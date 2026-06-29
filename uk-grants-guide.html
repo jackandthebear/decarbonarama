@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UK Home Decarbonisation Grants 2026: The Complete Guide | Decarbonarama</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0d1510; --bg2:#111a13; --bg3:#162019; --bg4:#1a2820;
+    --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.13);
+    --green:#4ade80; --green-pale:rgba(74,222,128,0.08); --green-pale2:rgba(74,222,128,0.14);
+    --amber:#fbbf24; --amber-pale:rgba(251,191,36,0.08);
+    --red:#f87171; --red-pale:rgba(248,113,113,0.09);
+    --blue:#60a5fa; --blue-pale:rgba(96,165,250,0.08);
+    --scot:#a78bfa; --scot-pale:rgba(167,139,250,0.08);
+    --text:#e4ede5; --text-mid:#94a894; --text-dim:#4a5c4a;
+    --mono:'JetBrains Mono','Courier New',monospace;
+    --serif:'Playfair Display',Georgia,serif;
+    --body:'Source Serif 4',Georgia,serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.75;font-weight:300;-webkit-font-smoothing:antialiased;}
+
+  .site-header{border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;}
+  .site-logo{text-decoration:none;display:flex;align-items:center;}
+  .site-logo img{height:32px;width:auto;display:block;}
+  .site-nav{display:flex;gap:1.5rem;}
+  .site-nav a{color:var(--text-dim);text-decoration:none;font-size:12px;letter-spacing:.07em;text-transform:uppercase;}
+
+  /* HERO */
+  .hero{max-width:960px;margin:0 auto;padding:4rem 2rem 2.5rem;}
+  .kicker{font-family:var(--mono);font-size:11px;color:var(--green);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem;display:flex;align-items:center;gap:10px;}
+  .kicker::before{content:'';width:28px;height:1.5px;background:var(--green);display:block;}
+  h1{font-family:var(--serif);font-size:clamp(2rem,4.5vw,3.2rem);font-weight:400;line-height:1.1;letter-spacing:-.02em;color:var(--text);margin-bottom:1rem;}
+  h1 em{font-style:italic;color:var(--green);}
+  .deck{font-size:1.1rem;font-weight:300;line-height:1.65;color:var(--text-mid);max-width:680px;margin-bottom:1.5rem;}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:.75rem;border-top:1px solid var(--border);padding-top:1rem;font-family:var(--mono);font-size:11px;color:var(--text-dim);}
+  .tag{background:var(--green-pale);color:var(--green);font-size:10px;padding:3px 9px;border-radius:2px;font-family:var(--mono);}
+  .tag-scot{background:var(--scot-pale);color:var(--scot);}
+  .tag-amber{background:var(--amber-pale);color:var(--amber);}
+
+  /* TOTAL BAR */
+  .total-bar{background:var(--bg3);border-top:2px solid var(--green);border-bottom:1px solid var(--border);display:grid;grid-template-columns:repeat(5,1fr);}
+  .tb-cell{padding:1.25rem 1.5rem;border-right:1px solid var(--border);}
+  .tb-cell:last-child{border-right:none;}
+  .tb-num{font-family:var(--serif);font-size:1.7rem;font-weight:400;line-height:1;margin-bottom:.25rem;}
+  .tb-num.green{color:var(--green);}
+  .tb-num.amber{color:var(--amber);}
+  .tb-num.scot{color:var(--scot);}
+  .tb-label{font-family:var(--mono);font-size:9px;color:var(--text-dim);letter-spacing:.06em;text-transform:uppercase;line-height:1.4;}
+
+  /* JUMP NAV */
+  .jump-nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:.75rem 2rem;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;position:sticky;top:0;z-index:100;}
+  .jump-nav span{font-family:var(--mono);font-size:10px;color:var(--text-dim);margin-right:.25rem;}
+  .jump-btn{font-family:var(--mono);font-size:10px;padding:5px 10px;border:1px solid var(--border2);background:transparent;color:var(--text-mid);border-radius:3px;cursor:pointer;transition:all .2s;letter-spacing:.04em;white-space:nowrap;}
+  .jump-btn:hover{background:var(--green-pale);border-color:var(--green);color:var(--green);}
+
+  /* CHECKER */
+  .checker{background:var(--bg3);border:1px solid var(--border2);border-top:3px solid var(--amber);margin:0 2rem 0;max-width:960px;margin:0 auto 2rem;border-radius:2px;}
+  .checker-header{padding:1.5rem 1.75rem;border-bottom:1px solid var(--border);}
+  .checker-kicker{font-family:var(--mono);font-size:10px;color:var(--amber);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem;}
+  .checker-header h2{font-family:var(--serif);font-size:1.4rem;font-weight:400;color:var(--text);margin-bottom:.35rem;}
+  .checker-header p{font-size:14px;color:var(--text-dim);font-weight:300;margin:0;}
+  .checker-body{padding:1.5rem 1.75rem;}
+
+  /* CHECKER QUESTIONS */
+  .q-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem;}
+  .q-block{}
+  .q-label{font-family:var(--mono);font-size:10px;color:var(--text-mid);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem;}
+  .q-options{display:flex;flex-wrap:wrap;gap:.4rem;}
+  .q-btn{font-family:var(--mono);font-size:11px;padding:6px 12px;border:1px solid var(--border2);background:transparent;color:var(--text-dim);border-radius:3px;cursor:pointer;transition:all .15s;letter-spacing:.03em;}
+  .q-btn:hover{border-color:var(--text-mid);color:var(--text);}
+  .q-btn.selected{background:var(--green-pale2);border-color:var(--green);color:var(--green);}
+  .q-btn.selected-scot{background:var(--scot-pale);border-color:var(--scot);color:var(--scot);}
+
+  .checker-run{margin-top:1rem;display:flex;align-items:center;gap:1rem;}
+  .run-btn{font-family:var(--mono);font-size:12px;font-weight:500;padding:11px 22px;background:var(--green);color:#0d1510;border:none;border-radius:4px;cursor:pointer;letter-spacing:.04em;transition:background .2s;}
+  .run-btn:hover{background:#22c55e;}
+  .reset-btn{font-family:var(--mono);font-size:11px;color:var(--text-dim);background:none;border:1px solid var(--border);padding:10px 14px;border-radius:4px;cursor:pointer;transition:all .2s;letter-spacing:.03em;}
+  .reset-btn:hover{border-color:var(--text-mid);color:var(--text-mid);}
+
+  /* RESULTS */
+  .results{display:none;margin-top:1.25rem;border-top:1px solid var(--border);padding-top:1.25rem;}
+  .results.visible{display:block;}
+  .results-summary{font-family:var(--serif);font-size:1.05rem;color:var(--text);margin-bottom:1rem;line-height:1.5;}
+  .result-cards{display:flex;flex-direction:column;gap:.6rem;}
+  .result-card{display:grid;grid-template-columns:auto 1fr auto;gap:.75rem;align-items:center;padding:.9rem 1.1rem;border-radius:3px;border:1px solid transparent;}
+  .result-card.eligible{background:var(--green-pale);border-color:rgba(74,222,128,0.2);}
+  .result-card.maybe{background:var(--amber-pale);border-color:rgba(251,191,36,0.2);}
+  .result-card.ineligible{background:rgba(255,255,255,0.03);border-color:var(--border);}
+  .result-card.scot{background:var(--scot-pale);border-color:rgba(167,139,250,0.2);}
+  .rc-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+  .dot-green{background:var(--green);}
+  .dot-amber{background:var(--amber);}
+  .dot-dim{background:var(--text-dim);}
+  .dot-scot{background:var(--scot);}
+  .rc-name{font-family:var(--mono);font-size:12px;color:var(--text);font-weight:500;}
+  .rc-desc{font-size:12px;color:var(--text-dim);font-weight:300;margin-top:2px;}
+  .rc-amount{font-family:var(--mono);font-size:12px;text-align:right;white-space:nowrap;}
+  .rc-amount.green{color:var(--green);}
+  .rc-amount.amber{color:var(--amber);}
+  .rc-amount.dim{color:var(--text-dim);}
+  .rc-amount.scot{color:var(--scot);}
+  .results-total{margin-top:1rem;padding:1rem;background:var(--green-pale2);border:1px solid rgba(74,222,128,0.25);border-radius:3px;display:flex;justify-content:space-between;align-items:center;}
+  .rt-label{font-family:var(--mono);font-size:11px;color:var(--green);letter-spacing:.06em;text-transform:uppercase;}
+  .rt-val{font-family:var(--serif);font-size:1.5rem;color:var(--green);}
+  .results-note{font-family:var(--mono);font-size:11px;color:var(--text-dim);margin-top:.75rem;line-height:1.7;}
+
+  /* CONTENT */
+  .content{max-width:960px;margin:0 auto;padding:0 2rem 5rem;}
+  h2.section-h{font-family:var(--serif);font-size:1.6rem;font-weight:400;color:var(--text);margin:3.5rem 0 .75rem;padding-top:2.5rem;border-top:1px solid var(--border2);line-height:1.2;}
+  h2.section-h:first-child{border-top:none;padding-top:2rem;margin-top:2rem;}
+  h3{font-family:var(--serif);font-size:1.1rem;font-style:italic;color:var(--text-mid);margin:1.5rem 0 .5rem;}
+  p{color:var(--text-mid);margin-bottom:1rem;font-weight:300;}
+  strong{color:var(--text);font-weight:400;}
+  .sl{font-family:var(--mono);font-size:10px;color:var(--green);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.4rem;display:flex;align-items:center;gap:8px;}
+  .sl::before{content:'';display:block;width:16px;height:1.5px;background:var(--green);}
+  .sl.scot{color:var(--scot);}
+  .sl.scot::before{background:var(--scot);}
+
+  /* SCHEME CARDS */
+  .scheme-card{background:var(--bg2);border:1px solid var(--border2);border-radius:2px;margin:1.25rem 0 2rem;overflow:hidden;}
+  .sc-head{padding:1.1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);}
+  .sc-head.green{background:var(--green-pale);border-left:3px solid var(--green);}
+  .sc-head.amber{background:var(--amber-pale);border-left:3px solid var(--amber);}
+  .sc-head.scot{background:var(--scot-pale);border-left:3px solid var(--scot);}
+  .sc-head.blue{background:var(--blue-pale);border-left:3px solid var(--blue);}
+  .sc-title{font-family:var(--serif);font-size:1.05rem;color:var(--text);}
+  .sc-amount{font-family:var(--mono);font-size:1.1rem;font-weight:500;white-space:nowrap;}
+  .sc-amount.green{color:var(--green);}
+  .sc-amount.amber{color:var(--amber);}
+  .sc-amount.scot{color:var(--scot);}
+  .sc-amount.blue{color:var(--blue);}
+  .sc-body{padding:1.25rem 1.5rem;}
+  .sc-row{display:flex;gap:.75rem;font-size:14px;color:var(--text-mid);font-weight:300;margin-bottom:.6rem;line-height:1.55;}
+  .sc-row::before{content:'→';font-family:var(--mono);font-size:11px;color:var(--green);margin-top:3px;flex-shrink:0;}
+  .sc-row strong{color:var(--text);}
+  .sc-status{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;padding:3px 9px;border-radius:2px;margin-top:.5rem;margin-right:.5rem;}
+  .sc-status.open{background:var(--green-pale);color:var(--green);}
+  .sc-status.ending{background:var(--amber-pale);color:var(--amber);}
+  .sc-status.paused{background:var(--red-pale);color:var(--red);}
+  .sc-status.coming{background:var(--blue-pale);color:var(--blue);}
+  .sc-status::before{content:'●';font-size:7px;}
+
+  /* CALLOUTS */
+  .callout{border-left:2px solid var(--green);padding:.9rem 1.25rem;background:var(--green-pale);border-radius:0 2px 2px 0;margin:1.5rem 0;}
+  .callout p{margin:0;color:var(--text);font-size:15px;line-height:1.65;}
+  .callout-amber{border-left-color:var(--amber);background:var(--amber-pale);}
+  .callout-amber p{color:var(--text-mid);}
+  .callout-scot{border-left-color:var(--scot);background:var(--scot-pale);}
+  .callout-scot p{color:var(--text-mid);}
+
+  /* COMPARISON TABLE */
+  .table-wrap{overflow-x:auto;margin:1.25rem 0 2rem;}
+  table{width:100%;border-collapse:collapse;font-size:14px;}
+  thead tr{border-bottom:1px solid var(--border2);}
+  thead th{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);padding:.4rem .75rem .6rem;text-align:left;font-weight:400;}
+  tbody tr{border-bottom:1px solid var(--border);}
+  tbody tr:last-child{border-bottom:none;}
+  tbody td{padding:.65rem .75rem;color:var(--text-mid);font-weight:300;font-size:13px;}
+  tbody td:first-child{color:var(--text);}
+  .td-green{color:var(--green)!important;font-family:var(--mono);}
+  .td-amber{color:var(--amber)!important;font-family:var(--mono);}
+  .td-scot{color:var(--scot)!important;font-family:var(--mono);}
+  .td-red{color:var(--red)!important;font-family:var(--mono);}
+  .td-dim{color:var(--text-dim)!important;font-family:var(--mono);}
+  tbody tr.hl td{background:var(--green-pale);}
+  tbody tr.hl-scot td{background:var(--scot-pale);}
+
+  /* BANK GRID */
+  .bank-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin:1.25rem 0 2rem;}
+  .bank-cell{background:var(--bg2);padding:1.1rem 1.25rem;}
+  .bank-name{font-family:var(--mono);font-size:11px;color:var(--blue);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.3rem;}
+  .bank-offer{font-size:13px;color:var(--text);margin-bottom:.25rem;font-weight:400;}
+  .bank-detail{font-size:12px;color:var(--text-dim);line-height:1.5;}
+
+  /* PULL */
+  .pull{font-family:var(--serif);font-size:1.35rem;font-style:italic;font-weight:400;line-height:1.4;color:var(--text);border-top:1px solid var(--green);border-bottom:1px solid var(--border);padding:1.25rem 0;margin:2rem 0;}
+
+  .conclusion{background:var(--bg3);border-top:2px solid var(--green);padding:3rem 2rem;margin:3rem -2rem 0;}
+  .conclusion-inner{max-width:960px;margin:0 auto;}
+  .conclusion h2{font-family:var(--serif);font-size:1.8rem;color:var(--text);border:none;padding:0;margin:0 0 1.25rem;}
+  .conclusion p{color:var(--text-mid);font-weight:300;font-size:1rem;margin-bottom:1rem;}
+  .conclusion strong{color:var(--text);}
+
+  footer{border-top:1px solid var(--border);padding:2rem 2rem 3rem;max-width:960px;margin:0 auto;font-family:var(--mono);font-size:11px;color:var(--text-dim);line-height:1.7;}
+
+  @media(max-width:640px){
+    .hero,.content,footer,.checker{padding-left:1.25rem;padding-right:1.25rem;}
+    h1{font-size:1.9rem;}
+    .total-bar{grid-template-columns:1fr 1fr;}
+    .q-grid{grid-template-columns:1fr;}
+    .result-card{grid-template-columns:auto 1fr;}
+    .rc-amount{grid-column:2;text-align:left;}
+    .conclusion{margin-left:-1.25rem;margin-right:-1.25rem;}
+    .jump-nav{padding:.75rem 1.25rem;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="site-logo"><img src="logo-light.svg" alt="Decarbonarma"></a>
+  <nav class="site-nav">
+    <a href="#">Grants</a><a href="#">Heat pumps</a><a href="#">Solar</a><a href="#">About</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <p class="kicker">Reference guide — Updated May 2026</p>
+  <h1>UK home decarbonisation grants:<br><em>the complete 2026 reference</em></h1>
+  <p class="deck">£15 billion committed. Six overlapping schemes. Scotland operating an entirely different system. New oil and LPG uplift from July. Banks offering interest-free top-ups. This guide maps every available route to funded upgrades — and the interactive checker tells you what your specific circumstances can unlock.</p>
+  <div class="hero-meta">
+    <span class="tag">England &amp; Wales</span>
+    <span class="tag tag-scot">Scotland</span>
+    <span class="tag">Heat pumps</span>
+    <span class="tag">Insulation</span>
+    <span class="tag">Solar &amp; batteries</span>
+    <span class="tag tag-amber">Updated May 2026</span>
+  </div>
+</div>
+
+<div class="total-bar">
+  <div class="tb-cell">
+    <div class="tb-num green">£15bn</div>
+    <div class="tb-label">Warm Homes Plan total commitment 2025–2030</div>
+  </div>
+  <div class="tb-cell">
+    <div class="tb-num green">£9,000</div>
+    <div class="tb-label">Max BUS grant — oil/LPG homes from July 2026</div>
+  </div>
+  <div class="tb-cell">
+    <div class="tb-num green">£30,000</div>
+    <div class="tb-label">Max Warm Homes Local Grant — low income, EPC D-G</div>
+  </div>
+  <div class="tb-cell">
+    <div class="tb-num scot">£18,000</div>
+    <div class="tb-label">Max HES grant — Scotland rural/island homeowners</div>
+  </div>
+  <div class="tb-cell">
+    <div class="tb-num amber">£20,000</div>
+    <div class="tb-label">Max NatWest 0% additional borrowing for green improvements</div>
+  </div>
+</div>
+
+<div class="jump-nav">
+  <span>//</span>
+  <button class="jump-btn" onclick="document.getElementById('checker').scrollIntoView({behavior:'smooth'})">⚡ Eligibility checker</button>
+  <button class="jump-btn" onclick="document.getElementById('bus').scrollIntoView({behavior:'smooth'})">BUS grant</button>
+  <button class="jump-btn" onclick="document.getElementById('eco4').scrollIntoView({behavior:'smooth'})">ECO4</button>
+  <button class="jump-btn" onclick="document.getElementById('whlg').scrollIntoView({behavior:'smooth'})">Warm Homes Local Grant</button>
+  <button class="jump-btn" onclick="document.getElementById('warm-plan').scrollIntoView({behavior:'smooth'})">Warm Homes Plan</button>
+  <button class="jump-btn" onclick="document.getElementById('scotland').scrollIntoView({behavior:'smooth'})">Scotland</button>
+  <button class="jump-btn" onclick="document.getElementById('banks').scrollIntoView({behavior:'smooth'})">Banks &amp; loans</button>
+  <button class="jump-btn" onclick="document.getElementById('stack').scrollIntoView({behavior:'smooth'})">Stacking grants</button>
+</div>
+
+<!-- ═══════════════════ CHECKER ═══════════════════ -->
+<div id="checker" style="max-width:960px;margin:2rem auto;padding:0 2rem;">
+<div class="checker">
+  <div class="checker-header">
+    <p class="checker-kicker">// Interactive eligibility checker</p>
+    <h2>What can you get? Answer six questions.</h2>
+    <p>Select all that apply. Results are indicative — verify eligibility with scheme administrators before applying.</p>
+  </div>
+  <div class="checker-body">
+    <div class="q-grid">
+      <div class="q-block">
+        <div class="q-label">Where is your property?</div>
+        <div class="q-options">
+          <button class="q-btn" data-group="nation" data-val="england" onclick="selectQ(this)">England</button>
+          <button class="q-btn" data-group="nation" data-val="wales" onclick="selectQ(this)">Wales</button>
+          <button class="q-btn" data-group="nation" data-val="scotland" onclick="selectQ(this)">Scotland</button>
+          <button class="q-btn" data-group="nation" data-val="ni" onclick="selectQ(this)">N. Ireland</button>
+        </div>
+      </div>
+      <div class="q-block">
+        <div class="q-label">Current heating fuel</div>
+        <div class="q-options">
+          <button class="q-btn" data-group="fuel" data-val="gas" onclick="selectQ(this)">Mains gas</button>
+          <button class="q-btn" data-group="fuel" data-val="oil" onclick="selectQ(this)">Heating oil</button>
+          <button class="q-btn" data-group="fuel" data-val="lpg" onclick="selectQ(this)">LPG</button>
+          <button class="q-btn" data-group="fuel" data-val="electric" onclick="selectQ(this)">Electric only</button>
+          <button class="q-btn" data-group="fuel" data-val="coal" onclick="selectQ(this)">Coal/solid fuel</button>
+        </div>
+      </div>
+      <div class="q-block">
+        <div class="q-label">Your EPC rating</div>
+        <div class="q-options">
+          <button class="q-btn" data-group="epc" data-val="ab" onclick="selectQ(this)">A or B</button>
+          <button class="q-btn" data-group="epc" data-val="c" onclick="selectQ(this)">C</button>
+          <button class="q-btn" data-group="epc" data-val="d" onclick="selectQ(this)">D</button>
+          <button class="q-btn" data-group="epc" data-val="efg" onclick="selectQ(this)">E, F or G</button>
+          <button class="q-btn" data-group="epc" data-val="none" onclick="selectQ(this)">Don't know</button>
+        </div>
+      </div>
+      <div class="q-block">
+        <div class="q-label">Household income</div>
+        <div class="q-options">
+          <button class="q-btn" data-group="income" data-val="benefits" onclick="selectQ(this)">Receiving qualifying benefits</button>
+          <button class="q-btn" data-group="income" data-val="low" onclick="selectQ(this)">Under £36,000/yr</button>
+          <button class="q-btn" data-group="income" data-val="medium" onclick="selectQ(this)">£36k–£80k/yr</button>
+          <button class="q-btn" data-group="income" data-val="high" onclick="selectQ(this)">Over £80,000/yr</button>
+        </div>
+      </div>
+      <div class="q-block">
+        <div class="q-label">Property ownership</div>
+        <div class="q-options">
+          <button class="q-btn" data-group="owner" data-val="own" onclick="selectQ(this)">Owner-occupier</button>
+          <button class="q-btn" data-group="owner" data-val="landlord" onclick="selectQ(this)">Private landlord</button>
+          <button class="q-btn" data-group="owner" data-val="tenant" onclick="selectQ(this)">Private tenant</button>
+          <button class="q-btn" data-group="owner" data-val="social" onclick="selectQ(this)">Social housing</button>
+        </div>
+      </div>
+      <div class="q-block">
+        <div class="q-label">Location type (Scotland only)</div>
+        <div class="q-options">
+          <button class="q-btn" data-group="rural" data-val="rural" onclick="selectQ(this)">Rural / island</button>
+          <button class="q-btn" data-group="rural" data-val="urban" onclick="selectQ(this)">Town / city</button>
+          <button class="q-btn" data-group="rural" data-val="na" onclick="selectQ(this)">Not Scotland</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="checker-run">
+      <button class="run-btn" onclick="runChecker()">Check my eligibility →</button>
+      <button class="reset-btn" onclick="resetChecker()">Reset</button>
+    </div>
+
+    <div id="results" class="results">
+      <div id="results-summary" class="results-summary"></div>
+      <div id="result-cards" class="result-cards"></div>
+      <div id="results-total" class="results-total" style="display:none;">
+        <span class="rt-label">Estimated maximum available funding</span>
+        <span id="rt-val" class="rt-val"></span>
+      </div>
+      <p class="results-note">These results are indicative only. Grant amounts depend on specific installation costs, property type, installer quotes, and scheme availability at the time of application. Always verify with scheme administrators: Ofgem (BUS), your local council (WH:LG), your energy supplier (ECO4), or Home Energy Scotland (0808 808 2282).</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="content">
+
+  <!-- ═════ BUS ═════ -->
+  <div id="bus">
+  <div class="sl">Scheme 1 — England &amp; Wales</div>
+  <h2 class="section-h">Boiler Upgrade Scheme (BUS)</h2>
+
+  <div class="scheme-card">
+    <div class="sc-head green">
+      <span class="sc-title">Boiler Upgrade Scheme — standard</span>
+      <span class="sc-amount green">£7,500</span>
+    </div>
+    <div class="sc-body">
+      <div class="sc-row"><strong>Who:</strong> Owner-occupiers and private landlords in England and Wales, replacing an existing fossil fuel or electric heating system with a heat pump or biomass boiler</div>
+      <div class="sc-row"><strong>Technologies:</strong> Air source heat pump (£7,500) · Ground source heat pump (£7,500) · Biomass boiler (£5,000, limited to rural properties off mains gas) · Air-to-air heat pump (£2,500)</div>
+      <div class="sc-row"><strong>How it works:</strong> Your MCS-certified installer claims the grant and deducts it from your invoice — you never see the money, it directly reduces the price you pay</div>
+      <div class="sc-row"><strong>EPC requirement:</strong> A valid EPC within the last 10 years is required. The previous insulation pre-conditions were removed in April 2026 — no minimum energy efficiency rating needed</div>
+      <div class="sc-row"><strong>New builds:</strong> Not eligible, except self-builds meeting specific criteria</div>
+      <div class="sc-row"><strong>Runs until:</strong> Confirmed through to 2028–2029 as part of the Warm Homes Plan, with funding increasing annually to 2029–30</div>
+      <span class="sc-status open">Open — live now</span>
+    </div>
+  </div>
+
+  <div class="scheme-card">
+    <div class="sc-head amber">
+      <span class="sc-title">BUS Oil &amp; LPG Uplift — temporary</span>
+      <span class="sc-amount amber">£9,000</span>
+    </div>
+    <div class="sc-body">
+      <div class="sc-row"><strong>Who:</strong> Homes in England and Wales currently heated by heating oil or LPG (off mains gas grid only)</div>
+      <div class="sc-row"><strong>Technologies eligible for uplift:</strong> Air source heat pumps and ground source heat pumps only — biomass boilers and air-to-air systems are not eligible for the higher rate</div>
+      <div class="sc-row"><strong>When:</strong> Applications expected to open July 2026, subject to formal grant change notice by DESNZ. Runs for current financial year only — applications after it closes revert to £7,500</div>
+      <div class="sc-row"><strong>Why oil and LPG?</strong> Around 1.7 million homes in England and Wales rely on oil or LPG. Unlike mains gas users, they have no energy price cap protection and are directly exposed to global commodity markets — including oil price spikes from the ongoing Middle East conflict. Nesta analysis shows the £9,000 grant reduces net installation cost to approximately £3,600 for a detached house</div>
+      <span class="sc-status coming">From July 2026</span>
+      <span class="sc-status ending">Time-limited — this financial year only</span>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>Important change from April 2026:</strong> The requirement to have loft and cavity wall insulation in place before applying for the BUS grant was removed. You no longer need to clear insulation recommendations from your EPC before accessing the £7,500 grant. This has opened the scheme to a significantly wider group of homeowners who were previously blocked by the insulation condition.</p>
+  </div>
+  </div>
+
+  <!-- ═════ ECO4 ═════ -->
+  <div id="eco4">
+  <div class="sl" style="margin-top:2.5rem;">Scheme 2 — Great Britain</div>
+  <h2 class="section-h">ECO4 — Energy Company Obligation</h2>
+
+  <div class="scheme-card">
+    <div class="sc-head green">
+      <span class="sc-title">ECO4 — free insulation, heating &amp; solar for low-income homes</span>
+      <span class="sc-amount green">£7,000–£20,000+</span>
+    </div>
+    <div class="sc-body">
+      <div class="sc-row"><strong>Who:</strong> Households in Great Britain (England, Scotland, Wales) receiving qualifying benefits (Universal Credit, Pension Credit, Income Support, JSA, ESA, Housing Benefit, Child Tax Credit, Working Tax Credit) — or via LA Flex: household income below your council's threshold (typically £31,000–£38,000)</div>
+      <div class="sc-row"><strong>What it covers:</strong> Whole-house approach — insulation (loft, cavity wall, solid wall, underfloor), heat pumps, boiler replacement, solar panels, heating controls. The package is determined by what will most improve the property's EPC rating</div>
+      <div class="sc-row"><strong>Cost to you:</strong> Free — energy suppliers fund the scheme as an obligation, passed on to all energy bill payers. Social housing tenants should contact their landlord, not apply directly</div>
+      <div class="sc-row"><strong>LA Flex:</strong> If you don't receive benefits, check with your local council — they can apply ECO4 funding to households below their income threshold. Exact limits vary from £31,000 to £38,000 depending on household size and council</div>
+      <div class="sc-row"><strong>Status:</strong> Extended from March 2026 to 31 December 2026. No successor ECO5 scheme — will be replaced by Warm Homes Plan funding from 2027</div>
+      <div class="sc-row"><strong>Note on quality:</strong> A National Audit Office report (October 2025) found significant quality issues with some ECO4 installations, particularly external wall insulation. Use a TrustMark-registered installer and request PAS 2030/2035 compliance</div>
+      <span class="sc-status ending">Ends 31 December 2026</span>
+    </div>
+  </div>
+  </div>
+
+  <!-- ═════ WH:LG ═════ -->
+  <div id="whlg">
+  <div class="sl" style="margin-top:2.5rem;">Scheme 3 — England</div>
+  <h2 class="section-h">Warm Homes: Local Grant</h2>
+
+  <div class="scheme-card">
+    <div class="sc-head green">
+      <span class="sc-title">Warm Homes: Local Grant — up to £30,000 for low-income EPC D-G homes</span>
+      <span class="sc-amount green">Up to £30,000</span>
+    </div>
+    <div class="sc-body">
+      <div class="sc-row"><strong>Who:</strong> England only. Owner-occupiers or private tenants (with landlord consent) with household income below £36,000/yr, OR receiving any qualifying means-tested benefit, AND property EPC rating D to G</div>
+      <div class="sc-row"><strong>Structure:</strong> Up to £15,000 for energy performance improvements (insulation, draught-proofing, double/triple glazing, solar PV, batteries) + up to £15,000 for low-carbon heating (heat pumps). Total maximum: £30,000 per property</div>
+      <div class="sc-row"><strong>All fuel types:</strong> Unlike previous schemes, the WH:LG covers both on-gas-grid and off-gas-grid homes. Heat pump upgrades are particularly encouraged for oil and coal-heated properties</div>
+      <div class="sc-row"><strong>How to apply:</strong> Via your local council — not a national website. 271 councils (97% of eligible authorities) received funding in 2025. Contact your local authority directly or search gov.uk for your council's scheme</div>
+      <div class="sc-row"><strong>Landlords:</strong> Can get one property upgraded free. Additional properties require a 50% cost contribution. Landlords must sign a commitment not to raise rents as a result of the upgrades</div>
+      <div class="sc-row"><strong>Runs:</strong> April 2025 to March 2028 · £500 million total allocation</div>
+      <span class="sc-status open">Open — apply via local council</span>
+    </div>
+  </div>
+
+  <div class="callout-amber callout">
+    <p>The WH:LG is delivered by local councils, not private installers. You should not need to deal with installers directly — the council arranges the works if you qualify. Some councils have already met their Year 1 targets and are holding applications for Year 2 funding from April 2026. Apply early, even if told to wait.</p>
+  </div>
+  </div>
+
+  <!-- ═════ WARM HOMES PLAN ═════ -->
+  <div id="warm-plan">
+  <div class="sl" style="margin-top:2.5rem;">Scheme 4 — UK</div>
+  <h2 class="section-h">The Warm Homes Plan — the overarching framework</h2>
+
+  <p>The Warm Homes Plan is not itself a scheme you apply to — it is the Labour government's <strong>£15 billion overarching strategy</strong> for home energy efficiency, published 21 January 2026. It brings together BUS, ECO4, WH:LG, and new programmes under one framework. Key elements:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Component</th><th>Amount</th><th>Who</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Boiler Upgrade Scheme</td><td class="td-green">£7,500–£9,000</td><td>All homeowners, E&amp;W</td><td class="td-green">Open</td></tr>
+        <tr><td>ECO4</td><td class="td-green">£7k–£20k+</td><td>Low income, benefits</td><td class="td-amber">Ends Dec 2026</td></tr>
+        <tr><td>WH: Local Grant</td><td class="td-green">Up to £30,000</td><td>Low income, EPC D-G, England</td><td class="td-green">Open via councils</td></tr>
+        <tr class="hl"><td>WH: Social Housing Fund</td><td class="td-green">Funded direct</td><td>Social housing tenants</td><td class="td-green">Running now</td></tr>
+        <tr class="hl"><td>£5bn Warm Homes Fund (loans)</td><td class="td-blue">0% or low interest</td><td>All homeowners</td><td class="td-blue">Confirmed, detail TBC</td></tr>
+        <tr><td>Successor to ECO4</td><td class="td-amber">TBC</td><td>Low income — via WHP</td><td class="td-amber">Launches Jan 2027</td></tr>
+        <tr><td>Great British Insulation Scheme</td><td class="td-dim">Ending</td><td>Broader income bands</td><td class="td-red">Winding down 2026</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout-amber callout">
+    <p><strong>The £5 billion Warm Homes Fund</strong> — announced by the government as a loan facility for solar panels, batteries, and heat pumps — is confirmed in principle but has not yet opened for applications as of May 2026. It is expected to offer zero or very low interest rates to homeowners who do not qualify for outright grants. Watch the Ofgem and DESNZ websites for the launch date.</p>
+  </div>
+  </div>
+
+  <!-- ═════ SCOTLAND ═════ -->
+  <div id="scotland">
+  <div class="sl scot" style="margin-top:2.5rem;">Scotland — entirely different system</div>
+  <h2 class="section-h">Scotland: Home Energy Scotland (HES) Grant and Loan</h2>
+
+  <div class="callout-scot callout">
+    <p>Scotland operates its own home energy scheme through the Scottish Government, separate from all England and Wales schemes. The single point of contact for Scottish homeowners is <strong>Home Energy Scotland: 0808 808 2282 (free, Mon–Fri 8am–8pm, Sat 9am–5pm).</strong> They act as a gateway to all Scottish energy schemes and will assess which you qualify for in a single call.</p>
+  </div>
+
+  <div class="scheme-card">
+    <div class="sc-head scot">
+      <span class="sc-title">Home Energy Scotland Grant and Loan</span>
+      <span class="sc-amount scot">Up to £18,000 grant + £7,500 loan</span>
+    </div>
+    <div class="sc-body">
+      <div class="sc-row"><strong>Who:</strong> Scottish homeowners only. You must be the owner-occupier of an existing Scottish property as your primary residence. <strong>No means-testing — you do not need to be on benefits to qualify.</strong> This is the key difference from England's schemes</div>
+      <div class="sc-row"><strong>Heat pump grant:</strong> Up to £7,500 grant towards a heat pump or heat network connection. If the cost is £7,500 or less, the full amount is a grant (non-repayable). Costs above £7,500 can be covered by the optional 0% loan</div>
+      <div class="sc-row"><strong>Energy efficiency grant:</strong> Up to 75% of the combined cost of insulation measures, up to a maximum grant of £7,500. The remaining balance can be taken as an interest-free loan</div>
+      <div class="sc-row"><strong>Rural/island uplift:</strong> An additional £1,500 on both the heat pump grant and energy efficiency grant for rural, island, and off-gas accessible rural homes as defined by the Scottish Government's Urban Rural Classification. Rural households can therefore claim up to <strong>£18,000 in grants alone</strong></div>
+      <div class="sc-row"><strong>0% interest-free loan:</strong> Up to £7,500 additional for heating, repayable over up to 10 years with no interest. Can be repaid early with no penalty</div>
+      <div class="sc-row"><strong>Stacking with BUS:</strong> Scottish homeowners can combine the HES grant with the UK-wide BUS grant — a £7,500 HES grant + £7,500 BUS grant = £15,000 toward a heat pump installation. With a £12,000 install, this is effectively free</div>
+      <span class="sc-status open">Open — call 0808 808 2282</span>
+    </div>
+  </div>
+
+  <div class="scheme-card">
+    <div class="sc-head scot">
+      <span class="sc-title">Warmer Homes Scotland — fuel poverty scheme</span>
+      <span class="sc-amount scot">Free upgrades</span>
+    </div>
+    <div class="sc-body">
+      <div class="sc-row"><strong>Who:</strong> Scottish households experiencing fuel poverty — assessed through income, property type, and current energy costs. Delivered through Home Energy Scotland referral</div>
+      <div class="sc-row"><strong>What:</strong> Fully funded insulation, heating upgrades, and energy efficiency improvements at no cost to the household</div>
+      <div class="sc-row"><strong>Apply via:</strong> Home Energy Scotland (0808 808 2282) who will assess eligibility and refer eligible households</div>
+    </div>
+  </div>
+
+  <div class="pull">"A Scottish rural homeowner installing a £12,000 heat pump could receive £7,500 HES grant + £1,500 rural uplift + £7,500 BUS grant = £16,500 — covering the full installation cost with money left over."</div>
+
+  <div class="callout-scot callout">
+    <p>The ECO4 scheme also operates in Scotland — Scottish households on qualifying benefits or below LA Flex income thresholds can apply through energy suppliers. Scotland therefore has <strong>three potential routes</strong> running simultaneously: HES Grant/Loan, BUS, and ECO4. Home Energy Scotland will identify which combination applies to your circumstances.</p>
+  </div>
+  </div>
+
+  <!-- ═════ BANKS ═════ -->
+  <div id="banks">
+  <div class="sl" style="margin-top:2.5rem;">Banks &amp; lenders</div>
+  <h2 class="section-h">Green mortgages, loans and bank schemes</h2>
+
+  <p>The least-known dimension of home decarbonisation funding is the parallel ecosystem of bank and lender products. There are now 27 unsecured green loan products available in 2025 — up from just nine in 2021 — introduced by lenders ranging from high-street banks like Barclays to specialist lenders like Zopa Bank. These do not require benefit eligibility or EPC rating conditions — they are available to anyone with a mortgage or who can access personal finance.</p>
+
+  <div class="bank-grid">
+    <div class="bank-cell">
+      <div class="bank-name">NatWest</div>
+      <div class="bank-offer">0% interest additional borrowing £5,000–£20,000</div>
+      <div class="bank-detail">Must use 100% of loan for green home improvements. Available to existing NatWest mortgage holders. Also offers a green remortgage at reduced rates (4.06% at 75% LTV, Q2 2026) for EPC A/B properties.</div>
+    </div>
+    <div class="bank-cell">
+      <div class="bank-name">Barclays</div>
+      <div class="bank-offer">Green Home Mortgage + £500 cashback</div>
+      <div class="bank-detail">Discounted rates for purchasing new builds with EPC A/B. £500 cashback for customers who go solar with a certified installer. Also offers a Greener Home Reward of up to £2,000 for existing mortgage holders making qualifying improvements.</div>
+    </div>
+    <div class="bank-cell">
+      <div class="bank-name">Halifax / Lloyds</div>
+      <div class="bank-offer">£1,000 cashback for solar</div>
+      <div class="bank-detail">£1,000 cashback to mortgage customers who install solar with a certified installer. Available to both Halifax and Lloyds Bank mortgage holders.</div>
+    </div>
+    <div class="bank-cell">
+      <div class="bank-name">Leeds Building Society</div>
+      <div class="bank-offer">Green additional borrowing — from 4.19%</div>
+      <div class="bank-detail">Launched November 2025. 2-year fixed at 4.19% up to 75% LTV. Must use more than 50% for energy-efficient improvements: solar, insulation, heat pumps, glazing, EV chargers. No product fee, free standard valuation. Buy-to-let also available.</div>
+    </div>
+    <div class="bank-cell">
+      <div class="bank-name">HSBC</div>
+      <div class="bank-offer">Up to £750 cashback</div>
+      <div class="bank-detail">Energy Efficient Homes Cashback mortgage provides up to £750. Also offers discounted rates for EPC A/B remortgages.</div>
+    </div>
+    <div class="bank-cell">
+      <div class="bank-name">Nationwide / Coventry / Skipton</div>
+      <div class="bank-offer">Additional borrowing for green improvements</div>
+      <div class="bank-detail">Additional borrowing facilities specifically for energy-efficient home improvements. Terms vary by lender. Rates and amounts subject to individual circumstances.</div>
+    </div>
+    <div class="bank-cell">
+      <div class="bank-name">Kensington</div>
+      <div class="bank-offer">£1,000 cashback (eKo mortgage)</div>
+      <div class="bank-detail">£1,000 cashback for improving your home's energy efficiency by one EPC band or 10 SAP points within 12 months of your mortgage. Requires documented improvement.</div>
+    </div>
+    <div class="bank-cell">
+      <div class="bank-name">Santander</div>
+      <div class="bank-offer">Reduced rates for EPC A/B</div>
+      <div class="bank-detail">Lower interest rate for remortgaging EPC A/B properties. Previous £1,000 cashback scheme closed June 2025. Current offering is rate discount only.</div>
+    </div>
+  </div>
+
+  <div class="callout-amber callout">
+    <p><strong>The remortgage timing opportunity:</strong> An estimated 1.8 million UK fixed-rate mortgages expire in 2026. If your fixed rate is ending, this is the optimal moment to explore a green remortgage — the rate differential between a standard remortgage and a green remortgage product may be sufficient to help fund solar panels, insulation, or a heat pump at lower cost than a separate loan.</p>
+  </div>
+  </div>
+
+  <!-- ═════ STACKING ═════ -->
+  <div id="stack">
+  <div class="sl" style="margin-top:2.5rem;">Strategy</div>
+  <h2 class="section-h">Stacking grants: how to combine multiple schemes</h2>
+
+  <p>The grant landscape allows — and in many cases encourages — combining multiple schemes. Here are the most powerful combinations available in 2026:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Scenario</th><th>Schemes available</th><th>Max combined funding</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr class="hl">
+          <td><strong>Scotland — rural, any income, heat pump</strong></td>
+          <td>HES grant £9k + BUS £7,500</td>
+          <td class="td-green">£16,500 grant</td>
+          <td>Can cover full install. No means test for HES</td>
+        </tr>
+        <tr class="hl">
+          <td><strong>Scotland — any income, heat pump</strong></td>
+          <td>HES grant £7,500 + BUS £7,500 + HES 0% loan £7,500</td>
+          <td class="td-green">£22,500 total</td>
+          <td>Loan is interest-free, 10yr repayment</td>
+        </tr>
+        <tr>
+          <td>England — off-gas, oil/LPG, any income, heat pump</td>
+          <td>BUS oil uplift £9,000 + NatWest 0% £20,000</td>
+          <td class="td-amber">£29,000</td>
+          <td>BUS July 2026 uplift; bank loan for remainder</td>
+        </tr>
+        <tr>
+          <td>England — on benefits, EPC D-G, any fuel</td>
+          <td>WH:LG £30,000 (heat pump + insulation)</td>
+          <td class="td-green">£30,000 free</td>
+          <td>Via local council; covers insulation + heat pump</td>
+        </tr>
+        <tr>
+          <td>England — low income, on benefits, any fuel</td>
+          <td>ECO4 (free) + BUS £7,500</td>
+          <td class="td-amber">£7,500 + free ECO4</td>
+          <td>ECO4 for insulation/boiler; BUS for heat pump</td>
+        </tr>
+        <tr>
+          <td>England — any income, gas, heat pump</td>
+          <td>BUS £7,500 + NatWest 0% loan</td>
+          <td class="td-amber">£27,500</td>
+          <td>BUS reduces install cost; loan covers remainder</td>
+        </tr>
+        <tr>
+          <td>England — remortgaging in 2026, solar + heat pump</td>
+          <td>BUS £7,500 + green remortgage additional borrowing</td>
+          <td class="td-amber">Variable</td>
+          <td>Time remortgage with install for best financing</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <p><strong>Key stacking rules to know:</strong> BUS can be combined with HES in Scotland, with WH:LG only in limited circumstances (usually one or the other applies), and with bank lending freely. You cannot claim two whole-house heating systems under any single scheme — only one primary heat source per application. ECO4 and WH:LG cannot both be applied to the same measure in the same property, but may cover different improvements in the same home.</p>
+  </div>
+  </div>
+
+</div><!-- /content -->
+
+<div class="conclusion">
+  <div class="conclusion-inner">
+    <h2>Start here: the fastest route for your situation</h2>
+    <p><strong>You're in Scotland:</strong> Call Home Energy Scotland on 0808 808 2282. Free call, expert advisors, they will identify every scheme you qualify for in one conversation. Do this before anything else.</p>
+    <p><strong>You're in England, on benefits or income below £36,000, EPC D-G:</strong> Apply to the Warm Homes: Local Grant via your local council first. Up to £30,000 fully funded. If your council's year 1 allocation is full, register your interest for year 2.</p>
+    <p><strong>You're in England, on benefits, EPC D-G, urgently need help now:</strong> ECO4 is your fastest route while it lasts — contact your energy supplier directly before December 2026.</p>
+    <p><strong>You're in England or Wales, any income, replacing gas boiler with heat pump:</strong> The BUS £7,500 grant is available to you via your MCS-certified installer. If you're on oil or LPG, wait for the July 2026 uplift to £9,000 if your installation is not urgent.</p>
+    <p><strong>Your mortgage is expiring in 2026:</strong> Combine the BUS grant with a green remortgage additional borrowing product. NatWest's 0% additional borrowing (£5,000–£20,000) combined with BUS can fund a solar + heat pump installation with minimal out-of-pocket cost.</p>
+    <p><strong>The £5 billion Warm Homes Fund</strong> — offering zero or low-interest loans for solar, batteries, and heat pumps to all homeowners — has been confirmed but not yet launched. Watch gov.uk/warm-homes-plan for the opening date. This will be the route for households who are above the income threshold for grants but want government-backed finance.</p>
+  </div>
+</div>
+
+<footer>
+  <p>BUS standard grant £7,500: Ofgem / DESNZ, current rate confirmed. BUS oil/LPG uplift to £9,000 from July 2026: DESNZ announcement 21 April 2026 (Grant UK, Infinity Energy, Nesta, Aira, May 2026). BUS insulation precondition removal: April 2026 (Warm Homes Plan guidance). ECO4 extension to 31 December 2026: confirmed DESNZ (WarmHomeUK, February 2026). No ECO5 successor: confirmed (Elmhurst Energy, November 2025). Warm Homes Plan £15 billion total: published 21 January 2026. WH:LG up to £30,000 (£15k efficiency + £15k heating), launched April 2025, runs to March 2028, £500m allocation: Energy Saving Trust, Uswitch, June 2025 policy guidance, gov.uk statistics February 2026. WH:LG income threshold £36,000 (benefits or household income): MoneySavingExpert, December 2025. Home Energy Scotland grant up to £7,500 heating + £7,500 efficiency + £1,500 rural uplift = £18,000 max grant: homeenergyscotland.org T&Cs, mygov.scot. HES 0% loan up to £7,500: homeenergyscotland.org. HES no means-testing: MCS certified, West Lothian Council. £5bn Warm Homes Fund (loans): OVO / DESNZ confirmed, launch date TBC. NatWest 0% green additional borrowing £5k–£20k; green remortgage 4.06% Q2 2026: heatpumpsandsolar.co.uk / Sunsave, April 2026. Barclays £500 cashback, Leeds BS 4.19% green borrowing November 2025, Halifax/Lloyds £1,000 cashback, HSBC £750, Kensington eKo £1,000, Santander cashback closed June 2025: Sunsave/HomeOwners Alliance/Infinity Energy, 2025–2026. 27 green loan products 2025 (up from 9 in 2021): Green Finance Institute, January 2026. 1.8m fixed mortgages expiring 2026: heatpumpsandsolar.co.uk. ECO4 NAO quality concerns: Elmhurst Energy, November 2025. Published on Decarbonarama, May 2026. Not financial or legal advice — verify with scheme administrators before applying.</p>
+</footer>
+
+<script>
+const state = {};
+function selectQ(btn) {
+  const group = btn.dataset.group;
+  document.querySelectorAll(`[data-group="${group}"]`).forEach(b => {
+    b.classList.remove('selected','selected-scot');
+  });
+  btn.classList.add(group === 'nation' && btn.dataset.val === 'scotland' ? 'selected-scot' : 'selected');
+  state[group] = btn.dataset.val;
+}
+
+function runChecker() {
+  const n = state.nation, f = state.fuel, e = state.epc,
+        i = state.income, o = state.owner, r = state.rural;
+
+  if (!n || !f) {
+    document.getElementById('results').classList.add('visible');
+    document.getElementById('results-summary').textContent = 'Please select at least your location and current heating fuel.';
+    document.getElementById('result-cards').innerHTML = '';
+    document.getElementById('results-total').style.display = 'none';
+    return;
+  }
+
+  const cards = [];
+  let maxGrant = 0;
+
+  // ── BUS ──
+  if (n === 'england' || n === 'wales') {
+    if (o === 'own' || o === 'landlord') {
+      const isOilLpg = f === 'oil' || f === 'lpg';
+      const busAmt = isOilLpg ? '£9,000 (from July 2026)' : '£7,500';
+      const busNum = isOilLpg ? 9000 : 7500;
+      cards.push({
+        status: 'eligible',
+        name: 'Boiler Upgrade Scheme (BUS)',
+        desc: isOilLpg
+          ? 'Oil/LPG uplift applies — £9,000 from July 2026. Applied directly by your MCS installer.'
+          : 'Standard £7,500 grant. Applied by your MCS-certified installer, deducted from your invoice.',
+        amount: busAmt,
+        num: busNum
+      });
+      maxGrant += busNum;
+    }
+  }
+
+  // ── ECO4 ──
+  const eco4eligible = (n === 'england' || n === 'wales' || n === 'scotland') &&
+    (i === 'benefits' || i === 'low') &&
+    (o === 'own' || o === 'tenant' || o === 'landlord');
+  if (eco4eligible) {
+    cards.push({
+      status: 'eligible',
+      name: 'ECO4 (ends Dec 2026)',
+      desc: 'Free insulation, heating, and solar via your energy supplier. Whole-house approach. Apply now — ends December 2026.',
+      amount: '£7,000–£20,000+ free',
+      num: 10000
+    });
+    maxGrant += 10000;
+  }
+
+  // ── WH:LG ──
+  const whlgEligible = n === 'england' &&
+    (i === 'benefits' || i === 'low') &&
+    (e === 'd' || e === 'efg' || e === 'none') &&
+    (o === 'own' || o === 'tenant');
+  if (whlgEligible) {
+    cards.push({
+      status: 'eligible',
+      name: 'Warm Homes: Local Grant',
+      desc: 'Up to £30,000 via your local council — £15,000 for insulation/solar + £15,000 for heat pump. Apply via your council directly.',
+      amount: 'Up to £30,000',
+      num: 30000
+    });
+    maxGrant = Math.max(maxGrant, 30000);
+  }
+
+  // ── SCOTLAND HES ──
+  if (n === 'scotland' && (o === 'own')) {
+    const ruralUplift = r === 'rural';
+    const heatGrant = ruralUplift ? '£9,000' : '£7,500';
+    const effGrant = ruralUplift ? '£9,000' : '£7,500';
+    const heatNum = ruralUplift ? 9000 : 7500;
+    const effNum = ruralUplift ? 9000 : 7500;
+    cards.push({
+      status: 'scot',
+      name: `Home Energy Scotland Grant — heat pump ${heatGrant}`,
+      desc: `No means test needed. ${ruralUplift ? 'Rural uplift of £1,500 applied.' : ''} Plus optional 0% loan of up to £7,500. Call 0808 808 2282.`,
+      amount: heatGrant,
+      num: heatNum,
+      scot: true
+    });
+    cards.push({
+      status: 'scot',
+      name: `Home Energy Scotland Grant — insulation up to ${effGrant}`,
+      desc: 'Up to 75% of insulation costs covered. Combine with heating grant for maximum impact. Same application process.',
+      amount: effGrant,
+      num: effNum,
+      scot: true
+    });
+    maxGrant += heatNum + effNum;
+  }
+
+  // ── ECO4 SCOTLAND ──
+  if (n === 'scotland' && (i === 'benefits' || i === 'low') && !eco4eligible) {
+    cards.push({
+      status: 'eligible',
+      name: 'ECO4 in Scotland',
+      desc: 'Also available in Scotland via energy suppliers for households on benefits or below LA Flex income threshold.',
+      amount: '£7,000–£20,000+',
+      num: 0
+    });
+  }
+
+  // ── BANK LENDING ──
+  if ((n === 'england' || n === 'wales' || n === 'scotland') &&
+      (o === 'own') && (i === 'medium' || i === 'high' || i === 'low')) {
+    cards.push({
+      status: 'maybe',
+      name: 'Green mortgage / bank lending',
+      desc: 'NatWest 0% additional borrowing £5k–£20k. Barclays £500–£2,000 cashback. Halifax/Lloyds £1,000 solar cashback. Leeds BS from 4.19%. Check if your mortgage expires in 2026.',
+      amount: '0% loan up to £20k + cashback',
+      num: 0
+    });
+  }
+
+  // ── WARM HOMES FUND (coming) ──
+  if ((n === 'england' || n === 'wales') && (i === 'medium' || i === 'high')) {
+    cards.push({
+      status: 'maybe',
+      name: '£5bn Warm Homes Fund (loans — coming)',
+      desc: 'Government-backed 0% or low-interest loans for solar, batteries, and heat pumps. Confirmed but not yet launched — watch gov.uk/warm-homes-plan.',
+      amount: '0% loans — TBC',
+      num: 0
+    });
+  }
+
+  // ── NORTHERN IRELAND ──
+  if (n === 'ni') {
+    cards.push({
+      status: 'maybe',
+      name: 'Northern Ireland — separate schemes',
+      desc: 'NI has its own schemes: Affordable Warmth (low income), Boiler Replacement Scheme, and NI Sustainable Energy Programme. Contact NI Housing Executive or your energy provider.',
+      amount: 'Varies',
+      num: 0
+    });
+  }
+
+  // ── INELIGIBLE MESSAGE ──
+  if (cards.length === 0) {
+    cards.push({
+      status: 'ineligible',
+      name: 'No automatic grant eligibility found',
+      desc: 'Based on your selections, mainstream grant schemes may not apply. Consider the Warm Homes Fund loans (coming), NatWest 0% borrowing, or review whether LA Flex ECO4 applies via your local council.',
+      amount: '—',
+      num: 0
+    });
+  }
+
+  const nation = {england:'England', wales:'Wales', scotland:'Scotland', ni:'N. Ireland'}[n] || n;
+  const fuel = {gas:'mains gas', oil:'heating oil', lpg:'LPG', electric:'electric', coal:'coal/solid fuel'}[f] || f;
+
+  document.getElementById('results-summary').textContent =
+    `Results for: ${nation} · ${fuel} · EPC ${e?.toUpperCase() || 'unknown'} · ${o || 'owner'}`;
+
+  document.getElementById('result-cards').innerHTML = cards.map(c => {
+    const dot = c.status === 'eligible' ? 'dot-green' :
+                c.status === 'maybe' ? 'dot-amber' :
+                c.status === 'scot' ? 'dot-scot' : 'dot-dim';
+    const amtClass = c.status === 'eligible' ? 'green' :
+                     c.status === 'maybe' ? 'amber' :
+                     c.status === 'scot' ? 'scot' : 'dim';
+    return `<div class="result-card ${c.status}">
+      <span class="rc-dot ${dot}"></span>
+      <div><div class="rc-name">${c.name}</div><div class="rc-desc">${c.desc}</div></div>
+      <div class="rc-amount ${amtClass}">${c.amount}</div>
+    </div>`;
+  }).join('');
+
+  const totalEl = document.getElementById('results-total');
+  const rtVal = document.getElementById('rt-val');
+  if (maxGrant > 0) {
+    totalEl.style.display = 'flex';
+    rtVal.textContent = '£' + maxGrant.toLocaleString() + ' estimated maximum grants';
+  } else {
+    totalEl.style.display = 'none';
+  }
+
+  document.getElementById('results').classList.add('visible');
+  document.getElementById('results').scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function resetChecker() {
+  Object.keys(state).forEach(k => delete state[k]);
+  document.querySelectorAll('.q-btn').forEach(b => b.classList.remove('selected','selected-scot'));
+  document.getElementById('results').classList.remove('visible');
+  document.getElementById('results-total').style.display = 'none';
+}
+</script>
+
+</body>
+</html>

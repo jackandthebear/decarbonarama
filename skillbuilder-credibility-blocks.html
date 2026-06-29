@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decarbonarma — Skill Builder credibility strip + author bio (preview)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0ede6;
+    --bg2: #e8e4db;
+    --bg3: #ddd9cf;
+    --ink: #1c1a16;
+    --ink-mid: #4a4640;
+    --ink-light: #8a8478;
+    --rule: #c8c4b8;
+    --blue: #1a3a5c;
+    --blue-pale: rgba(26,58,92,0.07);
+    --orange: #c4530a;
+    --orange-pale: rgba(196,83,10,0.07);
+    --green: #1a5c38;
+    --green-pale: rgba(26,92,56,0.07);
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --display: 'Syne', system-ui, sans-serif;
+    --body: 'Source Serif 4', Georgia, serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.75; font-weight: 300; -webkit-font-smoothing: antialiased; padding: 3rem 1.5rem; }
+  .preview-label { font-family: var(--mono); font-size: 12px; color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.08em; margin: 2.5rem auto 0.75rem; max-width: 920px; }
+
+  /* ─────────────────────────────────────────────
+     BLOCK A — "AS SEEN ON" CREDIBILITY STRIP
+     Drop near the top of the homepage (under the hero)
+     or into the author bio area.
+  ───────────────────────────────────────────── */
+  .asseen {
+    max-width: 920px; margin: 0 auto; background: var(--ink); color: #fff;
+    border-radius: 4px; padding: 1.4rem 1.8rem; display: flex; align-items: center;
+    gap: 1.6rem; flex-wrap: wrap; justify-content: center; text-align: center;
+  }
+  .asseen .kicker {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #6db8e8; white-space: nowrap;
+  }
+  .asseen .channel { font-family: var(--display); font-weight: 800; font-size: 1.25rem; color: #fff; letter-spacing: 0.01em; }
+  .asseen .play { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; background: #c4181f; border-radius: 5px; margin-right: 0.5rem; vertical-align: middle; }
+  .asseen .play::after { content: ''; width: 0; height: 0; border-style: solid; border-width: 5px 0 5px 8px; border-color: transparent transparent transparent #fff; margin-left: 1px; }
+  .asseen .links { display: flex; gap: 0.9rem; flex-wrap: wrap; justify-content: center; }
+  .asseen .links a {
+    font-family: var(--mono); font-size: 12px; color: #ddd9cf; text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 0.3rem 0.85rem; transition: all .15s;
+  }
+  .asseen .links a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+
+  /* ─────────────────────────────────────────────
+     BLOCK B — AUTHOR BIO
+     Drop at the foot of every article + on an /about page.
+  ───────────────────────────────────────────── */
+  .author {
+    max-width: 920px; margin: 0 auto; background: var(--bg2); border: 1px solid var(--rule);
+    border-radius: 4px; padding: 1.8rem 2rem; display: flex; gap: 1.6rem; align-items: flex-start;
+  }
+  .author .avatar {
+    flex: 0 0 84px; width: 84px; height: 84px; border-radius: 50%; background: var(--blue);
+    color: #fff; font-family: var(--display); font-weight: 800; font-size: 2rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  /* Replace .avatar text with a real photo:
+     <div class="avatar" style="background-image:url('images/jack.jpg');background-size:cover;"></div> */
+  .author .body h3 { font-family: var(--display); font-weight: 700; font-size: 1.15rem; margin-bottom: 0.15rem; }
+  .author .body .role { font-family: var(--mono); font-size: 12px; color: var(--orange); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.7rem; }
+  .author .body p { font-size: 15.5px; color: var(--ink-mid); margin-bottom: 0.7rem; }
+  .author .creds { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .author .creds span {
+    font-family: var(--mono); font-size: 11px; color: var(--ink-mid); background: var(--bg3);
+    border-radius: 999px; padding: 0.25rem 0.7rem;
+  }
+  @media (max-width: 600px) { .author { flex-direction: column; } }
+</style>
+</head>
+<body>
+
+<div class="preview-label">Block A — "As seen on" strip (place under homepage hero)</div>
+<!-- ════════ COPY FROM HERE ════════ -->
+<section class="asseen">
+  <span class="kicker">As featured on</span>
+  <span class="channel"><span class="play"></span>Skill Builder</span>
+  <div class="links">
+    <a href="https://youtu.be/2rwH3EdV_rE" target="_blank" rel="noopener">Superfoil roof + solar →</a>
+    <a href="https://youtu.be/Z_kl8k0OsFY" target="_blank" rel="noopener">Air-to-air + Sunamp →</a>
+  </div>
+</section>
+<!-- ════════ TO HERE ════════ -->
+
+<div class="preview-label">Block B — Author bio (foot of every article + /about page)</div>
+<!-- ════════ COPY FROM HERE ════════ -->
+<aside class="author">
+  <div class="avatar">G</div>
+  <div class="body">
+    <h3>Gareth</h3>
+    <div class="role">Founder · Decarbonarma</div>
+    <p>I decarbonised my own home — a re-roof with Superfoil and solar, an air-to-air heat pump and a Sunamp heat battery — and I write up what actually worked, what didn't, and what it really cost. No installer pays me to say any of it.</p>
+    <p>My setup has been featured twice on <a href="https://www.youtube.com/@SkillBuilder" target="_blank" rel="noopener">Skill Builder</a>, the UK building channel that doesn't sugar-coat heat pumps. Decarbonarma exists to give you the same straight answers — backed by real numbers, not a sales script.</p>
+    <div class="creds">
+      <span>Featured ×2 on Skill Builder</span>
+      <span>Real metered home</span>
+      <span>Independent · no installer funding</span>
+    </div>
+  </div>
+</aside>
+<!-- ════════ TO HERE ════════ -->
+
+</body>
+</html>

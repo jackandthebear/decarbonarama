@@ -1,0 +1,284 @@
+
+<h2 class="sr-only">Home battery sizing calculator — estimates current and future battery requirements based on electricity usage, heat pump plans, and EV charging</h2>
+
+<div style="padding:1.5rem 0 2rem;">
+
+<div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:1.5rem;line-height:1.6;max-width:600px;">
+  Sizes your battery for winter demand (Dec–Feb peak), then projects what you'll need when you add a heat pump. Uses the HeatpumpMonitor.org fleet average SCOP of 3.87 by default.
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;">
+
+  <div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;">
+    <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:0.75rem;font-weight:500;text-transform:uppercase;letter-spacing:0.04em;">Step 1 — current electricity</div>
+
+    <div style="margin-bottom:1rem;">
+      <label style="font-size:13px;color:var(--color-text-secondary);display:block;margin-bottom:6px;">Winter daily electricity use (kWh/day)</label>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <input type="range" id="dailyKwh" min="3" max="40" step="0.5" value="10" style="flex:1;" oninput="calc()">
+        <span style="font-size:14px;font-weight:500;min-width:48px;text-align:right;" id="dailyKwhOut">10.0 kWh</span>
+      </div>
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px;">UK average ~8–12 kWh/day in winter. Check your Jan–Feb bills.</div>
+    </div>
+
+    <div style="margin-bottom:1rem;">
+      <label style="font-size:13px;color:var(--color-text-secondary);display:block;margin-bottom:6px;">Evening peak proportion (%)</label>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <input type="range" id="peakPct" min="30" max="65" step="1" value="45" style="flex:1;" oninput="calc()">
+        <span style="font-size:14px;font-weight:500;min-width:36px;text-align:right;" id="peakPctOut">45%</span>
+      </div>
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px;">% of daily use between 4pm–midnight. 40–50% is typical for most households.</div>
+    </div>
+
+    <div>
+      <label style="font-size:13px;color:var(--color-text-secondary);display:block;margin-bottom:6px;">Tariff type</label>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <button id="tariff-tou" onclick="setTariff('tou')" style="font-size:12px;padding:5px 10px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-info);color:var(--color-text-info);cursor:pointer;">Octopus Go / TOU</button>
+        <button id="tariff-flat" onclick="setTariff('flat')" style="font-size:12px;padding:5px 10px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);background:transparent;color:var(--color-text-secondary);cursor:pointer;">Flat rate</button>
+        <button id="tariff-solar" onclick="setTariff('solar')" style="font-size:12px;padding:5px 10px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);background:transparent;color:var(--color-text-secondary);cursor:pointer;">Solar + TOU</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;">
+    <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:0.75rem;font-weight:500;text-transform:uppercase;letter-spacing:0.04em;">Step 2 — EV charging (optional)</div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
+      <input type="checkbox" id="hasEV" onchange="calc()" style="width:16px;height:16px;cursor:pointer;">
+      <label for="hasEV" style="font-size:13px;color:var(--color-text-primary);cursor:pointer;">I charge an EV from the battery</label>
+    </div>
+
+    <div id="evSection" style="opacity:0.4;pointer-events:none;">
+      <label style="font-size:13px;color:var(--color-text-secondary);display:block;margin-bottom:6px;">kWh charged per session</label>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:0.5rem;">
+        <input type="range" id="evKwh" min="5" max="60" step="1" value="20" style="flex:1;" oninput="calc()">
+        <span style="font-size:14px;font-weight:500;min-width:48px;text-align:right;" id="evKwhOut">20 kWh</span>
+      </div>
+      <div style="font-size:11px;color:var(--color-text-secondary);">Nightly top-up. Full overnight charge adds this direct to battery requirement.</div>
+    </div>
+  </div>
+</div>
+
+<div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:1.5rem;">
+  <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:0.75rem;font-weight:500;text-transform:uppercase;letter-spacing:0.04em;">Step 3 — future heat pump (future-proofing)</div>
+
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
+    <input type="checkbox" id="hasHP" onchange="toggleHP()" style="width:16px;height:16px;cursor:pointer;">
+    <label for="hasHP" style="font-size:13px;color:var(--color-text-primary);cursor:pointer;">I plan to install a heat pump (now or in future)</label>
+  </div>
+
+  <div id="hpSection" style="opacity:0.4;pointer-events:none;">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem;">
+      <div>
+        <label style="font-size:13px;color:var(--color-text-secondary);display:block;margin-bottom:6px;">Annual gas use (kWh/yr)</label>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <input type="range" id="gasKwh" min="2000" max="30000" step="500" value="12000" style="flex:1;" oninput="calc()">
+          <span style="font-size:13px;font-weight:500;min-width:56px;text-align:right;" id="gasKwhOut">12,000</span>
+        </div>
+        <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px;">UK avg 11,500 kWh/yr. Check your gas bills.</div>
+      </div>
+      <div>
+        <label style="font-size:13px;color:var(--color-text-secondary);display:block;margin-bottom:6px;">Expected SCOP</label>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <input type="range" id="scop" min="2.5" max="5.5" step="0.1" value="3.87" style="flex:1;" oninput="calc()">
+          <span style="font-size:13px;font-weight:500;min-width:32px;text-align:right;" id="scopOut">3.87</span>
+        </div>
+        <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px;">HPM avg 3.87 · well-commissioned 4.1+</div>
+      </div>
+      <div>
+        <label style="font-size:13px;color:var(--color-text-secondary);display:block;margin-bottom:6px;">Evening/night heat pump load</label>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <input type="range" id="hpPeakPct" min="20" max="60" step="5" value="35" style="flex:1;" oninput="calc()">
+          <span style="font-size:13px;font-weight:500;min-width:32px;text-align:right;" id="hpPeakPctOut">35%</span>
+        </div>
+        <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px;">% of HP electricity needed after 4pm or overnight</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="resultsPanel" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
+  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1.25rem;">
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.04em;">Recommended now</div>
+    <div style="font-size:32px;font-weight:500;color:var(--color-text-primary);" id="recNow">—</div>
+    <div style="font-size:13px;color:var(--color-text-secondary);margin-top:2px;" id="recNowBreak">—</div>
+  </div>
+  <div id="futureCard" style="background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1.25rem;opacity:0.45;">
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.04em;">With heat pump added</div>
+    <div style="font-size:32px;font-weight:500;color:var(--color-text-primary);" id="recFuture">—</div>
+    <div style="font-size:13px;color:var(--color-text-secondary);margin-top:2px;" id="recFutureBreak">—</div>
+  </div>
+</div>
+
+<div id="workingsPanel" style="background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:1.5rem;font-size:12px;color:var(--color-text-secondary);line-height:1.8;font-family:var(--font-mono);" >
+</div>
+
+<div id="productPanel" style="display:none;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:1.5rem;">
+  <div style="font-size:12px;font-weight:500;margin-bottom:0.75rem;color:var(--color-text-primary);">Suggested battery products (nearest available sizes)</div>
+  <div id="productGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;"></div>
+</div>
+
+<div style="font-size:11px;color:var(--color-text-secondary);line-height:1.7;max-width:600px;">
+  Methodology: LFP 90% usable depth of discharge assumed throughout. TOU/Go tariff adds a full-day coverage requirement (battery must store enough cheap-rate electricity to last until next charge window). Evening peak fraction from typical UK half-hourly demand profiles. Heat pump peak fraction reflects that well-commissioned heat pumps run primarily during mild daytime hours with weather compensation — only a portion of daily electricity is needed at peak tariff times. All recommendations rounded up to nearest 0.5 kWh and then to nearest product size.
+</div>
+
+</div>
+
+<script>
+let tariff = 'tou';
+
+function setTariff(t) {
+  tariff = t;
+  ['tou','flat','solar'].forEach(x => {
+    const b = document.getElementById('tariff-' + x);
+    if (x === t) {
+      b.style.background = 'var(--color-background-info)';
+      b.style.color = 'var(--color-text-info)';
+      b.style.border = '0.5px solid var(--color-border-info)';
+    } else {
+      b.style.background = 'transparent';
+      b.style.color = 'var(--color-text-secondary)';
+      b.style.border = '0.5px solid var(--color-border-tertiary)';
+    }
+  });
+  calc();
+}
+
+function toggleHP() {
+  const on = document.getElementById('hasHP').checked;
+  const sec = document.getElementById('hpSection');
+  sec.style.opacity = on ? '1' : '0.4';
+  sec.style.pointerEvents = on ? 'auto' : 'none';
+  document.getElementById('futureCard').style.opacity = on ? '1' : '0.45';
+  calc();
+}
+
+document.getElementById('hasEV').addEventListener('change', function() {
+  const sec = document.getElementById('evSection');
+  sec.style.opacity = this.checked ? '1' : '0.4';
+  sec.style.pointerEvents = this.checked ? 'auto' : 'none';
+  calc();
+});
+
+function fmt(n) { return Math.round(n * 10) / 10; }
+
+function nearestProduct(kwh) {
+  const products = [
+    { name: 'GivEnergy 5.2', kwh: 5.2 },
+    { name: 'GivEnergy 8.2', kwh: 8.2 },
+    { name: 'Pylontech Force 7.1', kwh: 7.1 },
+    { name: 'GivEnergy 9.5', kwh: 9.5 },
+    { name: 'BYD HVS 10.2', kwh: 10.24 },
+    { name: 'Pylontech Force 10.65', kwh: 10.65 },
+    { name: 'GivEnergy 13.5', kwh: 13.5 },
+    { name: 'BYD HVS 15.4', kwh: 15.36 },
+    { name: 'Pylontech Force 14.2', kwh: 14.2 },
+    { name: 'Pylontech Force 17.75', kwh: 17.75 },
+    { name: 'BYD HVM 22.1', kwh: 22.1 },
+    { name: 'Pylontech Force 21.3', kwh: 21.3 },
+    { name: '2× GivEnergy 13.5', kwh: 27.0 },
+    { name: 'Pylontech Force 28.4', kwh: 28.4 }
+  ];
+  const sorted = products.filter(p => p.kwh >= kwh).sort((a,b) => a.kwh - b.kwh);
+  const below = products.filter(p => p.kwh < kwh).sort((a,b) => b.kwh - a.kwh);
+  return { above: sorted.slice(0, 2), below: below.slice(0, 1) };
+}
+
+function calc() {
+  const daily = parseFloat(document.getElementById('dailyKwh').value);
+  const peakPct = parseFloat(document.getElementById('peakPct').value) / 100;
+  const hasEV = document.getElementById('hasEV').checked;
+  const evKwh = hasEV ? parseFloat(document.getElementById('evKwh').value) : 0;
+  const hasHP = document.getElementById('hasHP').checked;
+  const gasKwh = parseFloat(document.getElementById('gasKwh').value);
+  const scop = parseFloat(document.getElementById('scop').value);
+  const hpPeakPct = parseFloat(document.getElementById('hpPeakPct').value) / 100;
+  const DOD = 0.9;
+  const BUFFER = 1.12;
+
+  document.getElementById('dailyKwhOut').textContent = fmt(daily) + ' kWh';
+  document.getElementById('peakPctOut').textContent = Math.round(peakPct * 100) + '%';
+  document.getElementById('evKwhOut').textContent = Math.round(evKwh) + ' kWh';
+  document.getElementById('gasKwhOut').textContent = Math.round(gasKwh).toLocaleString();
+  document.getElementById('scopOut').textContent = fmt(scop);
+  document.getElementById('hpPeakPctOut').textContent = Math.round(hpPeakPct * 100) + '%';
+
+  let baseEvening = daily * peakPct;
+  let touExtra = 0;
+
+  if (tariff === 'tou') {
+    touExtra = daily * 0.70;
+    baseEvening = Math.max(baseEvening, touExtra);
+  } else if (tariff === 'solar') {
+    baseEvening = daily * peakPct * 0.6;
+  }
+
+  const currentRequired = (baseEvening + evKwh) * BUFFER / DOD;
+  const currentRounded = Math.ceil(currentRequired * 2) / 2;
+
+  const hpDailyTotal = hasHP ? (gasKwh / 365) / scop : 0;
+  const hpPeakLoad = hpDailyTotal * hpPeakPct;
+  const futureRequired = hasHP ? ((baseEvening + hpPeakLoad + evKwh) * BUFFER / DOD) : 0;
+  const futureRounded = hasHP ? Math.ceil(futureRequired * 2) / 2 : 0;
+  const extraNeeded = hasHP ? Math.max(0, futureRounded - currentRounded) : 0;
+
+  document.getElementById('recNow').textContent = fmt(currentRounded) + ' kWh';
+  document.getElementById('recNowBreak').textContent =
+    'Evening load: ' + fmt(baseEvening) + ' kWh' +
+    (evKwh > 0 ? ' + EV: ' + fmt(evKwh) + ' kWh' : '');
+
+  if (hasHP) {
+    document.getElementById('recFuture').textContent = fmt(futureRounded) + ' kWh';
+    document.getElementById('recFutureBreak').textContent =
+      '+' + fmt(hpPeakLoad) + ' kWh HP peak load (extra ' + fmt(extraNeeded) + ' kWh)';
+  } else {
+    document.getElementById('recFuture').textContent = '—';
+    document.getElementById('recFutureBreak').textContent = 'Enable heat pump above';
+  }
+
+  let tariffNote = '';
+  if (tariff === 'tou') tariffNote = 'TOU: sized to cover full off-peak day from overnight charge.';
+  else if (tariff === 'solar') tariffNote = 'Solar+TOU: solar covers midday, battery covers evening peak only.';
+  else tariffNote = 'Flat rate: sized to cover evening peak only.';
+
+  const lines = [
+    '// current sizing',
+    `evening peak load      ${fmt(daily)} × ${Math.round(peakPct*100)}% = ${fmt(baseEvening)} kWh`,
+    evKwh > 0 ? `EV overnight charge    + ${fmt(evKwh)} kWh` : null,
+    `usable required        (${fmt(baseEvening + evKwh)} × ${BUFFER}) ÷ ${DOD} DoD = ${fmt(currentRequired)} kWh`,
+    `rounded up             → ${fmt(currentRounded)} kWh nominal`,
+    tariffNote,
+    hasHP ? '' : null,
+    hasHP ? '// heat pump projection' : null,
+    hasHP ? `gas annual             ${Math.round(gasKwh).toLocaleString()} kWh ÷ SCOP ${fmt(scop)} = ${fmt(gasKwh/scop)} kWh/yr electric` : null,
+    hasHP ? `daily HP electric      ${fmt(hpDailyTotal)} kWh/day` : null,
+    hasHP ? `peak portion (${Math.round(hpPeakPct*100)}%)    ${fmt(hpDailyTotal)} × ${Math.round(hpPeakPct*100)}% = ${fmt(hpPeakLoad)} kWh/day` : null,
+    hasHP ? `future usable reqd     (${fmt(baseEvening + hpPeakLoad + evKwh)} × ${BUFFER}) ÷ ${DOD} = ${fmt(futureRequired)} kWh` : null,
+    hasHP ? `future rounded up      → ${fmt(futureRounded)} kWh (extra ${fmt(extraNeeded)} kWh)` : null,
+  ].filter(l => l !== null);
+
+  document.getElementById('workingsPanel').innerHTML = lines.map(l => `<div>${l}</div>`).join('');
+
+  const targetKwh = hasHP ? futureRounded : currentRounded;
+  const prods = nearestProduct(targetKwh);
+  const panel = document.getElementById('productPanel');
+  panel.style.display = 'block';
+
+  const allProds = [...prods.below, ...prods.above];
+  const html = allProds.map((p, i) => {
+    const isNow = p.kwh >= currentRounded && (i === 0 || allProds[i-1].kwh < currentRounded);
+    const isFuture = hasHP && p.kwh >= futureRounded && (i === 0 || allProds[i-1].kwh < futureRounded);
+    const badge = isFuture ? `<span style="font-size:10px;background:var(--color-background-success);color:var(--color-text-success);padding:2px 6px;border-radius:4px;display:block;margin-top:4px;">covers future HP</span>`
+      : isNow ? `<span style="font-size:10px;background:var(--color-background-info);color:var(--color-text-info);padding:2px 6px;border-radius:4px;display:block;margin-top:4px;">covers current</span>` : '';
+    const dim = p.kwh < currentRounded;
+    return `<div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.75rem;opacity:${dim?'0.45':'1'};">
+      <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);">${p.name}</div>
+      <div style="font-size:20px;font-weight:500;color:var(--color-text-primary);margin-top:2px;">${fmt(p.kwh)} kWh</div>
+      ${badge}
+    </div>`;
+  }).join('');
+  document.getElementById('productGrid').innerHTML = html;
+}
+
+calc();
+</script>
