@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>H1 2026: Six Months of Metered Solar &amp; Battery Data From Rose Cottage | Decarbonarama</title>
+<meta name="description" content="Six months, four solar arrays, one battery: the full metered H1 2026 breakdown from Rose Cottage — North, South, Garage and the original Sonnen array compared, plus battery cycling, grid position and the real financial return.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0ede6; --bg2: #e8e4db; --bg3: #ddd9cf;
+    --ink: #1c1a16; --ink-mid: #4a4640; --ink-light: #8a8478;
+    --rule: #c8c4b8; --blue: #1a3a5c; --blue-pale: rgba(26,58,92,0.07);
+    --orange: #c4530a; --orange-pale: rgba(196,83,10,0.07);
+    --green: #1a5c38; --green-pale: rgba(26,92,56,0.07);
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --display: 'Syne', system-ui, sans-serif;
+    --body: 'Source Serif 4', Georgia, serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.75; font-weight: 300; -webkit-font-smoothing: antialiased; }
+
+  .site-header { background: var(--ink); padding: 0.9rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+  .site-logo{text-decoration:none;display:flex;align-items:center;}
+  .site-nav { display: flex; gap: 1.5rem; }
+  .site-nav a { color: rgba(255,255,255,0.55); text-decoration: none; font-family: var(--display); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .hero { background: var(--green); color: #fff; padding: 4rem 2rem 3.5rem; position: relative; overflow: hidden; }
+  .hero::after { content: 'H1'; position: absolute; right: -10px; top: -30px; font-family: var(--display); font-size: 16rem; font-weight: 800; color: rgba(255,255,255,0.05); line-height: 1; pointer-events: none; user-select: none; }
+  .hero-inner { max-width: 860px; margin: 0 auto; position: relative; }
+  .kicker { font-family: var(--mono); font-size: 11px; color: #8fd9b0; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 10px; }
+  .kicker::before { content: '//'; color: rgba(255,255,255,0.25); }
+  h1 { font-family: var(--display); font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; color: #fff; margin-bottom: 1.25rem; }
+  h1 em { font-style: italic; font-weight: 400; font-family: var(--body); color: #8fd9b0; }
+  .deck { font-size: 1.1rem; font-weight: 300; line-height: 1.65; color: rgba(255,255,255,0.72); max-width: 640px; margin-bottom: 2rem; font-family: var(--body); }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 1.25rem; font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 0.06em; }
+  .tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); font-size: 10px; padding: 3px 8px; border-radius: 2px; font-family: var(--mono); letter-spacing: 0.06em; }
+
+  .verdict-strip { background: var(--orange); overflow: hidden; }
+  .verdict-strip-inner { max-width: 860px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .vs-cell { padding: 1.5rem 1.75rem; border-right: 1px solid rgba(255,255,255,0.15); }
+  .vs-cell:last-child { border-right: none; }
+  .vs-num { font-family: var(--display); font-size: 2.2rem; font-weight: 800; color: #fff; line-height: 1; margin-bottom: 0.3rem; }
+  .vs-label { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.65); letter-spacing: 0.06em; line-height: 1.4; text-transform: uppercase; }
+
+  .content { max-width: 860px; margin: 0 auto; padding: 0 2rem 5rem; }
+  h2 { font-family: var(--display); font-size: 1.5rem; font-weight: 700; color: var(--ink); margin: 3rem 0 0.9rem; padding-top: 2.5rem; border-top: 2px solid var(--ink); letter-spacing: -0.01em; line-height: 1.2; }
+  h2:first-child { border-top: none; padding-top: 2rem; margin-top: 2rem; }
+  h3 { font-family: var(--display); font-size: 1rem; font-weight: 500; color: var(--ink-mid); margin: 1.75rem 0 0.5rem; letter-spacing: 0.02em; }
+  p { color: var(--ink-mid); margin-bottom: 1.1rem; font-weight: 300; }
+  strong { color: var(--ink); font-weight: 500; }
+  .content a { color: var(--blue); }
+
+  .data-box { background: var(--blue); color: #fff; padding: 1.5rem 1.75rem; margin: 2rem 0; border-radius: 2px; }
+  .data-box-label { font-family: var(--mono); font-size: 10px; color: #6db8e8; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .data-box p { color: rgba(255,255,255,0.82); margin: 0; font-size: 1.05rem; line-height: 1.65; }
+  .data-box strong { color: #fff; }
+
+  .callout { border-left: 3px solid var(--blue); padding: 1rem 1.25rem; background: var(--blue-pale); margin: 1.75rem 0; border-radius: 0 2px 2px 0; }
+  .callout p { margin: 0; color: var(--ink); font-size: 1rem; }
+  .callout-warn { border-left-color: var(--orange); background: var(--orange-pale); }
+
+  .brand-table-wrap { overflow-x: auto; margin: 1.5rem 0 2rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; font-family: var(--body); }
+  thead tr { border-bottom: 2px solid var(--ink); }
+  thead th { font-family: var(--display); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); padding: 0.5rem 0.75rem 0.75rem; text-align: left; font-weight: 500; }
+  thead th:not(:first-child) { text-align: right; }
+  tbody tr { border-bottom: 1px solid var(--rule); }
+  tbody tr:last-child { border-bottom: 2px solid var(--ink); font-weight: 500; }
+  tbody td { padding: 0.8rem 0.75rem; color: var(--ink-mid); font-weight: 300; }
+  tbody td:not(:first-child) { text-align: right; font-family: var(--mono); font-size: 13px; }
+  tbody td:first-child { color: var(--ink); font-weight: 400; }
+
+  .array-bars { margin: 1.5rem 0 2rem; }
+  .array-bar-row { display: grid; grid-template-columns: 150px 1fr 90px; align-items: center; gap: 14px; margin-bottom: 12px; }
+  .array-bar-label { font-family: var(--display); font-size: 13px; color: var(--ink); }
+  .array-bar-sub { font-family: var(--mono); font-size: 10px; color: var(--ink-light); display: block; margin-top: 2px; }
+  .array-bar-track { background: var(--bg3); border-radius: 3px; height: 22px; overflow: hidden; }
+  .array-bar-fill { height: 100%; border-radius: 3px; }
+  .array-bar-val { font-family: var(--mono); font-size: 13px; text-align: right; color: var(--ink); }
+
+  /* conclusion */
+  .conclusion { background: var(--blue); padding: 3rem 2rem; margin: 3rem -2rem 0; }
+  .conclusion-inner { max-width: 860px; margin: 0 auto; }
+  .conclusion h2 { font-family: var(--display); font-size: 1.8rem; font-weight: 800; color: #fff; border: none; padding: 0; margin: 0 0 1.25rem; letter-spacing: -0.02em; }
+  .conclusion p { color: rgba(255,255,255,0.75); font-weight: 300; font-size: 1rem; margin-bottom: 1rem; }
+  .conclusion strong { color: #fff; }
+  .cta-btn { display: inline-block; background: var(--orange); color: #fff; font-family: var(--display); font-weight: 700; font-size: 0.95rem; text-decoration: none; padding: 0.8rem 1.5rem; border-radius: 3px; margin-top: 0.5rem; }
+
+  .author-bio { display: flex; gap: 1.25rem; align-items: flex-start; max-width: 860px; margin: 0 auto; padding: 2rem; }
+  .author-bio .av { flex: 0 0 64px; width: 64px; height: 64px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 800; font-size: 1.7rem; }
+  .author-bio h4 { font-family: var(--display); font-size: 1.05rem; margin-bottom: 0.1rem; }
+  .author-bio .role { font-family: var(--mono); font-size: 11px; color: var(--orange); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.6rem; }
+  .author-bio p { font-size: 14.5px; margin-bottom: 0.5rem; }
+  .author-bio a { color: var(--blue); }
+
+  footer { border-top: 1px solid var(--rule); padding: 2rem; max-width: 860px; margin: 0 auto; font-family: var(--mono); font-size: 11.5px; color: var(--ink-light); line-height: 1.7; letter-spacing: 0.02em; }
+
+  @media (max-width: 680px) {
+    .verdict-strip-inner { grid-template-columns: repeat(2, 1fr); }
+    .vs-cell:nth-child(2) { border-right: none; }
+    .hero, .content { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .conclusion { margin-left: -1.25rem; margin-right: -1.25rem; padding: 2rem 1.25rem; }
+    .author-bio { flex-direction: column; }
+    .array-bar-row { grid-template-columns: 110px 1fr 70px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="site-logo"><img src="../logo.svg" alt="Decarbonarama" style="height:34px;width:auto;display:block;"></a>
+  <nav class="site-nav">
+    <a href="../index.html">Home</a>
+    <a href="#">Case studies</a>
+    <a href="#">About</a>
+  </nav>
+</header>
+
+<div class="hero" style="position:relative">
+  <a href="https://www.buymeacoffee.com/jackandthebear" target="_blank" rel="noopener" style="position:absolute;top:14px;left:14px;z-index:5;display:block;background:#fff;border-radius:12px;padding:7px;box-shadow:0 6px 18px rgba(0,0,0,0.22);text-decoration:none;text-align:center;">
+    <span style="display:block;font-family:'Inter',sans-serif;font-size:9px;font-weight:600;color:#1A3D2B;">☕ Support</span>
+  </a>
+  <div class="hero-inner">
+    <p class="kicker">Case study — H1 2026 metered update</p>
+    <h1>Six months, four arrays, one battery — <em>the real H1 2026 numbers</em></h1>
+    <p class="deck">Rose Cottage now runs two solar systems and a battery: 18 Aiko panels split North and South, 4 more on the garage, and the original Sonnen-connected array on the lower roof. Here's exactly what each of them produced between 1 January and 30 June, down to the panel.</p>
+    <div class="hero-meta">
+      <span class="tag">Real metered home</span>
+      <span class="tag">22 Enphase panels, individually monitored</span>
+      <span class="tag">Jan–Jun 2026</span>
+      <span>No installer funding · independent</span>
+    </div>
+  </div>
+</div>
+
+<div class="verdict-strip">
+  <div class="verdict-strip-inner">
+    <div class="vs-cell"><div class="vs-num">7,501 kWh</div><div class="vs-label">combined solar, both systems, H1</div></div>
+    <div class="vs-cell"><div class="vs-num">5,800 kWh</div><div class="vs-label">imported from the grid, H1</div></div>
+    <div class="vs-cell"><div class="vs-num">3,700 kWh</div><div class="vs-label">exported to the grid, H1</div></div>
+    <div class="vs-cell"><div class="vs-num">~£1,481</div><div class="vs-label">estimated H1 benefit (export income + avoided import)</div></div>
+  </div>
+</div>
+
+<div class="content">
+
+  <h2>Why split it out by array</h2>
+  <p>The "solar generation" number I usually quote is really four different arrays lumped together, and lumping them together hides the interesting part. The newer Enphase system is 18 panels across the <strong>North</strong> and <strong>South</strong> faces of the main roof, plus 4 more on the <strong>Garage</strong> — all 510W Aiko panels on individual IQ8HC microinverters, so every single panel reports its own output. Sitting alongside that is the much older array on the lower roof, wired into the original <strong>Sonnen</strong> hybrid inverter and 15kWh battery from the 2022 install. Four arrays, four orientations, four different stories — so for this half-year update I pulled the numbers apart properly.</p>
+
+  <h2>The four arrays, H1 2026</h2>
+  <p>Enphase's per-panel monitoring lets me sum every individual panel reading for the half-year and attribute it to the right roof face. Combined with the Sonnen array's own generation meter, here's how the half-year actually split:</p>
+
+  <div class="array-bars">
+    <div class="array-bar-row">
+      <div class="array-bar-label">South roof<span class="array-bar-sub">9 panels · Az 205° · Tilt 34°</span></div>
+      <div class="array-bar-track"><div class="array-bar-fill" style="width:100%;background:var(--orange);"></div></div>
+      <div class="array-bar-val">2,503 kWh</div>
+    </div>
+    <div class="array-bar-row">
+      <div class="array-bar-label">Sonnen array<span class="array-bar-sub">lower roof · original 2022 install</span></div>
+      <div class="array-bar-track"><div class="array-bar-fill" style="width:95%;background:var(--blue);"></div></div>
+      <div class="array-bar-val">2,380 kWh</div>
+    </div>
+    <div class="array-bar-row">
+      <div class="array-bar-label">North roof<span class="array-bar-sub">9 panels · Az 25° · Tilt 34°</span></div>
+      <div class="array-bar-track"><div class="array-bar-fill" style="width:62%;background:var(--green);"></div></div>
+      <div class="array-bar-val">1,549 kWh</div>
+    </div>
+    <div class="array-bar-row">
+      <div class="array-bar-label">Garage<span class="array-bar-sub">4 panels · Az 180° · Tilt 30°</span></div>
+      <div class="array-bar-track"><div class="array-bar-fill" style="width:43%;background:#8a8478;"></div></div>
+      <div class="array-bar-val">1,069 kWh</div>
+    </div>
+  </div>
+
+  <p>South comes out on top for the half-year, with the Sonnen array a close second despite being the oldest kit on the roof. North still pulls a very usable 1,549 kWh — proof again that a north-facing roof with microinverters is worth using, not writing off. And the Garage array, at just 4 panels, is the smallest total simply because there are fewer of them.</p>
+
+  <div class="callout">
+    <p><strong>About those Garage panels:</strong> they weren't part of the original spec. When the 18 main-roof Aiko panels were delivered, four arrived scratched — rather than have them scrapped, the supplier let me keep them, and they went up on the garage roof nobody can see from the ground. Over their full lifetime they've actually been among the best per-panel producers on site. For this specific half-year, though, it's close: at 267 kWh/panel they're running just behind the South roof's 278 kWh/panel and comfortably ahead of North's 172 kWh/panel — still a very respectable return for panels that would otherwise have gone to landfill.</p>
+  </div>
+
+  <h2>The seasonal ramp</h2>
+  <p>None of this will surprise anyone who's lived through a British winter, but the swing is still stark laid out month by month. January and February combined managed less than a quarter of what May produced on its own.</p>
+
+  <div class="brand-table-wrap">
+    <table>
+      <thead><tr><th>Month</th><th>Enphase (kWh)</th><th>Sonnen (kWh)</th><th>Combined (kWh)</th><th>Grid export</th><th>Grid import</th></tr></thead>
+      <tbody>
+        <tr><td>January</td><td>307.9</td><td>114.7</td><td>422.6</td><td>85.7</td><td>1,400</td></tr>
+        <tr><td>February</td><td>344.6</td><td>160.5</td><td>505.1</td><td>116.7</td><td>1,200</td></tr>
+        <tr><td>March</td><td>743.7</td><td>369.6</td><td>1,113.3</td><td>558.4</td><td>992</td></tr>
+        <tr><td>April</td><td>1,100</td><td>548.7</td><td>1,648.7</td><td>912.0</td><td>791</td></tr>
+        <tr><td>May</td><td>1,300</td><td>612.4</td><td>1,912.4</td><td>1,100</td><td>843</td></tr>
+        <tr><td>June</td><td>1,300</td><td>574.1</td><td>1,874.1</td><td>1,000</td><td>597</td></tr>
+        <tr><td>H1 total</td><td>5,100</td><td>2,380.0</td><td>7,480</td><td>3,700</td><td>5,800</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>May turned out to be the standout month at 1,912 kWh combined, just ahead of June's 1,874 kWh. From January's 423 kWh to May's peak, output climbed roughly 4.5× — exactly the kind of ramp you'd expect as day length and sun angle improve through spring.</p>
+
+  <h2>The battery: 1,090 kWh in, 1,348 kWh out</h2>
+  <p>The Sonnen battery (15kWh, 3.6kW inverter) charged 1,090 kWh and discharged 1,348 kWh across H1. At first glance that looks like it's conjuring energy from nowhere — discharge exceeding charge shouldn't be possible. It isn't: some solar charging happens on a path that isn't fully captured by the "charged" meter total I pulled from Homey, and there's also whatever state of charge was already sitting in the battery on 1 January carrying into the count. It's a metering quirk rather than a mystery, and a reminder that reconciling three separate monitoring systems (Enphase, Sonnen/Homey, and the grid meter) rarely lines up to the decimal place.</p>
+
+  <h2>Grid position and the money</h2>
+  <p>Across H1 the house imported <strong>5,800 kWh</strong> from the grid and exported <strong>3,700 kWh</strong> back out, for a net import of 2,100 kWh over the half-year. Import still outweighs export by a fair margin — expected for a system offsetting demand through a UK winter and spring but not yet net-positive. That's much more likely in H2 once summer daylight properly kicks in.</p>
+
+  <div class="data-box">
+    <p class="data-box-label">// The financial headline</p>
+    <p>Using flat rates of 15p/kWh for the Smart Export Guarantee and 24.5p/kWh as the import rate avoided: roughly <strong>£555 in SEG export income</strong>, plus roughly <strong>£926 in avoided import cost</strong> from self-consumed solar, for a combined H1 benefit of about <strong>£1,481</strong>. These are conservative estimates on flat rates rather than actual time-of-use billing, but they're a solid read on what four arrays and a battery are worth so far this year.</p>
+  </div>
+
+  <h2>What I'm watching for in H2</h2>
+  <p>Three things: whether June's momentum carries into a genuinely net-positive July and August; whether the Sonnen array holds its position against the newer Enphase roofs as the seasons turn again; and getting the battery charge/discharge metering properly reconciled so H2's numbers are tighter than H1's. If you're running a similar multi-array-plus-battery setup and have solved that metering puzzle, I'd love to hear how.</p>
+
+</div>
+
+<div class="conclusion">
+  <div class="conclusion-inner">
+    <h2>Sizing your own solar and battery?</h2>
+    <p>Our free tools give you an independent output and payback estimate for your own roof, postcode and battery size — no salesperson, no spam, no quote-chasing.</p>
+    <a class="cta-btn" href="../battery_sizing_tool.html">Try the tools →</a>
+  </div>
+</div>
+
+<aside class="author-bio">
+  <div class="av">G</div>
+  <div>
+    <h4>Gareth</h4>
+    <div class="role">Founder · Decarbonarama</div>
+    <p>I decarbonised my own home — solar across three roof faces, a Sonnen battery, an air-to-air heat pump and a Sunamp heat battery — and I write up what actually worked, what didn't, and what it really cost. No installer pays me to say any of it.</p>
+    <p>My setup has been featured twice on <a href="https://www.youtube.com/@SkillBuilder" target="_blank" rel="noopener">Skill Builder</a>, the UK building channel that doesn't sugar-coat heat pumps.</p>
+  </div>
+</aside>
+
+<footer>
+  <p>Figures for 1 Jan–30 Jun 2026. Enphase array: 18× Aiko 510W panels (9 North, Az 25°, Tilt 34°; 9 South, Az 205°, Tilt 34°) plus 4 on the Garage (Az 180°, Tilt 30°), all on individual Enphase IQ8HC microinverters — per-panel and per-month totals from Enphase Enlighten. Sonnen array: original 2022 install on the lower roof, generation and battery (15kWh, 3.6kW inverter) totals from Homey Insights cumulative meters. Grid import/export are Enphase Envoy whole-home readings, cross-checked against the Octopus smart meter for the period both systems overlap; Octopus's own Homey integration only began covering the last month of H1. SEG rate 15p/kWh, import rate 24.5p/kWh — flat-rate estimates, not actual time-of-use billing. Individual results vary with roof, location, tariff and usage. This is a personal account, not installation advice.</p>
+  <p style="margin-top:0.75rem;color:var(--rule);">Published on Decarbonarama. Independent · no installer funding.</p>
+</footer>
+
+</body>
+</html>

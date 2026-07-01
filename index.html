@@ -277,6 +277,7 @@
   </section>
   <script>
   const latestSlides = [
+    {icon:'🔋', grad:'linear-gradient(135deg,#1a5c3a,#2b6fb0)', meta:'Case study · H1 2026 update', title:'Six months, four arrays, one battery — the real H1 2026 numbers', teaser:'North, South, Garage and the original Sonnen array compared panel-by-panel, plus battery cycling, grid position and the real financial return for H1 2026.', src:'./articles/rose-cottage-h1-2026.html', full:'Six Months, Four Arrays, One Battery'},
     {icon:'🔌', grad:'linear-gradient(135deg,#0f5132,#198754)', meta:'Deal watch · June 2026', title:'Can an EV pay for itself? Almost.', teaser:'The free-car test on the Frontera: can fuel and tax savings, plus a cheap EV tariff for the whole home, cover the monthly payment?', src:'./articles/frontera-pay-for-itself.html', full:'Can an EV Pay for Itself?'},
     {icon:'🚗', grad:'linear-gradient(135deg,#1e3a5f,#2563eb)', meta:'Deal watch · June 2026', title:'The cheapest new car in Britain? £138 a month', teaser:'A new electric SUV for less than a city car — the true all-in cost with tax, insurance and 7p charging, plus how an EV unlocks a cheap tariff for your whole home.', src:'./articles/cheapest-motoring-uk-frontera.html', full:'The Cheapest New Car in Britain?'},
     {icon:'🔆', grad:'linear-gradient(135deg,#111827,#374151)', meta:'Deep dive · June 2026', title:'Samsung EHS Quint: one box, five modes', teaser:'The first residential heat pump to do air-to-air and air-to-water from one outdoor unit — and recover heat from cooling to make your hot water free. Specs, the grant angle and the honest caveats.', src:'./articles/samsung-ehs-quint-deep-dive.html', full:'Samsung EHS Quint Deep Dive'},
@@ -3229,6 +3230,20 @@ Keep the total to 200-250 words. Use plain English throughout — no jargon with
       </div>
 
       <div id="art-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+
+        <!-- Rose Cottage H1 2026 solar & battery update -->
+        <div class="art-card" data-tag="solar" onclick="artOpen('./articles/rose-cottage-h1-2026.html','Six Months, Four Arrays, One Battery')" style="background:#fff;border:1px solid var(--stone-200);border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow='0 1px 4px rgba(0,0,0,0.05)'">
+          <div style="height:140px;background:linear-gradient(135deg,#1a5c3a,#2b6fb0);display:flex;align-items:center;justify-content:center;font-size:48px;">🔋</div>
+          <div style="padding:20px;">
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;">
+              <span style="background:#dbeafe;color:#1e40af;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;">Case study</span>
+              <span style="font-size:11px;color:var(--stone-600);">H1 2026</span>
+            </div>
+            <h3 style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--green-900);line-height:1.3;margin-bottom:8px;">Six months, four arrays, one battery — the real H1 2026 numbers</h3>
+            <p style="font-size:13px;color:var(--stone-600);line-height:1.6;">North, South, Garage and the original Sonnen array compared panel-by-panel, plus battery cycling, grid position and the real financial return for H1 2026.</p>
+            <div style="margin-top:16px;font-size:13px;font-weight:600;color:var(--green-600);">Read article →</div>
+          </div>
+        </div>
 
         <!-- Samsung EHS Quint deep dive -->
         <div class="art-card" data-tag="heating" onclick="artOpen('./articles/samsung-ehs-quint-deep-dive.html','Samsung EHS Quint Deep Dive')" style="background:#fff;border:1px solid var(--stone-200);border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow='0 1px 4px rgba(0,0,0,0.05)'">
