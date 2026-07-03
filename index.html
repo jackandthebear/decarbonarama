@@ -220,6 +220,22 @@
     .footer-grid { grid-template-columns: 1fr 1fr; }
     footer { padding: 48px 22px 32px; }
   }
+
+  /* ---- Mobile polish: collapse inline-styled blocks that don't respond on phones ---- */
+  @media (max-width: 640px) {
+    /* Any inline multi-column grid on the homepage stacks to one column */
+    #page-home [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+    /* Tame the hard-coded 80px side padding on homepage sections */
+    #page-home section { padding-left: 20px !important; padding-right: 20px !important; }
+    /* Latest-article carousel card (inline 200px 1fr auto grid) */
+    #latest-card { gap: 16px !important; padding: 18px !important; }
+    #latest-media { height: 150px !important; }
+    #latest-title { font-size: 22px !important; }
+    /* Footer to a single column on the narrowest screens */
+    .footer-grid { grid-template-columns: 1fr !important; }
+    /* Guard against sideways scrolling from any stray wide element */
+    html, body { overflow-x: hidden; }
+  }
 </style>
 </head>
 <body>
