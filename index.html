@@ -3615,11 +3615,12 @@ function hgGo(n){
 }
 
 /* ── EMAIL GATE ──
-   Captured emails are POSTed to Formspree. Replace the form ID below with your
-   own from https://formspree.io  (Forms → your form → endpoint looks like
-   https://formspree.io/f/abcdwxyz). Until you do, the gate still works and
-   remembers the visitor, but emails won't be delivered anywhere. */
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID';
+   Captured emails are sent to Mailchimp (Decarbonarma audience) via Mailchimp's
+   JSONP endpoint, which allows a silent cross-origin signup with no page redirect
+   (a normal fetch POST is blocked by CORS — hence JSONP). To point at a different
+   audience, update MC_ENDPOINT's u / id / f_id to match the embedded-form action in
+   Mailchimp (Audience → Signup forms → Embedded form). */
+const MC_ENDPOINT = 'https://decarbonarma.us15.list-manage.com/subscribe/post-json?u=cffa5aec4001ad97d9357f807&id=8d5f19dec4&f_id=0096a2e1f0';
 const GATE_KEY = 'decarb_subscribed';
 let _pendingOpen = null;
 
@@ -3638,6 +3639,23 @@ function gateClose() {
   document.getElementById('gate-modal').style.display = 'none';
   _pendingOpen = null;
 }
+function _mcSubscribe(email, done) {
+  /* Mailchimp JSONP: inject a <script> with a unique callback name; Mailchimp
+     replies { result: 'success' | 'error', msg: '...' }. No CORS, no redirect. */
+  const cb = 'mc_cb_' + Date.now();
+  let s = null;
+  function cleanup() {
+    clearTimeout(timer);
+    try { delete window[cb]; } catch (e) { window[cb] = undefined; }
+    if (s && s.parentNode) s.parentNode.removeChild(s);
+  }
+  const timer = setTimeout(function () { cleanup(); done(null); }, 8000);
+  window[cb] = function (resp) { cleanup(); done(resp); };
+  s = document.createElement('script');
+  s.src = MC_ENDPOINT + '&EMAIL=' + encodeURIComponent(email) + '&c=' + cb;
+  s.onerror = function () { cleanup(); done(null); };
+  document.body.appendChild(s);
+}
 function gateSubmit(e) {
   if (e && e.preventDefault) e.preventDefault();
   const email = document.getElementById('gate-email').value.trim();
@@ -3648,18 +3666,20 @@ function gateSubmit(e) {
   err.style.display = 'none';
   const btn = document.getElementById('gate-submit');
   btn.disabled = true; btn.textContent = 'Unlocking…';
-  fetch(FORMSPREE_ENDPOINT, {
-    method: 'POST',
-    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email: email, source: 'Decarbonarma article gate' })
-  }).catch(function () { /* don't block the reader if the network/endpoint fails */ })
-    .finally(function () {
-      try { localStorage.setItem(GATE_KEY, '1'); } catch (e) {}
-      document.getElementById('gate-modal').style.display = 'none';
+  _mcSubscribe(email, function (resp) {
+    /* Unlock on success, "already subscribed", or any network failure — never trap a
+       reader behind the gate. Only a clear invalid-email response stops the unlock. */
+    if (resp && resp.result === 'error' && /valid|invalid/i.test(resp.msg || '') && !/already/i.test(resp.msg || '')) {
       btn.disabled = false; btn.textContent = 'Unlock all articles →';
-      const open = _pendingOpen; _pendingOpen = null;
-      if (open) open();
-    });
+      err.textContent = 'Please enter a valid email address.'; err.style.display = 'block';
+      return;
+    }
+    try { localStorage.setItem(GATE_KEY, '1'); } catch (e) {}
+    document.getElementById('gate-modal').style.display = 'none';
+    btn.disabled = false; btn.textContent = 'Unlock all articles →';
+    const open = _pendingOpen; _pendingOpen = null;
+    if (open) open();
+  });
   return false;
 }
 
