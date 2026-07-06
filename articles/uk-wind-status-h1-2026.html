@@ -69,6 +69,18 @@
   .callout{border-left:3px solid var(--amber);background:var(--amber-pale);padding:18px 22px;border-radius:0 12px 12px 0;margin:28px 0;}
   .callout h3{margin-top:0;color:var(--amber);}
 
+  .live-cta{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;background:var(--bg3);border:1px solid var(--green-pale2);border-radius:14px;padding:22px 24px;margin:30px 0;position:relative;overflow:hidden;}
+  .live-cta::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--green),var(--blue));}
+  .live-cta-body{flex:1 1 300px;}
+  .live-cta-kicker{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:8px;}
+  .live-cta h3{margin:.35em 0 .2em;color:#fff;}
+  .live-cta p{font-size:15px;color:var(--text-mid);margin:.3em 0 0;}
+  .live-dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(74,222,128,.6);animation:livePulse 2s infinite;}
+  @keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(74,222,128,.55);}70%{box-shadow:0 0 0 8px rgba(74,222,128,0);}100%{box-shadow:0 0 0 0 rgba(74,222,128,0);}}
+  .live-cta-btn{flex:0 0 auto;background:var(--green);color:#062012;text-decoration:none;font-family:var(--mono);font-size:13.5px;font-weight:500;letter-spacing:.02em;padding:14px 22px;border-radius:10px;transition:background .15s;white-space:nowrap;}
+  .live-cta-btn:hover{background:var(--green-dim);}
+  @media(max-width:520px){.live-cta-btn{width:100%;text-align:center;}}
+
   footer{border-top:1px solid var(--border);padding:28px 0 60px;}
   footer p{font-size:12.5px;color:var(--text-dim);line-height:1.65;}
   footer a{color:var(--text-mid);}
@@ -106,6 +118,15 @@
   </div>
 
   <p>For the first time, wind is the single largest source of electricity in Great Britain. In 2025 wind turbines generated <strong>more than 85 terawatt-hours (TWh)</strong> — close to <strong>30% of everything the grid produced</strong> — overtaking gas. The country splits its wind fleet almost evenly between turbines on land and turbines at sea, and it is racing to roughly triple the offshore total by 2030. But the same success has exposed a hard problem: Britain is building turbines faster than it is building the wires to carry their power south, and the bill for that mismatch is now measured in billions. This article walks through the whole picture — onshore, offshore, the build pipeline, floating wind, and the grid bottleneck that keeps forcing perfectly good turbines to stop.</p>
+
+  <div class="live-cta">
+    <div class="live-cta-body">
+      <div class="live-cta-kicker"><span class="live-dot"></span>Live now</div>
+      <h3>Current status of the UK grid</h3>
+      <p>Want to see how much of Britain's electricity is coming from wind <em>right this minute</em>? Our free UK Grid Live tool shows the real-time generation mix — wind, gas, nuclear, solar and imports — updated as you watch.</p>
+    </div>
+    <a class="live-cta-btn" href="/#grid">⚡ Open UK Grid Live →</a>
+  </div>
 
   <h2>1. Wind on the land: onshore</h2>
 
