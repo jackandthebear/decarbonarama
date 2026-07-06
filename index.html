@@ -846,6 +846,16 @@
       <div class="product-card"><div class="prod-icon">🏠</div><div class="prod-info"><h4>Indra Smart Pro</h4><p>V2G-ready charger for compatible vehicles. Export from your car back to the grid and earn.</p><div class="price">From £999 installed (with grant)</div></div></div>
       <div class="product-card"><div class="prod-icon">📱</div><div class="prod-info"><h4>Pod Point Solo 3</h4><p>Reliable, smart, and app-controlled. Excellent value and compatible with all solar systems.</p><div class="price">From £699 installed (with grant)</div></div></div>
     </div>
+    <h2 style="font-family:'DM Serif Display',serif; font-size:32px; color:var(--green-900); margin:8px 0 24px;">Wiring Guide</h2>
+    <div style="display:flex;gap:28px;align-items:center;flex-wrap:wrap;background:#fff;border:1px solid var(--stone-200);border-radius:16px;padding:28px;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+      <div style="flex:0 0 auto;width:120px;height:120px;border-radius:14px;background:linear-gradient(135deg,#1a5c3a,#fbbf24);display:flex;align-items:center;justify-content:center;font-size:52px;">🔌</div>
+      <div style="flex:1 1 320px;min-width:280px;">
+        <span style="background:#dcfce7;color:#166534;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;">Explainer · July 2026</span>
+        <h3 style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--green-900);line-height:1.3;margin:12px 0 8px;">EV charger + solar + battery: the CT-clamp trick that stops them fighting</h3>
+        <p style="font-size:14px;color:var(--stone-600);line-height:1.6;margin-bottom:18px;">Add a car charger to a solar-and-battery home and the battery can quietly drain itself to feed the car. The cheap fix — a Henley block and the right CT-clamp order — explained in plain English, with a clear wiring diagram.</p>
+        <a href="./articles/ev-charger-solar-battery-ct-clamps.html" class="btn-primary" style="display:inline-block;text-decoration:none;">Read the wiring guide →</a>
+      </div>
+    </div>
   </div>
   <div class="cta-banner" style="margin:0 80px 80px;">
     <div class="cta-text"><h2>Add EV charging to your green home</h2><p>Whether you have solar already or are starting fresh, we'll design the perfect integrated EV charging solution for your home.</p></div>
@@ -3262,6 +3272,20 @@ Keep the total to 200-250 words. Use plain English throughout — no jargon with
       </div>
 
       <div id="art-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+
+        <!-- EV charger + solar + battery CT-clamp wiring explainer -->
+        <div class="art-card" data-tag="ev" onclick="artOpen('./articles/ev-charger-solar-battery-ct-clamps.html','EV Charger + Solar + Battery: The CT-Clamp Trick')" style="background:#fff;border:1px solid var(--stone-200);border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow='0 1px 4px rgba(0,0,0,0.05)'">
+          <div style="height:140px;background:linear-gradient(135deg,#1a5c3a,#fbbf24);display:flex;align-items:center;justify-content:center;font-size:48px;">🔌</div>
+          <div style="padding:20px;">
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;">
+              <span style="background:#dcfce7;color:#166534;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;">Explainer</span>
+              <span style="font-size:11px;color:var(--stone-600);">July 2026</span>
+            </div>
+            <h3 style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--green-900);line-height:1.3;margin-bottom:8px;">EV charger + solar + battery: the CT-clamp trick that stops them fighting</h3>
+            <p style="font-size:13px;color:var(--stone-600);line-height:1.6;">Add a car charger to a solar-and-battery home and the battery can drain itself to feed the car. The cheap fix — a Henley block and the right CT-clamp order — with a clear wiring diagram.</p>
+            <div style="margin-top:16px;font-size:13px;font-weight:600;color:var(--green-600);">Read article →</div>
+          </div>
+        </div>
 
         <!-- Beginner's Guide to Air Source Heat Pumps -->
         <div class="art-card" data-tag="heating" onclick="artOpen('./articles/air-source-heat-pumps.html','The Beginner&#39;s Guide to Air Source Heat Pumps')" style="background:#fff;border:1px solid var(--stone-200);border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow='0 1px 4px rgba(0,0,0,0.05)'">

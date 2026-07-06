@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wiring an EV Charger with Solar &amp; a Battery: The CT-Clamp Trick | Decarbonarma</title>
+<meta name="description" content="Add an EV charger to a home with solar and a battery and the two can end up fighting — the battery drains itself to feed the car. The fix is a Henley block and getting the CT clamps in the right order. Here's how it works, in plain English.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d1510; --bg2:#111a13; --bg3:#162019; --bg4:#1a2820;
+    --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.13);
+    --green:#4ade80; --green-dim:#22c55e; --green-deep:#1a5c38;
+    --green-pale:rgba(74,222,128,0.08); --green-pale2:rgba(74,222,128,0.13);
+    --amber:#fbbf24; --amber-pale:rgba(251,191,36,0.08);
+    --blue:#5aa7d6; --violet:#a78bfa; --grey:#8a9a90;
+    --red:#f87171;
+    --text:#e4ede5; --text-mid:#94a894; --text-dim:#5a6c5a;
+    --mono:'JetBrains Mono','Courier New',monospace;
+    --serif:'Playfair Display',Georgia,serif;
+    --body:'Source Serif 4',Georgia,serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.75;font-weight:300;-webkit-font-smoothing:antialiased;}
+
+  .site-header{border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:rgba(13,21,16,.9);backdrop-filter:blur(8px);z-index:20;}
+  .site-logo{text-decoration:none;display:flex;align-items:center;}
+  .site-nav{display:flex;gap:1.5rem;}
+  .site-nav a{color:var(--text-dim);text-decoration:none;font-size:12px;letter-spacing:.07em;text-transform:uppercase;}
+  .site-nav a:hover{color:var(--green);}
+
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px;}
+  .hero{padding:64px 0 34px;border-bottom:1px solid var(--border);}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);}
+  h1{font-family:var(--serif);font-weight:700;font-size:2.5rem;line-height:1.12;margin:.4em 0 .3em;color:#fff;}
+  .standfirst{font-size:1.2rem;color:var(--text-mid);font-weight:300;}
+  .byline{font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-top:18px;}
+
+  main{padding:10px 0 40px;}
+  h2{font-family:var(--serif);font-weight:700;font-size:1.7rem;color:#fff;margin:2em 0 .4em;}
+  h3{font-family:var(--body);font-weight:600;font-size:1.18rem;color:var(--green);margin:1.7em 0 .3em;}
+  p{margin:.85em 0;}
+  strong{color:#fff;font-weight:600;}
+  em{color:var(--text-mid);}
+  a{color:var(--green);}
+  ol,ul{margin:.6em 0 .6em 1.2em;}
+  li{margin:.5em 0;padding-left:.3em;}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:30px 0;}
+  .stat{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+  .stat .n{font-family:var(--mono);font-size:1.5rem;font-weight:500;color:var(--green);line-height:1.1;}
+  .stat .l{font-size:13px;color:var(--text-mid);margin-top:8px;line-height:1.4;}
+
+  .card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px;margin:26px 0;}
+  .fig-cap{font-size:13.5px;color:var(--text-mid);margin-top:14px;line-height:1.55;}
+  .diagram{width:100%;height:auto;display:block;}
+
+  .callout{border-left:3px solid var(--amber);background:var(--amber-pale);padding:18px 22px;border-radius:0 12px 12px 0;margin:28px 0;}
+  .callout h3{margin-top:0;color:var(--amber);}
+  .callout.safety{border-left-color:var(--red);background:rgba(248,113,113,0.07);}
+  .callout.safety h3{color:var(--red);}
+
+  footer{border-top:1px solid var(--border);padding:28px 0 60px;}
+  footer p{font-size:12.5px;color:var(--text-dim);line-height:1.65;}
+  footer a{color:var(--text-mid);}
+
+  @media(max-width:600px){ h1{font-size:1.85rem;} body{font-size:16px;} .hero{padding:40px 0 26px;} }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="site-logo"><img src="../logo-light.svg" alt="Decarbonarma" style="height:34px;width:auto;display:block;"></a>
+  <nav class="site-nav">
+    <a href="/">Home</a>
+    <a href="#">Solar</a>
+    <a href="#">EV</a>
+    <a href="#">Storage</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">Home Wiring Explainer</div>
+    <h1>EV Charger + Solar + Battery: The CT-Clamp Trick That Stops Them Fighting</h1>
+    <!-- Article Start -->
+    <p class="standfirst">Add a car charger to a home that already has solar and a battery and the two can quietly work against each other — the battery empties itself to feed the car. The fix is cheap and well understood: a Henley block, and getting the little clip-on sensors in the right order. Here's how it works, without the jargon.</p>
+    <div class="byline">Decarbonarma · Updated July 2026 · ~7-min read</div>
+  </div>
+
+  <main>
+
+  <p>If you're putting a smart EV charger (a Zappi, an Ohme, a hypervolt and so on) onto a house that already has solar panels and a home battery, there's a classic gotcha that catches even good installers. Left unaddressed, your <strong>battery discharges to power the car</strong> — so instead of charging the EV from cheap off-peak grid or free daytime sun, you drain a battery you paid thousands for, then refill it later at a worse price. Everyone loses except the meter.</p>
+
+  <p>The good news: the fix is standard, cheap (roughly <strong>£100–200</strong> of parts and labour on top of the charger install), and the diagram below is genuinely all there is to it. The whole thing comes down to <strong>where you clip the little sensor rings</strong>.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="n">CT clamp</div><div class="l">The clip-on ring that measures current in a cable. Solar, batteries and smart chargers each use one.</div></div>
+    <div class="stat"><div class="n">Henley block</div><div class="l">A chunky connector that splits your incoming supply into two or three feeds — no fuse, just a junction.</div></div>
+    <div class="stat"><div class="n">~£100–200</div><div class="l">Typical extra cost to wire it correctly at install time. Far cheaper than doing it twice.</div></div>
+  </div>
+
+  <h2>First, what is a CT clamp?</h2>
+
+  <p>A <strong>CT clamp</strong> (current transformer) is a small plastic ring that clips around a live cable and measures how much electricity is flowing through it — and in which direction. It doesn't touch the wire; it just senses it. Three different gadgets in a modern home each rely on one:</p>
+
+  <ul>
+    <li>your <strong>solar &amp; battery inverter</strong> uses a CT to see whether you're importing from the grid or exporting spare solar, so it knows when to charge or discharge the battery;</li>
+    <li>your <strong>smart EV charger</strong> uses a CT to see your total household demand, so it can throttle the car and not trip your main fuse (and, in solar mode, only sip surplus sunshine);</li>
+    <li>some homes also have a CT just for <strong>metering generation</strong>.</li>
+  </ul>
+
+  <p>Each CT only "knows" about the cable it's clipped to. That single fact is the whole story — <strong>what a CT is allowed to see is decided by where you put it.</strong> Put two of them looking at the same stretch of cable and they start reacting to each other, like two thermostats fighting over one room.</p>
+
+  <h2>Why the battery ends up feeding the car</h2>
+
+  <p>Picture the naïve setup: the car charger is simply wired into your existing fuseboard, downstream of everything. Now the car starts pulling 7 kW. The <strong>inverter's</strong> CT sees a big new lump of "household demand" appear — it can't tell it's the car — so it does exactly what it's designed to do and <strong>discharges the battery to cover it</strong>. You wanted to charge the car; instead you've emptied the battery into it.</p>
+
+  <p>The fix is to arrange the wiring so the <strong>inverter's sensor never sees the car's cable</strong>. Then, as far as the battery is concerned, the EV charger doesn't exist — and it leaves the car to charge from the grid (or genuine solar surplus) as intended.</p>
+
+  <div class="card">
+    <svg class="diagram" viewBox="0 0 1150 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wiring diagram: meter feeds an EV CT then a Henley block that splits to the EV charger and, via a solar CT, a second Henley block feeding house, solar and heat pump.">
+      <defs>
+        <pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse">
+          <path d="M26 0H0V26" fill="none" stroke="rgba(255,255,255,0.035)" stroke-width="1"/>
+        </pattern>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#4ade80"/>
+        </marker>
+        <marker id="flow" markerWidth="11" markerHeight="11" refX="6" refY="3.2" orient="auto">
+          <path d="M0,0 L7,3.2 L0,6.4 Z" fill="#fbbf24"/>
+        </marker>
+      </defs>
+
+      <rect x="0" y="0" width="1150" height="640" fill="url(#grid)"/>
+
+      <!-- ===== power path (amber = the incoming supply / tails) ===== -->
+      <g fill="none" stroke="#fbbf24" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+        <!-- meter -> EV CT -> Henley 1 -->
+        <polyline points="150,168 150,262 360,262"/>
+        <!-- Henley 1 -> EV fuseboard -->
+        <polyline points="440,352 440,436" marker-end="url(#flow)"/>
+        <!-- Henley 1 -> Solar CT -> Henley 2 -->
+        <polyline points="520,262 660,262"/>
+        <!-- Henley 2 -> outputs -->
+        <polyline points="852,206 1000,206" marker-end="url(#flow)"/>
+        <polyline points="852,262 912,262 912,352 1000,352" marker-end="url(#flow)"/>
+        <polyline points="852,308 882,308 882,470 1000,470" marker-end="url(#flow)"/>
+      </g>
+
+      <!-- ===== boxes ===== -->
+      <g font-family="'JetBrains Mono',monospace" fill="#e4ede5">
+        <!-- Meter -->
+        <rect x="60" y="80" width="180" height="90" rx="11" fill="#1a2820" stroke="rgba(255,255,255,0.20)" stroke-width="1.5"/>
+        <text x="150" y="120" text-anchor="middle" font-size="17" fill="#fff">Meter</text>
+        <text x="150" y="142" text-anchor="middle" font-size="11.5" fill="#94a894">grid supply in</text>
+
+        <!-- Henley Block 1 -->
+        <rect x="360" y="185" width="160" height="167" rx="11" fill="#1a2820" stroke="rgba(255,255,255,0.20)" stroke-width="1.5"/>
+        <text x="440" y="252" text-anchor="middle" font-size="15" fill="#fff">Henley</text>
+        <text x="440" y="273" text-anchor="middle" font-size="15" fill="#fff">block</text>
+        <text x="440" y="300" text-anchor="middle" font-size="11" fill="#94a894">splits the</text>
+        <text x="440" y="315" text-anchor="middle" font-size="11" fill="#94a894">supply</text>
+
+        <!-- EV Fuseboard -->
+        <rect x="360" y="436" width="160" height="92" rx="11" fill="#162019" stroke="#4ade80" stroke-width="1.5"/>
+        <text x="440" y="476" text-anchor="middle" font-size="15" fill="#fff">EV charger</text>
+        <text x="440" y="497" text-anchor="middle" font-size="11.5" fill="#94a894">own fuseboard</text>
+
+        <!-- Henley Block 2 -->
+        <rect x="660" y="168" width="192" height="215" rx="11" fill="#1a2820" stroke="rgba(255,255,255,0.20)" stroke-width="1.5"/>
+        <text x="756" y="248" text-anchor="middle" font-size="15" fill="#fff">Henley</text>
+        <text x="756" y="269" text-anchor="middle" font-size="15" fill="#fff">block</text>
+        <text x="756" y="298" text-anchor="middle" font-size="10.5" fill="#94a894">2nd block only if</text>
+        <text x="756" y="313" text-anchor="middle" font-size="10.5" fill="#94a894">house &amp; solar are</text>
+        <text x="756" y="328" text-anchor="middle" font-size="10.5" fill="#94a894">separate units</text>
+      </g>
+
+      <!-- ===== output labels ===== -->
+      <g font-family="'JetBrains Mono',monospace" font-size="15" fill="#e4ede5" font-weight="500">
+        <text x="1010" y="211">HOUSE</text>
+        <text x="1010" y="357">SOLAR + BATTERY</text>
+        <text x="1010" y="475">HEAT PUMP</text>
+      </g>
+
+      <!-- ===== EV CT clamp ===== -->
+      <g>
+        <rect x="238" y="243" width="40" height="38" rx="9" fill="rgba(74,222,128,0.16)" stroke="#4ade80" stroke-width="2.2"/>
+        <line x1="284" y1="262" x2="304" y2="262" stroke="#4ade80" stroke-width="3" marker-end="url(#arrow)"/>
+        <rect x="214" y="294" width="88" height="24" rx="6" fill="#0d1510" stroke="#4ade80" stroke-width="1.2"/>
+        <text x="258" y="310" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#4ade80" font-weight="500">EV&#160;CT</text>
+      </g>
+
+      <!-- ===== Solar CT clamp ===== -->
+      <g>
+        <rect x="568" y="243" width="40" height="38" rx="9" fill="rgba(74,222,128,0.16)" stroke="#4ade80" stroke-width="2.2"/>
+        <line x1="614" y1="262" x2="634" y2="262" stroke="#4ade80" stroke-width="3" marker-end="url(#arrow)"/>
+        <rect x="542" y="294" width="94" height="24" rx="6" fill="#0d1510" stroke="#4ade80" stroke-width="1.2"/>
+        <text x="589" y="310" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#4ade80" font-weight="500">SOLAR&#160;CT</text>
+      </g>
+
+      <!-- ===== annotation: EV CT ===== -->
+      <g font-family="'Source Serif 4',Georgia,serif">
+        <line x1="258" y1="318" x2="150" y2="392" stroke="rgba(74,222,128,0.5)" stroke-width="1.2" stroke-dasharray="3 3"/>
+        <rect x="36" y="392" width="286" height="86" rx="10" fill="#111a13" stroke="rgba(74,222,128,0.35)" stroke-width="1.3"/>
+        <text x="52" y="416" font-size="13.5" fill="#4ade80" font-weight="600" font-family="'JetBrains Mono',monospace">EV CT — sees everything</text>
+        <text x="52" y="438" font-size="13" fill="#e4ede5">Reads the whole site, incl. the car,</text>
+        <text x="52" y="456" font-size="13" fill="#e4ede5">so the charger can load-balance</text>
+        <text x="52" y="474" font-size="13" fill="#e4ede5">and not overload your main fuse.</text>
+      </g>
+
+      <!-- ===== annotation: Solar CT ===== -->
+      <g font-family="'Source Serif 4',Georgia,serif">
+        <line x1="589" y1="318" x2="700" y2="474" stroke="rgba(74,222,128,0.5)" stroke-width="1.2" stroke-dasharray="3 3"/>
+        <rect x="560" y="474" width="340" height="104" rx="10" fill="#111a13" stroke="rgba(74,222,128,0.35)" stroke-width="1.3"/>
+        <text x="576" y="498" font-size="13.5" fill="#4ade80" font-weight="600" font-family="'JetBrains Mono',monospace">SOLAR CT — can't see the car</text>
+        <text x="576" y="520" font-size="13" fill="#e4ede5">Sits after the EV branch, so it only reads</text>
+        <text x="576" y="538" font-size="13" fill="#e4ede5">house + heat pump. The battery therefore</text>
+        <text x="576" y="556" font-size="13" fill="#e4ede5">never discharges to feed the EV charger —</text>
+        <text x="576" y="574" font-size="13" fill="#e4ede5">that's the whole trick.</text>
+      </g>
+
+      <!-- ===== legend ===== -->
+      <g font-family="'JetBrains Mono',monospace" font-size="12.5" fill="#94a894">
+        <line x1="44" y1="612" x2="74" y2="612" stroke="#fbbf24" stroke-width="4.5" stroke-linecap="round"/>
+        <text x="84" y="617">mains supply / tails</text>
+        <rect x="290" y="604" width="15" height="15" rx="4" fill="rgba(74,222,128,0.16)" stroke="#4ade80" stroke-width="1.6"/>
+        <text x="314" y="617">CT clamp</text>
+        <path d="M418,608 l8,4 l-8,4 Z" fill="#4ade80"/>
+        <text x="434" y="617">arrow points to the load</text>
+      </g>
+    </svg>
+    <p class="fig-cap"><strong>Figure 1 — The correct order.</strong> The <strong>EV CT</strong> goes on the incoming supply <em>before</em> the split, so the charger sees the whole house. The EV charger takes its own feed off the first Henley block. The <strong>solar CT</strong> sits <em>after</em> that branch — so the inverter and battery are blind to the car and won't drain to feed it. The second Henley block is only needed if your house and solar run on separate consumer units. Each CT clamp's arrow must point toward the load it feeds.</p>
+  </div>
+
+  <h2>The rule in one line</h2>
+
+  <p>If you remember nothing else: <strong>the car's cable must branch off <em>before</em> the solar/battery sensor.</strong> The EV sensor sees everything; the solar sensor sees everything <em>except</em> the car. Get that order right and the two systems simply ignore each other.</p>
+
+  <h3>Why the EV sensor still sees the whole house</h3>
+  <p>It's deliberate. A smart charger needs to know your <em>total</em> household draw so it can dial the car back on a cold evening when the oven, kettle and heat pump are all on — that's how it avoids tripping your main fuse (and how "charge only from solar surplus" modes work). So the EV CT lives right up at the incoming supply and watches the lot. The charger already knows how much <em>it</em> is sending to the car, so it isn't confused by seeing its own load.</p>
+
+  <h2>What to ask your installer</h2>
+
+  <p>You don't need to wire this yourself — and you shouldn't (see the safety note below). But knowing the right questions tells a good installer you understand the job, and flags a weak one early:</p>
+
+  <ol>
+    <li><strong>"Will the EV charger have its own feed off a Henley block, ahead of the battery's CT?"</strong> The answer you want is yes. If they plan to just spur the charger off the existing consumer unit, ask how they'll stop the battery discharging into the car.</li>
+    <li><strong>"Where exactly will each CT clamp sit, and which way do the arrows face?"</strong> Every CT has a direction arrow that must point toward the load. A reversed clamp reads backwards and breaks solar/export logic.</li>
+    <li><strong>"Is there physical room in the meter cupboard for the Henley block and the extra clamps?"</strong> Space and cable routing are the real-world constraint — worth checking before install day, not during it.</li>
+    <li><strong>"Does my inverter or charger support the setup directly?"</strong> Some ecosystems (e.g. myenergi's Zappi with certain hybrid batteries) have their own settings or a second CT to solve this in software — sometimes that's tidier than extra tails.</li>
+  </ol>
+
+  <div class="callout">
+    <h3>If you already have the problem</h3>
+    <p>Notice your battery percentage dropping every time you plug the car in? That's the tell. It usually doesn't mean ripping anything out — an electrician can often fix it by adding a Henley block and <strong>moving the existing CT clamp</strong> to the right side of the branch, or by changing an inverter/charger setting. Worth a call before you write off the battery as "not working".</p>
+  </div>
+
+  <div class="callout safety">
+    <h3>Safety — this is not a DIY job</h3>
+    <p>Everything above happens on the <strong>meter tails</strong>: the thickest, live-all-the-time cables in your home, upstream of your main fuse. This is <strong>notifiable electrical work</strong> and must be done by a qualified, registered electrician (Part P in England &amp; Wales; equivalent elsewhere). Adding solar or a battery also requires notifying your network operator (G98/G99). This article explains the principle so you can have a smarter conversation with your installer — it is not a wiring guide, and you should never open a meter cupboard or work on live tails yourself.</p>
+  </div>
+
+  <h2>The bottom line</h2>
+  <p>An EV charger, solar and a battery all get along fine — they just need to be introduced in the right order. Branch the car off a Henley block <em>before</em> the battery's sensor, point every CT arrow the right way, and each system stays in its lane: the charger balances the whole house, the battery ignores the car. It's an hour of an electrician's planning that saves you years of quietly cycling your battery for nothing.</p>
+  <!-- Article End -->
+
+  </main>
+</div>
+
+<!-- dca-email-capture -->
+<div class="dca-signup-outer">
+  <div class="dca-signup">
+    <div class="dca-signup-kicker">Decarbonarma Newsletter</div>
+    <h3 class="dca-signup-h">Get the next one in your inbox</h3>
+    <p class="dca-signup-sub">Clear, no-nonsense analysis of UK home decarbonisation &mdash; heat pumps, solar, EVs, batteries and the grid. Occasional emails, no spam, unsubscribe anytime.</p>
+    <form action="https://decarbonarma.us15.list-manage.com/subscribe/post?u=cffa5aec4001ad97d9357f807&amp;id=8d5f19dec4&amp;f_id=0096a2e1f0" method="post" target="_blank" novalidate class="dca-signup-form">
+      <label class="dca-visually-hidden" for="dca-email">Email address</label>
+      <input type="email" name="EMAIL" id="dca-email" required placeholder="you@example.com" class="dca-signup-input">
+      <div aria-hidden="true" style="position:absolute;left:-5000px;"><input type="text" name="b_cffa5aec4001ad97d9357f807_8d5f19dec4" tabindex="-1" value=""></div>
+      <button type="submit" name="subscribe" class="dca-signup-btn">Subscribe</button>
+    </form>
+    <div class="dca-signup-fine">We&rsquo;ll never share your email. Powered by Mailchimp.</div>
+  </div>
+</div>
+<style>
+  .dca-signup-outer{max-width:820px;margin:48px auto 10px;padding:0 24px;}
+  .dca-signup{background:var(--bg3,#162019);border:1px solid var(--green-pale2,rgba(74,222,128,0.13));border-radius:16px;padding:30px 28px;position:relative;overflow:hidden;}
+  .dca-signup::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green,#4ade80),var(--amber,#fbbf24));}
+  .dca-signup-kicker{font-family:var(--mono,'JetBrains Mono',monospace);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--green,#4ade80);margin-bottom:8px;}
+  .dca-signup-h{font-family:var(--serif,'Playfair Display',Georgia,serif);font-weight:700;font-size:1.5rem;color:#fff;margin:0 0 .3em;line-height:1.15;}
+  .dca-signup-sub{font-family:var(--body,'Source Serif 4',Georgia,serif);font-size:15px;color:var(--text-mid,#94a894);margin:0 0 18px;line-height:1.6;font-weight:300;}
+  .dca-signup-form{display:flex;gap:10px;flex-wrap:wrap;}
+  .dca-signup-input{flex:1 1 240px;min-width:0;background:var(--bg,#0d1510);border:1px solid var(--border2,rgba(255,255,255,0.13));border-radius:10px;padding:13px 15px;color:var(--text,#e4ede5);font-family:var(--body,'Source Serif 4',Georgia,serif);font-size:15px;}
+  .dca-signup-input:focus{outline:none;border-color:var(--green,#4ade80);box-shadow:0 0 0 3px var(--green-pale,rgba(74,222,128,0.08));}
+  .dca-signup-input::placeholder{color:var(--text-dim,#5a6c5a);}
+  .dca-signup-btn{flex:0 0 auto;background:var(--green,#4ade80);color:#062012;border:none;border-radius:10px;padding:13px 26px;font-family:var(--mono,'JetBrains Mono',monospace);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:background .15s;}
+  .dca-signup-btn:hover{background:var(--green-dim,#22c55e);}
+  .dca-signup-fine{font-family:var(--mono,'JetBrains Mono',monospace);font-size:11px;color:var(--text-dim,#5a6c5a);margin-top:12px;letter-spacing:.02em;}
+  .dca-visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  @media(max-width:520px){.dca-signup-btn{flex:1 1 100%;}}
+</style>
+<!-- /dca-email-capture -->
+
+<footer>
+  <div class="wrap">
+    <p><strong style="color:var(--text-mid);">Sources:</strong>
+      CT clamp placement with EV chargers &amp; solar batteries (Solar Tech Support, solar-tech-support.co.uk) · myenergi Help Centre — Hybrid PV &amp; Battery set-up and Zappi with hybrid batteries (support.myenergi.com) · zappi installation manual, CT positioning &amp; arrow direction (myenergi) · "How to avoid your solar &amp; battery supplying your EV charger" (ALPS Electrical) · Electricians Forums &amp; Speak EV discussion threads on CT positioning and Henley blocks.
+      Cost figures are typical UK ranges and vary by property. Published on Decarbonarma. General explainer, not a wiring guide — all work on meter tails must be carried out by a qualified, registered electrician.</p>
+  </div>
+</footer>
+
+</body>
+</html>
