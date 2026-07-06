@@ -18,7 +18,8 @@ items=[]
 for f in arts:
     txt=open(f, encoding="utf-8", errors="ignore").read()
     title=field(txt, r"<title>(.*?)</title>")
-    title=re.sub(r"\s*\|\s*Decarbonarma.*$","",title).strip()
+    # strip trailing site name in any form: "| Decarbonarma", "— Decarbonarama", "&mdash; Decarbonarma", etc.
+    title=re.sub(r"\s*(?:\||-|–|—|&mdash;|&ndash;)\s*Decarbonar\w*\s*$","",title,flags=re.I).strip()
     m=re.search(r'<meta[^>]*name=(["\'])description\1[^>]*content=(["\'])(.*?)\2', txt, re.I|re.S)
     desc=m.group(3).strip() if m else ""
     if not desc:
