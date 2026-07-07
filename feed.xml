@@ -5,8 +5,15 @@
 <link>https://decarbonarma.com/</link>
 <description>Clear, no-nonsense analysis of UK home decarbonisation - heat pumps, solar, EVs, batteries and the grid.</description>
 <language>en-gb</language>
-<lastBuildDate>Mon, 06 Jul 2026 07:30:32 -0000</lastBuildDate>
+<lastBuildDate>Tue, 07 Jul 2026 04:05:47 -0000</lastBuildDate>
 <atom:link href="https://decarbonarma.com/feed.xml" rel="self" type="application/rss+xml" />
+<item>
+<title>Wiring an EV Charger with Solar &amp;amp; a Battery: The CT-Clamp Trick</title>
+<link>https://decarbonarma.com/articles/ev-charger-solar-battery-ct-clamps.html</link>
+<guid isPermaLink="true">https://decarbonarma.com/articles/ev-charger-solar-battery-ct-clamps.html</guid>
+<pubDate>Mon, 06 Jul 2026 09:29:15 -0000</pubDate>
+<description>Add an EV charger to a home with solar and a battery and the two can end up fighting — the battery drains itself to feed the car. The fix is a Henley block and getting the CT clamps in the right order. Here's how it works, in plain English.</description>
+</item>
 <item>
 <title>UK Wind: Status H1 2026</title>
 <link>https://decarbonarma.com/articles/uk-wind-status-h1-2026.html</link>
