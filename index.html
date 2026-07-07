@@ -1363,9 +1363,14 @@ function showPage(id) {
   return false;
 }
 
-/* Deep-link support: /#grid opens the UK Grid Live tool directly (used by article buttons) */
+/* Deep-link support: /#<tool> opens a tool section directly (used by article cross-ref buttons) */
 window.addEventListener('DOMContentLoaded', function(){
-  if (location.hash === '#grid') { showPage('grid'); if (window.ngInit) window.ngInit(); }
+  var h = location.hash.replace('#', '');
+  var tools = ['grid', 'tariff', 'heatloss', 'optimiser', 'homeyguide'];
+  if (tools.indexOf(h) !== -1 && document.getElementById('page-' + h)) {
+    showPage(h);
+    if (h === 'grid' && window.ngInit) window.ngInit();
+  }
 });
 
 /* ── TARIFF FINDER LOGIC ── */
