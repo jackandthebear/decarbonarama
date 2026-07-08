@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Air-to-Air Heat Pumps: Has the British Summer Started Needing Air-Con? | Decarbonarma</title>
+<meta name="description" content="We counted every day above 25C at Heathrow for the last five years. The British summer is quietly turning into an air-con season — and an air-to-air heat pump cooling on free solar surplus is the neatest answer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0d1510; --bg2:#111a13; --bg3:#162019; --bg4:#1a2820;
+    --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.13);
+    --green:#4ade80; --green-dim:#22c55e; --green-deep:#1a5c38;
+    --green-pale:rgba(74,222,128,0.08); --green-pale2:rgba(74,222,128,0.13);
+    --amber:#fbbf24; --amber-pale:rgba(251,191,36,0.08);
+    --blue:#5aa7d6; --violet:#a78bfa; --grey:#8a9a90;
+    --red:#f87171;
+    --text:#e4ede5; --text-mid:#94a894; --text-dim:#5a6c5a;
+    --mono:'JetBrains Mono','Courier New',monospace;
+    --serif:'Playfair Display',Georgia,serif;
+    --body:'Source Serif 4',Georgia,serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.75;font-weight:300;-webkit-font-smoothing:antialiased;}
+
+  .site-header{border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:rgba(13,21,16,.9);backdrop-filter:blur(8px);z-index:20;}
+  .site-logo{text-decoration:none;display:flex;align-items:center;}
+  .site-nav{display:flex;gap:1.5rem;}
+  .site-nav a{color:var(--text-dim);text-decoration:none;font-size:12px;letter-spacing:.07em;text-transform:uppercase;}
+  .site-nav a:hover{color:var(--green);}
+
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px;}
+  .hero{padding:64px 0 34px;border-bottom:1px solid var(--border);}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);}
+  h1{font-family:var(--serif);font-weight:700;font-size:2.5rem;line-height:1.12;margin:.4em 0 .3em;color:#fff;}
+  .standfirst{font-size:1.2rem;color:var(--text-mid);font-weight:300;}
+  .byline{font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-top:18px;}
+
+  main{padding:10px 0 40px;}
+  h2{font-family:var(--serif);font-weight:700;font-size:1.7rem;color:#fff;margin:2em 0 .4em;}
+  h3{font-family:var(--body);font-weight:600;font-size:1.18rem;color:var(--green);margin:1.7em 0 .3em;}
+  p{margin:.85em 0;}
+  strong{color:#fff;font-weight:600;}
+  em{color:var(--text-mid);}
+  a{color:var(--green);}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:30px 0;}
+  .stat{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+  .stat .n{font-family:var(--mono);font-size:1.6rem;font-weight:500;color:var(--green);line-height:1;}
+  .stat .l{font-size:13px;color:var(--text-mid);margin-top:8px;line-height:1.4;}
+
+  .card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px;margin:26px 0;}
+  .chart-box{position:relative;height:420px;width:100%;}
+  .chart-cap{font-size:13.5px;color:var(--text-mid);margin-top:14px;line-height:1.55;}
+
+  table{width:100%;border-collapse:collapse;font-size:15px;margin:6px 0;}
+  th,td{text-align:left;padding:10px 10px;border-bottom:1px solid var(--border);}
+  th{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim);font-weight:400;}
+  td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--text);}
+  .pill{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;padding:2px 9px;border-radius:20px;}
+  .pill.on{background:var(--green-pale2);color:var(--green);border:1px solid var(--green-deep);}
+  .pill.hot{background:var(--amber-pale);color:var(--amber);border:1px solid rgba(251,191,36,.4);}
+
+  .callout{border-left:3px solid var(--amber);background:var(--amber-pale);padding:18px 22px;border-radius:0 12px 12px 0;margin:28px 0;}
+  .callout h3{margin-top:0;color:var(--amber);}
+
+  footer{border-top:1px solid var(--border);padding:28px 0 60px;}
+  footer p{font-size:12.5px;color:var(--text-dim);line-height:1.65;}
+  footer a{color:var(--text-mid);}
+
+  @media(max-width:600px){ h1{font-size:1.85rem;} .chart-box{height:340px;} body{font-size:16px;} .hero{padding:40px 0 26px;} }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="site-logo"><img src="../logo-light.svg" alt="Decarbonarma" style="height:34px;width:auto;display:block;"></a>
+  <nav class="site-nav">
+    <a href="/">Home</a>
+    <a href="/">Heating</a>
+    <a href="/">Solar</a>
+    <a href="/">Case Studies</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">Heating &amp; Cooling</div>
+    <h1>Air-to-Air Heat Pumps: Has the British Summer Started Needing Air-Con?</h1>
+    <!-- Article Start -->
+  <p class="standfirst">We counted every single day above 25&deg;C at Heathrow for the last five years. The British summer is quietly becoming an air-con season — and an air-to-air heat pump, cooling on free solar surplus, is the neatest way to meet it.</p>
+    <div class="byline">Decarbonarma &middot; July 2026 &middot; ~9-min read</div>
+  </div>
+
+  <main>
+
+  <p>There is a certain kind of British stubbornness about air conditioning. It is what other countries have — hot countries, unserious countries. Here we open a window, put a fan on, and complain. But sit with the actual temperature record for a moment and the joke starts to wear thin. As I write this on <strong>8 July 2026</strong>, our own Daikin air-to-air system is quietly running in cooling mode, keeping the house at a civilised temperature. It is 30&deg;C outside, the roof is producing more power than we're allowed to export, and the cooling is soaking up the difference — electricity that would otherwise simply be clipped and lost. In the truest sense, it is running on <strong>sunshine we couldn't have used any other way</strong>.</p>
+
+  <p>So we asked a simple question with a data answer. Over the last five years, how many days would you actually have <em>wanted</em> air conditioning in southern England? We pulled the daily maximum temperature for the Heathrow area — a good proxy for lowland south-east England — from the ERA5 climate reanalysis, every day from January 2021 to now, and counted.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="n">23 days</div><div class="l">Average per year at or above 25&deg;C (2021&ndash;2025)</div></div>
+    <div class="stat"><div class="n">35 days</div><div class="l">Days at or above 25&deg;C in 2025 &mdash; the most in the window</div></div>
+    <div class="stat"><div class="n">26 days</div><div class="l">Already at or above 25&deg;C in 2026, and it's only early July</div></div>
+    <div class="stat"><div class="n">37.0&deg;C</div><div class="l">Hottest day in the record (19 July 2022)</div></div>
+  </div>
+
+  <h2>What counts as an air-con day?</h2>
+
+  <p>We used a threshold of <strong>25&deg;C daytime maximum</strong>. That is not an arbitrary number. Below about 25&deg;C, most reasonably insulated homes stay comfortable with shading and a bit of night ventilation. Push past 25&deg;C — especially two or three days running, when the fabric of the house has soaked up heat and stops shedding it overnight — and comfort drops away fast. Bedrooms in particular become a problem: overnight minima matter more than the daytime peak for sleep, and a run of hot days drags the nights up with it. So "days at or above 25&deg;C" is a fair, conservative stand-in for "days you'd reach for cooling."</p>
+
+  <p>On that measure, here is the last five years, plus 2026 to date.</p>
+
+  <div class="card">
+    <div class="chart-box"><canvas id="yearChart"></canvas></div>
+    <p class="chart-cap"><strong>Figure 1 &mdash; Hot days per year, Heathrow area (2021&ndash;2026).</strong> Green bars count days with a maximum at or above 25&deg;C; the amber overlay counts the genuinely hot days at or above 30&deg;C. 2026 is only to 7 July and has already cleared 26 days above 25&deg;C and 12 above 30&deg;C. Source: Open-Meteo / ERA5 reanalysis, daily maximum 2&thinsp;m air temperature.</p>
+  </div>
+
+  <div class="card">
+  <table>
+    <thead><tr><th>Year</th><th class="num">Days &ge;25&deg;C</th><th class="num">Days &ge;28&deg;C</th><th class="num">Days &ge;30&deg;C</th><th class="num">Peak</th><th>Character</th></tr></thead>
+    <tbody>
+      <tr><td>2021</td><td class="num">13</td><td class="num">4</td><td class="num">0</td><td class="num">29.5&deg;C</td><td><span class="pill on">Mild</span></td></tr>
+      <tr><td>2022</td><td class="num">31</td><td class="num">12</td><td class="num">6</td><td class="num">37.0&deg;C</td><td><span class="pill hot">Record heat</span></td></tr>
+      <tr><td>2023</td><td class="num">21</td><td class="num">9</td><td class="num">2</td><td class="num">31.2&deg;C</td><td><span class="pill on">Warm</span></td></tr>
+      <tr><td>2024</td><td class="num">15</td><td class="num">5</td><td class="num">1</td><td class="num">31.8&deg;C</td><td><span class="pill on">Average</span></td></tr>
+      <tr><td>2025</td><td class="num">35</td><td class="num">18</td><td class="num">8</td><td class="num">33.0&deg;C</td><td><span class="pill hot">Hot &amp; long</span></td></tr>
+      <tr><td>2026*</td><td class="num">26</td><td class="num">17</td><td class="num">12</td><td class="num">34.3&deg;C</td><td><span class="pill hot">Running hot</span></td></tr>
+    </tbody>
+  </table>
+  <p class="chart-cap">*2026 to 7 July only &mdash; the main summer is still ahead. Note how the "&ge;30&deg;C" column, effectively zero a decade ago in an average year, is now routinely mid-single-digits and already 12 this year.</p>
+  </div>
+
+  <p>The headline is not a smooth, tidy upward line — weather never is. 2021 was mild (13 days), and 2024 was fairly average (15). But the <em>hot</em> years are getting hotter and longer: 2022 gave us the country's first-ever 40&deg;C reading nationally and 31 days above 25&deg;C locally; 2025 topped even that for sheer <strong>duration</strong>, with 35 days above 25&deg;C and 18 above 28&deg;C. And 2026, before the peak of summer has even arrived, has already banked 12 days above 30&deg;C — more than 2022, 2023 and 2024 <em>combined</em>. The five full years 2021&ndash;2025 average <strong>23 hot days a year</strong>. That is a working month of weather where cooling earns its keep.</p>
+
+  <h2>The season is stretching, not just the peaks</h2>
+
+  <p>Averages hide the more interesting shift, which is <em>when</em> the heat now lands. If you tally every hot day across all six years by calendar month, the old idea of a short August peak simply isn't there any more. The hot days are spread from May clean through to September, and the single biggest month is <strong>June</strong>.</p>
+
+  <div class="card">
+    <div class="chart-box"><canvas id="monthChart"></canvas></div>
+    <p class="chart-cap"><strong>Figure 2 &mdash; When the hot days fall (all days &ge;25&deg;C, 2021&ndash;2026 pooled).</strong> The heat is no longer an August story. June is the busiest month, closely followed by July, with a long shoulder through May and September. A cooling system now has a genuine four-to-five-month duty season, not a fortnight.</p>
+  </div>
+
+  <p>This matters for the economics. A cooling appliance that only pays off during two weeks in August is a hard sell. One that does useful work from May to September — and, crucially, runs the <em>same hardware</em> backwards to heat your home for the other seven months — is a completely different proposition. Which brings us to the machine.</p>
+
+  <h2>Why air-to-air, specifically</h2>
+
+  <p>Most of the heat pump conversation in Britain is about <strong>air-to-water</strong> systems: they take heat from outside air and put it into your radiators and hot-water cylinder, replacing a gas boiler. They are the right answer for whole-home heating and they are what the Boiler Upgrade Scheme grant is aimed at. But they don't cool. Water-based radiator systems aren't designed to run cold (you'd get condensation and clammy rooms), so an air-to-water heat pump gives you winter warmth and nothing for summer.</p>
+
+  <p>An <strong>air-to-air</strong> heat pump is the other branch of the family — and it is, mechanically, exactly what people mean by "air conditioning." It moves heat between outside air and indoor air via wall-mounted units. The single, decisive difference from the aircon of cliché is that it is <em>reversible</em>: the same refrigerant cycle that dumps heat outdoors in July pulls heat indoors in January. One box on the wall, two jobs, and a seasonal efficiency (SCOP/SEER) that means you get several units of heat or cooling for every unit of electricity.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="n">Heats &amp; cools</div><div class="l">One reversible unit covers both duties &mdash; warmth in winter, cooling in summer</div></div>
+    <div class="stat"><div class="n">3&ndash;5&times;</div><div class="l">Typical efficiency: units of useful heat/cool per unit of electricity</div></div>
+    <div class="stat"><div class="n">Fast &amp; zonal</div><div class="l">Cools one room or a floor in minutes; no wet plumbing or cylinder</div></div>
+  </div>
+
+  <div class="callout">
+    <h3>Our Daikin, soaking up power we'd otherwise lose</h3>
+    <p>Here is the part that makes it genuinely painless — and it's better than "free." Our grid connection has a <strong>G100 export limiter set to 6&thinsp;kW</strong>: the maximum we're allowed to push back to the network. On a bright day like today, the array can produce far more than that — we peaked at around <strong>10&thinsp;kW</strong>. If we did nothing with the difference, the inverter would simply <em>throttle the panels down to 6&thinsp;kW</em> and that extra ~4&thinsp;kW would never be generated at all. It isn't exported for pennies; it's clipped and lost.</p>
+    <p>So the trick is to give that power somewhere to go <em>behind the meter</em>. Today the 6&thinsp;kW went to the grid and the other ~4&thinsp;kW went into the <strong>EV charging and the Daikin cooling</strong> — load we chose to run precisely so the array could keep producing at full tilt. The cooling isn't just running on surplus sunshine; it's running on sunshine that would otherwise have been <strong>curtailed to nothing</strong>. Air-to-air cooling demand and peak solar land at exactly the same time of day, which makes it an almost perfect sink for clipped generation.</p>
+    <p>It is the tidiest bit of synergy in the whole low-carbon home: the hotter and brighter it gets, the more cooling you want, and the more otherwise-wasted power you have to do it with.</p>
+  </div>
+
+  <h2>So — do you actually need it?</h2>
+
+  <p>Honestly, "need" is a strong word for a country that managed without for centuries. But the case has shifted from <em>luxury</em> to <em>reasonable</em>, and the numbers above are why. If a system does real work for three or four weeks a year (rising), extends your comfortable use of the house, protects sleep during heatwaves, and — this is the clincher — <strong>also heats your home the rest of the year</strong> off the same kit, then it stops looking like an indulgence and starts looking like sensible infrastructure. Add solar, and the summer running cost rounds to zero.</p>
+
+  <p>A few honest caveats before you rush out. First, this is a <strong>single location</strong> (lowland south-east England); Scotland, the north and exposed coasts see far fewer hot days, and the case is correspondingly weaker there. Second, ERA5 is a gridded reanalysis, not your back garden — treat the day-counts as robust trends, not to-the-decimal truth. Third, our 25&deg;C threshold is a proxy for comfort, not a law of nature; a well-shaded, heavyweight house copes higher, a west-facing flat with big windows suffers lower. And fourth, air-to-air currently sits <em>outside</em> the Boiler Upgrade Scheme grant, so unlike air-to-water you're paying the full cost up front — though the dual heating-and-cooling use changes that maths.</p>
+
+  <h2>The bottom line</h2>
+
+  <p>The British summer has quietly crossed a line. Two dozen days above 25&deg;C a year — and rising — is no longer a heatwave, it's a season. You can meet it by suffering with a fan, or with a single reversible box on the wall that cools you in July, heats you in January, and — if you have panels — does the summer half on sunshine you'd otherwise have thrown away. Ours is running as I finish this sentence. The window, for once, is shut.</p>
+  <!-- Article End -->
+
+  </main>
+</div>
+
+<!-- dca-email-capture -->
+<div class="dca-signup-outer">
+  <div class="dca-signup">
+    <div class="dca-signup-kicker">Decarbonarma Newsletter</div>
+    <h3 class="dca-signup-h">Get the next one in your inbox</h3>
+    <p class="dca-signup-sub">Clear, no-nonsense analysis of UK home decarbonisation &mdash; heat pumps, solar, EVs, batteries and the grid. Occasional emails, no spam, unsubscribe anytime.</p>
+    <form action="https://decarbonarma.us15.list-manage.com/subscribe/post?u=cffa5aec4001ad97d9357f807&amp;id=8d5f19dec4&amp;f_id=0096a2e1f0" method="post" target="_blank" novalidate class="dca-signup-form">
+      <label class="dca-visually-hidden" for="dca-email">Email address</label>
+      <input type="email" name="EMAIL" id="dca-email" required placeholder="you@example.com" class="dca-signup-input">
+      <!-- Mailchimp bot-prevention honeypot: real users leave this empty -->
+      <div aria-hidden="true" style="position:absolute;left:-5000px;"><input type="text" name="b_cffa5aec4001ad97d9357f807_8d5f19dec4" tabindex="-1" value=""></div>
+      <button type="submit" name="subscribe" class="dca-signup-btn">Subscribe</button>
+    </form>
+    <div class="dca-signup-fine">We&rsquo;ll never share your email. Powered by Mailchimp.</div>
+  </div>
+</div>
+<style>
+  .dca-signup-outer{max-width:820px;margin:48px auto 10px;padding:0 24px;}
+  .dca-signup{background:var(--bg3,#162019);border:1px solid var(--green-pale2,rgba(74,222,128,0.13));border-radius:16px;padding:30px 28px;position:relative;overflow:hidden;}
+  .dca-signup::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green,#4ade80),var(--amber,#fbbf24));}
+  .dca-signup-kicker{font-family:var(--mono,'JetBrains Mono',monospace);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--green,#4ade80);margin-bottom:8px;}
+  .dca-signup-h{font-family:var(--serif,'Playfair Display',Georgia,serif);font-weight:700;font-size:1.5rem;color:#fff;margin:0 0 .3em;line-height:1.15;}
+  .dca-signup-sub{font-family:var(--body,'Source Serif 4',Georgia,serif);font-size:15px;color:var(--text-mid,#94a894);margin:0 0 18px;line-height:1.6;font-weight:300;}
+  .dca-signup-form{display:flex;gap:10px;flex-wrap:wrap;}
+  .dca-signup-input{flex:1 1 240px;min-width:0;background:var(--bg,#0d1510);border:1px solid var(--border2,rgba(255,255,255,0.13));border-radius:10px;padding:13px 15px;color:var(--text,#e4ede5);font-family:var(--body,'Source Serif 4',Georgia,serif);font-size:15px;}
+  .dca-signup-input:focus{outline:none;border-color:var(--green,#4ade80);box-shadow:0 0 0 3px var(--green-pale,rgba(74,222,128,0.08));}
+  .dca-signup-input::placeholder{color:var(--text-dim,#5a6c5a);}
+  .dca-signup-btn{flex:0 0 auto;background:var(--green,#4ade80);color:#062012;border:none;border-radius:10px;padding:13px 26px;font-family:var(--mono,'JetBrains Mono',monospace);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:background .15s;}
+  .dca-signup-btn:hover{background:var(--green-dim,#22c55e);}
+  .dca-signup-fine{font-family:var(--mono,'JetBrains Mono',monospace);font-size:11px;color:var(--text-dim,#5a6c5a);margin-top:12px;letter-spacing:.02em;}
+  .dca-visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  @media(max-width:520px){.dca-signup-btn{flex:1 1 100%;}}
+</style>
+<!-- /dca-email-capture -->
+
+<div data-toolref="1" style="max-width:760px;margin:2.5rem auto;padding:1.25rem 1.5rem;border:1px solid rgba(74,222,128,0.35);border-radius:12px;background:rgba(74,222,128,0.08);"><div style="font-weight:700;font-size:1.05rem;margin-bottom:0.85rem;">Free tools for this topic</div><div style="display:flex;flex-wrap:wrap;gap:0.6rem;"><a href="/#heatloss" style="display:inline-block;background:#4ade80;color:#0d1510;font-weight:700;text-decoration:none;padding:0.6rem 1.1rem;border-radius:8px;font-size:0.95rem;line-height:1.2;">🏠 Heat Loss Estimator &rarr;</a></div></div>
+<footer>
+  <div class="wrap">
+    <p><strong style="color:var(--text-mid);">Sources:</strong>
+      Daily maximum temperature, Heathrow area (51.47&deg;N, 0.45&deg;W), 2021&ndash;2026 &mdash; Open-Meteo Historical Weather API, ERA5 reanalysis (open-meteo.com). Hot-day counts (&ge;25&deg;C / &ge;28&deg;C / &ge;30&deg;C), monthly distribution and annual peaks computed by Decarbonarma from that daily series. Air-to-air heat pump characteristics per manufacturer SCOP/SEER data. 2026 figures cover 1 January to 7 July 2026.
+      Single-site reanalysis data, indicative of lowland south-east England and not a substitute for local measurement. Published on Decarbonarma. Analytical commentary, not investment, planning or product advice.</p>
+  </div>
+</footer>
+
+<script>
+const brand = {
+  text:'#e4ede5', mid:'#94a894', grid:'rgba(255,255,255,0.06)',
+  grey:'#8a9a90', blue:'#5aa7d6', teal:'#4ade80', violet:'#a78bfa', amber:'#fbbf24'
+};
+Chart.defaults.font.family = "'Source Serif 4', Georgia, serif";
+Chart.defaults.color = brand.mid;
+
+/* Figure 1 — Hot days per year */
+const years   = ['2021','2022','2023','2024','2025','2026*'];
+const over25  = [13, 31, 21, 15, 35, 26];
+const over30  = [0,  6,  2,  1,  8,  12];
+new Chart(document.getElementById('yearChart'), {
+  type:'bar',
+  data:{ labels:years, datasets:[
+    {label:'Days ≥25°C', data:over25, backgroundColor:'rgba(74,222,128,.55)', borderColor:brand.teal, borderWidth:1.5, borderRadius:4},
+    {label:'Days ≥30°C', data:over30, backgroundColor:'rgba(251,191,36,.85)', borderColor:brand.amber, borderWidth:1.5, borderRadius:4}
+  ]},
+  options:{ responsive:true, maintainAspectRatio:false, interaction:{mode:'index', intersect:false},
+    plugins:{
+      legend:{position:'bottom', labels:{boxWidth:12, padding:14, font:{size:12}, color:brand.mid}},
+      tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.parsed.y} days`}}
+    },
+    scales:{
+      y:{ beginAtZero:true, title:{display:true,text:'Number of days'}, grid:{color:brand.grid}, ticks:{stepSize:5} },
+      x:{ grid:{display:false} }
+    }
+  }
+});
+
+/* Figure 2 — Monthly distribution of hot days, pooled 2021–2026 */
+const months = ['Apr','May','Jun','Jul','Aug','Sep','Oct'];
+const monthDays = [1, 11, 46, 41, 30, 12, 0];
+new Chart(document.getElementById('monthChart'), {
+  type:'bar',
+  data:{ labels:months, datasets:[{
+    label:'Days ≥25°C (2021–2026 pooled)', data:monthDays,
+    backgroundColor:months.map((m,i)=> i===2 ? brand.amber : 'rgba(74,222,128,.5)'),
+    borderColor:months.map((m,i)=> i===2 ? brand.amber : brand.teal),
+    borderWidth:1.5, borderRadius:4
+  }]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{callbacks:{label:c=>` ${c.parsed.y} hot days over 6 years`}} },
+    scales:{
+      y:{ beginAtZero:true, title:{display:true,text:'Total hot days, 2021–2026'}, grid:{color:brand.grid} },
+      x:{ grid:{display:false} }
+    }
+  }
+});
+</script>
+</body>
+</html>
