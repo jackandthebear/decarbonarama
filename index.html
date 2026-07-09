@@ -274,6 +274,74 @@
   <a href="https://share.octopus.energy/clean-hero-615" target="_blank" rel="noopener" style="display:block;background:linear-gradient(90deg,#1b0a4e,#3a1d8a);color:#fff;text-decoration:none;text-align:center;padding:11px 16px;font-size:14px;font-weight:500;letter-spacing:-0.01em;">
     🐙 Switch to Octopus Energy and get <strong>£50 free credit</strong> — we get £50 too, which helps keep Decarbonarma free &amp; independent. <span style="text-decoration:underline;white-space:nowrap;">Claim your £50 →</span>
   </a>
+  <!-- ═══════════ POWER ALERT TICKER (live, Elexon BMRS SYSWARN) ═══════════ -->
+  <a id="ptWrap" href="https://bmrs.elexon.co.uk/notices" target="_blank" rel="noopener"
+     style="display:flex;align-items:stretch;text-decoration:none;background:#14181c;border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(0,0,0,0.14);overflow:hidden;">
+    <span id="ptLabel" style="flex-shrink:0;display:flex;align-items:center;gap:8px;background:#6e6e73;color:#fff;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:9px 18px;white-space:nowrap;transition:background .3s;">
+      <span id="ptDot" style="width:8px;height:8px;border-radius:50%;background:#fff;"></span>⚡ Power Alert
+    </span>
+    <div style="flex:1;overflow:hidden;position:relative;display:flex;align-items:center;">
+      <div id="ptScroll" style="white-space:nowrap;will-change:transform;font-size:13.5px;font-weight:500;color:#e8eaed;padding-left:100%;letter-spacing:.1px;">Connecting to National Energy System Operator live warnings…</div>
+    </div>
+    <span style="flex-shrink:0;display:flex;align-items:center;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#9aa0a6;padding:0 16px;white-space:nowrap;background:#14181c;">Live →</span>
+  </a>
+  <style>
+    @keyframes ptRoll { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+    #ptScroll.rolling { animation: ptRoll linear infinite; }
+    #ptWrap:hover #ptScroll.rolling { animation-play-state: paused; }
+    @keyframes ptPulse { 0%,100%{opacity:1;} 50%{opacity:.2;} }
+  </style>
+  <script>
+  (function(){
+    var wrap=document.getElementById('ptWrap'),
+        label=document.getElementById('ptLabel'),
+        dot=document.getElementById('ptDot'),
+        scroll=document.getElementById('ptScroll');
+    var STRESS=['ELECTRICITY MARGIN NOTICE','CAPACITY MARKET NOTICE','DEMAND CONTROL','INADEQUATE SYSTEM MARGIN','NEGATIVE RESERVE','HIGH RISK','RISK OF'];
+    function isStress(t){ t=(t||'').toUpperCase(); return STRESS.some(function(k){ return t.indexOf(k)!==-1; }); }
+    function isCancel(x){ x=(x||'').toUpperCase(); return x.indexOf('CANCELLATION')!==-1||x.indexOf('CANCELLED')!==-1||x.indexOf('NO LONGER')!==-1; }
+    function ago(d){ var s=Math.floor((Date.now()-d.getTime())/1000);
+      if(s<3600) return Math.max(1,Math.floor(s/60))+' min ago';
+      if(s<86400) return Math.floor(s/3600)+' hr ago';
+      return Math.floor(s/86400)+' day'+(s>=172800?'s':'')+' ago'; }
+    function render(bg, msg, pulse){
+      label.style.background=bg;
+      dot.style.animation = pulse ? 'ptPulse 1s infinite' : 'none';
+      scroll.classList.remove('rolling');
+      scroll.textContent=msg;
+      scroll.style.animationDuration=Math.max(22, msg.length*0.22)+'s';
+      void scroll.offsetWidth;
+      scroll.classList.add('rolling');
+    }
+    function fallback(){ render('#6e6e73','Live grid warnings unavailable right now — tap for current NESO system warnings on the Elexon BMRS notices page.',false); }
+    var now=new Date(), from=new Date(Date.now()-48*3600*1000);
+    var q='publishDateTimeFrom='+from.toISOString().slice(0,19)+'Z&publishDateTimeTo='+now.toISOString().slice(0,19)+'Z&format=json';
+    fetch('https://data.elexon.co.uk/bmrs/api/v1/system/warnings?'+q)
+      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(function(j){
+        var rows=(j&&j.data)||[];
+        var stress=rows.filter(function(d){ return isStress(d.warningType); })
+                       .sort(function(a,b){ return new Date(b.publishTime)-new Date(a.publishTime); });
+        if(!stress.length){
+          render('#1f8a4c','GB GRID NORMAL — supply margins healthy across Great Britain; no active NESO margin warnings in the last 48 hours.  •  Source: Elexon BMRS SYSWARN.',false);
+          return;
+        }
+        var latest=stress[0], when=new Date(latest.publishTime);
+        var recent=(Date.now()-when.getTime()) < 18*3600*1000;
+        var oneLine=(latest.warningText||'').replace(/\\r|\\n|[\r\n]+/g,' ').replace(/\s+/g,' ').trim();
+        if(oneLine.length>240) oneLine=oneLine.slice(0,240)+'…';
+        if(isCancel(latest.warningText)){
+          render('#1f8a4c','ALL CLEAR — latest NESO '+latest.warningType.toLowerCase()+' cancelled '+ago(when)+'; GB grid margins back to normal.',false);
+        } else if(recent){
+          render('#c81e1e','⚠ '+latest.warningType+' ACTIVE — issued '+ago(when)+' by NESO:  '+oneLine+'   → Tap for live data.',true);
+        } else {
+          render('#b45309','RECENT ALERT (last 48h) — '+latest.warningType+' issued '+ago(when)+' by NESO:  '+oneLine,false);
+        }
+      })
+      .catch(fallback);
+  })();
+  </script>
+
 
   <!-- LATEST ARTICLE (rotating) -->
   <section style="padding:32px 80px 8px;">
@@ -358,85 +426,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ═══════════ GB GRID STATUS (live, Elexon BMRS SYSWARN) ═══════════ -->
-  <section style="padding:8px 80px 4px;">
-    <div style="max-width:1100px;margin:0 auto;">
-      <a id="gridAlert" href="https://bmrs.elexon.co.uk/notices" target="_blank" rel="noopener"
-         style="display:flex;align-items:center;gap:16px;text-decoration:none;background:var(--stone-50);border:1px solid var(--stone-200);border-left:4px solid var(--stone-200);border-radius:16px;padding:16px 22px;transition:all .2s var(--ease);">
-        <span id="gridDot" style="flex-shrink:0;width:12px;height:12px;border-radius:50%;background:var(--stone-200);box-shadow:0 0 0 4px rgba(0,0,0,0.03);"></span>
-        <div style="flex:1;min-width:0;">
-          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-            <span style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--stone-600);">GB Grid Status</span>
-            <span id="gridLive" style="display:none;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#b45309;background:#fef3c7;padding:2px 8px;border-radius:20px;">● Warning</span>
-          </div>
-          <div id="gridHeadline" style="font-size:16px;font-weight:600;color:var(--stone-800);margin-top:3px;letter-spacing:-0.01em;">Checking National Energy System Operator warnings…</div>
-          <div id="gridDetail" style="font-size:13px;color:var(--stone-600);line-height:1.5;margin-top:4px;"></div>
-        </div>
-        <span style="flex-shrink:0;font-size:13px;font-weight:600;color:var(--green-600);white-space:nowrap;">Live data →</span>
-      </a>
-      <div style="font-size:11px;color:var(--stone-600);opacity:0.7;margin-top:8px;padding-left:4px;">Source: NESO System Warnings via Elexon BMRS Insights (SYSWARN) · updates on page load</div>
-    </div>
-  </section>
-  <script>
-  (function(){
-    var el = {
-      wrap: document.getElementById('gridAlert'),
-      dot: document.getElementById('gridDot'),
-      live: document.getElementById('gridLive'),
-      head: document.getElementById('gridHeadline'),
-      detail: document.getElementById('gridDetail')
-    };
-    // Warning types that indicate GB grid stress (as opposed to routine SO-SO trade prices / IT outages)
-    var STRESS = ['ELECTRICITY MARGIN NOTICE','CAPACITY MARKET NOTICE','DEMAND CONTROL','INADEQUATE SYSTEM MARGIN','NEGATIVE RESERVE','HIGH RISK','RISK OF'];
-    function isStress(t){ t=(t||'').toUpperCase(); return STRESS.some(function(k){ return t.indexOf(k)!==-1; }); }
-    function isCancel(txt){ txt=(txt||'').toUpperCase(); return txt.indexOf('CANCELLATION')!==-1 || txt.indexOf('CANCELLED')!==-1 || txt.indexOf('NO LONGER')!==-1; }
-    function ago(d){
-      var s=Math.floor((Date.now()-d.getTime())/1000);
-      if(s<3600) return Math.max(1,Math.floor(s/60))+' min ago';
-      if(s<86400) return Math.floor(s/3600)+' hr ago';
-      return Math.floor(s/86400)+' day'+(s>=172800?'s':'')+' ago';
-    }
-    function set(color, headline, detail, warn){
-      el.dot.style.background = color;
-      el.wrap.style.borderLeftColor = color;
-      el.head.textContent = headline;
-      el.detail.textContent = detail || '';
-      el.live.style.display = warn ? 'inline-block' : 'none';
-    }
-    function fallback(){
-      set('var(--stone-200)','Live grid warnings unavailable right now','Tap to view current NESO system warnings on the Elexon BMRS notices page.',false);
-    }
-    var now=new Date(), from=new Date(Date.now()-48*3600*1000);
-    var q='publishDateTimeFrom='+from.toISOString().slice(0,19)+'Z&publishDateTimeTo='+now.toISOString().slice(0,19)+'Z&format=json';
-    fetch('https://data.elexon.co.uk/bmrs/api/v1/system/warnings?'+q)
-      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
-      .then(function(j){
-        var rows=(j&&j.data)||[];
-        var stress=rows.filter(function(d){ return isStress(d.warningType); })
-                       .sort(function(a,b){ return new Date(b.publishTime)-new Date(a.publishTime); });
-        if(!stress.length){
-          set('var(--green-400)','No active grid margin warnings','Supply margins normal across Great Britain over the last 48 hours.',false);
-          return;
-        }
-        var latest=stress[0];
-        var when=new Date(latest.publishTime);
-        var recent=(Date.now()-when.getTime()) < 18*3600*1000; // within 18h => treat as active
-        var cancelled=isCancel(latest.warningText);
-        var label=latest.warningType.replace(/\b\w/g,function(c){return c.toUpperCase();}).replace(/\bNotice\b/i,'Notice');
-        var oneLine=(latest.warningText||'').replace(/\\r|\\n|[\r\n]+/g,' ').replace(/\s+/g,' ').trim();
-        if(oneLine.length>200) oneLine=oneLine.slice(0,200)+'…';
-        if(cancelled){
-          set('var(--green-400)','Latest grid warning has been cancelled','NESO '+latest.warningType.toLowerCase()+' — cancelled '+ago(when)+'. Margins back to normal.',false);
-        } else if(recent){
-          set('#d97706','Grid margin warning active — '+latest.warningType,'Issued '+ago(when)+' by NESO. '+oneLine,true);
-        } else {
-          set('#eab308','Recent grid warning (last 48h) — '+latest.warningType,'Issued '+ago(when)+' by NESO. '+oneLine,false);
-        }
-      })
-      .catch(fallback);
-  })();
-  </script>
 
   <!-- ═══════════ AS SEEN ON SKILL BUILDER ═══════════ -->
   <section style="padding:28px 80px 4px;">
