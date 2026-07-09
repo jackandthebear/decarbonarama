@@ -424,7 +424,7 @@
         var recent=(Date.now()-when.getTime()) < 18*3600*1000; // within 18h => treat as active
         var cancelled=isCancel(latest.warningText);
         var label=latest.warningType.replace(/\b\w/g,function(c){return c.toUpperCase();}).replace(/\bNotice\b/i,'Notice');
-        var oneLine=(latest.warningText||'').replace(/\r?\\?n|\r/g,' ').replace(/\s+/g,' ').trim();
+        var oneLine=(latest.warningText||'').replace(/\\r|\\n|[\r\n]+/g,' ').replace(/\s+/g,' ').trim();
         if(oneLine.length>200) oneLine=oneLine.slice(0,200)+'…';
         if(cancelled){
           set('var(--green-400)','Latest grid warning has been cancelled','NESO '+latest.warningType.toLowerCase()+' — cancelled '+ago(when)+'. Margins back to normal.',false);
