@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Britain's Grid Keeps Getting Margin Notices: Why Security of Supply Needs More Than Wind | Decarbonarma</title>
+<meta name="description" content="Three heatwave-driven Electricity Margin Notices in one summer, low wind, and French interconnectors unable to bail Britain out. The case for treating grid security of supply as a national security question, not just a decarbonisation one.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0d1510; --bg2:#111a13; --bg3:#162019; --bg4:#1a2820;
+    --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.13);
+    --green:#4ade80; --green-dim:#22c55e; --green-deep:#1a5c38;
+    --green-pale:rgba(74,222,128,0.08); --green-pale2:rgba(74,222,128,0.13);
+    --amber:#fbbf24; --amber-pale:rgba(251,191,36,0.08);
+    --blue:#5aa7d6; --violet:#a78bfa; --grey:#8a9a90;
+    --red:#f87171;
+    --text:#e4ede5; --text-mid:#94a894; --text-dim:#5a6c5a;
+    --mono:'JetBrains Mono','Courier New',monospace;
+    --serif:'Playfair Display',Georgia,serif;
+    --body:'Source Serif 4',Georgia,serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.75;font-weight:300;-webkit-font-smoothing:antialiased;}
+
+  .site-header{border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:rgba(13,21,16,.9);backdrop-filter:blur(8px);z-index:20;}
+  .site-logo{text-decoration:none;display:flex;align-items:center;}
+  .site-nav{display:flex;gap:1.5rem;}
+  .site-nav a{color:var(--text-dim);text-decoration:none;font-size:12px;letter-spacing:.07em;text-transform:uppercase;}
+  .site-nav a:hover{color:var(--green);}
+
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px;}
+  .hero{padding:64px 0 34px;border-bottom:1px solid var(--border);}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);}
+  h1{font-family:var(--serif);font-weight:700;font-size:2.5rem;line-height:1.12;margin:.4em 0 .3em;color:#fff;}
+  .standfirst{font-size:1.2rem;color:var(--text-mid);font-weight:300;}
+  .byline{font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-top:18px;}
+
+  main{padding:10px 0 40px;}
+  h2{font-family:var(--serif);font-weight:700;font-size:1.7rem;color:#fff;margin:2em 0 .4em;}
+  h3{font-family:var(--body);font-weight:600;font-size:1.18rem;color:var(--green);margin:1.7em 0 .3em;}
+  p{margin:.85em 0;}
+  strong{color:#fff;font-weight:600;}
+  em{color:var(--text-mid);}
+  a{color:var(--green);}
+  ul,ol{margin:.85em 0 .85em 1.3em;}
+  li{margin:.4em 0;}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:30px 0;}
+  .stat{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+  .stat .n{font-family:var(--mono);font-size:1.6rem;font-weight:500;color:var(--green);line-height:1;}
+  .stat .l{font-size:13px;color:var(--text-mid);margin-top:8px;line-height:1.4;}
+
+  .card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px;margin:26px 0;}
+  .chart-box{position:relative;height:380px;width:100%;}
+  .chart-cap{font-size:13.5px;color:var(--text-mid);margin-top:14px;line-height:1.55;}
+
+  table{width:100%;border-collapse:collapse;font-size:15px;margin:6px 0;}
+  th,td{text-align:left;padding:10px 10px;border-bottom:1px solid var(--border);}
+  th{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim);font-weight:400;}
+  td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--text);}
+  .pill{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;padding:2px 9px;border-radius:20px;}
+  .pill.on{background:var(--green-pale2);color:var(--green);border:1px solid var(--green-deep);}
+  .pill.warn{background:var(--amber-pale);color:var(--amber);border:1px solid rgba(251,191,36,0.35);}
+
+  .callout{border-left:3px solid var(--amber);background:var(--amber-pale);padding:18px 22px;border-radius:0 12px 12px 0;margin:28px 0;}
+  .callout h3{margin-top:0;color:var(--amber);}
+
+  footer{border-top:1px solid var(--border);padding:28px 0 60px;}
+  footer p{font-size:12.5px;color:var(--text-dim);line-height:1.65;}
+  footer a{color:var(--text-mid);}
+
+  @media(max-width:600px){ h1{font-size:1.85rem;} .chart-box{height:320px;} body{font-size:16px;} .hero{padding:40px 0 26px;} }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="site-logo"><img src="../logo-light.svg" alt="Decarbonarma" style="height:34px;width:auto;display:block;"></a>
+  <nav class="site-nav">
+    <a href="/">Home</a>
+    <a href="#">Grid</a>
+    <a href="#">Wind</a>
+    <a href="#">Policy</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">Grid &amp; Security of Supply</div>
+    <h1>Britain's Grid Keeps Issuing Margin Notices — Time to Admit Security of Supply Is a National Security Question</h1>
+    <p class="standfirst">Three Electricity Margin Notices in six weeks, low wind during a heatwave, and interconnectors that can't help because France and the continent are just as squeezed. The lights stayed on this time. That's not the same as the system being safe.</p>
+    <div class="byline">Decarbonarma · July 2026 · ~9-min read</div>
+  </div>
+
+  <main>
+
+  <div class="stats">
+    <div class="stat"><div class="n">3rd</div><div class="l">Heatwave-driven Electricity Margin Notice issued this summer (24 Jun &amp; 9 Jul 2026)</div></div>
+    <div class="stat"><div class="n">~1.2 GW</div><div class="l">Forecast margin shortfall flagged for Thursday evening's peak</div></div>
+    <div class="stat"><div class="n">7–10pm</div><div class="l">Typical window covered by each notice — the evening demand peak</div></div>
+    <div class="stat"><div class="n">40°C</div><div class="l">Temperatures forecast across parts of England and Wales</div></div>
+  </div>
+
+  <p>On the evening of 9 July 2026, the National Energy System Operator (NESO) issued an Electricity Margin Notice — a signal to the market that forecast supply margins for the evening peak were tighter than usual and that any spare generation or flexibility should come forward. It was the third such notice in a matter of weeks, all triggered during a run of summer heatwaves. NESO's own language was careful and consistent each time: this is a "routine tool," and it "does not mean electricity supply is at risk." Nobody's lights went out. But the fact that Britain's grid operator has had to make this appeal three times in one summer — a season when margin notices are supposed to be rare — is itself the story.</p>
+
+  <h2>1. What actually happened</h2>
+
+  <p>An Electricity Margin Notice (EMN) is not a blackout warning. It's an early flag, usually issued a few hours ahead, telling generators and flexibility providers that NESO's forecast shows the safety buffer between expected supply and expected demand is narrower than the system likes to run with. It's a market signal designed to pull more capacity forward before things get tight — the system equivalent of ringing round to see who has a spare generator. Historically these notices were a winter phenomenon, issued when cold snaps pushed heating demand to its yearly peak. This year they've shown up in June and July instead, and for a specific combination of reasons:</p>
+
+  <ul>
+    <li><strong>Low wind.</strong> The 24 June notice was explicit: NESO cited "extremely high temperatures affecting Great Britain and the continent <em>and low wind</em>." Heatwaves in the UK are very often accompanied by the high-pressure, still-air conditions that also produce the lowest wind generation — the two aren't independent risks, they tend to arrive together.</li>
+    <li><strong>Heat-stressed thermal and nuclear plant.</strong> Extreme heat makes gas stations, cooling systems and nuclear plants less efficient, and in the worst cases forces output down or offline. Energy analysts noted that French nuclear reactors were being curtailed for exactly this reason during the same heat-dome event — reactors that rely on river or sea water for cooling have to throttle back or shut down if the water gets too warm or too scarce, a constraint that is itself getting worse as summers get hotter.</li>
+    <li><strong>Rising demand from cooling.</strong> The other side of the ledger: hotter weather means more fans and air conditioning running, pushing demand up at exactly the moment supply is most constrained.</li>
+    <li><strong>Interconnectors offering less headroom.</strong> Britain leans on subsea interconnectors to France, Belgium, the Netherlands and Norway to import power when its own margins are tight. That only works if the country on the other end has spare capacity to sell. During a continent-wide heatwave, France and its neighbours are managing their own demand spikes and their own heat-affected generation at the same time — so the interconnectors that are supposed to be Britain's insurance policy are least available exactly when Britain needs them most.</li>
+  </ul>
+
+  <div class="card">
+    <div class="chart-box"><canvas id="riskChart"></canvas></div>
+    <p class="chart-cap"><strong>Figure 1 — Why heatwave margin notices are a compounding problem, not a single fault.</strong> Four separate pressures — low wind, heat-derated thermal/nuclear plant, rising cooling demand, and reduced interconnector import capacity — tend to move in the same direction at once during a summer heat-dome. Illustrative severity, not measured data.</p>
+  </div>
+
+  <h2>2. Why "just add more wind" doesn't fix this</h2>
+
+  <p>Britain has built an enormous amount of wind capacity, and it's been the right call for cost and emissions — wind is now routinely the largest single source on the system over a full year. But the events of this summer are a clean illustration of wind's one structural weakness: correlated failure. Solar has the opposite problem — it's reliably absent every single night, which is at least predictable and can be planned around. Wind's problem is that a large, calm, high-pressure weather system can park over the entire country — and often the near continent too — cutting output from every turbine at once, for days, with no warning more than a few days out. Building more turbines doesn't fix a correlated drop to near-zero; it just makes the drop bigger in absolute terms.</p>
+
+  <p>This is precisely why security-of-supply planning talks about "firm capacity" — generation you can call on regardless of weather — separately from total installed capacity. A system can have enormous headline capacity and still be fragile at the margin, because the number that matters during an EMN isn't gigawatts installed, it's gigawatts actually available in the next four hours.</p>
+
+  <h2>3. The interconnector assumption just failed a stress test</h2>
+
+  <p>For two decades, UK energy security planning has treated interconnectors to Europe as a reliable backstop: if Britain is short, buy from France's nuclear fleet or Norway's hydro. That assumption depends on the exporting country having spare capacity precisely when Britain needs it. This summer showed the flaw in that logic — a heatwave covering the whole of northwest Europe hits Britain, France and the Netherlands simultaneously. Everyone's demand rises together; everyone's thermal and nuclear plant is heat-stressed together; nobody has much spare to sell. An insurance policy that pays out less when the risk is more widespread is not much of an insurance policy. It doesn't mean interconnectors are worthless — most of the time they genuinely do smooth things out — but it means they cannot be the single answer to a system-wide, weather-correlated shortfall.</p>
+
+  <div class="callout">
+    <h3>"Routine tool" is doing a lot of work in that sentence</h3>
+    <p>NESO is right that an EMN is a routine, pre-planned mechanism and that it worked exactly as designed — extra capacity came forward, nobody was cut off. But three EMNs in one summer, after a decade in which they were almost exclusively a winter event, is a trend line worth taking seriously rather than a string of unrelated coincidences. Energy analysts have already flagged that as climate change pushes UK and European summers hotter and more frequently into heat-dome conditions, this kind of notice is likely to become a normal part of summer rather than a rare one.</p>
+  </div>
+
+  <h2>4. Why this is a national security question, not just a decarbonisation one</h2>
+
+  <p>Keeping the lights on is one of the oldest functions of the state, on a par with defence and border control — it underpins hospitals, water treatment, food refrigeration, communications and, increasingly, the electrified heating and transport that decarbonisation itself depends on. A grid that can be pushed to its margin by nothing more dramatic than a week of still, hot weather is a grid with a single point of failure that any adversary, or simply a bad summer, can find without even trying. Framed that way, the question stops being "renewables versus fossil fuels" and becomes: what's the minimum firm, weather-independent capacity Britain needs to hold in reserve so that a domestic wind lull plus a continental heatwave can never simultaneously take out both the primary source <em>and</em> the backup plan?</p>
+
+  <p>That argues for a genuinely balanced generation mix, not a wind-maximised one: firm low-carbon baseload from nuclear (the existing AGR fleet plus Hinkley Point C, Sizewell C and the incoming SMR programmes — see our <a href="./uk-nuclear-power-2026.html">nuclear power explainer</a>), enough flexible gas or long-duration storage to cover multi-day wind droughts, grid-scale batteries for the hourly swings, and demand-side flexibility so homes and businesses can shift load away from the tightest evenings. Wind and solar remain the cheapest energy on the system whenever the weather cooperates — the case here isn't against them, it's against relying on them, or on imports, as the entire margin of safety.</p>
+
+  <h2>5. What households can actually do with this</h2>
+
+  <p>None of this requires waiting for government policy to catch up. The EMN windows this summer have consistently landed in the 7–10pm evening peak — exactly the period a home battery, smart EV charging schedule, or simply shifting a tumble dryer or dishwasher run can dodge entirely. Homes with solar and storage already sidestep a chunk of their exposure to exactly this kind of tight-margin evening; homes on flexible tariffs can be paid to do it. The <a href="/#grid">UK Grid Live tool</a> shows current system margin, wind output and carbon intensity in real time, so it's possible to see one of these tight evenings coming rather than reading about it in the news the next morning.</p>
+
+  <h2>The bottom line</h2>
+  <p>Nobody lost power this summer. That's the system working as designed, and NESO deserves credit for the early warnings and for pulling in extra capacity each time. But three margin notices in six weeks, driven by the same combination of low wind, heat-stressed thermal and nuclear plant, rising cooling demand and unavailable interconnectors, is a pattern rather than a fluke — and patterns in security of supply are exactly the kind of thing that should be planned for years in advance, not discovered one hot Thursday at a time. A grid resilient enough to shrug off a still, 40°C week without needing a market-wide appeal for spare capacity is not an anti-renewables position. It's the baseline a country should expect from something as essential as keeping the power on.</p>
+
+  </main>
+</div>
+
+<!-- dca-email-capture -->
+<div class="dca-signup-outer">
+  <div class="dca-signup">
+    <div class="dca-signup-kicker">Decarbonarma Newsletter</div>
+    <h3 class="dca-signup-h">Get the next one in your inbox</h3>
+    <p class="dca-signup-sub">Clear, no-nonsense analysis of UK home decarbonisation &mdash; heat pumps, solar, EVs, batteries and the grid. Occasional emails, no spam, unsubscribe anytime.</p>
+    <form action="https://decarbonarma.us15.list-manage.com/subscribe/post?u=cffa5aec4001ad97d9357f807&amp;id=8d5f19dec4&amp;f_id=0096a2e1f0" method="post" target="_blank" novalidate class="dca-signup-form">
+      <label class="dca-visually-hidden" for="dca-email">Email address</label>
+      <input type="email" name="EMAIL" id="dca-email" required placeholder="you@example.com" class="dca-signup-input">
+      <!-- Mailchimp bot-prevention honeypot: real users leave this empty -->
+      <div aria-hidden="true" style="position:absolute;left:-5000px;"><input type="text" name="b_cffa5aec4001ad97d9357f807_8d5f19dec4" tabindex="-1" value=""></div>
+      <button type="submit" name="subscribe" class="dca-signup-btn">Subscribe</button>
+    </form>
+    <div class="dca-signup-fine">We&rsquo;ll never share your email. Powered by Mailchimp.</div>
+  </div>
+</div>
+<style>
+  .dca-signup-outer{max-width:820px;margin:48px auto 10px;padding:0 24px;}
+  .dca-signup{background:var(--bg3,#162019);border:1px solid var(--green-pale2,rgba(74,222,128,0.13));border-radius:16px;padding:30px 28px;position:relative;overflow:hidden;}
+  .dca-signup::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green,#4ade80),var(--amber,#fbbf24));}
+  .dca-signup-kicker{font-family:var(--mono,'JetBrains Mono',monospace);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--green,#4ade80);margin-bottom:8px;}
+  .dca-signup-h{font-family:var(--serif,'Playfair Display',Georgia,serif);font-weight:700;font-size:1.5rem;color:#fff;margin:0 0 .3em;line-height:1.15;}
+  .dca-signup-sub{font-family:var(--body,'Source Serif 4',Georgia,serif);font-size:15px;color:var(--text-mid,#94a894);margin:0 0 18px;line-height:1.6;font-weight:300;}
+  .dca-signup-form{display:flex;gap:10px;flex-wrap:wrap;}
+  .dca-signup-input{flex:1 1 240px;min-width:0;background:var(--bg,#0d1510);border:1px solid var(--border2,rgba(255,255,255,0.13));border-radius:10px;padding:13px 15px;color:var(--text,#e4ede5);font-family:var(--body,'Source Serif 4',Georgia,serif);font-size:15px;}
+  .dca-signup-input:focus{outline:none;border-color:var(--green,#4ade80);box-shadow:0 0 0 3px var(--green-pale,rgba(74,222,128,0.08));}
+  .dca-signup-input::placeholder{color:var(--text-dim,#5a6c5a);}
+  .dca-signup-btn{flex:0 0 auto;background:var(--green,#4ade80);color:#062012;border:none;border-radius:10px;padding:13px 26px;font-family:var(--mono,'JetBrains Mono',monospace);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:background .15s;}
+  .dca-signup-btn:hover{background:var(--green-dim,#22c55e);}
+  .dca-signup-fine{font-family:var(--mono,'JetBrains Mono',monospace);font-size:11px;color:var(--text-dim,#5a6c5a);margin-top:12px;letter-spacing:.02em;}
+  .dca-visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  @media(max-width:520px){.dca-signup-btn{flex:1 1 100%;}}
+</style>
+<!-- /dca-email-capture -->
+
+<div data-toolref="1" style="max-width:760px;margin:2.5rem auto;padding:1.25rem 1.5rem;border:1px solid rgba(74,222,128,0.35);border-radius:12px;background:rgba(74,222,128,0.08);"><div style="font-weight:700;font-size:1.05rem;margin-bottom:0.85rem;">Free tools for this topic</div><div style="display:flex;flex-wrap:wrap;gap:0.6rem;"><a href="/#grid" style="display:inline-block;background:#4ade80;color:#0d1510;font-weight:700;text-decoration:none;padding:0.6rem 1.1rem;border-radius:8px;font-size:0.95rem;line-height:1.2;">📡 UK Grid Live &rarr;</a></div></div>
+<footer>
+  <div class="wrap">
+    <p><strong style="color:var(--text-mid);">Sources:</strong>
+      NESO Electricity Margin Notice, 9 July 2026 (reNEWS, "Heatwave prompts UK electricity margin notice") · NESO Electricity Margin Notice, 24 June 2026, citing "extremely high temperatures... and low wind" (PA Media / Yahoo Finance, "Britain's electricity grid operator issues system warning due to heatwave") · Energy &amp; Climate Intelligence Unit comment on French nuclear heat-curtailment and rising heatwave-driven EMN frequency (ECIU, 9 July 2026) · Decarbonarma's own <a href="./uk-wind-status-h1-2026.html">UK Wind: Status H1 2026</a> and <a href="./uk-nuclear-power-2026.html">Nuclear Power in the UK: 2026</a> explainers.
+      Published on Decarbonarma. Analytical commentary, not investment or policy advice.</p>
+  </div>
+</footer>
+
+<script>
+Chart.defaults.font.family = "'Source Serif 4', Georgia, serif";
+Chart.defaults.color = '#94a894';
+
+/* Figure 1 — Compounding heatwave risk factors (illustrative severity, radar) */
+const ctx = document.getElementById('riskChart');
+new Chart(ctx, {
+  type:'radar',
+  data:{
+    labels:['Low wind\n(anticyclonic heat-dome)','Heat-derated\nthermal & nuclear','Rising cooling\ndemand','Reduced interconnector\nimport capacity'],
+    datasets:[
+      { label:'Normal summer evening', data:[2,1,2,1], borderColor:'#5aa7d6', backgroundColor:'rgba(90,167,214,.15)', pointBackgroundColor:'#5aa7d6' },
+      { label:'Heatwave / EMN evening (illustrative)', data:[8,7,8,7], borderColor:'#fbbf24', backgroundColor:'rgba(251,191,36,.18)', pointBackgroundColor:'#fbbf24' }
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{position:'bottom', labels:{boxWidth:12, padding:14, font:{size:12}, color:'#94a894'}} },
+    scales:{
+      r:{ min:0, max:10, ticks:{display:false, stepSize:2}, grid:{color:'rgba(255,255,255,0.08)'}, angleLines:{color:'rgba(255,255,255,0.08)'}, pointLabels:{color:'#e4ede5', font:{size:11.5}} }
+    }
+  }
+});
+</script>
+</body>
+</html>
