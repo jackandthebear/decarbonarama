@@ -278,6 +278,7 @@
     <li><a href="#" onclick="showPage('news')" id="nav-news">News</a></li>
     <li><a href="#" onclick="showPage('articles')" id="nav-articles">Articles</a></li>
     <li><a href="#" onclick="showPage('casestudies')" id="nav-casestudies">Case Studies</a></li>
+    <li><a href="#" onclick="showPage('rosecottage')" id="nav-rosecottage">Rose Cottage</a></li>
     <li style="position:relative;" id="nav-tools-wrap" onmouseenter="document.getElementById('tools-drop').style.display='block'" onmouseleave="document.getElementById('tools-drop').style.display='none'">
       <a href="#" style="color:var(--green-600);font-weight:600;padding:8px 14px;border-radius:8px;background:var(--green-100);text-decoration:none;font-size:14px;display:block;">🛠 AI Tools ▾</a>
       <div id="tools-drop" style="display:none;position:absolute;top:100%;right:0;background:#fff;border:1px solid var(--green-100);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.1);padding:8px;min-width:200px;z-index:200;">
@@ -746,6 +747,20 @@
   </div>
   <div style="max-width:1000px;margin:0 auto;padding:0 16px;">
     <iframe src="./news/daily-brief.html" title="Daily decarbonisation brief" style="width:100%;border:none;min-height:calc(100vh - var(--nav-h) - 60px);display:block;background:#fff;"></iframe>
+  </div>
+</div>
+
+<!-- ═══════════ ROSE COTTAGE (LIVE CASE STUDY) PAGE ═══════════ -->
+<div id="page-rosecottage" class="page">
+  <div style="background:linear-gradient(135deg,#0e3520 0%,#1a5530 60%,#2d8a4a 100%);padding:60px 48px 44px;">
+    <div style="max-width:1000px;margin:0 auto;">
+      <span style="font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--green-200);">Updated every morning</span>
+      <h1 style="font-family:'DM Serif Display',serif;font-size:clamp(34px,4vw,46px);color:#fff;margin-top:12px;letter-spacing:-1px;line-height:1.1;">Rose Cottage: a real hot water &amp; solar case study</h1>
+      <p style="font-size:17px;color:rgba(255,255,255,0.72);max-width:580px;margin-top:14px;line-height:1.7;">Our own 16.08 kWp solar + Sunamp thermal-battery install, tracked day by day — how much of the hot water load solar covers before any grid top-up is needed.</p>
+    </div>
+  </div>
+  <div style="max-width:1000px;margin:0 auto;padding:0 16px;">
+    <iframe src="./rose-cottage/hot-water.html" title="Rose Cottage hot water report" style="width:100%;border:none;min-height:calc(100vh - var(--nav-h) - 60px);display:block;background:#fff;"></iframe>
   </div>
 </div>
 

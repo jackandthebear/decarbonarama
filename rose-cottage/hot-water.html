@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rose Cottage — Live Hot Water Report — Decarbonarma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--ink:#141C1A;--ink-2:#3A4A46;--ink-3:#6A7E78;--forest:#1A3D2B;--green:#2d8a4a;--amber:#b8860b;--sand:#C9A96E;--cream:#F4F2EC;--white:#fff;--border:#DDD9CE;}
+body{font-family:"Source Serif 4",Georgia,serif;background:var(--cream);color:var(--ink);line-height:1.6;font-size:16px;}
+.wrap{max-width:980px;margin:0 auto;padding:40px 24px 64px;}
+.head{border-bottom:2px solid var(--forest);padding-bottom:20px;margin-bottom:24px;}
+.kicker{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:10px;}
+.head h1{font-family:"Playfair Display",serif;font-size:clamp(28px,4vw,40px);font-weight:900;line-height:1.1;letter-spacing:-0.02em;color:var(--forest);}
+.dateline{font-family:"JetBrains Mono",monospace;font-size:12.5px;color:var(--ink-3);margin-top:10px;}
+.dateline b{color:var(--forest);}
+p.lede{font-size:16.5px;color:var(--ink-2);max-width:680px;margin-top:14px;line-height:1.7;}
+
+.system-context{
+  background:linear-gradient(135deg,#eefaf3,#f4f2ec);border:1px solid var(--border);
+  border-radius:12px;padding:14px 18px;margin:24px 0;font-family:"JetBrains Mono",monospace;font-size:12.5px;color:var(--ink-2);
+  display:flex;flex-wrap:wrap;gap:6px 22px;
+}
+.system-context b{color:var(--forest);}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px;}
+.card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+.card .label{font-family:"JetBrains Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-3);margin-bottom:6px;}
+.card .value{font-family:"Playfair Display",serif;font-size:26px;font-weight:900;color:var(--green);}
+.card .value.amber{color:var(--amber);}
+.card .foot{font-size:12.5px;color:var(--ink-3);margin-top:4px;}
+
+.subtabs{display:flex;gap:8px;margin-bottom:16px;}
+.subtabs button{appearance:none;cursor:pointer;border:1px solid var(--border);background:var(--white);color:var(--ink-2);padding:8px 16px;border-radius:999px;font-family:"JetBrains Mono",monospace;font-size:12.5px;font-weight:600;}
+.subtabs button.active{background:var(--forest);border-color:var(--forest);color:#fff;}
+.subpanel{display:none;}
+.subpanel.active{display:block;}
+
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:22px;}
+@media (max-width:720px){.chart-grid{grid-template-columns:1fr;}}
+.chart-box{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:14px;height:260px;}
+.chart-box h3{font-family:"JetBrains Mono",monospace;margin:0 0 8px;font-size:12.5px;color:var(--ink-2);text-transform:uppercase;letter-spacing:.03em;}
+.chart-box .canvas-wrap{position:relative;height:200px;}
+
+.table-wrap{border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:24px;background:var(--white);}
+table{width:100%;border-collapse:collapse;font-family:"JetBrains Mono",monospace;font-size:12.5px;}
+th,td{padding:9px 12px;text-align:right;border-bottom:1px solid var(--border);}
+th:first-child,td:first-child{text-align:left;font-family:"Source Serif 4",serif;font-size:13.5px;}
+th{background:#eefaf3;color:var(--forest);font-size:10.5px;text-transform:uppercase;}
+tr:last-child td{border-bottom:none;}
+
+h2.section{font-family:"Playfair Display",serif;font-size:20px;color:var(--forest);margin:8px 0 12px;padding-top:16px;border-top:1px solid var(--border);}
+.insights{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:8px;}
+.insight{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--green);border-radius:8px;padding:14px 16px;}
+.insight .t{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--forest);margin-bottom:6px;}
+.insight .d{font-size:14.5px;color:var(--ink-2);line-height:1.5;}
+
+.foot{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--ink-3);margin-top:28px;line-height:1.6;text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <div class="kicker">🏡 Rose Cottage Case Study · Regenerated every morning</div>
+    <h1>Live hot water &amp; thermal storage report</h1>
+    <div class="dateline">Ledger through <b id="ledgerThrough">—</b> · report generated <b id="genDate">—</b></div>
+    <p class="lede">A real 16.08 kWp solar + Sunamp thermal-battery system, tracked day by day. This page shows exactly how much of Rose Cottage's hot water demand solar covers before any grid (Octopus overnight) top-up is needed — regenerated daily from the household's own energy ledger.</p>
+  </div>
+
+  <div class="system-context">
+    <div><b>16.08 kWp</b> array (22×510W IC8HC + 12×405W Viridian)</div>
+    <div><b>6kW</b> export limit</div>
+    <div><b>Sunamp 300e</b> thermal store</div>
+    <div><b>Myenergi Eddi</b> diverter</div>
+  </div>
+
+  <div class="cards" id="hw-summary-cards"></div>
+
+  <div class="subtabs">
+    <button class="sub-btn active" data-sub="overview">13-Day Rolling</button>
+    <button class="sub-btn" data-sub="week">This Week</button>
+  </div>
+
+  <div id="sub-overview" class="subpanel active">
+    <div class="chart-grid">
+      <div class="chart-box"><h3>Daily hot water demand (kWh)</h3><div class="canvas-wrap"><canvas id="chart-demand"></canvas></div></div>
+      <div class="chart-box"><h3>Day (solar) vs night (Octopus) mix</h3><div class="canvas-wrap"><canvas id="chart-mix"></canvas></div></div>
+      <div class="chart-box"><h3>Cost vs solar offset (£)</h3><div class="canvas-wrap"><canvas id="chart-cost"></canvas></div></div>
+      <div class="chart-box"><h3>Night (Octopus) usage %</h3><div class="canvas-wrap"><canvas id="chart-nightpct"></canvas></div></div>
+    </div>
+    <div class="table-wrap"><table id="table-overview"></table></div>
+  </div>
+
+  <div id="sub-week" class="subpanel">
+    <div class="cards" id="week-summary-cards"></div>
+    <div class="chart-grid">
+      <div class="chart-box" style="grid-column:1/-1;"><h3>This week vs 13-day average</h3><div class="canvas-wrap"><canvas id="chart-weekcompare"></canvas></div></div>
+    </div>
+    <div class="table-wrap"><table id="table-week"></table></div>
+  </div>
+
+  <h2 class="section">Key insights</h2>
+  <div class="insights" id="insights-grid"></div>
+
+  <div class="foot">
+    Source: Rose Cottage hot-water day/night ledger (Homey → eddi meter, Octopus overnight rate 6.9p/kWh). Regenerated automatically each morning by a scheduled Decarbonarma reporting task.<br>
+    <a href="https://www.buymeacoffee.com/jackandthebear" target="_blank" rel="noopener" style="color:var(--green);">☕ Support Decarbonarma</a>
+  </div>
+</div>
+
+<script>
+// ---------- Static daily snapshot: Rose Cottage hot-water ledger ----------
+// Regenerated each morning by the daily-rose-cottage-energy-report scheduled task.
+const LEDGER_GENERATED_AT = "2026-07-10T07:00:00Z";
+const LEDGER_ROWS = [
+  {date:"2026-06-26", day_solar_kwh:5.795, night_octopus_kwh:0.585, total_kwh:6.38, octopus_pct:9.2,  octopus_cost_gbp:0.04, solar_offset_gbp:1.76},
+  {date:"2026-06-27", day_solar_kwh:3.01,  night_octopus_kwh:0,     total_kwh:3.01, octopus_pct:0.0,  octopus_cost_gbp:0,    solar_offset_gbp:0.91},
+  {date:"2026-06-28", day_solar_kwh:6.65,  night_octopus_kwh:0,     total_kwh:6.65, octopus_pct:0.0,  octopus_cost_gbp:0,    solar_offset_gbp:2.02},
+  {date:"2026-06-29", day_solar_kwh:3.18,  night_octopus_kwh:0,     total_kwh:3.18, octopus_pct:0.0,  octopus_cost_gbp:0,    solar_offset_gbp:0.97},
+  {date:"2026-06-30", day_solar_kwh:3.743, night_octopus_kwh:2.247, total_kwh:5.99, octopus_pct:37.5, octopus_cost_gbp:0.16, solar_offset_gbp:1.14},
+  {date:"2026-07-01", day_solar_kwh:5.69,  night_octopus_kwh:0,     total_kwh:5.69, octopus_pct:0.0,  octopus_cost_gbp:0,    solar_offset_gbp:1.73},
+  {date:"2026-07-02", day_solar_kwh:2.98,  night_octopus_kwh:0,     total_kwh:2.98, octopus_pct:0.0,  octopus_cost_gbp:0,    solar_offset_gbp:0.91},
+  {date:"2026-07-03", day_solar_kwh:7.317, night_octopus_kwh:0.363, total_kwh:7.68, octopus_pct:4.7,  octopus_cost_gbp:0.03, solar_offset_gbp:2.22},
+  {date:"2026-07-04", day_solar_kwh:4.797, night_octopus_kwh:1.193, total_kwh:5.99, octopus_pct:19.9, octopus_cost_gbp:0.08, solar_offset_gbp:1.46},
+  {date:"2026-07-05", day_solar_kwh:2.494, night_octopus_kwh:0.446, total_kwh:2.94, octopus_pct:15.2, octopus_cost_gbp:0.03, solar_offset_gbp:0.76},
+  {date:"2026-07-06", day_solar_kwh:2.86,  night_octopus_kwh:0,     total_kwh:2.86, octopus_pct:0.0,  octopus_cost_gbp:0,    solar_offset_gbp:0.87},
+  {date:"2026-07-07", day_solar_kwh:2.47,  night_octopus_kwh:0,     total_kwh:2.47, octopus_pct:0.0,  octopus_cost_gbp:0,    solar_offset_gbp:0.75},
+  {date:"2026-07-08", day_solar_kwh:8.491, night_octopus_kwh:0.319, total_kwh:8.81, octopus_pct:3.6,  octopus_cost_gbp:0.02, solar_offset_gbp:2.58},
+];
+
+let charts = {};
+
+document.querySelectorAll('.sub-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.subpanel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('sub-' + btn.dataset.sub).classList.add('active');
+  });
+});
+
+function fmt(n, d=2) { return (Math.round(n * Math.pow(10,d)) / Math.pow(10,d)).toFixed(d); }
+function shortDate(d) {
+  const dt = new Date(d + 'T00:00:00');
+  return dt.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+}
+function longDate(iso) {
+  const dt = new Date(iso);
+  return dt.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+}
+function isoWeekRange(dateStr) {
+  const dt = new Date(dateStr + 'T00:00:00');
+  const day = dt.getDay();
+  const diffToMon = (day === 0 ? -6 : 1 - day);
+  const monday = new Date(dt); monday.setDate(dt.getDate() + diffToMon);
+  const sunday = new Date(monday); sunday.setDate(monday.getDate() + 6);
+  return { start: monday, end: sunday };
+}
+
+function buildCards(container, rows) {
+  const total = rows.reduce((s,r)=>s+r.total_kwh,0);
+  const octTotal = rows.reduce((s,r)=>s+r.night_octopus_kwh,0);
+  const cost = rows.reduce((s,r)=>s+r.octopus_cost_gbp,0);
+  const offset = rows.reduce((s,r)=>s+r.solar_offset_gbp,0);
+  const octPct = total > 0 ? (octTotal/total*100) : 0;
+  container.innerHTML = `
+    <div class="card"><div class="label">Total demand</div><div class="value">${fmt(total,1)} kWh</div><div class="foot">${rows.length} days</div></div>
+    <div class="card"><div class="label">Octopus (night) share</div><div class="value amber">${fmt(octPct,1)}%</div><div class="foot">${fmt(octTotal,1)} kWh from grid</div></div>
+    <div class="card"><div class="label">Octopus cost</div><div class="value">£${fmt(cost,2)}</div><div class="foot">at 6.9p/kWh overnight</div></div>
+    <div class="card"><div class="label">Solar offset value</div><div class="value">£${fmt(offset,2)}</div><div class="foot">demand met free by solar</div></div>
+  `;
+}
+
+function buildTable(tableEl, rows) {
+  tableEl.innerHTML = `
+    <thead><tr>
+      <th>Date</th><th>Solar (day)</th><th>Octopus (night)</th><th>Total kWh</th>
+      <th>Octopus %</th><th>Octopus cost</th><th>Solar offset</th>
+    </tr></thead>
+    <tbody>
+      ${rows.map(r => `
+        <tr>
+          <td>${shortDate(r.date)}</td>
+          <td>${fmt(r.day_solar_kwh,2)}</td>
+          <td>${fmt(r.night_octopus_kwh,2)}</td>
+          <td>${fmt(r.total_kwh,2)}</td>
+          <td>${fmt(r.octopus_pct,1)}%</td>
+          <td>£${fmt(r.octopus_cost_gbp,2)}</td>
+          <td>£${fmt(r.solar_offset_gbp,2)}</td>
+        </tr>
+      `).join('')}
+    </tbody>
+  `;
+}
+
+function destroyChart(key) { if (charts[key]) { charts[key].destroy(); delete charts[key]; } }
+
+function buildOverviewCharts(rows) {
+  const labels = rows.map(r => shortDate(r.date));
+
+  destroyChart('demand');
+  charts.demand = new Chart(document.getElementById('chart-demand'), {
+    type: 'bar',
+    data: { labels, datasets: [
+      { label: 'Solar (day)', data: rows.map(r=>r.day_solar_kwh), backgroundColor: '#2d8a4a' },
+      { label: 'Octopus (night)', data: rows.map(r=>r.night_octopus_kwh), backgroundColor: '#b8860b' },
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true, title: { display:true, text:'kWh' } } } }
+  });
+
+  destroyChart('mix');
+  charts.mix = new Chart(document.getElementById('chart-mix'), {
+    type: 'bar',
+    data: { labels, datasets: [
+      { label: 'Solar %', data: rows.map(r => r.total_kwh>0 ? 100*(r.day_solar_kwh/r.total_kwh) : 0), backgroundColor: '#2d8a4a' },
+      { label: 'Octopus %', data: rows.map(r => r.octopus_pct), backgroundColor: '#b8860b' },
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true, max: 100, title: { display:true, text:'%' } } } }
+  });
+
+  destroyChart('cost');
+  charts.cost = new Chart(document.getElementById('chart-cost'), {
+    type: 'bar',
+    data: { labels, datasets: [
+      { label: 'Octopus cost (£)', data: rows.map(r=>r.octopus_cost_gbp), backgroundColor: '#c0392b' },
+      { label: 'Solar offset value (£)', data: rows.map(r=>r.solar_offset_gbp), backgroundColor: '#2d8a4a' },
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { title: { display:true, text:'£' } } } }
+  });
+
+  destroyChart('nightpct');
+  charts.nightpct = new Chart(document.getElementById('chart-nightpct'), {
+    type: 'line',
+    data: { labels, datasets: [
+      { label: 'Octopus (night) %', data: rows.map(r=>r.octopus_pct), borderColor: '#b8860b', backgroundColor: 'rgba(184,134,11,0.15)', fill: true, tension: 0.3 },
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { min: 0, max: 100, title: { display:true, text:'%' } } } }
+  });
+}
+
+function buildWeekCompareChart(weekRows, allRows) {
+  const avgAll = allRows.reduce((s,r)=>s+r.total_kwh,0) / allRows.length;
+  const avgWeek = weekRows.length ? weekRows.reduce((s,r)=>s+r.total_kwh,0)/weekRows.length : 0;
+  const avgAllOctPct = allRows.reduce((s,r)=>s+r.octopus_pct,0) / allRows.length;
+  const avgWeekOctPct = weekRows.length ? weekRows.reduce((s,r)=>s+r.octopus_pct,0)/weekRows.length : 0;
+
+  destroyChart('weekcompare');
+  charts.weekcompare = new Chart(document.getElementById('chart-weekcompare'), {
+    type: 'bar',
+    data: {
+      labels: ['Avg daily demand (kWh)', 'Avg Octopus share (%)'],
+      datasets: [
+        { label: 'This week', data: [avgWeek, avgWeekOctPct], backgroundColor: '#1A3D2B' },
+        { label: '13-day average', data: [avgAll, avgAllOctPct], backgroundColor: '#C9A96E' },
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+  });
+}
+
+function buildInsights(rows) {
+  const total = rows.reduce((s,r)=>s+r.total_kwh,0);
+  const octTotal = rows.reduce((s,r)=>s+r.night_octopus_kwh,0);
+  const octPct = total>0 ? (octTotal/total*100) : 0;
+  const offset = rows.reduce((s,r)=>s+r.solar_offset_gbp,0);
+  const zeroOctDays = rows.filter(r => r.night_octopus_kwh === 0).length;
+  const best = rows.slice().sort((a,b)=>a.octopus_pct-b.octopus_pct)[0];
+  const worst = rows.slice().sort((a,b)=>b.octopus_pct-a.octopus_pct)[0];
+
+  const insights = [
+    { t: '6am thermal readiness', d: `Sunamp reached morning temperature on ${zeroOctDays} of the last ${rows.length} days without any overnight Octopus top-up — solar carry-over alone covered demand.` },
+    { t: 'Solar excess management', d: `Across the last ${rows.length} days, solar covered ${fmt(100-octPct,1)}% of total hot water demand, offsetting an estimated £${fmt(offset,2)} of grid-sourced heating cost.` },
+    { t: 'Sunamp heat retention', d: `Lowest overnight top-up day: ${shortDate(best.date)} (${fmt(best.octopus_pct,1)}% Octopus). Highest: ${shortDate(worst.date)} (${fmt(worst.octopus_pct,1)}% Octopus) — likely a lower-solar or higher-demand day.` },
+    { t: 'Export / diverter optimisation', d: `With a 6kW export limit and 16.08 kWp array, the Eddi diverting surplus into the Sunamp before export remains the main lever keeping Octopus overnight usage down (currently averaging ${fmt(octPct,1)}%).` },
+  ];
+  document.getElementById('insights-grid').innerHTML = insights.map(i => `
+    <div class="insight"><div class="t">${i.t}</div><div class="d">${i.d}</div></div>
+  `).join('');
+}
+
+(function init(){
+  const rows = LEDGER_ROWS;
+  const latestDate = rows[rows.length-1].date;
+  document.getElementById('ledgerThrough').textContent = shortDate(latestDate);
+  document.getElementById('genDate').textContent = longDate(LEDGER_GENERATED_AT);
+
+  buildCards(document.getElementById('hw-summary-cards'), rows);
+  buildTable(document.getElementById('table-overview'), rows);
+  buildOverviewCharts(rows);
+
+  const { start, end } = isoWeekRange(latestDate);
+  const weekRows = rows.filter(r => {
+    const d = new Date(r.date + 'T00:00:00');
+    return d >= start && d <= end;
+  });
+  buildCards(document.getElementById('week-summary-cards'), weekRows.length ? weekRows : rows);
+  buildTable(document.getElementById('table-week'), weekRows.length ? weekRows : rows);
+  buildWeekCompareChart(weekRows, rows);
+
+  buildInsights(rows);
+})();
+</script>
+</body>
+</html>
