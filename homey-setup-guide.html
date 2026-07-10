@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Homey Setup Guide: Automate Your Solar, Battery & Heat Pump in the UK | Decarbonarma</title>
+<meta name="description" content="A step-by-step guide to setting up Homey home automation with UK solar, battery, heat pump and EV charger systems, from first pairing to smart energy flows.">
+<link rel="canonical" href="https://decarbonarma.com/homey-setup-guide.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Decarbonarma">
+<meta property="og:title" content="Homey Setup Guide: Automate Your Solar, Battery & Heat Pump in the UK | Decarbonarma">
+<meta property="og:description" content="A step-by-step guide to setting up Homey home automation with UK solar, battery, heat pump and EV charger systems, from first pairing to smart energy flows.">
+<meta property="og:url" content="https://decarbonarma.com/homey-setup-guide.html">
+<meta property="og:image" content="https://decarbonarma.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Homey Setup Guide: Automate Your Solar, Battery & Heat Pump in the UK | Decarbonarma">
+<meta name="twitter:description" content="A step-by-step guide to setting up Homey home automation with UK solar, battery, heat pump and EV charger systems, from first pairing to smart energy flows.">
+<meta name="twitter:image" content="https://decarbonarma.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Homey Setup Guide: Automate Your Solar, Battery & Heat Pump in the UK | Decarbonarma",
+  "description": "A step-by-step guide to setting up Homey home automation with UK solar, battery, heat pump and EV charger systems, from first pairing to smart energy flows.",
+  "url": "https://decarbonarma.com/homey-setup-guide.html",
+  "image": "https://decarbonarma.com/og-image.png",
+  "author": {"@type": "Organization", "name": "Decarbonarma"},
+  "publisher": {
+    "@type": "Organization",
+    "name": "Decarbonarma",
+    "logo": {"@type": "ImageObject", "url": "https://decarbonarma.com/logo.png"}
+  },
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://decarbonarma.com/homey-setup-guide.html"}
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-50: #f0faf3; --green-100: #dcf1e3; --green-200: #aee3c1;
+    --green-400: #34c759; --green-600: #1f8a4c; --green-800: #14622f; --green-900: #0b3a1c;
+    --stone-50: #f5f5f7; --stone-100: #ececf0; --stone-200: #d2d2d7;
+    --stone-600: #6e6e73; --stone-800: #1d1d1f; --white: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: var(--white); color: var(--stone-800);
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.011em;
+  }
+  a { color: inherit; }
+  .site-header { padding:14px 32px; border-bottom:1px solid var(--stone-100); display:flex; align-items:center; justify-content:space-between; }
+  .site-header img { height:28px; display:block; }
+  .site-header .back-link { font-size:13px; color:var(--stone-600); text-decoration:none; font-weight:500; }
+  .site-header .back-link:hover { color:var(--green-600); }
+  .site-footer { padding:32px; border-top:1px solid var(--stone-100); margin-top:40px; text-align:center; font-size:12px; color:var(--stone-600); }
+
+  .hg-hero{background:linear-gradient(150deg,#0e3520 0%,#1a5530 45%,#2d6a4a 100%);padding:72px 80px 60px;text-align:center;position:relative;overflow:hidden;}
+  .hg-hero h1{font-family:'DM Serif Display',serif;font-size:clamp(34px,4vw,56px);color:#fff;line-height:1.1;letter-spacing:-0.5px;margin-bottom:16px;}
+  .hg-hero h1 em{font-style:italic;color:#a8e2b7;}
+  .hg-hero p{font-size:17px;color:rgba(255,255,255,0.75);max-width:600px;margin:0 auto 12px;line-height:1.7;}
+  .hg-wrap{max-width:860px;margin:0 auto;padding:64px 24px 80px;}
+
+  /* PROGRESS STEPS */
+  .hg-steps{display:flex;gap:0;margin-bottom:56px;position:relative;}
+  .hg-steps::before{content:'';position:absolute;top:22px;left:5%;right:5%;height:2px;background:var(--green-100);z-index:0;}
+  .hg-step-dot{flex:1;text-align:center;position:relative;z-index:1;cursor:pointer;}
+  .hg-step-dot .dot{width:44px;height:44px;border-radius:50%;background:var(--white);border:2px solid var(--green-200);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:18px;transition:all 0.25s;}
+  .hg-step-dot.active .dot{background:var(--green-600);border-color:var(--green-600);color:#fff;}
+  .hg-step-dot.done .dot{background:var(--green-100);border-color:var(--green-400);}
+  .hg-step-dot span{font-size:12px;color:var(--stone-600);font-weight:500;display:block;}
+  .hg-step-dot.active span{color:var(--green-800);font-weight:600;}
+
+  /* SECTIONS */
+  .hg-section{display:none;}
+  .hg-section.active{display:block;animation:fadeUp 0.3s ease;}
+
+  .hg-card{background:var(--white);border:1px solid var(--green-100);border-radius:18px;padding:36px;margin-bottom:24px;}
+  .hg-card h2{font-family:'DM Serif Display',serif;font-size:28px;color:var(--green-900);margin-bottom:8px;}
+  .hg-card .hg-intro{font-size:16px;color:var(--stone-600);line-height:1.7;margin-bottom:28px;}
+
+  /* ALERT BOX */
+  .hg-alert{border-radius:12px;padding:18px 22px;margin-bottom:24px;display:flex;gap:14px;align-items:flex-start;}
+  .hg-alert.warn{background:#fff8e6;border:1px solid #e6a817;}
+  .hg-alert.info{background:var(--green-50);border:1px solid var(--green-200);}
+  .hg-alert.danger{background:#fff0f0;border:1px solid #dc3545;}
+  .hg-alert .ai{font-size:22px;flex-shrink:0;margin-top:2px;}
+  .hg-alert p{font-size:14px;line-height:1.7;margin:0;}
+  .hg-alert.warn p{color:#6b4400;}
+  .hg-alert.info p{color:var(--green-800);}
+  .hg-alert.danger p{color:#6b1a1a;}
+  .hg-alert strong{font-weight:600;}
+
+  /* STEP LIST */
+  .hg-steps-list{display:flex;flex-direction:column;gap:20px;margin:24px 0;}
+  .hg-step-item{display:flex;gap:18px;align-items:flex-start;}
+  .hg-step-num{width:36px;height:36px;border-radius:50%;background:var(--green-600);color:#fff;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+  .hg-step-body h4{font-size:15px;font-weight:600;color:var(--green-900);margin-bottom:4px;}
+  .hg-step-body p{font-size:14px;color:var(--stone-600);line-height:1.65;}
+  .hg-step-body code{background:var(--green-50);border:1px solid var(--green-100);border-radius:6px;padding:2px 8px;font-size:13px;color:var(--green-800);font-family:monospace;}
+
+  /* PRODUCT CARDS */
+  .hg-products{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:24px 0;}
+  .hg-product{background:var(--green-50);border:1.5px solid var(--green-200);border-radius:14px;padding:22px;}
+  .hg-product .pi{font-size:32px;margin-bottom:10px;display:block;}
+  .hg-product h4{font-size:15px;font-weight:600;color:var(--green-900);margin-bottom:4px;}
+  .hg-product p{font-size:13px;color:var(--stone-600);line-height:1.6;}
+  .hg-product .price{font-size:14px;font-weight:600;color:var(--green-600);margin-top:10px;}
+  .hg-product .rec{display:inline-block;background:var(--green-600);color:#fff;font-size:11px;font-weight:600;padding:3px 10px;border-radius:100px;margin-bottom:8px;}
+
+  /* APP GRID */
+  .hg-apps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0;}
+  .hg-app{background:var(--white);border:1px solid var(--green-100);border-radius:12px;padding:18px;text-align:center;}
+  .hg-app .ai2{font-size:30px;margin-bottom:8px;display:block;}
+  .hg-app h5{font-size:13px;font-weight:600;color:var(--green-900);margin-bottom:4px;}
+  .hg-app p{font-size:12px;color:var(--stone-600);line-height:1.5;}
+  .hg-app .tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:100px;margin-top:6px;}
+  .hg-app .tag.official{background:var(--green-100);color:var(--green-800);}
+  .hg-app .tag.community{background:#fff8e6;color:#8a5c00;}
+  .hg-app .tag.recommended{background:var(--green-600);color:#fff;}
+
+  /* FLOW EXAMPLE */
+  .hg-flow{background:var(--green-900);border-radius:14px;padding:24px;margin:24px 0;}
+  .hg-flow h4{font-size:14px;font-weight:600;color:var(--green-200);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:16px;}
+  .hg-flow-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+  .hg-flow-badge{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:8px 14px;font-size:13px;color:#fff;min-width:80px;text-align:center;}
+  .hg-flow-badge.when{border-color:rgba(168,226,183,0.4);background:rgba(45,138,74,0.2);}
+  .hg-flow-badge.and{border-color:rgba(168,196,226,0.4);background:rgba(56,138,221,0.2);}
+  .hg-flow-badge.then{border-color:rgba(250,199,117,0.4);background:rgba(186,117,23,0.2);}
+  .hg-flow-arrow{color:rgba(255,255,255,0.4);font-size:18px;}
+  .hg-flow p{font-size:13px;color:rgba(255,255,255,0.75);margin:0;}
+
+  /* COMPARISON TABLE */
+  .hg-table{width:100%;border-collapse:collapse;margin:24px 0;}
+  .hg-table th{background:var(--green-800);color:#fff;padding:12px 16px;text-align:left;font-size:13px;font-weight:600;}
+  .hg-table td{padding:12px 16px;font-size:13px;color:var(--stone-600);border-bottom:1px solid var(--green-50);}
+  .hg-table tr:hover td{background:var(--green-50);}
+  .hg-table .check{color:var(--green-600);font-weight:600;}
+  .hg-table .cross{color:#dc3545;}
+  .hg-table .warn2{color:#e6a817;}
+
+  /* NAV */
+  .hg-nav{display:flex;gap:14px;margin-top:32px;}
+  .hg-btn-next{flex:1;background:var(--green-600);color:#fff;padding:14px 28px;border-radius:10px;font-size:15px;font-weight:600;border:none;cursor:pointer;transition:background 0.2s;}
+  .hg-btn-next:hover{background:var(--green-800);}
+  .hg-btn-back{background:transparent;color:var(--stone-600);padding:14px 20px;border-radius:10px;font-size:15px;border:1.5px solid var(--stone-200);cursor:pointer;}
+  .hg-btn-back:hover{border-color:var(--stone-600);}
+
+  @media(max-width:660px){
+    .hg-hero{padding:60px 24px 48px;}
+    .hg-products,.hg-apps{grid-template-columns:1fr;}
+    .hg-wrap{padding:40px 16px 60px;}
+    .hg-steps{gap:0;}
+    .hg-step-dot span{font-size:10px;}
+  }
+
+  /* ── CASE STUDIES ── */
+  .cs-hero {
+    background: linear-gradient(160deg, var(--green-900) 0%, var(--green-800) 60%, #0d2818 100%);
+    padding: 80px 80px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cs-hero::before {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(92,186,120,0.1) 0%, transparent 70%);
+    top: -80px; right: -80px;
+    pointer-events: none;
+  }
+  .cs-hero-inner { max-width: 860px; position: relative; }
+  .cs-kicker {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    background: rgba(255,255,255,0.1); color: var(--green-200);
+    padding: 6px 14px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .cs-hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 5vw, 58px);
+    line-height: 1.08;
+    color: #fff;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+  }
+  .cs-hero h1 em { font-style: italic; color: var(--green-200); }
+  .cs-hero p { font-size: 18px; color: rgba(255,255,255,0.7); line-height: 1.7; max-width: 580px; margin-bottom: 32px; }
+
+  .cs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    padding: 60px 80px;
+    max-width: 1400px;
+  }
+  .cs-card {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--green-100);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.25s, box-shadow 0.25s;
+    display: flex; flex-direction: column;
+  }
+  .cs-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(14,53,32,0.12); }
+  .cs-card-top {
+    padding: 24px 24px 0;
+    display: flex; align-items: flex-start; gap: 14px;
+  }
+  .cs-card-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .cs-card-icon.green { background: var(--green-100); }
+  .cs-card-icon.blue { background: #e0f0ff; }
+  .cs-card-icon.amber { background: #fff8e6; }
+  .cs-card-icon.red { background: #fff0f0; }
+  .cs-card-tag {
+    font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--green-600); background: var(--green-100);
+    padding: 3px 10px; border-radius: 100px; margin-bottom: 8px; display: inline-block;
+  }
+  .cs-card-tag.blue { color: #1a5c8b; background: #e0f0ff; }
+  .cs-card-tag.amber { color: #7a4c00; background: #fff3cc; }
+  .cs-card-tag.policy { color: #5c2d1a; background: #ffe8dd; }
+  .cs-card-body { padding: 16px 24px 24px; flex: 1; display: flex; flex-direction: column; }
+  .cs-card-body h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px; font-weight: 400; color: var(--green-900);
+    line-height: 1.25; margin-bottom: 10px;
+  }
+  .cs-card-body p { font-size: 14px; color: var(--stone-600); line-height: 1.6; margin: 0; flex: 1; }
+  .cs-card-footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--green-50);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .cs-card-meta { font-size: 12px; color: var(--stone-600); }
+  .cs-read-btn {
+    font-size: 13px; font-weight: 600; color: var(--green-600);
+    background: var(--green-50); border: none;
+    padding: 7px 14px; border-radius: 8px; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .cs-read-btn:hover { background: var(--green-100); }
+
+  /* ── ARTICLE VIEWER ── */
+  .cs-article-wrap {
+    display: none;
+    min-height: 100vh;
+    padding-top: var(--nav-h);
+  }
+  .cs-article-wrap.visible { display: block; }
+  .cs-article-bar {
+    background: var(--green-900);
+    padding: 12px 48px;
+    display: flex; align-items: center; gap: 16px;
+    position: sticky; top: var(--nav-h); z-index: 50;
+  }
+  .cs-back-btn {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    color: var(--green-200); padding: 7px 16px; border-radius: 8px;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .cs-back-btn:hover { background: rgba(255,255,255,0.2); }
+  .cs-article-title { font-size: 14px; color: rgba(255,255,255,0.6); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cs-article-frame {
+    width: 100%;
+    border: none;
+    display: block;
+    min-height: calc(100vh - 110px);
+  }
+
+
+  .cs-article-panel { min-height: 100vh; }
+  .cs-article-topbar {
+    position: sticky; top: var(--nav-h); z-index: 50;
+    background: var(--green-900);
+    padding: 12px 48px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .cs-article-breadcrumb { font-size: 13px; color: rgba(255,255,255,0.55); flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .cs-article-content { background: var(--stone-50); }
+  .cs-article-content nav,
+  .cs-article-content .site-header,
+  .cs-article-content header.site-header { display: none !important; }
+
+  @media(max-width:860px){
+    .cs-hero { padding: 60px 24px 48px; }
+    .cs-grid { padding: 40px 24px; grid-template-columns: 1fr; }
+    .cs-article-bar { padding: 12px 24px; }
+  }
+
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/"><img src="logo.svg" alt="Decarbonarma"></a>
+  <a href="/" class="back-link">&larr; Back to Decarbonarma</a>
+</header>
+
+<div id="page-homeyguide" class="page">
+
+
+<section class="hg-hero">
+  <div class="page-tag" style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);padding:6px 14px;border-radius:100px;margin-bottom:20px;">📱 Setup Guide</div>
+  <h1>Setting up <em>Homey Pro</em><br>for your green home</h1>
+  <p>The only UK-specific guide to getting Homey Pro working with your battery, solar, smart meter, and Octopus tariff — written for Decarbonarma customers, not developers.</p>
+  <div class="vpp-trust">
+    <span style="font-size:13px;color:rgba(255,255,255,0.6);">🕐 30–60 mins to set up</span>
+    <span style="font-size:13px;color:rgba(255,255,255,0.6);">🇬🇧 UK-specific advice</span>
+    <span style="font-size:13px;color:rgba(255,255,255,0.6);">✅ No coding required</span>
+    <span style="font-size:13px;color:rgba(255,255,255,0.6);">🔋 Battery + solar + EV</span>
+  </div>
+</section>
+
+<div class="hg-wrap">
+
+  <!-- PROGRESS -->
+  <div class="hg-steps">
+    <div class="hg-step-dot active" id="hgdot-1" onclick="hgGo(1)"><div class="dot">🛒</div><span>Choose Hub</span></div>
+    <div class="hg-step-dot" id="hgdot-2" onclick="hgGo(2)"><div class="dot">⚡</div><span>Smart Meter</span></div>
+    <div class="hg-step-dot" id="hgdot-3" onclick="hgGo(3)"><div class="dot">🔋</div><span>Battery App</span></div>
+    <div class="hg-step-dot" id="hgdot-4" onclick="hgGo(4)"><div class="dot">🐙</div><span>Octopus</span></div>
+    <div class="hg-step-dot" id="hgdot-5" onclick="hgGo(5)"><div class="dot">⚡</div><span>Flows</span></div>
+    <div class="hg-step-dot" id="hgdot-6" onclick="hgGo(6)"><div class="dot">🌿</div><span>VPP Ready</span></div>
+  </div>
+
+  <!-- SECTION 1: CHOOSE YOUR HUB -->
+  <div class="hg-section active" id="hgsec-1">
+    <div class="hg-card">
+      <h2>Step 1 — Choose your hub</h2>
+      <p class="hg-intro">Homey Pro is the local smart home hub that sits between your battery, solar, and Octopus tariff — acting as the brain that makes everything talk to each other. There are two current models to choose from.</p>
+
+      <div class="hg-alert info">
+        <div class="ai">💡</div>
+        <p>Both Homey Pro models are officially supported until at least June 2031 and receive identical features and updates. The only difference is RAM (4GB vs 2GB) and the inclusion of Z-Wave, Bluetooth, and Infrared in the larger model.</p>
+      </div>
+
+      <div class="hg-products">
+        <div class="hg-product">
+          <span class="rec">⭐ Recommended</span>
+          <span class="pi">🏠</span>
+          <h4>Homey Pro (2026)</h4>
+          <p>The current flagship. 4GB RAM, quad-core processor, all 8 wireless protocols including Z-Wave and Matter. Handles large battery setups, complex Flows, and multiple battery apps simultaneously without slowing down.</p>
+          <p style="margin-top:8px;font-size:13px;color:var(--stone-600);">Best for: homes with battery + solar + EV + heat pump. Future-proof for VPP participation.</p>
+          <div class="price">£399 — homey.app</div>
+        </div>
+        <div class="hg-product">
+          <span class="pi">📦</span>
+          <h4>Homey Pro Mini</h4>
+          <p>Same core software as the Pro 2026, at £200 less. No Z-Wave, Bluetooth, or Infrared — but has Ethernet built-in. If your battery system uses Wi-Fi or Zigbee only, this is perfectly capable.</p>
+          <p style="margin-top:8px;font-size:13px;color:var(--stone-600);">Best for: simpler setups with one battery brand and no legacy Z-Wave devices.</p>
+          <div class="price">£199 — homey.app</div>
+        </div>
+      </div>
+
+      <h3 style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--green-900);margin-bottom:16px;">What about Home Assistant?</h3>
+      <p style="font-size:15px;color:var(--stone-600);line-height:1.7;margin-bottom:16px;">Home Assistant (HA) on a Raspberry Pi or dedicated hardware is a more powerful but significantly more technical alternative. For users who are comfortable with YAML configuration files and want maximum control, HA with the Predbat plugin is the gold standard for battery optimisation on Octopus tariffs. For everyone else, Homey Pro gives 80% of the capability with a fraction of the setup time.</p>
+
+      <table class="hg-table">
+        <tr><th>Feature</th><th>Homey Pro</th><th>Home Assistant</th></tr>
+        <tr><td>Setup time</td><td class="check">30–60 mins</td><td class="warn2">Several hours to days</td></tr>
+        <tr><td>Technical skill required</td><td class="check">None</td><td class="warn2">Moderate–high</td></tr>
+        <tr><td>Octopus Agile integration</td><td class="warn2">Community app (in development)</td><td class="check">Official integration, mature</td></tr>
+        <tr><td>Predbat battery optimisation</td><td class="cross">Not available</td><td class="check">Full support</td></tr>
+        <tr><td>GivEnergy* support</td><td class="warn2">Community app — see note</td><td class="check">Excellent via local API</td></tr>
+        <tr><td>Tesla Powerwall support</td><td class="check">Official app</td><td class="check">Via Teslemetry/official</td></tr>
+        <tr><td>Huawei LUNA support</td><td class="check">Community app</td><td class="check">Excellent via Modbus</td></tr>
+        <tr><td>VPP webhook support</td><td class="check">Built-in webhook trigger</td><td class="check">Full webhook support</td></tr>
+        <tr><td>Mobile app quality</td><td class="check">Excellent native app</td><td class="warn2">Functional but complex</td></tr>
+      </table>
+
+      <div class="hg-alert warn">
+        <div class="ai">⚠️</div>
+        <p><strong>GivEnergy note:</strong> GivEnergy Ltd entered administration on 9 April 2026 and has ceased trading. Existing GivEnergy systems will continue to work, but manufacturer warranties are now uncertain and software support may be affected. If you have a GivEnergy system, contact your installer. If you are choosing a new battery, we currently recommend Tesla Powerwall 3, Huawei LUNA2000, or SigenStor as alternatives.</p>
+      </div>
+    </div>
+    <div class="hg-nav">
+      <button class="hg-btn-next" onclick="hgGo(2)">Next: Smart Meter Data →</button>
+    </div>
+  </div>
+
+  <!-- SECTION 2: SMART METER -->
+  <div class="hg-section" id="hgsec-2">
+    <div class="hg-card">
+      <h2>Step 2 — Getting your smart meter data into Homey</h2>
+      <p class="hg-intro">This is the most commonly misunderstood step for UK users. Unlike European countries where smart meters have a P1 port, UK SMETS2 meters communicate differently — and the Homey Energy Dongle does not work in the UK.</p>
+
+      <div class="hg-alert danger">
+        <div class="ai">🚫</div>
+        <p><strong>The Homey Energy Dongle does NOT work in the UK.</strong> It uses a P1 port connector (RJ12) which is a European standard. UK SMETS2 smart meters do not have a P1 port — they use a proprietary Zigbee-based Home Area Network (HAN) that requires a licensed Consumer Access Device (CAD). Homey only ships the dongle to mainland European countries.</p>
+      </div>
+
+      <h3 style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--green-900);margin:24px 0 12px;">The UK solution: Hildebrand Glow CAD</h3>
+      <p style="font-size:15px;color:var(--stone-600);line-height:1.7;margin-bottom:20px;">The Hildebrand Glow CAD (Consumer Access Device) is currently the best option for UK homeowners wanting live smart meter data. Hildebrand are a licensed DCC Other User, meaning they can legally access your SMETS2 meter data independently of your energy supplier.</p>
+
+      <div class="hg-products">
+        <div class="hg-product">
+          <span class="rec">✅ UK Recommended</span>
+          <span class="pi">📊</span>
+          <h4>Hildebrand Glow Display + CAD</h4>
+          <p>Connects to your SMETS2 meter via Zigbee, sends live data (10-second electricity, 30-min gas) to Hildebrand's servers, and makes it available via API, MQTT, and the Bright app. Compatible with Home Assistant and Homey.</p>
+          <p style="margin-top:8px;font-size:13px;color:var(--stone-600);">Works with SMETS1 and SMETS2. Octopus Agile customers can see live tariff costs. API included free.</p>
+          <div class="price">~£50 — glowmarkt.com</div>
+        </div>
+        <div class="hg-product">
+          <span class="pi">📡</span>
+          <h4>Glow Zigbee CAD (no display)</h4>
+          <p>Same data access as the display model but without a screen — just data. Lower cost option if you only need the API/MQTT feed for automation and are happy to view data in Homey or Home Assistant instead.</p>
+          <p style="margin-top:8px;font-size:13px;color:var(--stone-600);">Ideal for technical users who want MQTT data flowing straight to Home Assistant.</p>
+          <div class="price">~£35 — glowmarkt.com</div>
+        </div>
+      </div>
+
+      <div class="hg-steps-list">
+        <div class="hg-step-item">
+          <div class="hg-step-num">1</div>
+          <div class="hg-step-body">
+            <h4>Order your Glow CAD</h4>
+            <p>Buy from <strong>glowmarkt.com</strong>. Download the free Bright app and register your account — you'll need these credentials to authorise the CAD to access your meter.</p>
+          </div>
+        </div>
+        <div class="hg-step-item">
+          <div class="hg-step-num">2</div>
+          <div class="hg-step-body">
+            <h4>Register and pair to your meter</h4>
+            <p>When your Glow CAD arrives, plug it in near your meter and follow the Bright app pairing process. Hildebrand will connect it to your specific meter via the DCC network — this can take 24–48 hours to activate.</p>
+          </div>
+        </div>
+        <div class="hg-step-item">
+          <div class="hg-step-num">3</div>
+          <div class="hg-step-body">
+            <h4>Connect to Homey (via Bright app credentials)</h4>
+            <p>Install the <strong>Glow (Hildebrand)</strong> app from the Homey App Store. Sign in with your Bright app email and password. Your electricity consumption, gas usage, and live costs will appear in the Homey Energy tab.</p>
+          </div>
+        </div>
+        <div class="hg-step-item">
+          <div class="hg-step-num">4</div>
+          <div class="hg-step-body">
+            <h4>For Home Assistant users: enable MQTT</h4>
+            <p>In the Glow app settings, enable the local MQTT feed. Point it at your Home Assistant MQTT broker IP. You'll get 10-second electricity readings as <code>sensor.glow_electricity_power</code> — ideal for Predbat and real-time Agile automation.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hg-alert info">
+        <div class="ai">💡</div>
+        <p><strong>Do you already have an Octopus account?</strong> If you're on Octopus, you can also pull your tariff and consumption data via the <strong>Octopus Energy</strong> integration (Home Assistant) or the community Octopus app (Homey) — no physical device needed. This is ideal for viewing half-hourly usage but doesn't give the live 10-second power readings that the Glow CAD provides.</p>
+      </div>
+    </div>
+    <div class="hg-nav">
+      <button class="hg-btn-back" onclick="hgGo(1)">← Back</button>
+      <button class="hg-btn-next" onclick="hgGo(3)">Next: Battery App →</button>
+    </div>
+  </div>
+
+  <!-- SECTION 3: BATTERY APP -->
+  <div class="hg-section" id="hgsec-3">
+    <div class="hg-card">
+      <h2>Step 3 — Install your battery app</h2>
+      <p class="hg-intro">Each battery brand has its own Homey app. Most connect directly over your local Wi-Fi network — no cloud dependency needed for control, which is important for VPP dispatch reliability.</p>
+
+      <div class="hg-apps">
+        <div class="hg-app">
+          <span class="ai2">⚡</span>
+          <h5>Tesla Car & Energy</h5>
+          <p>Controls Powerwall 2 & 3 plus Tesla vehicles. Uses Tesla Fleet API. Requires a Tesla developer account (free). Charge/discharge modes, reserve %, SoC monitoring.</p>
+          <span class="tag official">Official App</span>
+        </div>
+        <div class="hg-app">
+          <span class="ai2">☀️</span>
+          <h5>Huawei Solar</h5>
+          <p>Controls Huawei SUN2000 inverter and LUNA2000 battery. Local Modbus connection — works without internet. Working mode, charge/discharge power, SoC.</p>
+          <span class="tag community">Community App</span>
+        </div>
+        <div class="hg-app">
+          <span class="ai2">🌿</span>
+          <h5>SolarEdge</h5>
+          <p>Monitoring and some control via SolarEdge cloud API. Generation, consumption, battery SoC. Note: control capability more limited than local-API brands.</p>
+          <span class="tag community">Community App</span>
+        </div>
+        <div class="hg-app">
+          <span class="ai2">🔋</span>
+          <h5>Fox ESS</h5>
+          <p>Full control via FoxCloud API. Charge/discharge schedules, working mode, SoC. Good integration, active development community.</p>
+          <span class="tag community">Community App</span>
+        </div>
+        <div class="hg-app">
+          <span class="ai2">⚡</span>
+          <h5>Sigenergy / SigenStor</h5>
+          <p>Local Modbus control via Home Assistant. Full charge/discharge capability. Strong UK installer network in 2026. Recommended GivEnergy alternative.</p>
+          <span class="tag recommended">HA Recommended</span>
+        </div>
+        <div class="hg-app">
+          <span class="ai2">🌱</span>
+          <h5>GivEnergy</h5>
+          <p>Community app using local network connection. Note: GivEnergy Ltd entered administration April 2026. Existing systems work but see Step 1 warning before choosing this brand.</p>
+          <span class="tag community">⚠️ See Warning</span>
+        </div>
+      </div>
+
+      <h3 style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--green-900);margin:28px 0 12px;">Installing an app on Homey Pro</h3>
+      <div class="hg-steps-list">
+        <div class="hg-step-item">
+          <div class="hg-step-num">1</div>
+          <div class="hg-step-body">
+            <h4>Open the Homey app → App Store</h4>
+            <p>Search for your battery brand name. Both official and community apps appear here. Tap <strong>Install</strong> and wait for it to download to your hub (~30 seconds).</p>
+          </div>
+        </div>
+        <div class="hg-step-item">
+          <div class="hg-step-num">2</div>
+          <div class="hg-step-body">
+            <h4>Add your battery as a device</h4>
+            <p>Go to <strong>Devices → + → Add Device</strong>. Select your battery brand. You'll be asked for either your cloud account credentials (e.g. Tesla, FoxESS) or your inverter's local IP address (e.g. Huawei, SigenStor).</p>
+          </div>
+        </div>
+        <div class="hg-step-item">
+          <div class="hg-step-num">3</div>
+          <div class="hg-step-body">
+            <h4>Find your inverter's local IP address</h4>
+            <p>For local network connections, log into your home router and look for a device with your inverter's brand name. Assign it a <strong>static IP address</strong> so it doesn't change. Common addresses: <code>192.168.1.xxx</code>. Your router admin page is usually at <code>192.168.1.1</code>.</p>
+          </div>
+        </div>
+        <div class="hg-step-item">
+          <div class="hg-step-num">4</div>
+          <div class="hg-step-body">
+            <h4>Verify in the Energy tab</h4>
+            <p>Once added, open <strong>Settings → Energy</strong> in Homey. Your battery, solar generation, and consumption should all appear as live devices. This confirms everything is talking correctly before you build any Flows.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hg-alert info">
+        <div class="ai">💡</div>
+        <p><strong>Tesla Powerwall setup note:</strong> Tesla's Fleet API requires a free developer account at <strong>developer.tesla.com</strong>. You'll generate an API key and link it to your Homey app. This takes about 10 minutes and only needs doing once. The Powerwall then appears in Homey with full SoC, charge/discharge mode, and reserve percentage control.</p>
+      </div>
+    </div>
+    <div class="hg-nav">
+      <button class="hg-btn-back" onclick="hgGo(2)">← Back</button>
+      <button class="hg-btn-next" onclick="hgGo(4)">Next: Octopus Integration →</button>
+    </div>
+  </div>
+
+  <!-- SECTION 4: OCTOPUS -->
+  <div class="hg-section" id="hgsec-4">
+    <div class="hg-card">
+      <h2>Step 4 — Connecting Octopus Energy</h2>
+      <p class="hg-intro">The Octopus Energy integration brings your real-time tariff prices, consumption data, and Intelligent dispatch slots into Homey — enabling price-responsive automations. For UK users this is the most valuable integration you can add.</p>
+
+      <div class="hg-alert warn">
+        <div class="ai">⚠️</div>
+        <p><strong>UK status (May 2026):</strong> The official Octopus Energy Homey app is a community development — it is functional but not as mature as the Home Assistant integration. If you need the most robust Octopus + battery automation (particularly for Agile half-hourly price response), Home Assistant with the official Octopus Energy integration and Predbat is currently the stronger choice. That said, Homey + Octopus works well for simpler automations like scheduled EV charging and heat pump pre-heating.</p>
+      </div>
+
+      <h3 style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--green-900);margin:24px 0 12px;">Setting up the Octopus app on Homey</h3>
+      <div class="hg-steps-list">
+        <div class="hg-step-item">
+          <div class="hg-step-num">1</div>
+          <div class="hg-step-body">
+            <h4>Install the Octopus Energy app</h4>
+            <p>Search the Homey App Store for <strong>"Octopus Energy Integration"</strong>. This is a community app — install it and open its settings page within Homey.</p>
+          </div>
+        </div>
+        <div class="hg-step-item">
+          <div class="hg-step-num">2</div>
+          <div class="hg-step-body">
+            <h4>Get your Octopus API key</h4>
+            <p>Log into your Octopus account at <strong>octopus.energy/dashboard</strong>. Go to <strong>Account → Personal Details → API Access</strong>. Generate a personal API key. This is what Homey uses to read your tariff data.</p>
+          </div>
+        </div>
+        <div class="hg-step-item">
+          <div class="hg-step-num">3</div>
+          <div class="hg-step-body">
+            <h4>Enter your MPAN and API key</h4>
+            <p>In the Homey Octopus app settings, enter your <strong>electricity MPAN</strong> (found on any Octopus bill or in your account) and your API key. This links Homey to your specific meter and tariff data.</p>
+          </div>
+        </div>
+        <div class="hg-step-item">
+          <div class="hg-step-num">4</div>
+          <div class="hg-step-body">
+            <h4>Verify tariff data is flowing</h4>
+            <p>After a few minutes, you should see your current Agile or Go rate appearing as a device in Homey. You can use this as a trigger in Flows — e.g. <code>When electricity price drops below 10p → Start EV charging</code>.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--green-900);margin:28px 0 12px;">For Home Assistant users: Predbat + Octopus</h3>
+      <p style="font-size:15px;color:var(--stone-600);line-height:1.7;margin-bottom:16px;">If you're using Home Assistant, the official Octopus Energy integration is the most capable route. Combined with <strong>Predbat</strong> (free, open-source battery optimisation), it creates a fully automated system that:</p>
+      <div class="hg-steps-list">
+        <div class="hg-step-item">
+          <div class="hg-step-num">✓</div>
+          <div class="hg-step-body">
+            <h4>Reads your Octopus Agile half-hourly prices automatically</h4>
+            <p>Tomorrow's prices download from Octopus every evening after 4pm — Predbat plans your battery charging schedule overnight to use the cheapest slots.</p>
+          </div>
+        </div>
+        <div class="hg-step-item">
+          <div class="hg-step-num">✓</div>
+          <div class="hg-step-body">
+            <h4>Integrates Intelligent Octopus Go dispatch slots</h4>
+            <p>If you're on Intelligent Go, Predbat reads Octopus's dispatch schedule and coordinates your EV charging and home battery to avoid conflict — so both charge at 7p/kWh overnight without fighting each other.</p>
+          </div>
+        </div>
+        <div class="hg-step-item">
+          <div class="hg-step-num">✓</div>
+          <div class="hg-step-body">
+            <h4>Connects to Solcast for solar forecasts</h4>
+            <p>Free Solcast API provides 48-hour solar generation forecasts. Predbat uses this to decide whether to charge the battery from the grid tonight, or wait for tomorrow's solar generation instead.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hg-alert info">
+        <div class="ai">💡</div>
+        <p><strong>Not on Octopus yet?</strong> Use our <a href="/ai-tariff-finder.html" style="color:var(--green-600);font-weight:600;">AI Tariff Finder</a> to find the right Octopus tariff for your home setup. Switching takes about 3 weeks and you'll both earn £50 credit via our referral link.</p>
+      </div>
+    </div>
+    <div class="hg-nav">
+      <button class="hg-btn-back" onclick="hgGo(3)">← Back</button>
+      <button class="hg-btn-next" onclick="hgGo(5)">Next: Building Flows →</button>
+    </div>
+  </div>
+
+  <!-- SECTION 5: FLOWS -->
+  <div class="hg-section" id="hgsec-5">
+    <div class="hg-card">
+      <h2>Step 5 — Building your first Flows</h2>
+      <p class="hg-intro">Homey Flows are the automations that make everything work together. Each Flow has a <strong>When</strong> (trigger), optionally an <strong>And</strong> (condition), and a <strong>Then</strong> (action). Here are the four most valuable Flows for a UK green home.</p>
+
+      <div class="hg-flow">
+        <h4>Flow 1 — Charge battery from cheap overnight electricity</h4>
+        <div class="hg-flow-row">
+          <div class="hg-flow-badge when">WHEN</div>
+          <div class="hg-flow-arrow">→</div>
+          <div class="hg-flow-p" style="flex:1"><p>Time is 00:30 (start of Octopus Go / Intelligent cheap window)</p></div>
+        </div>
+        <div class="hg-flow-row">
+          <div class="hg-flow-badge and">AND</div>
+          <div class="hg-flow-arrow">→</div>
+          <div class="hg-flow-p" style="flex:1"><p>Battery SoC is less than 80%</p></div>
+        </div>
+        <div class="hg-flow-row">
+          <div class="hg-flow-badge then">THEN</div>
+          <div class="hg-flow-arrow">→</div>
+          <div class="hg-flow-p" style="flex:1"><p>Set battery to Charge from Grid mode at maximum rate</p></div>
+        </div>
+      </div>
+
+      <div class="hg-flow">
+        <h4>Flow 2 — Switch to solar-priority mode at sunrise</h4>
+        <div class="hg-flow-row">
+          <div class="hg-flow-badge when">WHEN</div>
+          <div class="hg-flow-arrow">→</div>
+          <div class="hg-flow-p" style="flex:1"><p>Time is 06:00 (or use sunrise trigger)</p></div>
+        </div>
+        <div class="hg-flow-row">
+          <div class="hg-flow-badge then">THEN</div>
+          <div class="hg-flow-arrow">→</div>
+          <div class="hg-flow-p" style="flex:1"><p>Set battery to Self-consumption / Eco mode (store solar, avoid grid import)</p></div>
+        </div>
+      </div>
+
+      <div class="hg-flow">
+        <h4>Flow 3 — Protect battery during peak hours (Octopus Agile)</h4>
+        <div class="hg-flow-row">
+          <div class="hg-flow-badge when">WHEN</div>
+          <div class="hg-flow-arrow">→</div>
+          <div class="hg-flow-p" style="flex:1"><p>Octopus electricity price rises above 30p/kWh</p></div>
+        </div>
+        <div class="hg-flow-row">
+          <div class="hg-flow-badge and">AND</div>
+          <div class="hg-flow-arrow">→</div>
+          <div class="hg-flow-p" style="flex:1"><p>Battery SoC is above 30% (leave reserve for evening)</p></div>
+        </div>
+        <div class="hg-flow-row">
+          <div class="hg-flow-badge then">THEN</div>
+          <div class="hg-flow-arrow">→</div>
+          <div class="hg-flow-p" style="flex:1"><p>Set battery to Discharge mode — power the home from battery, avoid buying expensive grid electricity</p></div>
+        </div>
+      </div>
+
+      <div class="hg-flow">
+        <h4>Flow 4 — EV charging on cheap overnight rate</h4>
+        <div class="hg-flow-row">
+          <div class="hg-flow-badge when">WHEN</div>
+          <div class="hg-flow-arrow">→</div>
+          <div class="hg-flow-p" style="flex:1"><p>EV is plugged in AND time is between 00:30 and 04:30</p></div>
+        </div>
+        <div class="hg-flow-row">
+          <div class="hg-flow-badge then">THEN</div>
+          <div class="hg-flow-arrow">→</div>
+          <div class="hg-flow-p" style="flex:1"><p>Enable EV charger (Zappi / Ohme / Pod Point) at full rate — charges during cheapest overnight window</p></div>
+        </div>
+      </div>
+
+      <div class="hg-alert info">
+        <div class="ai">💡</div>
+        <p><strong>Advanced Flows:</strong> Homey Pro's Advanced Flow editor (available in the web app at <strong>my.homey.app</strong>) lets you create complex multi-branch automations with if/else logic, delays, and parallel actions. It's the right place to build more sophisticated energy management once you've got the basics working.</p>
+      </div>
+    </div>
+    <div class="hg-nav">
+      <button class="hg-btn-back" onclick="hgGo(4)">← Back</button>
+      <button class="hg-btn-next" onclick="hgGo(6)">Next: VPP Ready →</button>
+    </div>
+  </div>
+
+  <!-- SECTION 6: VPP READY -->
+  <div class="hg-section" id="hgsec-6">
+    <div class="hg-card">
+      <h2>Step 6 — Get VPP-ready</h2>
+      <p class="hg-intro">Once your battery, smart meter data, and Octopus tariff are all working in Homey, you're ready to join the Decarbonarma Virtual Power Plant — earning passive income by allowing your battery to support the grid during peak demand events.</p>
+
+      <div class="hg-steps-list">
+        <div class="hg-step-item">
+          <div class="hg-step-num">1</div>
+          <div class="hg-step-body">
+            <h4>Set up your VPP webhook in Homey</h4>
+            <p>Go to <strong>Settings → API Keys</strong> in the Homey web app and create a new API key with device control permissions. You'll provide this to Decarbonarma during VPP sign-up. Also note your Homey's external webhook URL: <code>https://webhook.homey.app/[your-homey-id]/vpp-dispatch</code></p>
+          </div>
+        </div>
+        <div class="hg-step-item">
+          <div class="hg-step-num">2</div>
+          <div class="hg-step-body">
+            <h4>Create the VPP dispatch Flow</h4>
+            <p>In Homey Flows, create a new Flow with <strong>When: Webhook event "vpp-dispatch" received</strong>. In the Then action, set your battery to discharge at the rate specified in the webhook payload. Add a condition: <strong>Battery SoC > [your SoC floor]%</strong> as a safety check.</p>
+          </div>
+        </div>
+        <div class="hg-step-item">
+          <div class="hg-step-num">3</div>
+          <div class="hg-step-body">
+            <h4>Create the VPP restore Flow</h4>
+            <p>Create a second Flow with <strong>When: Webhook event "vpp-restore" received</strong>. This returns your battery to its normal operating mode (self-consumption or time-of-use) when the dispatch event ends.</p>
+          </div>
+        </div>
+        <div class="hg-step-item">
+          <div class="hg-step-num">4</div>
+          <div class="hg-step-body">
+            <h4>Register for the Decarbonarma VPP</h4>
+            <p>Complete the sign-up form we provide when you join the pilot. You'll need: your battery brand and capacity, your Homey webhook URL, your preferred SoC floor, and consent to the dispatch terms. We'll test the webhook before going live.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hg-alert info">
+        <div class="ai">💡</div>
+        <p><strong>Estimated setup time for all 6 steps:</strong> Allow 30–60 minutes for first-time Homey setup, plus another 30 minutes to install apps and build your first Flows. The VPP webhook setup takes about 10 minutes once everything else is working. Most customers are fully live within 2 hours of their Homey Pro arriving.</p>
+      </div>
+
+      <div style="background:var(--green-800);border-radius:16px;padding:32px;margin-top:24px;text-align:center;">
+        <h3 style="font-family:'DM Serif Display',serif;font-size:26px;color:#fff;margin-bottom:10px;">Ready to join the VPP?</h3>
+        <p style="font-size:15px;color:rgba(255,255,255,0.75);margin-bottom:24px;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.7;">Your battery is set up, Homey is running, and Octopus is connected. The last step is registering for the Decarbonarma Virtual Power Plant and starting to earn.</p>
+        <a href="/" style="background:var(--green-400);color:#fff;padding:14px 32px;border-radius:10px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block;">Back to Home &rarr;</a>
+      </div>
+    </div>
+    <div class="hg-nav">
+      <button class="hg-btn-back" onclick="hgGo(5)">← Back</button>
+      <a class="hg-btn-next" href="/" style="text-decoration:none;display:inline-block;text-align:center;">Back to Home &#10003;</a>
+    </div>
+  </div>
+
+</div><!-- /hg-wrap -->
+</div><!-- /page-homeyguide -->
+
+<footer class="site-footer">Decarbonarma &mdash; UK home decarbonisation, explained with real data.</footer>
+
+<script>
+function hgGo(n){
+  document.querySelectorAll('.hg-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('hgsec-'+n).classList.add('active');
+  for(let i=1;i<=6;i++){
+    const d=document.getElementById('hgdot-'+i);
+    d.classList.remove('active','done');
+    if(i<n) d.classList.add('done');
+    if(i===n) d.classList.add('active');
+  }
+  window.scrollTo({top:document.querySelector('.hg-wrap').offsetTop-90,behavior:'smooth'});
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heat Loss Estimator: Calculate Your Home's HTC & Right-Size a Heat Pump | Decarbonarma</title>
+<meta name="description" content="Estimate your home's Heat Transfer Coefficient from your gas bill, using Michael de Podesta's methodology, and cross-check your MCS installer's heat pump size quote.">
+<link rel="canonical" href="https://decarbonarma.com/heat-loss-estimator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Decarbonarma">
+<meta property="og:title" content="Heat Loss Estimator: Calculate Your Home's HTC & Right-Size a Heat Pump | Decarbonarma">
+<meta property="og:description" content="Estimate your home's Heat Transfer Coefficient from your gas bill, using Michael de Podesta's methodology, and cross-check your MCS installer's heat pump size quote.">
+<meta property="og:url" content="https://decarbonarma.com/heat-loss-estimator.html">
+<meta property="og:image" content="https://decarbonarma.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Heat Loss Estimator: Calculate Your Home's HTC & Right-Size a Heat Pump | Decarbonarma">
+<meta name="twitter:description" content="Estimate your home's Heat Transfer Coefficient from your gas bill, using Michael de Podesta's methodology, and cross-check your MCS installer's heat pump size quote.">
+<meta name="twitter:image" content="https://decarbonarma.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Heat Loss Estimator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (web browser)",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"},
+  "description": "Estimate your home's Heat Transfer Coefficient from your gas bill, using Michael de Podesta's methodology, and cross-check your MCS installer's heat pump size quote.",
+  "url": "https://decarbonarma.com/heat-loss-estimator.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Decarbonarma",
+    "logo": {"@type": "ImageObject", "url": "https://decarbonarma.com/logo.png"}
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-50: #f0faf3; --green-100: #dcf1e3; --green-200: #aee3c1;
+    --green-400: #34c759; --green-500: #2ba84a; --green-600: #1f8a4c; --green-800: #14622f; --green-900: #0b3a1c;
+    --stone-50: #f5f5f7; --stone-100: #ececf0; --stone-200: #d2d2d7;
+    --stone-600: #6e6e73; --stone-800: #1d1d1f; --white: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: var(--white); color: var(--stone-800);
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.011em;
+  }
+  a { color: inherit; }
+  .site-header { padding:14px 32px; border-bottom:1px solid var(--stone-100); display:flex; align-items:center; justify-content:space-between; }
+  .site-header img { height:28px; display:block; }
+  .site-header .back-link { font-size:13px; color:var(--stone-600); text-decoration:none; font-weight:500; }
+  .site-header .back-link:hover { color:var(--green-600); }
+  footer { padding:48px 32px 32px; border-top:1px solid var(--stone-100); margin-top:40px; }
+  .footer-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:32px; max-width:1120px; margin:0 auto 24px; }
+  .footer-brand .logo { font-family:'DM Serif Display',serif; font-size:20px; color:var(--green-900); }
+  .footer-brand .logo span { color:var(--green-600); }
+  .footer-brand p { font-size:13px; color:var(--stone-600); margin-top:10px; line-height:1.6; }
+  .footer-col h5 { font-size:12px; text-transform:uppercase; letter-spacing:0.06em; color:var(--stone-600); margin-bottom:12px; }
+  .footer-col a { display:block; font-size:14px; color:var(--stone-800); text-decoration:none; margin-bottom:8px; }
+  .footer-col a:hover { color:var(--green-600); }
+  .footer-bottom { max-width:1120px; margin:0 auto; font-size:12px; color:var(--stone-600); border-top:1px solid var(--stone-100); padding-top:16px; }
+
+  .hl-hero {
+    background: linear-gradient(150deg, #0e3520 0%, #1a5530 55%, #2d8a4a 100%);
+    padding: 72px 80px 60px; text-align:center; position:relative; overflow:hidden;
+  }
+  .hl-hero h1 { font-family:'DM Serif Display',serif; font-size:clamp(34px,4vw,56px); color:#fff; line-height:1.1; letter-spacing:-0.5px; margin-bottom:16px; }
+  .hl-hero h1 em { font-style:italic; color:#a8e2b7; }
+  .hl-hero p { font-size:17px; color:rgba(255,255,255,0.75); max-width:600px; margin:0 auto 20px; line-height:1.7; }
+  .hl-credit { font-size:13px; color:rgba(255,255,255,0.5); margin-top:4px; }
+  .hl-credit a { color:rgba(168,226,183,0.8); }
+  .hl-trust { display:flex; justify-content:center; gap:28px; margin-top:24px; flex-wrap:wrap; }
+  .hl-trust span { font-size:13px; color:rgba(255,255,255,0.6); display:flex; align-items:center; gap:6px; }
+
+  .hl-wrapper { max-width:820px; margin:0 auto; padding:56px 24px 80px; }
+
+  /* STEP TABS */
+  .hl-tabs { display:flex; gap:0; margin-bottom:40px; border-radius:14px; overflow:hidden; border:1px solid var(--green-200); }
+  .hl-tab {
+    flex:1; padding:14px 8px; text-align:center; font-size:13px; font-weight:600;
+    background:var(--white); color:var(--stone-600); cursor:pointer; border:none;
+    transition:all 0.2s; border-right:1px solid var(--green-100);
+  }
+  .hl-tab:last-child { border-right:none; }
+  .hl-tab.active { background:var(--green-600); color:var(--white); }
+  .hl-tab.done { background:var(--green-100); color:var(--green-800); }
+  .hl-tab-num { display:block; font-size:18px; margin-bottom:2px; }
+
+  /* PANELS */
+  .hl-panel { display:none; }
+  .hl-panel.active { display:block; animation:fadeUp 0.3s ease; }
+
+  .hl-card { background:var(--white); border-radius:18px; border:1px solid var(--green-100); padding:32px; margin-bottom:24px; }
+  .hl-card h3 { font-family:'DM Serif Display',serif; font-size:22px; color:var(--green-900); margin-bottom:6px; }
+  .hl-card .hl-desc { font-size:14px; color:var(--stone-600); margin-bottom:24px; line-height:1.6; }
+
+  /* FORM ROWS */
+  .hl-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+  .hl-row.triple { grid-template-columns:1fr 1fr 1fr; }
+  .hl-row.single { grid-template-columns:1fr; }
+  .hl-field { display:flex; flex-direction:column; gap:6px; }
+  .hl-field label { font-size:13px; font-weight:600; color:var(--stone-800); }
+  .hl-field .hl-hint { font-size:11px; color:var(--stone-600); margin-top:2px; }
+  .hl-field input, .hl-field select {
+    padding:10px 14px; border-radius:9px; border:1.5px solid var(--green-200);
+    font-size:14px; font-family:'Instrument Sans',sans-serif;
+    background:var(--white); color:var(--stone-800);
+    transition:border-color 0.2s;
+  }
+  .hl-field input:focus, .hl-field select:focus { outline:none; border-color:var(--green-500); }
+  .hl-field .hl-unit { font-size:12px; color:var(--stone-600); margin-top:3px; }
+
+  /* HOUSEHOLD TEMP VISUAL */
+  .hl-temp-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:8px; margin-bottom:16px; }
+  .hl-temp-zone { background:var(--green-50); border:1.5px solid var(--green-200); border-radius:10px; padding:10px 8px; text-align:center; }
+  .hl-temp-zone label { font-size:11px; color:var(--stone-600); display:block; margin-bottom:6px; }
+  .hl-temp-zone input { width:100%; text-align:center; padding:6px 4px; border-radius:6px; border:1px solid var(--green-200); font-size:14px; font-weight:600; color:var(--green-800); background:var(--white); }
+
+  /* RESULTS PANEL */
+  .hl-results { display:none; }
+  .hl-results.active { display:block; }
+
+  .hl-result-hero {
+    background:var(--green-800); border-radius:20px; padding:36px; margin-bottom:24px;
+    display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; text-align:center;
+  }
+  .hl-rstat .val { font-family:'DM Serif Display',serif; font-size:40px; color:var(--white); line-height:1; margin-bottom:6px; }
+  .hl-rstat .lbl { font-size:12px; color:rgba(255,255,255,0.6); text-transform:uppercase; letter-spacing:0.5px; }
+  .hl-rstat .unit { font-size:14px; color:rgba(255,255,255,0.5); margin-top:2px; }
+
+  .hl-verdict {
+    border-radius:16px; padding:24px 28px; margin-bottom:24px;
+    border:2px solid;
+  }
+  .hl-verdict.good { background:#f0faf2; border-color:var(--green-400); }
+  .hl-verdict.warn { background:#fffbf0; border-color:#e6a817; }
+  .hl-verdict.alert { background:#fff5f5; border-color:#dc3545; }
+  .hl-verdict h3 { font-family:'DM Serif Display',serif; font-size:22px; margin-bottom:8px; }
+  .hl-verdict.good h3 { color:var(--green-800); }
+  .hl-verdict.warn h3 { color:#8a5c00; }
+  .hl-verdict.alert h3 { color:#8b1a1a; }
+  .hl-verdict p { font-size:15px; line-height:1.7; }
+  .hl-verdict.good p { color:var(--green-800); }
+  .hl-verdict.warn p { color:#6b4400; }
+  .hl-verdict.alert p { color:#6b1a1a; }
+
+  .hl-breakdown { background:var(--white); border:1px solid var(--green-100); border-radius:16px; padding:28px; margin-bottom:24px; }
+  .hl-breakdown h3 { font-family:'DM Serif Display',serif; font-size:20px; color:var(--green-900); margin-bottom:20px; }
+  .hl-brow { display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--green-50); }
+  .hl-brow:last-child { border-bottom:none; }
+  .hl-brow .hl-blabel { font-size:14px; color:var(--stone-600); display:flex; align-items:center; gap:8px; }
+  .hl-brow .hl-bval { font-size:14px; font-weight:600; color:var(--green-800); }
+  .hl-bar { height:6px; background:var(--green-100); border-radius:3px; margin-top:6px; }
+  .hl-bar-fill { height:6px; background:var(--green-400); border-radius:3px; transition:width 0.8s ease; }
+
+  /* AI ANALYSIS */
+  .hl-ai-box { background:var(--green-900); border-radius:18px; padding:32px; margin-bottom:24px; }
+  .hl-ai-box .hl-ai-head { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+  .hl-ai-box .hl-ai-head span { font-size:28px; }
+  .hl-ai-box .hl-ai-head h3 { font-family:'DM Serif Display',serif; font-size:22px; color:var(--white); }
+  .hl-ai-box .hl-ai-head p { font-size:13px; color:rgba(255,255,255,0.6); margin-top:2px; }
+  .hl-ai-content { font-size:15px; color:rgba(255,255,255,0.85); line-height:1.8; }
+  .hl-ai-content h4 { color:var(--green-200); font-size:14px; font-weight:600; margin:16px 0 6px; text-transform:uppercase; letter-spacing:0.5px; }
+  .hl-ai-loading { display:flex; align-items:center; gap:12px; color:rgba(255,255,255,0.6); font-size:14px; }
+  .hl-ai-spinner { width:20px; height:20px; border:2px solid rgba(255,255,255,0.2); border-top-color:var(--green-400); border-radius:50%; animation:spin 0.8s linear infinite; flex-shrink:0; }
+
+  /* MCS COMPARISON */
+  .hl-mcs-box { background:var(--white); border:1px solid var(--green-100); border-radius:16px; padding:28px; margin-bottom:24px; }
+  .hl-mcs-box h3 { font-family:'DM Serif Display',serif; font-size:20px; color:var(--green-900); margin-bottom:8px; }
+  .hl-mcs-box p { font-size:14px; color:var(--stone-600); margin-bottom:20px; line-height:1.6; }
+  .hl-mcs-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .hl-mcs-item { background:var(--green-50); border-radius:12px; padding:18px; }
+  .hl-mcs-item .mi-label { font-size:12px; text-transform:uppercase; letter-spacing:0.5px; color:var(--stone-600); margin-bottom:6px; font-weight:600; }
+  .hl-mcs-item .mi-val { font-family:'DM Serif Display',serif; font-size:28px; color:var(--green-800); }
+  .hl-mcs-item .mi-sub { font-size:12px; color:var(--stone-600); margin-top:4px; }
+  .hl-mcs-check { margin-top:16px; padding:14px; border-radius:10px; font-size:14px; font-weight:600; text-align:center; }
+  .hl-mcs-check.ok { background:var(--green-100); color:var(--green-800); }
+  .hl-mcs-check.review { background:#fff8e6; color:#8a5c00; }
+  .hl-mcs-check.flag { background:#fff0f0; color:#8b1a1a; }
+
+  /* NAV BTNS */
+  .hl-nav { display:flex; gap:14px; margin-top:28px; }
+  .hl-btn-next { flex:1; background:var(--green-600); color:var(--white); padding:14px 28px; border-radius:10px; font-size:15px; font-weight:600; border:none; cursor:pointer; transition:background 0.2s; }
+  .hl-btn-next:hover { background:var(--green-800); }
+  .hl-btn-back { background:transparent; color:var(--stone-600); padding:14px 20px; border-radius:10px; font-size:15px; border:1.5px solid var(--stone-200); cursor:pointer; transition:all 0.2s; }
+  .hl-btn-back:hover { border-color:var(--stone-600); }
+  .hl-btn-calc { flex:1; background:var(--green-800); color:var(--white); padding:16px 28px; border-radius:10px; font-size:16px; font-weight:600; border:none; cursor:pointer; transition:background 0.2s; }
+  .hl-btn-calc:hover { background:var(--green-900); }
+
+  .hl-note { font-size:12px; color:var(--stone-600); line-height:1.6; margin-top:20px; padding:14px; background:var(--stone-100); border-radius:10px; }
+
+  @media(max-width:640px) {
+    .hl-hero { padding:60px 24px 48px; }
+    .hl-row, .hl-row.triple { grid-template-columns:1fr; }
+    .hl-result-hero { grid-template-columns:1fr; }
+    .hl-mcs-row { grid-template-columns:1fr; }
+    .hl-tabs { flex-wrap:wrap; }
+    .hl-tab { font-size:11px; padding:10px 4px; }
+    .hl-wrapper { padding:32px 16px 60px; }
+  }
+
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/"><img src="logo.svg" alt="Decarbonarma"></a>
+  <a href="/" class="back-link">&larr; Back to Decarbonarma</a>
+</header>
+
+<div id="page-heatloss" class="page">
+
+
+<!-- HERO -->
+<section class="hl-hero">
+  <div class="page-tag" style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);padding:6px 14px;border-radius:100px;margin-bottom:20px;">🏠 Heat Loss Estimator</div>
+  <h1>How well does your<br>home <em>hold its heat?</em></h1>
+  <p>Estimate your home's Heat Transfer Coefficient (HTC) — the key number that determines the right heat pump size. Cross-check your MCS installer's quote before you sign.</p>
+  <p class="hl-credit">Methodology based on the work of <a href="https://protonsforbreakfast.wordpress.com/" target="_blank">Michael de Podesta</a> — physicist and heat pump pioneer.</p>
+  <div class="hl-trust">
+    <span>📊 Based on real physics</span>
+    <span>🎯 MCS sanity check tool</span>
+    <span>🤖 AI-powered analysis</span>
+    <span>🆓 Completely free</span>
+  </div>
+</section>
+
+<div class="hl-wrapper">
+
+  <!-- STEP TABS -->
+  <div class="hl-tabs">
+    <button class="hl-tab active" id="hltab-1" onclick="hlGoPanel(1)"><span class="hl-tab-num">🌡️</span>Temperatures</button>
+    <button class="hl-tab" id="hltab-2" onclick="hlGoPanel(2)"><span class="hl-tab-num">🚿</span>Hot Water</button>
+    <button class="hl-tab" id="hltab-3" onclick="hlGoPanel(3)"><span class="hl-tab-num">⛽</span>Gas / Bills</button>
+    <button class="hl-tab" id="hltab-4" onclick="hlGoPanel(4)"><span class="hl-tab-num">🏠</span>Your Home</button>
+    <button class="hl-tab" id="hltab-5" onclick="hlGoPanel(5)"><span class="hl-tab-num">📊</span>Results</button>
+  </div>
+
+  <!-- PANEL 1: TEMPERATURES -->
+  <div class="hl-panel active" id="hlpanel-1">
+    <div class="hl-card">
+      <h3>🌡️ Household Temperature Profile</h3>
+      <p class="hl-desc">Enter the temperatures you keep different zones of your home at during winter. This lets us calculate your average daily indoor temperature — a key input for the heat loss calculation. Think about morning, daytime and sleeping temperatures.</p>
+      <div class="hl-row triple">
+        <div class="hl-field">
+          <label>Daytime living area (°C)</label>
+          <input type="number" id="hl-t1" value="21" min="15" max="28">
+          <span class="hl-hint">Lounge, kitchen — when occupied</span>
+        </div>
+        <div class="hl-field">
+          <label>Background temperature (°C)</label>
+          <input type="number" id="hl-t2" value="18" min="12" max="25">
+          <span class="hl-hint">Hallways, spare rooms, daytime bedrooms</span>
+        </div>
+        <div class="hl-field">
+          <label>Night / sleeping temperature (°C)</label>
+          <input type="number" id="hl-t3" value="16" min="10" max="22">
+          <span class="hl-hint">Bedrooms overnight</span>
+        </div>
+      </div>
+      <div class="hl-row triple">
+        <div class="hl-field">
+          <label>Hours at daytime temp</label>
+          <input type="number" id="hl-h1" value="7" min="1" max="20">
+          <span class="hl-hint">Typically 6–8 hrs (evenings + morning)</span>
+        </div>
+        <div class="hl-field">
+          <label>Hours at background temp</label>
+          <input type="number" id="hl-h2" value="9" min="1" max="20">
+          <span class="hl-hint">Typically daytime if out at work</span>
+        </div>
+        <div class="hl-field">
+          <label>Hours at night temp</label>
+          <input type="number" id="hl-h3" value="8" min="4" max="12">
+          <span class="hl-hint">Overnight sleeping hours</span>
+        </div>
+      </div>
+      <div style="background:var(--green-50);border-radius:12px;padding:16px;margin-top:8px;">
+        <div style="font-size:13px;color:var(--stone-600);margin-bottom:4px;">Calculated average daily temperature:</div>
+        <div style="font-size:28px;font-weight:600;color:var(--green-800);" id="hl-avg-t-display">—</div>
+      </div>
+    </div>
+    <div class="hl-nav">
+      <button class="hl-btn-next" onclick="hlGoPanel(2)">Next: Hot Water →</button>
+    </div>
+  </div>
+
+  <!-- PANEL 2: HOT WATER -->
+  <div class="hl-panel" id="hlpanel-2">
+    <div class="hl-card">
+      <h3>🚿 Hot Water Usage</h3>
+      <p class="hl-desc">We need to separate the gas used for hot water from gas used for space heating. This is important because a heat pump handles both but at different efficiencies — and getting the split right gives a more accurate HTC.</p>
+      <div class="hl-row">
+        <div class="hl-field">
+          <label>Number of people in household</label>
+          <select id="hl-people">
+            <option value="1">1 person</option>
+            <option value="2" selected>2 people</option>
+            <option value="3">3 people</option>
+            <option value="4">4 people</option>
+            <option value="5">5 people</option>
+            <option value="6">6+ people</option>
+          </select>
+          <span class="hl-hint">Each person uses roughly 50 litres of hot water per day</span>
+        </div>
+        <div class="hl-field">
+          <label>Shower type</label>
+          <select id="hl-shower">
+            <option value="low">Low flow / eco shower</option>
+            <option value="normal" selected>Normal power shower</option>
+            <option value="high">High power / rain shower</option>
+          </select>
+          <span class="hl-hint">This affects hot water consumption significantly</span>
+        </div>
+      </div>
+      <div class="hl-row">
+        <div class="hl-field">
+          <label>Do you have a bath regularly?</label>
+          <select id="hl-bath">
+            <option value="never">Never / rarely</option>
+            <option value="weekly" selected>1–2 baths per week</option>
+            <option value="daily">Daily baths</option>
+          </select>
+        </div>
+        <div class="hl-field">
+          <label>Dishwasher?</label>
+          <select id="hl-dishwasher">
+            <option value="yes" selected>Yes, use daily</option>
+            <option value="no">No dishwasher</option>
+          </select>
+        </div>
+      </div>
+      <div style="background:var(--green-50);border-radius:12px;padding:16px;margin-top:8px;">
+        <div style="font-size:13px;color:var(--stone-600);margin-bottom:4px;">Estimated daily hot water energy:</div>
+        <div style="font-size:28px;font-weight:600;color:var(--green-800);" id="hl-hw-display">—</div>
+      </div>
+    </div>
+    <div class="hl-nav">
+      <button class="hl-btn-back" onclick="hlGoPanel(1)">← Back</button>
+      <button class="hl-btn-next" onclick="hlGoPanel(3)">Next: Gas Usage →</button>
+    </div>
+  </div>
+
+  <!-- PANEL 3: GAS / BILLS -->
+  <div class="hl-panel" id="hlpanel-3">
+    <div class="hl-card">
+      <h3>⛽ Gas Consumption & Boiler</h3>
+      <p class="hl-desc">Your annual gas consumption is the foundation of the calculation. Look at last year's gas bill for the total kWh figure — or use your smart meter data. This is the single most important number you'll enter.</p>
+      <div class="hl-row">
+        <div class="hl-field">
+          <label>Annual gas consumption (kWh)</label>
+          <input type="number" id="hl-gas" value="15000" min="3000" max="60000">
+          <span class="hl-hint">5,000 = small flat · 15,000 = average house · 30,000+ = large house</span>
+        </div>
+        <div class="hl-field">
+          <label>Boiler efficiency (%)</label>
+          <select id="hl-boiler-eff">
+            <option value="0.9">90% — New condensing boiler (post-2010)</option>
+            <option value="0.85" selected>85% — Modern boiler (2000–2010)</option>
+            <option value="0.78">78% — Older boiler (pre-2000)</option>
+            <option value="0.70">70% — Old or poorly maintained boiler</option>
+          </select>
+          <span class="hl-hint">Check your boiler's installation date if unsure</span>
+        </div>
+      </div>
+      <div class="hl-row">
+        <div class="hl-field">
+          <label>Location (for Heating Degree Days)</label>
+          <select id="hl-location">
+            <option value="Newquay">Newquay (Cornwall)</option>
+            <option value="Exeter">Exeter</option>
+            <option value="Bristol">Bristol</option>
+            <option value="Oxford">Oxford / South Midlands</option>
+            <option value="Birmingham">Birmingham / Midlands</option>
+            <option value="Heathrow" selected>London / Heathrow</option>
+            <option value="Dungeness">Kent / Dungeness</option>
+            <option value="Norwich">Norwich / East Anglia</option>
+            <option value="Cardiff">Cardiff / South Wales</option>
+            <option value="Manchester">Manchester / NW England</option>
+            <option value="Leeds">Leeds / Bradford</option>
+            <option value="Newcastle">Newcastle / NE England</option>
+            <option value="Glasgow">Glasgow</option>
+            <option value="Edinburgh">Edinburgh</option>
+            <option value="Aberdeen">Aberdeen</option>
+            <option value="Belfast">Belfast</option>
+          </select>
+        </div>
+        <div class="hl-field">
+          <label>Design outside temperature (°C)</label>
+          <input type="number" id="hl-design-t" value="-3" min="-10" max="5">
+          <span class="hl-hint">The coldest temperature your heat pump must handle. -3°C suits most of England; -7°C for Scotland.</span>
+        </div>
+      </div>
+    </div>
+    <div class="hl-nav">
+      <button class="hl-btn-back" onclick="hlGoPanel(2)">← Back</button>
+      <button class="hl-btn-next" onclick="hlGoPanel(4)">Next: Your Home →</button>
+    </div>
+  </div>
+
+  <!-- PANEL 4: HOME DETAILS -->
+  <div class="hl-panel" id="hlpanel-4">
+    <div class="hl-card">
+      <h3>🏠 Your Home Details</h3>
+      <p class="hl-desc">A few details about your home help us calculate the insulation figure of merit and give context to your heat loss result — and help our AI give you more specific advice.</p>
+      <div class="hl-row">
+        <div class="hl-field">
+          <label>Floor area (m²)</label>
+          <input type="number" id="hl-floor" value="100" min="20" max="500">
+          <span class="hl-hint">Total heated floor area across all floors</span>
+        </div>
+        <div class="hl-field">
+          <label>Property type</label>
+          <select id="hl-prop-type">
+            <option value="detached">Detached house</option>
+            <option value="semi">Semi-detached house</option>
+            <option value="terrace" selected>Terraced house</option>
+            <option value="flat">Flat / apartment</option>
+            <option value="bungalow">Bungalow</option>
+          </select>
+        </div>
+      </div>
+      <div class="hl-row">
+        <div class="hl-field">
+          <label>Construction era</label>
+          <select id="hl-era">
+            <option value="pre1930">Pre-1930 (solid walls, no insulation)</option>
+            <option value="1930s">1930s–1960s (cavity walls, uninsulated)</option>
+            <option value="1970s" selected>1970s–1990s (some insulation)</option>
+            <option value="2000s">2000s–2010s (building regs improved)</option>
+            <option value="new">Post-2016 (modern building regs)</option>
+          </select>
+        </div>
+        <div class="hl-field">
+          <label>Insulation improvements done?</label>
+          <select id="hl-insulation">
+            <option value="none">None beyond original</option>
+            <option value="loft">Loft insulation added</option>
+            <option value="cavity" selected>Cavity wall + loft</option>
+            <option value="full">Full retrofit (EWI/IWI + loft + floor)</option>
+          </select>
+        </div>
+      </div>
+      <div class="hl-row">
+        <div class="hl-field">
+          <label>MCS installer's heat pump size (kW) — optional</label>
+          <input type="number" id="hl-mcs-size" value="" placeholder="e.g. 8" min="4" max="30">
+          <span class="hl-hint">Enter this if you have a quote to cross-check</span>
+        </div>
+        <div class="hl-field">
+          <label>MCS installer's heat loss figure (W/°C) — optional</label>
+          <input type="number" id="hl-mcs-htc" value="" placeholder="e.g. 180" min="50" max="1000">
+          <span class="hl-hint">Sometimes shown on MCS design documents</span>
+        </div>
+      </div>
+    </div>
+    <div class="hl-nav">
+      <button class="hl-btn-back" onclick="hlGoPanel(3)">← Back</button>
+      <button class="hl-btn-calc" onclick="hlCalculate()">🔬 Calculate My Heat Loss</button>
+    </div>
+    <p class="hl-note">All data stays in your browser — nothing is sent to any server except the anonymised values used to generate your AI analysis via Claude.</p>
+  </div>
+
+  <!-- PANEL 5: RESULTS -->
+  <div class="hl-panel" id="hlpanel-5">
+
+    <div class="hl-results" id="hl-results-content">
+
+      <!-- KEY NUMBERS -->
+      <div class="hl-result-hero" id="hl-result-hero">
+        <div class="hl-rstat">
+          <div class="val" id="hl-r-htc">—</div>
+          <div class="lbl">Heat Transfer Coefficient</div>
+          <div class="unit">W/°C</div>
+        </div>
+        <div class="hl-rstat">
+          <div class="val" id="hl-r-hp">—</div>
+          <div class="lbl">Suggested Heat Pump Size</div>
+          <div class="unit">kW</div>
+        </div>
+        <div class="hl-rstat">
+          <div class="val" id="hl-r-fom">—</div>
+          <div class="lbl">Insulation Figure of Merit</div>
+          <div class="unit">kWh/m²/year</div>
+        </div>
+      </div>
+
+      <!-- VERDICT -->
+      <div class="hl-verdict" id="hl-verdict">
+        <h3 id="hl-verdict-title">—</h3>
+        <p id="hl-verdict-text">—</p>
+      </div>
+
+      <!-- BREAKDOWN -->
+      <div class="hl-breakdown">
+        <h3>📊 Calculation Breakdown</h3>
+        <div class="hl-brow">
+          <div><div class="hl-blabel">⛽ Annual gas consumption</div></div>
+          <div class="hl-bval" id="hl-b-gas">—</div>
+        </div>
+        <div class="hl-brow">
+          <div><div class="hl-blabel">🚿 Hot water energy (estimated)</div></div>
+          <div class="hl-bval" id="hl-b-hw">—</div>
+        </div>
+        <div class="hl-brow">
+          <div><div class="hl-blabel">🔥 Space heating energy (thermal)</div></div>
+          <div class="hl-bval" id="hl-b-space">—</div>
+        </div>
+        <div class="hl-brow">
+          <div><div class="hl-blabel">📍 Location heating degree days</div></div>
+          <div class="hl-bval" id="hl-b-hdd">—</div>
+        </div>
+        <div class="hl-brow">
+          <div><div class="hl-blabel">🌡️ Average indoor temperature</div></div>
+          <div class="hl-bval" id="hl-b-avgT">—</div>
+        </div>
+        <div class="hl-brow">
+          <div><div class="hl-blabel">🏠 Reference temperature (HDD basis)</div></div>
+          <div class="hl-bval" id="hl-b-refT">—</div>
+        </div>
+        <div class="hl-brow">
+          <div><div class="hl-blabel">📐 Floor area</div></div>
+          <div class="hl-bval" id="hl-b-floor">—</div>
+        </div>
+      </div>
+
+      <!-- MCS COMPARISON -->
+      <div class="hl-mcs-box" id="hl-mcs-section">
+        <h3>🔍 MCS Quote Sanity Check</h3>
+        <p>Compare our estimate against your MCS installer's figures. A well-sized heat pump should be within 20–30% of this estimate. Large discrepancies warrant a conversation with your installer.</p>
+        <div class="hl-mcs-row">
+          <div class="hl-mcs-item">
+            <div class="mi-label">Our estimate — Heat Pump Size</div>
+            <div class="mi-val" id="hl-mcs-our-hp">—</div>
+            <div class="mi-sub">Based on your gas usage & location</div>
+          </div>
+          <div class="hl-mcs-item">
+            <div class="mi-label">MCS installer's figure</div>
+            <div class="mi-val" id="hl-mcs-their-hp">Not entered</div>
+            <div class="mi-sub">From your MCS design document</div>
+          </div>
+        </div>
+        <div class="hl-mcs-check" id="hl-mcs-check">Enter your MCS figures in the Home Details step to see a comparison.</div>
+      </div>
+
+      <!-- AI ANALYSIS -->
+      <div class="hl-ai-box">
+        <div class="hl-ai-head">
+          <span>🤖</span>
+          <div>
+            <h3>AI Analysis & Recommendations</h3>
+            <p>Powered by Claude — personalised to your specific home profile</p>
+          </div>
+        </div>
+        <div class="hl-ai-content" id="hl-ai-content">
+          <div class="hl-ai-loading" id="hl-ai-loading">
+            <div class="hl-ai-spinner"></div>
+            <span>Analysing your home's heat loss profile…</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hl-nav" style="margin-top:0;">
+        <button class="hl-btn-back" onclick="hlGoPanel(4)">← Adjust Inputs</button>
+        <a class="hl-btn-next" href="/#heatpump" style="background:var(--green-600);text-align:center;text-decoration:none;display:inline-block;">Explore Heat Pumps &rarr;</a>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /hl-wrapper -->
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><span class="logo">Decarbon<span>arma</span></span><p>Helping UK homeowners transition to clean, affordable home energy.</p></div>
+    <div class="footer-col"><h5>Technologies</h5><a href="/#solar">Solar Panels</a><a href="/#battery">Battery Storage</a><a href="/#heatpump">Heat Pumps</a><a href="/#evcar">EV Charging</a><a href="/#ai">AI Technology</a></div>
+    <div class="footer-col"><h5>Tools</h5><a href="/ai-tariff-finder.html">Tariff Finder</a><a href="/heat-loss-estimator.html">Heat Loss Estimator</a></div>
+    <div class="footer-col"><h5>Support</h5><a href="/#">Contact</a><a href="/#">FAQ</a><a href="/uk-grants-guide.html">Grants Guide</a></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 Decarbonarma. All rights reserved.</span></div>
+</footer>
+
+</div><!-- /page-heatloss -->
+
+<script>
+/* ══════════════════════════════════════
+   HEAT LOSS ESTIMATOR LOGIC
+   Based on Michael de Podesta's HTC methodology
+══════════════════════════════════════ */
+
+// Heating Degree Days data (HDD 16.5 basis — close to typical UK reference)
+// and slope (HDD change per °C of internal temp change)
+const HDD_DATA = {
+  'Newquay':   { hdd: 1902.2, slope: 318.8 },
+  'Exeter':    { hdd: 2028.9, slope: 295.8 },
+  'Bristol':   { hdd: 2316.3, slope: 317.1 },
+  'Oxford':    { hdd: 2305.2, slope: 295.3 },
+  'Birmingham':{ hdd: 2315.1, slope: 303.3 },
+  'Heathrow':  { hdd: 1985.7, slope: 280.0 },
+  'Dungeness': { hdd: 1927.2, slope: 284.1 },
+  'Norwich':   { hdd: 2210.8, slope: 294.8 },
+  'Cardiff':   { hdd: 2044.8, slope: 305.5 },
+  'Manchester':{ hdd: 2362.8, slope: 312.1 },
+  'Leeds':     { hdd: 2725.7, slope: 329.5 },
+  'Newcastle': { hdd: 2673.2, slope: 326.1 },
+  'Glasgow':   { hdd: 2639.1, slope: 330.5 },
+  'Edinburgh': { hdd: 2660.6, slope: 330.8 },
+  'Aberdeen':  { hdd: 2840.7, slope: 339.1 },
+  'Belfast':   { hdd: 2573.0, slope: 332.9 }
+};
+
+// Hot water estimation (kWh/day)
+function estimateHotWater() {
+  const people = parseInt(document.getElementById('hl-people').value);
+  const shower = document.getElementById('hl-shower').value;
+  const bath   = document.getElementById('hl-bath').value;
+  const dish   = document.getElementById('hl-dishwasher').value;
+  let base = people * 1.5; // base per person kWh/day
+  if (shower === 'low')  base *= 0.8;
+  if (shower === 'high') base *= 1.25;
+  if (bath === 'weekly') base += 0.5;
+  if (bath === 'daily')  base += 1.5;
+  if (dish === 'yes')    base += 0.5;
+  return Math.round(base * 10) / 10;
+}
+
+// Average indoor temperature
+function calcAvgTemp() {
+  const t1 = parseFloat(document.getElementById('hl-t1').value) || 21;
+  const t2 = parseFloat(document.getElementById('hl-t2').value) || 18;
+  const t3 = parseFloat(document.getElementById('hl-t3').value) || 16;
+  const h1 = parseFloat(document.getElementById('hl-h1').value) || 7;
+  const h2 = parseFloat(document.getElementById('hl-h2').value) || 9;
+  const h3 = parseFloat(document.getElementById('hl-h3').value) || 8;
+  const total = h1 + h2 + h3;
+  return (t1*h1 + t2*h2 + t3*h3) / (total || 24);
+}
+
+// Live displays
+function hlUpdateDisplays() {
+  const avg = calcAvgTemp();
+  const d = document.getElementById('hl-avg-t-display');
+  if (d) d.textContent = avg.toFixed(1) + ' °C';
+  const hw = estimateHotWater();
+  const hwd = document.getElementById('hl-hw-display');
+  if (hwd) hwd.textContent = hw.toFixed(1) + ' kWh/day ≈ ' + Math.round(hw * 365) + ' kWh/year';
+}
+
+// Attach live updates
+['hl-t1','hl-t2','hl-t3','hl-h1','hl-h2','hl-h3'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', hlUpdateDisplays);
+});
+['hl-people','hl-shower','hl-bath','hl-dishwasher'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('change', hlUpdateDisplays);
+});
+setTimeout(hlUpdateDisplays, 100);
+
+function hlGoPanel(n) {
+  document.querySelectorAll('.hl-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('hlpanel-' + n).classList.add('active');
+  for (let i = 1; i <= 5; i++) {
+    const tab = document.getElementById('hltab-' + i);
+    tab.classList.remove('active','done');
+    if (i < n) tab.classList.add('done');
+    if (i === n) tab.classList.add('active');
+  }
+  window.scrollTo({ top: document.querySelector('.hl-wrapper').offsetTop - 90, behavior:'smooth' });
+}
+
+async function hlCalculate() {
+  hlGoPanel(5);
+
+  // ── GATHER INPUTS ──
+  const avgT    = calcAvgTemp();
+  const maxT    = Math.max(
+    parseFloat(document.getElementById('hl-t1').value)||21,
+    parseFloat(document.getElementById('hl-t2').value)||18,
+    parseFloat(document.getElementById('hl-t3').value)||16
+  );
+  const hwPerDay    = estimateHotWater();
+  const hwPerYear   = hwPerDay * 365;
+  const gasTotal    = parseFloat(document.getElementById('hl-gas').value) || 15000;
+  const boilerEff   = parseFloat(document.getElementById('hl-boiler-eff').value) || 0.85;
+  const location    = document.getElementById('hl-location').value;
+  const designT     = parseFloat(document.getElementById('hl-design-t').value) || -3;
+  const floorArea   = parseFloat(document.getElementById('hl-floor').value) || 100;
+  const propType    = document.getElementById('hl-prop-type').value;
+  const era         = document.getElementById('hl-era').value;
+  const insulation  = document.getElementById('hl-insulation').value;
+  const mcsHpSize   = parseFloat(document.getElementById('hl-mcs-size').value) || 0;
+  const mcsHtc      = parseFloat(document.getElementById('hl-mcs-htc').value) || 0;
+
+  // ── MICHAEL DE PODESTA METHOD ──
+  // Step 1: Total thermal heat delivered
+  const heatTotal   = gasTotal * boilerEff;
+  // Step 2: Hot water thermal energy (at boiler efficiency)
+  const hwThermal   = hwPerYear * boilerEff;
+  // Step 3: Space heating thermal energy
+  const spaceHeat   = heatTotal - hwThermal;
+  // Step 4: Heating Degree Days — adjusted for actual avg internal temp
+  // HDD data is at reference 16.5°C basis; adjust using slope
+  const locData     = HDD_DATA[location] || HDD_DATA['Heathrow'];
+  const refT        = avgT - 3.5; // HDD reference ≈ avg indoor - 3.5°C (Michael's method)
+  const hddAdjusted = locData.hdd + locData.slope * (avgT - 20);
+  // Step 5: HTC = space heat (Wh) / (HDD * 24h)
+  const htc         = (spaceHeat * 1000) / (hddAdjusted * 24);
+  // Step 6: Heat pump size at design temperature
+  const deltaT      = maxT - designT;
+  const hpPower     = (htc * deltaT) / 1000; // kW
+  // Step 7: Figure of merit
+  const fom         = spaceHeat / floorArea;
+
+  // ── UPDATE UI ──
+  document.getElementById('hl-results-content').classList.add('active');
+  document.getElementById('hl-r-htc').textContent  = Math.round(htc);
+  document.getElementById('hl-r-hp').textContent   = hpPower.toFixed(1);
+  document.getElementById('hl-r-fom').textContent  = Math.round(fom);
+  document.getElementById('hl-b-gas').textContent  = gasTotal.toLocaleString() + ' kWh/year';
+  document.getElementById('hl-b-hw').textContent   = Math.round(hwThermal) + ' kWh/year (' + hwPerDay.toFixed(1) + ' kWh/day)';
+  document.getElementById('hl-b-space').textContent= Math.round(spaceHeat) + ' kWh (thermal)/year';
+  document.getElementById('hl-b-hdd').textContent  = Math.round(hddAdjusted) + ' °C-days/year (' + location + ')';
+  document.getElementById('hl-b-avgT').textContent = avgT.toFixed(1) + ' °C';
+  document.getElementById('hl-b-refT').textContent = refT.toFixed(1) + ' °C';
+  document.getElementById('hl-b-floor').textContent= floorArea + ' m²';
+  document.getElementById('hl-mcs-our-hp').textContent = hpPower.toFixed(1) + ' kW';
+
+  // ── VERDICT ──
+  const verdict = document.getElementById('hl-verdict');
+  const vTitle  = document.getElementById('hl-verdict-title');
+  const vText   = document.getElementById('hl-verdict-text');
+  verdict.className = 'hl-verdict';
+  if (fom < 40) {
+    verdict.classList.add('good');
+    vTitle.textContent = '🌟 Excellent — Your home is well insulated';
+    vText.textContent  = `Your insulation figure of merit is ${Math.round(fom)} kWh/m²/year — well below the 50 kWh threshold for a good UK home. You're an ideal heat pump candidate and should achieve excellent SCOP performance. Your installer should be able to size a relatively modest heat pump for your home.`;
+  } else if (fom < 70) {
+    verdict.classList.add('good');
+    vTitle.textContent = '✅ Good — Solid candidate for a heat pump';
+    vText.textContent  = `Your insulation figure of merit is ${Math.round(fom)} kWh/m²/year — in line with a typical well-maintained UK home. A heat pump should work well, though ensuring your radiators are adequately sized for lower flow temperatures will be important.`;
+  } else if (fom < 100) {
+    verdict.classList.add('warn');
+    vTitle.textContent = '⚠️ Fair — Consider some insulation improvements first';
+    vText.textContent  = `Your figure of merit is ${Math.round(fom)} kWh/m²/year — above the ideal threshold. A heat pump will still work but may need to run at higher flow temperatures, reducing efficiency. Addressing the easiest insulation wins (loft, draught-proofing) could significantly improve your result.`;
+  } else {
+    verdict.classList.add('alert');
+    vTitle.textContent = '🔴 High heat loss — Insulation work recommended first';
+    vText.textContent  = `Your figure of merit is ${Math.round(fom)} kWh/m²/year — this indicates significant heat loss. While a heat pump can still be installed, improving insulation first would reduce the required heat pump size and dramatically improve efficiency and running costs. Consider the ECO4 scheme for potential grant funding.`;
+  }
+
+  // ── MCS COMPARISON ──
+  if (mcsHpSize > 0) {
+    document.getElementById('hl-mcs-their-hp').textContent = mcsHpSize.toFixed(1) + ' kW';
+    const ratio = mcsHpSize / hpPower;
+    const mcsCheck = document.getElementById('hl-mcs-check');
+    if (ratio >= 0.8 && ratio <= 1.4) {
+      mcsCheck.className = 'hl-mcs-check ok';
+      mcsCheck.textContent = `✅ Good agreement — installer's size (${mcsHpSize}kW) is within a reasonable range of our estimate (${hpPower.toFixed(1)}kW). This is a credible sizing.`;
+    } else if (ratio < 0.8) {
+      mcsCheck.className = 'hl-mcs-check review';
+      mcsCheck.textContent = `⚠️ Installer's figure (${mcsHpSize}kW) is significantly smaller than our estimate (${hpPower.toFixed(1)}kW). This could indicate a very efficient home or aggressive assumptions — ask your installer to show their MCS heat loss calculation.`;
+    } else {
+      mcsCheck.className = 'hl-mcs-check review';
+      mcsCheck.textContent = `⚠️ Installer's figure (${mcsHpSize}kW) is larger than our estimate (${hpPower.toFixed(1)}kW). Some oversizing is normal, but a very large difference may indicate an overly cautious approach. Ask to see the detailed MCS design calculation.`;
+    }
+  } else {
+    document.getElementById('hl-mcs-section').querySelector('p').textContent =
+      'Enter your MCS installer\'s heat pump size in the Home Details step to compare against our estimate.';
+  }
+
+  // ── AI ANALYSIS ──
+  document.getElementById('hl-ai-loading').style.display = 'flex';
+  const eraLabels = {'pre1930':'pre-1930 solid wall','1930s':'1930s–60s cavity','1970s':'1970s–90s partial insulation','2000s':'2000s improved building regs','new':'post-2016 modern build'};
+  const propLabels = {'detached':'detached','semi':'semi-detached','terrace':'terraced','flat':'flat/apartment','bungalow':'bungalow'};
+  const insLabels  = {'none':'no additional insulation','loft':'loft insulation only','cavity':'cavity wall + loft','full':'full retrofit insulation'};
+
+  const aiPrompt = `You are an expert UK heat pump and home energy advisor for Decarbonarma. A homeowner has completed a heat loss estimation tool based on Michael de Podesta's HTC methodology.
+
+Here are their results:
+- Heat Transfer Coefficient (HTC): ${Math.round(htc)} W/°C
+- Suggested heat pump size: ${hpPower.toFixed(1)} kW
+- Annual space heating: ${Math.round(spaceHeat)} kWh/year
+- Insulation figure of merit: ${Math.round(fom)} kWh/m²/year
+- Location: ${location}
+- Property: ${propLabels[propType]} house, ${eraLabels[era]}, with ${insLabels[insulation]}
+- Floor area: ${floorArea} m²
+- Average indoor temperature: ${avgT.toFixed(1)}°C
+- Design outside temperature: ${designT}°C
+${mcsHpSize > 0 ? `- MCS installer suggested: ${mcsHpSize}kW heat pump` : '- No MCS quote entered yet'}
+
+Write a warm, expert, personalised analysis in 4 short sections. Use this exact structure with these HTML headers:
+<h4>What your HTC means</h4>
+[2-3 sentences explaining their specific HTC in plain English — what it means physically, how it compares to benchmarks: Passivhaus=~30 W/°C per 100m², good UK home=~80-150 W/°C, typical pre-war=200-350 W/°C]
+
+<h4>Your heat pump sizing</h4>
+[2-3 sentences on the ${hpPower.toFixed(1)}kW estimate — what size product this maps to (real manufacturers do 5, 7, 8, 9, 10, 12kW units), whether to size up slightly for DHW, and what this means for running costs]
+
+<h4>Insulation priority</h4>
+[2-3 sentences specifically about their construction era and insulation state — what the biggest heat loss routes are likely to be, what they should prioritise IF their FoM is above 60, or reassurance if it's good]
+
+<h4>Next steps</h4>
+[2-3 practical numbered recommendations specific to their situation. Include: whether to get an MCS survey, any grants they might qualify for (BUS scheme £7,500), whether to address insulation first or proceed directly. Be specific to their property type and era.]
+
+Keep the total to 200-250 words. Use plain English throughout — no jargon without explanation. Be genuinely helpful and honest, not just positive.`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        messages:[{role:'user', content: aiPrompt}]
+      })
+    });
+    const data = await res.json();
+    const text = data.content.map(c => c.text || '').join('');
+    document.getElementById('hl-ai-loading').style.display = 'none';
+    document.getElementById('hl-ai-content').innerHTML = text;
+  } catch(e) {
+    document.getElementById('hl-ai-loading').style.display = 'none';
+    document.getElementById('hl-ai-content').innerHTML = `
+      <h4>Your heat loss result</h4>
+      <p>Your HTC of ${Math.round(htc)} W/°C and figure of merit of ${Math.round(fom)} kWh/m²/year gives a clear picture of your home's thermal performance.</p>
+      <h4>Heat pump sizing</h4>
+      <p>Based on our calculation, a ${hpPower.toFixed(1)}kW heat pump would meet your home's peak demand. In practice, look at models in the ${Math.ceil(hpPower/2)*2}–${Math.ceil(hpPower/2)*2+2}kW range to account for hot water and a small safety margin.</p>
+      <h4>Next steps</h4>
+      <p>1. Get an MCS-accredited installer to conduct a formal heat loss survey — this is required for the £7,500 Boiler Upgrade Scheme grant.<br>2. Use our figures as a sanity check against their MCS design document.<br>3. Ask your installer to confirm the flow temperature their design assumes.</p>`;
+  }
+}
+
+</script>
+
+</body>
+</html>
