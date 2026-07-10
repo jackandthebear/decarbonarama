@@ -295,7 +295,7 @@
   </div>
 
   <div class="bs-method">
-    <strong>Methodology:</strong> LFP 90% usable depth of discharge assumed throughout. TOU/Go tariff adds a full-day coverage requirement (battery must store enough cheap-rate electricity to last until next charge window). Evening peak fraction from typical UK half-hourly demand profiles. Heat pump projection uses only the Dec–Feb winter share (~42%) of annual gas use spread over 90 days, not an annual daily average — since UK heating load is heavily concentrated in the coldest three months, averaging over all 365 days would understate real winter demand by roughly 4×. Heat pump peak fraction reflects that well-commissioned heat pumps run primarily during mild daytime hours with weather compensation — only a portion of daily electricity is needed at peak tariff times. All recommendations rounded up to nearest 0.5 kWh and then to nearest product size.
+    <strong>Methodology:</strong> LFP 90% usable depth of discharge assumed throughout. TOU/Go tariff adds a full-day coverage requirement (battery must store enough cheap-rate electricity to last until next charge window). Evening peak fraction from typical UK half-hourly demand profiles. Heat pump projection uses only the Dec–Feb winter share (~47%) of annual gas use spread over 90 days, not an annual daily average — since UK heating degree days are heavily concentrated in the coldest three months (Dec+Jan+Feb ≈ 47% of the UK annual heating degree day total), averaging over all 365 days would understate real winter demand. This treats your full annual gas figure as space heating; if a meaningful share of it is water heating or cooking (which runs fairly flat year-round), this slightly overstates winter heat pump load — a deliberately conservative, safer-to-oversize assumption. Heat pump peak fraction reflects that well-commissioned heat pumps run primarily during mild daytime hours with weather compensation — only a portion of daily electricity is needed at peak tariff times. All recommendations rounded up to nearest 0.5 kWh and then to nearest product size.
   </div>
 
 </div><!-- /bs-wrapper -->
@@ -390,9 +390,9 @@ function calc() {
   const currentRequired = (baseEvening + evKwh) * BUFFER / DOD;
   const currentRounded = Math.ceil(currentRequired * 2) / 2;
 
-  // Dec+Jan+Feb (90 days) account for ~42% of annual UK heating degree days —
+  // Dec+Jan+Feb (90 days) account for ~47% of annual UK heating degree days —
   // averaging gas use over all 365 days would badly understate winter daily HP load.
-  const WINTER_SHARE = 0.42;
+  const WINTER_SHARE = 0.47;
   const WINTER_DAYS = 90;
   const hpDailyTotal = hasHP ? ((gasKwh * WINTER_SHARE) / WINTER_DAYS) / scop : 0;
   const hpPeakLoad = hpDailyTotal * hpPeakPct;
