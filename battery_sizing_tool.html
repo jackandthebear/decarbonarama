@@ -196,7 +196,7 @@
           <input type="range" id="peakPct" min="30" max="65" step="1" value="45" oninput="calc()">
           <span class="bs-range-val" id="peakPctOut">45%</span>
         </div>
-        <div class="bs-hint">% of daily use between 4pm–midnight. 40–50% is typical for most households.</div>
+        <div class="bs-hint" id="peakPctHint">% of daily use between 4pm–midnight. 40–50% is typical for most households.</div>
       </div>
 
       <div class="bs-field">
@@ -264,7 +264,7 @@
             <input type="range" id="hpPeakPct" min="20" max="60" step="5" value="35" oninput="calc()">
             <span class="bs-range-val" id="hpPeakPctOut">35%</span>
           </div>
-          <div class="bs-hint">% of HP electricity needed after 4pm or overnight</div>
+          <div class="bs-hint" id="hpPeakPctHint">% of HP electricity needed after 4pm or overnight</div>
         </div>
       </div>
     </div>
@@ -295,7 +295,7 @@
   </div>
 
   <div class="bs-method">
-    <strong>Methodology:</strong> LFP 90% usable depth of discharge assumed throughout. TOU/Go tariff adds a full-day coverage requirement (battery must store enough cheap-rate electricity to last until next charge window). Evening peak fraction from typical UK half-hourly demand profiles. Heat pump projection uses only the Dec–Feb winter share (~47%) of annual gas use spread over 90 days, not an annual daily average — since UK heating degree days are heavily concentrated in the coldest three months (Dec+Jan+Feb ≈ 47% of the UK annual heating degree day total), averaging over all 365 days would understate real winter demand. This treats your full annual gas figure as space heating; if a meaningful share of it is water heating or cooking (which runs fairly flat year-round), this slightly overstates winter heat pump load — a deliberately conservative, safer-to-oversize assumption. Heat pump peak fraction reflects that well-commissioned heat pumps run primarily during mild daytime hours with weather compensation — only a portion of daily electricity is needed at peak tariff times. All recommendations rounded up to nearest 0.5 kWh and then to nearest product size.
+    <strong>Methodology:</strong> LFP 90% usable depth of discharge assumed throughout. On Octopus Go/IOG (TOU), the cheap-rate window is only a few hours overnight, so the battery is sized to cover the <strong>entire rest of the day</strong> — full daily house load, plus (if you're future-proofing) the full daily heat pump electric use — not just an evening-hours slice of either. On flat rate or Solar+TOU, only the evening/night peak share needs battery coverage, using the sliders above. Heat pump projection uses only the Dec–Feb winter share (~47%) of annual gas use spread over 90 days, not an annual daily average — since UK heating degree days are heavily concentrated in the coldest three months, averaging over all 365 days would understate real winter demand. This treats your full annual gas figure as space heating; if a meaningful share is water heating or cooking (which runs fairly flat year-round), this slightly overstates winter heat pump load — a deliberately conservative, safer-to-oversize assumption. All recommendations rounded up to nearest 0.5 kWh and then to nearest product size.
   </div>
 
 </div><!-- /bs-wrapper -->
@@ -377,12 +377,25 @@ function calc() {
   document.getElementById('scopOut').textContent = fmt(scop);
   document.getElementById('hpPeakPctOut').textContent = Math.round(hpPeakPct * 100) + '%';
 
-  let baseEvening = daily * peakPct;
-  let touExtra = 0;
+  const isTOU = tariff === 'tou';
 
-  if (tariff === 'tou') {
-    touExtra = daily * 0.70;
-    baseEvening = Math.max(baseEvening, touExtra);
+  // Update slider hints — on TOU/Go/IOG the peak-hours sliders no longer apply,
+  // since the battery must cover the whole day outside the short cheap window.
+  document.getElementById('peakPctHint').innerHTML = isTOU
+    ? '<strong>Not used on Go/IOG</strong> — battery is sized for the full day instead (see below).'
+    : '% of daily use between 4pm–midnight. 40–50% is typical for most households.';
+  document.getElementById('hpPeakPctHint').innerHTML = isTOU
+    ? '<strong>Not used on Go/IOG</strong> — heat pump runs across the day, so full daily HP electric use is included.'
+    : '% of HP electricity needed after 4pm or overnight';
+
+  let baseEvening = daily * peakPct;
+
+  if (isTOU) {
+    // Go / IOG's cheap-rate window is only ~4-6 hrs overnight. Everything the
+    // house uses for the rest of the day has to come off the battery (or
+    // expensive day-rate grid import) — so size for the full daily load, not
+    // just an evening-hours fraction of it.
+    baseEvening = daily;
   } else if (tariff === 'solar') {
     baseEvening = daily * peakPct * 0.6;
   }
@@ -395,33 +408,39 @@ function calc() {
   const WINTER_SHARE = 0.47;
   const WINTER_DAYS = 90;
   const hpDailyTotal = hasHP ? ((gasKwh * WINTER_SHARE) / WINTER_DAYS) / scop : 0;
-  const hpPeakLoad = hpDailyTotal * hpPeakPct;
+  // On TOU/Go/IOG the heat pump can run at any hour of the day, and with such
+  // a short cheap window almost none of its daily output falls inside it — so
+  // the FULL daily HP electric figure needs battery coverage, not just an
+  // evening/night portion of it.
+  const hpPeakLoad = hasHP ? (isTOU ? hpDailyTotal : hpDailyTotal * hpPeakPct) : 0;
   const futureRequired = hasHP ? ((baseEvening + hpPeakLoad + evKwh) * BUFFER / DOD) : 0;
   const futureRounded = hasHP ? Math.ceil(futureRequired * 2) / 2 : 0;
   const extraNeeded = hasHP ? Math.max(0, futureRounded - currentRounded) : 0;
 
   document.getElementById('recNow').textContent = fmt(currentRounded) + ' kWh';
   document.getElementById('recNowBreak').textContent =
-    'Evening load: ' + fmt(baseEvening) + ' kWh' +
+    (isTOU ? 'Full-day load: ' : 'Evening load: ') + fmt(baseEvening) + ' kWh' +
     (evKwh > 0 ? ' + EV: ' + fmt(evKwh) + ' kWh' : '');
 
   if (hasHP) {
     document.getElementById('recFuture').textContent = fmt(futureRounded) + ' kWh';
     document.getElementById('recFutureBreak').textContent =
-      '+' + fmt(hpPeakLoad) + ' kWh HP peak load (extra ' + fmt(extraNeeded) + ' kWh)';
+      '+' + fmt(hpPeakLoad) + ' kWh HP load (extra ' + fmt(extraNeeded) + ' kWh)';
   } else {
     document.getElementById('recFuture').textContent = '—';
     document.getElementById('recFutureBreak').textContent = 'Enable heat pump above';
   }
 
   let tariffNote = '';
-  if (tariff === 'tou') tariffNote = 'TOU: sized to cover full off-peak day from overnight charge.';
+  if (isTOU) tariffNote = 'TOU/Go/IOG: cheap window is only a few hours, so the battery is sized to cover the whole rest of the day — house load plus heat pump — not just the evening.';
   else if (tariff === 'solar') tariffNote = 'Solar+TOU: solar covers midday, battery covers evening peak only.';
   else tariffNote = 'Flat rate: sized to cover evening peak only.';
 
   const lines = [
     '// current sizing',
-    `evening peak load      ${fmt(daily)} × ${Math.round(peakPct*100)}% = ${fmt(baseEvening)} kWh`,
+    isTOU
+      ? `full daily house load  ${fmt(daily)} kWh (TOU/Go: whole day outside cheap window)`
+      : `evening peak load      ${fmt(daily)} × ${Math.round(peakPct*100)}% = ${fmt(baseEvening)} kWh`,
     evKwh > 0 ? `EV overnight charge    + ${fmt(evKwh)} kWh` : null,
     `usable required        (${fmt(baseEvening + evKwh)} × ${BUFFER}) ÷ ${DOD} DoD = ${fmt(currentRequired)} kWh`,
     `rounded up             → ${fmt(currentRounded)} kWh nominal`,
@@ -431,7 +450,11 @@ function calc() {
     hasHP ? `gas annual             ${Math.round(gasKwh).toLocaleString()} kWh × ${Math.round(WINTER_SHARE*100)}% (Dec–Feb share) = ${fmt(gasKwh*WINTER_SHARE)} kWh/winter` : null,
     hasHP ? `winter daily gas       ÷ ${WINTER_DAYS} days = ${fmt((gasKwh*WINTER_SHARE)/WINTER_DAYS)} kWh/day thermal` : null,
     hasHP ? `daily HP electric      ÷ SCOP ${fmt(scop)} = ${fmt(hpDailyTotal)} kWh/day` : null,
-    hasHP ? `peak portion (${Math.round(hpPeakPct*100)}%)    ${fmt(hpDailyTotal)} × ${Math.round(hpPeakPct*100)}% = ${fmt(hpPeakLoad)} kWh/day` : null,
+    hasHP
+      ? (isTOU
+          ? `HP on battery (TOU/Go) full day = ${fmt(hpPeakLoad)} kWh/day`
+          : `peak portion (${Math.round(hpPeakPct*100)}%)    ${fmt(hpDailyTotal)} × ${Math.round(hpPeakPct*100)}% = ${fmt(hpPeakLoad)} kWh/day`)
+      : null,
     hasHP ? `future usable reqd     (${fmt(baseEvening + hpPeakLoad + evKwh)} × ${BUFFER}) ÷ ${DOD} = ${fmt(futureRequired)} kWh` : null,
     hasHP ? `future rounded up      → ${fmt(futureRounded)} kWh (extra ${fmt(extraNeeded)} kWh)` : null,
   ].filter(l => l !== null);
