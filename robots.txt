@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /battery_sizing_tool.html
 Disallow: /skillbuilder-credibility-blocks.html
 
 Sitemap: https://decarbonarma.com/sitemap.xml

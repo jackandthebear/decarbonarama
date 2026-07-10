@@ -1,127 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Battery Sizing Calculator: How Big a Home Battery Do You Need? | Decarbonarma</title>
+<meta name="description" content="Size your home battery for winter evening demand, then see how much bigger you'll need to go once you add a heat pump. Free, physics-based, no sign-up.">
+<link rel="canonical" href="https://decarbonarma.com/battery_sizing_tool.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Decarbonarma">
+<meta property="og:title" content="Battery Sizing Calculator: How Big a Home Battery Do You Need? | Decarbonarma">
+<meta property="og:description" content="Size your home battery for winter evening demand, then see how much bigger you'll need to go once you add a heat pump. Free, physics-based, no sign-up.">
+<meta property="og:url" content="https://decarbonarma.com/battery_sizing_tool.html">
+<meta property="og:image" content="https://decarbonarma.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Battery Sizing Calculator: How Big a Home Battery Do You Need? | Decarbonarma">
+<meta name="twitter:description" content="Size your home battery for winter evening demand, then see how much bigger you'll need to go once you add a heat pump. Free, physics-based, no sign-up.">
+<meta name="twitter:image" content="https://decarbonarma.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Battery Sizing Calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (web browser)",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"},
+  "description": "Size your home battery for winter evening demand, then see how much bigger you'll need to go once you add a heat pump.",
+  "url": "https://decarbonarma.com/battery_sizing_tool.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Decarbonarma",
+    "logo": {"@type": "ImageObject", "url": "https://decarbonarma.com/logo.png"}
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-50: #f0faf3; --green-100: #dcf1e3; --green-200: #aee3c1;
+    --green-400: #34c759; --green-500: #2ba84a; --green-600: #1f8a4c; --green-800: #14622f; --green-900: #0b3a1c;
+    --stone-50: #f5f5f7; --stone-100: #ececf0; --stone-200: #d2d2d7;
+    --stone-600: #6e6e73; --stone-800: #1d1d1f; --white: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: var(--white); color: var(--stone-800);
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.011em;
+  }
+  a { color: inherit; }
+  .site-header { padding:14px 32px; border-bottom:1px solid var(--stone-100); display:flex; align-items:center; justify-content:space-between; }
+  .site-header img { height:28px; display:block; }
+  .site-header .back-link { font-size:13px; color:var(--stone-600); text-decoration:none; font-weight:500; }
+  .site-header .back-link:hover { color:var(--green-600); }
+  footer { padding:48px 32px 32px; border-top:1px solid var(--stone-100); margin-top:40px; }
+  .footer-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:32px; max-width:1120px; margin:0 auto 24px; }
+  .footer-brand .logo { font-family:'DM Serif Display',serif; font-size:20px; color:var(--green-900); }
+  .footer-brand .logo span { color:var(--green-600); }
+  .footer-brand p { font-size:13px; color:var(--stone-600); margin-top:10px; line-height:1.6; }
+  .footer-col h5 { font-size:12px; text-transform:uppercase; letter-spacing:0.06em; color:var(--stone-600); margin-bottom:12px; }
+  .footer-col a { display:block; font-size:14px; color:var(--stone-800); text-decoration:none; margin-bottom:8px; }
+  .footer-col a:hover { color:var(--green-600); }
+  .footer-bottom { max-width:1120px; margin:0 auto; font-size:12px; color:var(--stone-600); border-top:1px solid var(--stone-100); padding-top:16px; }
 
-<h2 class="sr-only">Home battery sizing calculator — estimates current and future battery requirements based on electricity usage, heat pump plans, and EV charging</h2>
+  /* ── BATTERY SIZING STYLES ── */
+  .bs-hero {
+    background: linear-gradient(150deg, #0e3520 0%, #1a5530 55%, #2d8a4a 100%);
+    padding: 72px 80px 60px; text-align:center; position:relative; overflow:hidden;
+  }
+  .bs-hero::before {
+    content:''; position:absolute; width:520px; height:520px; border-radius:50%;
+    background:rgba(92,186,120,0.1); top:-160px; left:50%; transform:translateX(-50%);
+    pointer-events:none;
+  }
+  .bs-hero .page-tag { display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:2px; background:rgba(255,255,255,0.15); color:rgba(255,255,255,0.9); padding:6px 14px; border-radius:100px; margin-bottom:20px; }
+  .bs-hero h1 { font-family:'DM Serif Display',serif; font-size:clamp(34px,4vw,56px); color:#fff; line-height:1.1; letter-spacing:-0.5px; margin-bottom:16px; position:relative; }
+  .bs-hero h1 em { font-style:italic; color:#a8e2b7; }
+  .bs-hero p { font-size:17px; color:rgba(255,255,255,0.75); max-width:600px; margin:0 auto; line-height:1.7; position:relative; }
+  .bs-trust { display:flex; justify-content:center; gap:28px; margin-top:24px; flex-wrap:wrap; position:relative; }
+  .bs-trust span { font-size:13px; color:rgba(255,255,255,0.6); display:flex; align-items:center; gap:6px; }
 
-<div style="padding:1.5rem 0 2rem;">
+  .bs-wrapper { max-width:900px; margin:0 auto; padding:56px 24px 80px; }
 
-<div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:1.5rem;line-height:1.6;max-width:600px;">
-  Sizes your battery for winter demand (Dec–Feb peak), then projects what you'll need when you add a heat pump. Uses the HeatpumpMonitor.org fleet average SCOP of 3.87 by default.
-</div>
+  .bs-grid2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px; }
+  .bs-card { background:var(--white); border-radius:18px; border:1px solid var(--green-100); padding:28px; margin-bottom:0; }
+  .bs-card .bs-eyebrow { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--green-600); margin-bottom:6px; }
+  .bs-card h3 { font-family:'DM Serif Display',serif; font-size:20px; color:var(--green-900); margin-bottom:20px; }
 
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;">
+  .bs-field { margin-bottom:18px; }
+  .bs-field:last-child { margin-bottom:0; }
+  .bs-field label { font-size:13px; font-weight:600; color:var(--stone-800); display:block; margin-bottom:8px; }
+  .bs-range-row { display:flex; align-items:center; gap:12px; }
+  .bs-range-row input[type=range] { flex:1; accent-color:var(--green-600); }
+  .bs-range-val { font-size:14px; font-weight:600; color:var(--green-800); min-width:56px; text-align:right; font-variant-numeric:tabular-nums; }
+  .bs-hint { font-size:11.5px; color:var(--stone-600); margin-top:6px; line-height:1.5; }
 
-  <div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;">
-    <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:0.75rem;font-weight:500;text-transform:uppercase;letter-spacing:0.04em;">Step 1 — current electricity</div>
+  .bs-pills { display:flex; gap:8px; flex-wrap:wrap; }
+  .bs-pill {
+    font-size:12.5px; font-weight:600; padding:8px 14px; border-radius:100px;
+    border:1.5px solid var(--green-200); background:var(--white); color:var(--stone-600);
+    cursor:pointer; transition:all 0.2s;
+  }
+  .bs-pill:hover { border-color:var(--green-400); }
+  .bs-pill.active { background:var(--green-600); color:var(--white); border-color:var(--green-600); }
 
-    <div style="margin-bottom:1rem;">
-      <label style="font-size:13px;color:var(--color-text-secondary);display:block;margin-bottom:6px;">Winter daily electricity use (kWh/day)</label>
-      <div style="display:flex;align-items:center;gap:10px;">
-        <input type="range" id="dailyKwh" min="3" max="40" step="0.5" value="10" style="flex:1;" oninput="calc()">
-        <span style="font-size:14px;font-weight:500;min-width:48px;text-align:right;" id="dailyKwhOut">10.0 kWh</span>
-      </div>
-      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px;">UK average ~8–12 kWh/day in winter. Check your Jan–Feb bills.</div>
-    </div>
+  .bs-toggle-row { display:flex; align-items:center; gap:10px; margin-bottom:18px; cursor:pointer; }
+  .bs-toggle-row input[type=checkbox] { width:18px; height:18px; accent-color:var(--green-600); cursor:pointer; }
+  .bs-toggle-row label { font-size:14px; font-weight:600; color:var(--stone-800); cursor:pointer; }
+  .bs-subsection { transition:opacity 0.2s; }
+  .bs-subsection.disabled { opacity:0.4; pointer-events:none; }
 
-    <div style="margin-bottom:1rem;">
-      <label style="font-size:13px;color:var(--color-text-secondary);display:block;margin-bottom:6px;">Evening peak proportion (%)</label>
-      <div style="display:flex;align-items:center;gap:10px;">
-        <input type="range" id="peakPct" min="30" max="65" step="1" value="45" style="flex:1;" oninput="calc()">
-        <span style="font-size:14px;font-weight:500;min-width:36px;text-align:right;" id="peakPctOut">45%</span>
-      </div>
-      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px;">% of daily use between 4pm–midnight. 40–50% is typical for most households.</div>
-    </div>
+  .bs-grid3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; }
 
-    <div>
-      <label style="font-size:13px;color:var(--color-text-secondary);display:block;margin-bottom:6px;">Tariff type</label>
-      <div style="display:flex;gap:6px;flex-wrap:wrap;">
-        <button id="tariff-tou" onclick="setTariff('tou')" style="font-size:12px;padding:5px 10px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-info);color:var(--color-text-info);cursor:pointer;">Octopus Go / TOU</button>
-        <button id="tariff-flat" onclick="setTariff('flat')" style="font-size:12px;padding:5px 10px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);background:transparent;color:var(--color-text-secondary);cursor:pointer;">Flat rate</button>
-        <button id="tariff-solar" onclick="setTariff('solar')" style="font-size:12px;padding:5px 10px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);background:transparent;color:var(--color-text-secondary);cursor:pointer;">Solar + TOU</button>
-      </div>
-    </div>
+  /* RESULTS */
+  .bs-results-hero { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin:28px 0 20px; }
+  .bs-rcard { background:var(--green-800); border-radius:18px; padding:26px 24px; transition:opacity 0.2s; }
+  .bs-rcard.future { background:var(--stone-800); }
+  .bs-rcard .rc-label { font-size:11px; color:rgba(255,255,255,0.55); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px; }
+  .bs-rcard .rc-val { font-family:'DM Serif Display',serif; font-size:38px; color:var(--white); line-height:1; }
+  .bs-rcard .rc-sub { font-size:13px; color:rgba(255,255,255,0.65); margin-top:8px; line-height:1.5; }
+
+  .bs-breakdown { background:var(--stone-50); border:1px solid var(--stone-100); border-radius:14px; padding:20px 24px; margin-bottom:20px; }
+  .bs-breakdown .bd-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--stone-600); margin-bottom:12px; }
+  .bs-breakdown-lines { font-family:'SF Mono','Menlo','JetBrains Mono',monospace; font-size:12.5px; color:var(--stone-600); line-height:1.9; white-space:pre-wrap; word-break:break-word; }
+
+  .bs-products { background:var(--white); border:1px solid var(--green-100); border-radius:18px; padding:28px; margin-bottom:24px; }
+  .bs-products h4 { font-family:'DM Serif Display',serif; font-size:18px; color:var(--green-900); margin-bottom:16px; }
+  .bs-product-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
+  .bs-product-card { background:var(--green-50); border-radius:12px; padding:16px; transition:opacity 0.2s; }
+  .bs-product-card .pc-name { font-size:12.5px; font-weight:600; color:var(--stone-800); margin-bottom:4px; }
+  .bs-product-card .pc-kwh { font-family:'DM Serif Display',serif; font-size:22px; color:var(--green-800); }
+  .bs-product-card .pc-badge { display:inline-block; font-size:10px; font-weight:700; padding:3px 8px; border-radius:5px; margin-top:8px; text-transform:uppercase; letter-spacing:0.03em; }
+  .bs-product-card .pc-badge.now { background:var(--green-100); color:var(--green-800); }
+  .bs-product-card .pc-badge.future { background:#e8f0ff; color:#1e4fa3; }
+
+  .bs-method { font-size:12px; color:var(--stone-600); line-height:1.7; background:var(--stone-50); border-radius:12px; padding:18px 20px; }
+  .bs-method strong { color:var(--stone-800); }
+
+  @media(max-width:640px) {
+    .bs-hero { padding:60px 24px 48px; }
+    .bs-grid2, .bs-grid3, .bs-results-hero { grid-template-columns:1fr; }
+    .bs-wrapper { padding:32px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/"><img src="logo.svg" alt="Decarbonarma"></a>
+  <a href="/" class="back-link">&larr; Back to Decarbonarma</a>
+</header>
+
+<div id="page-battery-sizing" class="page">
+
+<!-- HERO -->
+<section class="bs-hero">
+  <div class="page-tag">🔋 Battery Sizing Calculator</div>
+  <h1>Size your battery,<br><em>right</em> the first time</h1>
+  <p>Get a physics-based battery size for your winter evening demand — then see exactly how much bigger you'll need to go once you add a heat pump.</p>
+  <div class="bs-trust">
+    <span>⚡ Takes 60 seconds</span>
+    <span>🔬 Physics-based sizing</span>
+    <span>🔮 Future-proofs for a heat pump</span>
+  </div>
+</section>
+
+<div class="bs-wrapper">
+
+  <h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Home battery sizing calculator — estimates current and future battery requirements based on electricity usage, heat pump plans, and EV charging</h2>
+
+  <div style="font-size:14px;color:var(--stone-600);margin-bottom:28px;line-height:1.7;max-width:640px;">
+    Sizes your battery for winter demand (Dec–Feb peak), then projects what you'll need when you add a heat pump. Uses the HeatpumpMonitor.org fleet average SCOP of 3.87 by default.
   </div>
 
-  <div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;">
-    <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:0.75rem;font-weight:500;text-transform:uppercase;letter-spacing:0.04em;">Step 2 — EV charging (optional)</div>
+  <div class="bs-grid2">
 
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
-      <input type="checkbox" id="hasEV" onchange="calc()" style="width:16px;height:16px;cursor:pointer;">
-      <label for="hasEV" style="font-size:13px;color:var(--color-text-primary);cursor:pointer;">I charge an EV from the battery</label>
-    </div>
+    <div class="bs-card">
+      <div class="bs-eyebrow">Step 1</div>
+      <h3>⚡ Current electricity</h3>
 
-    <div id="evSection" style="opacity:0.4;pointer-events:none;">
-      <label style="font-size:13px;color:var(--color-text-secondary);display:block;margin-bottom:6px;">kWh charged per session</label>
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:0.5rem;">
-        <input type="range" id="evKwh" min="5" max="60" step="1" value="20" style="flex:1;" oninput="calc()">
-        <span style="font-size:14px;font-weight:500;min-width:48px;text-align:right;" id="evKwhOut">20 kWh</span>
-      </div>
-      <div style="font-size:11px;color:var(--color-text-secondary);">Nightly top-up. Full overnight charge adds this direct to battery requirement.</div>
-    </div>
-  </div>
-</div>
-
-<div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:1.5rem;">
-  <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:0.75rem;font-weight:500;text-transform:uppercase;letter-spacing:0.04em;">Step 3 — future heat pump (future-proofing)</div>
-
-  <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;">
-    <input type="checkbox" id="hasHP" onchange="toggleHP()" style="width:16px;height:16px;cursor:pointer;">
-    <label for="hasHP" style="font-size:13px;color:var(--color-text-primary);cursor:pointer;">I plan to install a heat pump (now or in future)</label>
-  </div>
-
-  <div id="hpSection" style="opacity:0.4;pointer-events:none;">
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem;">
-      <div>
-        <label style="font-size:13px;color:var(--color-text-secondary);display:block;margin-bottom:6px;">Annual gas use (kWh/yr)</label>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <input type="range" id="gasKwh" min="2000" max="30000" step="500" value="12000" style="flex:1;" oninput="calc()">
-          <span style="font-size:13px;font-weight:500;min-width:56px;text-align:right;" id="gasKwhOut">12,000</span>
+      <div class="bs-field">
+        <label>Winter daily electricity use</label>
+        <div class="bs-range-row">
+          <input type="range" id="dailyKwh" min="3" max="40" step="0.5" value="10" oninput="calc()">
+          <span class="bs-range-val" id="dailyKwhOut">10.0 kWh</span>
         </div>
-        <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px;">UK avg 11,500 kWh/yr. Check your gas bills.</div>
+        <div class="bs-hint">UK average ~8–12 kWh/day in winter. Check your Jan–Feb bills.</div>
       </div>
-      <div>
-        <label style="font-size:13px;color:var(--color-text-secondary);display:block;margin-bottom:6px;">Expected SCOP</label>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <input type="range" id="scop" min="2.5" max="5.5" step="0.1" value="3.87" style="flex:1;" oninput="calc()">
-          <span style="font-size:13px;font-weight:500;min-width:32px;text-align:right;" id="scopOut">3.87</span>
+
+      <div class="bs-field">
+        <label>Evening peak proportion</label>
+        <div class="bs-range-row">
+          <input type="range" id="peakPct" min="30" max="65" step="1" value="45" oninput="calc()">
+          <span class="bs-range-val" id="peakPctOut">45%</span>
         </div>
-        <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px;">HPM avg 3.87 · well-commissioned 4.1+</div>
+        <div class="bs-hint">% of daily use between 4pm–midnight. 40–50% is typical for most households.</div>
       </div>
-      <div>
-        <label style="font-size:13px;color:var(--color-text-secondary);display:block;margin-bottom:6px;">Evening/night heat pump load</label>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <input type="range" id="hpPeakPct" min="20" max="60" step="5" value="35" style="flex:1;" oninput="calc()">
-          <span style="font-size:13px;font-weight:500;min-width:32px;text-align:right;" id="hpPeakPctOut">35%</span>
+
+      <div class="bs-field">
+        <label>Tariff type</label>
+        <div class="bs-pills">
+          <button id="tariff-tou" class="bs-pill active" onclick="setTariff('tou')" type="button">Octopus Go / TOU</button>
+          <button id="tariff-flat" class="bs-pill" onclick="setTariff('flat')" type="button">Flat rate</button>
+          <button id="tariff-solar" class="bs-pill" onclick="setTariff('solar')" type="button">Solar + TOU</button>
         </div>
-        <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px;">% of HP electricity needed after 4pm or overnight</div>
+      </div>
+    </div>
+
+    <div class="bs-card">
+      <div class="bs-eyebrow">Step 2 · Optional</div>
+      <h3>🚗 EV charging</h3>
+
+      <div class="bs-toggle-row">
+        <input type="checkbox" id="hasEV" onchange="calc()">
+        <label for="hasEV">I charge an EV from the battery</label>
+      </div>
+
+      <div id="evSection" class="bs-subsection disabled">
+        <div class="bs-field">
+          <label>kWh charged per session</label>
+          <div class="bs-range-row">
+            <input type="range" id="evKwh" min="5" max="60" step="1" value="20" oninput="calc()">
+            <span class="bs-range-val" id="evKwhOut">20 kWh</span>
+          </div>
+          <div class="bs-hint">Nightly top-up. Full overnight charge adds this direct to battery requirement.</div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div id="resultsPanel" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
-  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1.25rem;">
-    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.04em;">Recommended now</div>
-    <div style="font-size:32px;font-weight:500;color:var(--color-text-primary);" id="recNow">—</div>
-    <div style="font-size:13px;color:var(--color-text-secondary);margin-top:2px;" id="recNowBreak">—</div>
+  <div class="bs-card" style="margin-bottom:20px;">
+    <div class="bs-eyebrow">Step 3 · Future-proofing</div>
+    <h3>♨️ Future heat pump</h3>
+
+    <div class="bs-toggle-row">
+      <input type="checkbox" id="hasHP" onchange="toggleHP()">
+      <label for="hasHP">I plan to install a heat pump (now or in future)</label>
+    </div>
+
+    <div id="hpSection" class="bs-subsection disabled">
+      <div class="bs-grid3">
+        <div class="bs-field">
+          <label>Annual gas use</label>
+          <div class="bs-range-row">
+            <input type="range" id="gasKwh" min="2000" max="30000" step="500" value="12000" oninput="calc()">
+            <span class="bs-range-val" id="gasKwhOut">12,000</span>
+          </div>
+          <div class="bs-hint">UK avg 11,500 kWh/yr. Check your gas bills.</div>
+        </div>
+        <div class="bs-field">
+          <label>Expected SCOP</label>
+          <div class="bs-range-row">
+            <input type="range" id="scop" min="2.5" max="5.5" step="0.1" value="3.87" oninput="calc()">
+            <span class="bs-range-val" id="scopOut">3.87</span>
+          </div>
+          <div class="bs-hint">HPM avg 3.87 · well-commissioned 4.1+</div>
+        </div>
+        <div class="bs-field">
+          <label>Evening/night HP load</label>
+          <div class="bs-range-row">
+            <input type="range" id="hpPeakPct" min="20" max="60" step="5" value="35" oninput="calc()">
+            <span class="bs-range-val" id="hpPeakPctOut">35%</span>
+          </div>
+          <div class="bs-hint">% of HP electricity needed after 4pm or overnight</div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div id="futureCard" style="background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1.25rem;opacity:0.45;">
-    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.04em;">With heat pump added</div>
-    <div style="font-size:32px;font-weight:500;color:var(--color-text-primary);" id="recFuture">—</div>
-    <div style="font-size:13px;color:var(--color-text-secondary);margin-top:2px;" id="recFutureBreak">—</div>
+
+  <!-- RESULTS -->
+  <div class="bs-results-hero" id="resultsPanel">
+    <div class="bs-rcard">
+      <div class="rc-label">Recommended now</div>
+      <div class="rc-val" id="recNow">—</div>
+      <div class="rc-sub" id="recNowBreak">—</div>
+    </div>
+    <div class="bs-rcard future" id="futureCard" style="opacity:0.45;">
+      <div class="rc-label">With heat pump added</div>
+      <div class="rc-val" id="recFuture">—</div>
+      <div class="rc-sub" id="recFutureBreak">—</div>
+    </div>
   </div>
-</div>
 
-<div id="workingsPanel" style="background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:1.5rem;font-size:12px;color:var(--color-text-secondary);line-height:1.8;font-family:var(--font-mono);" >
-</div>
+  <div class="bs-breakdown">
+    <div class="bd-label">How we calculated this</div>
+    <div class="bs-breakdown-lines" id="workingsPanel"></div>
+  </div>
 
-<div id="productPanel" style="display:none;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:1.5rem;">
-  <div style="font-size:12px;font-weight:500;margin-bottom:0.75rem;color:var(--color-text-primary);">Suggested battery products (nearest available sizes)</div>
-  <div id="productGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;"></div>
-</div>
+  <div class="bs-products" id="productPanel" style="display:none;">
+    <h4>Suggested battery products</h4>
+    <div class="bs-product-grid" id="productGrid"></div>
+  </div>
 
-<div style="font-size:11px;color:var(--color-text-secondary);line-height:1.7;max-width:600px;">
-  Methodology: LFP 90% usable depth of discharge assumed throughout. TOU/Go tariff adds a full-day coverage requirement (battery must store enough cheap-rate electricity to last until next charge window). Evening peak fraction from typical UK half-hourly demand profiles. Heat pump peak fraction reflects that well-commissioned heat pumps run primarily during mild daytime hours with weather compensation — only a portion of daily electricity is needed at peak tariff times. All recommendations rounded up to nearest 0.5 kWh and then to nearest product size.
-</div>
+  <div class="bs-method">
+    <strong>Methodology:</strong> LFP 90% usable depth of discharge assumed throughout. TOU/Go tariff adds a full-day coverage requirement (battery must store enough cheap-rate electricity to last until next charge window). Evening peak fraction from typical UK half-hourly demand profiles. Heat pump peak fraction reflects that well-commissioned heat pumps run primarily during mild daytime hours with weather compensation — only a portion of daily electricity is needed at peak tariff times. All recommendations rounded up to nearest 0.5 kWh and then to nearest product size.
+  </div>
 
+</div><!-- /bs-wrapper -->
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><span class="logo">Decarbon<span>arma</span></span><p>Helping UK homeowners transition to clean, affordable home energy.</p></div>
+    <div class="footer-col"><h5>Technologies</h5><a href="/#solar">Solar Panels</a><a href="/#battery">Battery Storage</a><a href="/#heatpump">Heat Pumps</a><a href="/#evcar">EV Charging</a><a href="/#ai">AI Technology</a></div>
+    <div class="footer-col"><h5>Tools</h5><a href="/ai-tariff-finder.html">Tariff Finder</a><a href="/heat-loss-estimator.html">Heat Loss Estimator</a><a href="/battery_sizing_tool.html">Battery Sizing</a></div>
+    <div class="footer-col"><h5>Support</h5><a href="/#">Contact</a><a href="/#">FAQ</a><a href="/uk-grants-guide.html">Grants Guide</a></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 Decarbonarma. All rights reserved.</span></div>
+</footer>
 </div>
 
 <script>
@@ -130,33 +317,20 @@ let tariff = 'tou';
 function setTariff(t) {
   tariff = t;
   ['tou','flat','solar'].forEach(x => {
-    const b = document.getElementById('tariff-' + x);
-    if (x === t) {
-      b.style.background = 'var(--color-background-info)';
-      b.style.color = 'var(--color-text-info)';
-      b.style.border = '0.5px solid var(--color-border-info)';
-    } else {
-      b.style.background = 'transparent';
-      b.style.color = 'var(--color-text-secondary)';
-      b.style.border = '0.5px solid var(--color-border-tertiary)';
-    }
+    document.getElementById('tariff-' + x).classList.toggle('active', x === t);
   });
   calc();
 }
 
 function toggleHP() {
   const on = document.getElementById('hasHP').checked;
-  const sec = document.getElementById('hpSection');
-  sec.style.opacity = on ? '1' : '0.4';
-  sec.style.pointerEvents = on ? 'auto' : 'none';
+  document.getElementById('hpSection').classList.toggle('disabled', !on);
   document.getElementById('futureCard').style.opacity = on ? '1' : '0.45';
   calc();
 }
 
 document.getElementById('hasEV').addEventListener('change', function() {
-  const sec = document.getElementById('evSection');
-  sec.style.opacity = this.checked ? '1' : '0.4';
-  sec.style.pointerEvents = this.checked ? 'auto' : 'none';
+  document.getElementById('evSection').classList.toggle('disabled', !this.checked);
   calc();
 });
 
@@ -268,12 +442,12 @@ function calc() {
   const html = allProds.map((p, i) => {
     const isNow = p.kwh >= currentRounded && (i === 0 || allProds[i-1].kwh < currentRounded);
     const isFuture = hasHP && p.kwh >= futureRounded && (i === 0 || allProds[i-1].kwh < futureRounded);
-    const badge = isFuture ? `<span style="font-size:10px;background:var(--color-background-success);color:var(--color-text-success);padding:2px 6px;border-radius:4px;display:block;margin-top:4px;">covers future HP</span>`
-      : isNow ? `<span style="font-size:10px;background:var(--color-background-info);color:var(--color-text-info);padding:2px 6px;border-radius:4px;display:block;margin-top:4px;">covers current</span>` : '';
+    const badge = isFuture ? `<span class="pc-badge future">Covers future HP</span>`
+      : isNow ? `<span class="pc-badge now">Covers current</span>` : '';
     const dim = p.kwh < currentRounded;
-    return `<div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.75rem;opacity:${dim?'0.45':'1'};">
-      <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);">${p.name}</div>
-      <div style="font-size:20px;font-weight:500;color:var(--color-text-primary);margin-top:2px;">${fmt(p.kwh)} kWh</div>
+    return `<div class="bs-product-card" style="opacity:${dim?'0.45':'1'};">
+      <div class="pc-name">${p.name}</div>
+      <div class="pc-kwh">${fmt(p.kwh)} kWh</div>
       ${badge}
     </div>`;
   }).join('');
@@ -282,3 +456,6 @@ function calc() {
 
 calc();
 </script>
+
+</body>
+</html>
