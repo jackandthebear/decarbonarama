@@ -127,9 +127,13 @@
   .bs-breakdown-lines { font-family:'SF Mono','Menlo','JetBrains Mono',monospace; font-size:12.5px; color:var(--stone-600); line-height:1.9; white-space:pre-wrap; word-break:break-word; }
 
   .bs-products { background:var(--white); border:1px solid var(--green-100); border-radius:18px; padding:28px; margin-bottom:24px; }
-  .bs-products h4 { font-family:'DM Serif Display',serif; font-size:18px; color:var(--green-900); margin-bottom:16px; }
+  .bs-products h4 { font-family:'DM Serif Display',serif; font-size:18px; color:var(--green-900); margin-bottom:6px; }
+  .bs-products .bs-products-sub { font-size:12.5px; color:var(--stone-600); line-height:1.6; margin-bottom:18px; max-width:640px; }
   .bs-product-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
   .bs-product-card { background:var(--green-50); border-radius:12px; padding:16px; transition:opacity 0.2s; }
+  .bs-product-card .pc-tier { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px; }
+  .bs-product-card .pc-tier.budget { color:var(--green-600); }
+  .bs-product-card .pc-tier.premium { color:#8a5c00; }
   .bs-product-card .pc-name { font-size:12.5px; font-weight:600; color:var(--stone-800); margin-bottom:4px; }
   .bs-product-card .pc-kwh { font-family:'DM Serif Display',serif; font-size:22px; color:var(--green-800); }
   .bs-product-card .pc-badge { display:inline-block; font-size:10px; font-weight:700; padding:3px 8px; border-radius:5px; margin-top:8px; text-transform:uppercase; letter-spacing:0.03em; }
@@ -291,6 +295,7 @@
 
   <div class="bs-products" id="productPanel" style="display:none;">
     <h4>Suggested battery products</h4>
+    <div class="bs-products-sub">We recommend <strong>Fogstar</strong> (budget) and <strong>Sigenergy SigenStor</strong> (premium) — both use modular, stackable packs so you can match your exact kWh target, and both have built-in cell heating for reliable performance on cold winter nights.</div>
     <div class="bs-product-grid" id="productGrid"></div>
   </div>
 
@@ -337,21 +342,22 @@ document.getElementById('hasEV').addEventListener('change', function() {
 function fmt(n) { return Math.round(n * 10) / 10; }
 
 function nearestProduct(kwh) {
+  // Budget: Fogstar (stackable 5.12kWh units, modular stacks, cell heating built in).
+  // Premium: Sigenergy SigenStor (6kWh modules, up to 6 slots, active thermal
+  // management / built-in heating pad, IP66). Both ranges are heated and stackable —
+  // the two properties that matter most for reliable UK winter performance.
   const products = [
-    { name: 'GivEnergy 5.2', kwh: 5.2 },
-    { name: 'GivEnergy 8.2', kwh: 8.2 },
-    { name: 'Pylontech Force 7.1', kwh: 7.1 },
-    { name: 'GivEnergy 9.5', kwh: 9.5 },
-    { name: 'BYD HVS 10.2', kwh: 10.24 },
-    { name: 'Pylontech Force 10.65', kwh: 10.65 },
-    { name: 'GivEnergy 13.5', kwh: 13.5 },
-    { name: 'BYD HVS 15.4', kwh: 15.36 },
-    { name: 'Pylontech Force 14.2', kwh: 14.2 },
-    { name: 'Pylontech Force 17.75', kwh: 17.75 },
-    { name: 'BYD HVM 22.1', kwh: 22.1 },
-    { name: 'Pylontech Force 21.3', kwh: 21.3 },
-    { name: '2× GivEnergy 13.5', kwh: 27.0 },
-    { name: 'Pylontech Force 28.4', kwh: 28.4 }
+    { name: 'Fogstar 5.12kWh', kwh: 5.12, tier: 'Budget' },
+    { name: 'Sigenergy SigenStor 6.0', kwh: 6.0, tier: 'Premium' },
+    { name: 'Sigenergy SigenStor 12.0', kwh: 12.0, tier: 'Premium' },
+    { name: 'Fogstar 16.1kWh', kwh: 16.1, tier: 'Budget' },
+    { name: 'Sigenergy SigenStor 18.0', kwh: 18.0, tier: 'Premium' },
+    { name: 'Sigenergy SigenStor 24.0', kwh: 24.0, tier: 'Premium' },
+    { name: 'Fogstar 32.2kWh', kwh: 32.2, tier: 'Budget' },
+    { name: 'Sigenergy SigenStor 30.0', kwh: 30.0, tier: 'Premium' },
+    { name: 'Sigenergy SigenStor 36.0', kwh: 36.0, tier: 'Premium' },
+    { name: 'Fogstar 48.3kWh', kwh: 48.3, tier: 'Budget' },
+    { name: 'Fogstar 64.4kWh', kwh: 64.4, tier: 'Budget' },
   ];
   const sorted = products.filter(p => p.kwh >= kwh).sort((a,b) => a.kwh - b.kwh);
   const below = products.filter(p => p.kwh < kwh).sort((a,b) => b.kwh - a.kwh);
@@ -473,7 +479,9 @@ function calc() {
     const badge = isFuture ? `<span class="pc-badge future">Covers future HP</span>`
       : isNow ? `<span class="pc-badge now">Covers current</span>` : '';
     const dim = p.kwh < currentRounded;
+    const tierClass = p.tier === 'Premium' ? 'premium' : 'budget';
     return `<div class="bs-product-card" style="opacity:${dim?'0.45':'1'};">
+      <div class="pc-tier ${tierClass}">${p.tier}</div>
       <div class="pc-name">${p.name}</div>
       <div class="pc-kwh">${fmt(p.kwh)} kWh</div>
       ${badge}
