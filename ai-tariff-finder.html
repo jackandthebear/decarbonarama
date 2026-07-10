@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Tariff Finder: Find Your Cheapest UK Energy Tariff | Decarbonarma</title>
+<meta name="description" content="Answer 5 quick questions and get matched to the best Octopus or EDF tariff for your solar, battery, EV or heat pump setup, with estimated annual savings.">
+<link rel="canonical" href="https://decarbonarma.com/ai-tariff-finder.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Decarbonarma">
+<meta property="og:title" content="AI Tariff Finder: Find Your Cheapest UK Energy Tariff | Decarbonarma">
+<meta property="og:description" content="Answer 5 quick questions and get matched to the best Octopus or EDF tariff for your solar, battery, EV or heat pump setup, with estimated annual savings.">
+<meta property="og:url" content="https://decarbonarma.com/ai-tariff-finder.html">
+<meta property="og:image" content="https://decarbonarma.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Tariff Finder: Find Your Cheapest UK Energy Tariff | Decarbonarma">
+<meta name="twitter:description" content="Answer 5 quick questions and get matched to the best Octopus or EDF tariff for your solar, battery, EV or heat pump setup, with estimated annual savings.">
+<meta name="twitter:image" content="https://decarbonarma.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "AI Tariff Finder",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (web browser)",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"},
+  "description": "Answer 5 quick questions and get matched to the best Octopus or EDF tariff for your solar, battery, EV or heat pump setup, with estimated annual savings.",
+  "url": "https://decarbonarma.com/ai-tariff-finder.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Decarbonarma",
+    "logo": {"@type": "ImageObject", "url": "https://decarbonarma.com/logo.png"}
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-50: #f0faf3; --green-100: #dcf1e3; --green-200: #aee3c1;
+    --green-400: #34c759; --green-600: #1f8a4c; --green-800: #14622f; --green-900: #0b3a1c;
+    --stone-50: #f5f5f7; --stone-100: #ececf0; --stone-200: #d2d2d7;
+    --stone-600: #6e6e73; --stone-800: #1d1d1f; --white: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: var(--white); color: var(--stone-800);
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.011em;
+  }
+  a { color: inherit; }
+  .site-header { padding:14px 32px; border-bottom:1px solid var(--stone-100); display:flex; align-items:center; justify-content:space-between; }
+  .site-header img { height:28px; display:block; }
+  .site-header .back-link { font-size:13px; color:var(--stone-600); text-decoration:none; font-weight:500; }
+  .site-header .back-link:hover { color:var(--green-600); }
+  footer { padding:48px 32px 32px; border-top:1px solid var(--stone-100); margin-top:40px; }
+  .footer-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:32px; max-width:1120px; margin:0 auto 24px; }
+  .footer-brand .logo { font-family:'DM Serif Display',serif; font-size:20px; color:var(--green-900); }
+  .footer-brand .logo span { color:var(--green-600); }
+  .footer-brand p { font-size:13px; color:var(--stone-600); margin-top:10px; line-height:1.6; }
+  .footer-col h5 { font-size:12px; text-transform:uppercase; letter-spacing:0.06em; color:var(--stone-600); margin-bottom:12px; }
+  .footer-col a { display:block; font-size:14px; color:var(--stone-800); text-decoration:none; margin-bottom:8px; }
+  .footer-col a:hover { color:var(--green-600); }
+  .footer-bottom { max-width:1120px; margin:0 auto; font-size:12px; color:var(--stone-600); border-top:1px solid var(--stone-100); padding-top:16px; }
+
+    /* ── TARIFF FINDER STYLES ── */
+    .tf-hero {
+      background: linear-gradient(150deg, #0e3520 0%, #1a5530 50%, #2d8a4a 100%);
+      padding: 72px 80px 60px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .tf-hero::before {
+      content:''; position:absolute; width:500px; height:500px; border-radius:50%;
+      background:rgba(92,186,120,0.1); top:-150px; left:50%; transform:translateX(-50%);
+      pointer-events:none;
+    }
+    .tf-hero .page-tag { background:rgba(255,255,255,0.15); color:rgba(255,255,255,0.9); }
+    .tf-hero h1 { font-family:'DM Serif Display',serif; font-size:clamp(36px,4vw,58px); color:#fff; letter-spacing:-0.5px; line-height:1.1; margin-bottom:16px; }
+    .tf-hero h1 em { font-style:italic; color:#a8e2b7; }
+    .tf-hero p { font-size:18px; color:rgba(255,255,255,0.75); max-width:560px; margin:0 auto 12px; line-height:1.7; }
+    .tf-trust { display:flex; justify-content:center; gap:32px; margin-top:28px; flex-wrap:wrap; }
+    .tf-trust-item { display:flex; align-items:center; gap:8px; font-size:13px; color:rgba(255,255,255,0.6); }
+
+    /* WIZARD WRAPPER */
+    .tf-wrapper { max-width:740px; margin:0 auto; padding:60px 24px 80px; }
+
+    /* PROGRESS BAR */
+    .tf-progress { margin-bottom:40px; }
+    .tf-progress-track { height:4px; background:var(--green-100); border-radius:4px; margin-bottom:10px; }
+    .tf-progress-fill { height:4px; background:var(--green-600); border-radius:4px; transition:width 0.4s ease; }
+    .tf-progress-label { font-size:13px; color:var(--stone-600); text-align:right; }
+
+    /* STEP */
+    .tf-step { display:none; animation:fadeUp 0.3s ease; }
+    .tf-step.active { display:block; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    .tf-step-q { font-family:'DM Serif Display',serif; font-size:28px; color:var(--green-900); margin-bottom:8px; line-height:1.2; }
+    .tf-step-sub { font-size:15px; color:var(--stone-600); margin-bottom:32px; line-height:1.6; }
+
+    /* OPTION BUTTONS */
+    .tf-options { display:grid; gap:14px; }
+    .tf-options.cols2 { grid-template-columns:1fr 1fr; }
+    .tf-options.cols3 { grid-template-columns:repeat(3,1fr); }
+    .tf-opt {
+      background:var(--white); border:1.5px solid var(--green-200);
+      border-radius:16px; padding:20px 18px;
+      cursor:pointer; text-align:left;
+      transition:all 0.2s; display:flex; align-items:center; gap:14px;
+      font-family:'Instrument Sans',sans-serif;
+    }
+    .tf-opt:hover { border-color:var(--green-400); background:var(--green-50); transform:translateY(-2px); }
+    .tf-opt.selected { border-color:var(--green-600); background:var(--green-50); box-shadow:0 0 0 3px rgba(45,138,74,0.12); }
+    .tf-opt-icon { font-size:28px; flex-shrink:0; }
+    .tf-opt-text strong { display:block; font-size:15px; font-weight:600; color:var(--green-900); margin-bottom:3px; }
+    .tf-opt-text span { font-size:13px; color:var(--stone-600); line-height:1.4; display:block; }
+
+    /* MULTI SELECT */
+    .tf-multi-hint { font-size:13px; color:var(--green-600); margin-bottom:20px; font-weight:500; }
+
+    /* SLIDER */
+    .tf-slider-wrap { background:var(--white); border:1.5px solid var(--green-200); border-radius:16px; padding:28px; }
+    .tf-slider-val { font-family:'DM Serif Display',serif; font-size:48px; color:var(--green-800); text-align:center; margin-bottom:8px; }
+    .tf-slider-val span { font-size:20px; color:var(--stone-600); font-family:'Instrument Sans',sans-serif; font-weight:400; }
+    .tf-slider-wrap input[type=range] { width:100%; margin:16px 0 8px; accent-color:var(--green-600); }
+    .tf-slider-labels { display:flex; justify-content:space-between; font-size:12px; color:var(--stone-600); }
+
+    /* NAV BUTTONS */
+    .tf-nav { display:flex; gap:14px; margin-top:32px; align-items:center; }
+    .tf-btn-next {
+      background:var(--green-600); color:var(--white);
+      padding:14px 32px; border-radius:10px; font-size:15px; font-weight:600;
+      border:none; cursor:pointer; transition:all 0.2s; flex:1;
+    }
+    .tf-btn-next:hover { background:var(--green-800); }
+    .tf-btn-next:disabled { background:var(--stone-200); color:var(--stone-600); cursor:not-allowed; }
+    .tf-btn-back {
+      background:transparent; color:var(--stone-600);
+      padding:14px 20px; border-radius:10px; font-size:15px; font-weight:500;
+      border:1.5px solid var(--stone-200); cursor:pointer; transition:all 0.2s;
+    }
+    .tf-btn-back:hover { border-color:var(--stone-600); }
+
+    /* LOADING */
+    .tf-loading { text-align:center; padding:48px 0; }
+    .tf-loading-spinner {
+      width:56px; height:56px; border:3px solid var(--green-100);
+      border-top-color:var(--green-600); border-radius:50%;
+      animation:spin 0.8s linear infinite; margin:0 auto 24px;
+    }
+    @keyframes spin { to{transform:rotate(360deg)} }
+    .tf-loading h3 { font-family:'DM Serif Display',serif; font-size:24px; color:var(--green-900); margin-bottom:8px; }
+    .tf-loading p { font-size:15px; color:var(--stone-600); }
+    .tf-loading-steps { margin-top:28px; display:flex; flex-direction:column; gap:10px; max-width:320px; margin-left:auto; margin-right:auto; }
+    .tf-ls { display:flex; align-items:center; gap:10px; font-size:14px; color:var(--stone-600); opacity:0; transition:opacity 0.4s; }
+    .tf-ls.visible { opacity:1; }
+    .tf-ls-dot { width:8px; height:8px; border-radius:50%; background:var(--green-400); flex-shrink:0; }
+
+    /* RESULT */
+    .tf-result { display:none; }
+    .tf-result.active { display:block; }
+    .tf-result-intro { font-size:15px; color:var(--stone-600); line-height:1.75; margin-bottom:32px; background:var(--green-50); border-radius:16px; padding:24px; border:1px solid var(--green-100); }
+
+    .tf-tariff-card {
+      background:var(--white); border-radius:20px; border:2px solid var(--green-400);
+      overflow:hidden; margin-bottom:20px;
+      box-shadow:0 8px 32px rgba(45,138,74,0.12);
+    }
+    .tf-tariff-card.secondary { border-color:var(--green-200); box-shadow:none; }
+    .tf-tariff-header {
+      background:var(--green-800); padding:20px 28px;
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+    }
+    .tf-tariff-card.secondary .tf-tariff-header { background:var(--stone-100); }
+    .tf-tariff-header-left { display:flex; align-items:center; gap:14px; }
+    .tf-tariff-logo { font-size:28px; }
+    .tf-tariff-header h3 { font-family:'DM Serif Display',serif; font-size:22px; color:var(--white); margin-bottom:2px; }
+    .tf-tariff-card.secondary .tf-tariff-header h3 { color:var(--green-900); }
+    .tf-tariff-header .sub { font-size:13px; color:rgba(255,255,255,0.65); }
+    .tf-tariff-card.secondary .tf-tariff-header .sub { color:var(--stone-600); }
+    .tf-best-badge {
+      background:var(--green-400); color:var(--white);
+      font-size:12px; font-weight:600; padding:6px 14px; border-radius:100px;
+      white-space:nowrap;
+    }
+    .tf-tariff-body { padding:24px 28px; }
+    .tf-tariff-why { font-size:15px; color:var(--stone-600); line-height:1.7; margin-bottom:20px; }
+    .tf-tariff-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:24px; }
+    .tf-stat { text-align:center; background:var(--green-50); border-radius:12px; padding:14px 10px; }
+    .tf-tariff-card.secondary .tf-stat { background:var(--stone-100); }
+    .tf-stat .val { font-size:20px; font-weight:600; color:var(--green-800); display:block; margin-bottom:4px; }
+    .tf-stat .lbl { font-size:11px; color:var(--stone-600); text-transform:uppercase; letter-spacing:0.5px; }
+    .tf-cta-row { display:flex; gap:12px; flex-wrap:wrap; }
+    .tf-cta-primary {
+      flex:1; background:var(--green-600); color:var(--white);
+      padding:15px 24px; border-radius:10px; font-size:15px; font-weight:600;
+      text-decoration:none; text-align:center; transition:background 0.2s;
+      border:none; cursor:pointer; display:block;
+    }
+    .tf-cta-primary:hover { background:var(--green-800); }
+    .tf-cta-secondary {
+      background:transparent; color:var(--green-600);
+      padding:15px 20px; border-radius:10px; font-size:14px; font-weight:500;
+      text-decoration:none; border:1.5px solid var(--green-200); text-align:center;
+      transition:all 0.2s; display:block;
+    }
+    .tf-cta-secondary:hover { border-color:var(--green-400); background:var(--green-50); }
+    .tf-referral-note { font-size:12px; color:var(--stone-600); text-align:center; margin-top:10px; }
+    .tf-referral-note strong { color:var(--green-600); }
+
+    .tf-restart {
+      text-align:center; margin-top:40px; padding-top:32px; border-top:1px solid var(--green-100);
+    }
+    .tf-restart button {
+      background:transparent; color:var(--stone-600); font-size:14px;
+      border:none; cursor:pointer; text-decoration:underline;
+    }
+
+    /* AI DISCLAIMER */
+    .tf-ai-note { display:flex; gap:10px; align-items:flex-start; background:var(--stone-100); border-radius:12px; padding:16px; margin-top:32px; }
+    .tf-ai-note span { font-size:13px; color:var(--stone-600); line-height:1.6; }
+
+    @media(max-width:600px) {
+      .tf-hero { padding:60px 24px 48px; }
+      .tf-options.cols2, .tf-options.cols3 { grid-template-columns:1fr; }
+      .tf-tariff-stats { grid-template-columns:1fr 1fr; }
+      .tf-step-q { font-size:22px; }
+    }
+  
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/"><img src="logo.svg" alt="Decarbonarma"></a>
+  <a href="/" class="back-link">&larr; Back to Decarbonarma</a>
+</header>
+
+<div id="page-tariff" class="page">
+
+  
+
+  <!-- HERO -->
+  <section class="tf-hero">
+    <div class="page-tag" style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;padding:6px 14px;border-radius:100px;margin-bottom:20px;">⚡ AI Tariff Finder</div>
+    <h1>Find your <em>perfect</em><br>energy tariff</h1>
+    <p>Answer 5 quick questions and our AI will match you to the best Octopus or EDF tariff for your home — and tell you exactly how much you could save.</p>
+    <div class="tf-trust">
+      <div class="tf-trust-item">✅ Takes 60 seconds</div>
+      <div class="tf-trust-item">🎯 Personalised to your home</div>
+      <div class="tf-trust-item">💷 You & us both earn on a switch</div>
+    </div>
+  </section>
+
+  <div class="tf-wrapper">
+
+    <!-- PROGRESS -->
+    <div class="tf-progress" id="tf-progress-bar">
+      <div class="tf-progress-track"><div class="tf-progress-fill" id="tf-fill" style="width:20%"></div></div>
+      <div class="tf-progress-label" id="tf-prog-label">Step 1 of 5</div>
+    </div>
+
+    <!-- ── STEP 1: Home tech ── -->
+    <div class="tf-step active" id="tf-step-1">
+      <h2 class="tf-step-q">What green technology do you have at home?</h2>
+      <p class="tf-step-sub">Select all that apply — this is the biggest factor in choosing your tariff.</p>
+      <p class="tf-multi-hint">✓ Select all that apply</p>
+      <div class="tf-options cols2" id="tf-q1-opts">
+        <button class="tf-opt" data-val="solar" onclick="toggleMulti(this,'q1')">
+          <span class="tf-opt-icon">☀️</span>
+          <div class="tf-opt-text"><strong>Solar Panels</strong><span>I generate my own electricity</span></div>
+        </button>
+        <button class="tf-opt" data-val="battery" onclick="toggleMulti(this,'q1')">
+          <span class="tf-opt-icon">🔋</span>
+          <div class="tf-opt-text"><strong>Home Battery</strong><span>I store solar or cheap grid energy</span></div>
+        </button>
+        <button class="tf-opt" data-val="ev" onclick="toggleMulti(this,'q1')">
+          <span class="tf-opt-icon">⚡</span>
+          <div class="tf-opt-text"><strong>Electric Vehicle</strong><span>I charge at home overnight</span></div>
+        </button>
+        <button class="tf-opt" data-val="heatpump" onclick="toggleMulti(this,'q1')">
+          <span class="tf-opt-icon">♨️</span>
+          <div class="tf-opt-text"><strong>Heat Pump</strong><span>Electric heating, no gas boiler</span></div>
+        </button>
+        <button class="tf-opt" data-val="none" onclick="toggleMulti(this,'q1')">
+          <span class="tf-opt-icon">🏠</span>
+          <div class="tf-opt-text"><strong>None yet</strong><span>Standard home, looking to switch</span></div>
+        </button>
+        <button class="tf-opt" data-val="planning" onclick="toggleMulti(this,'q1')">
+          <span class="tf-opt-icon">📋</span>
+          <div class="tf-opt-text"><strong>Planning to install</strong><span>Getting ready to go green</span></div>
+        </button>
+      </div>
+      <div class="tf-nav">
+        <button class="tf-btn-next" id="tf-next-1" onclick="goStep(2)" disabled>Continue →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 2: Smart meter ── -->
+    <div class="tf-step" id="tf-step-2">
+      <h2 class="tf-step-q">Do you have a smart meter?</h2>
+      <p class="tf-step-sub">Smart meters unlock the best time-of-use tariffs — essential for Octopus Agile and Go.</p>
+      <div class="tf-options cols3">
+        <button class="tf-opt" data-val="yes" onclick="selectSingle(this,'q2')">
+          <span class="tf-opt-icon">✅</span>
+          <div class="tf-opt-text"><strong>Yes</strong><span>I have a smart meter installed</span></div>
+        </button>
+        <button class="tf-opt" data-val="no" onclick="selectSingle(this,'q2')">
+          <span class="tf-opt-icon">🔧</span>
+          <div class="tf-opt-text"><strong>No</strong><span>Still on a traditional meter</span></div>
+        </button>
+        <button class="tf-opt" data-val="unsure" onclick="selectSingle(this,'q2')">
+          <span class="tf-opt-icon">❓</span>
+          <div class="tf-opt-text"><strong>Not sure</strong><span>I'll check my meter</span></div>
+        </button>
+      </div>
+      <div class="tf-nav">
+        <button class="tf-btn-back" onclick="goStep(1)">← Back</button>
+        <button class="tf-btn-next" id="tf-next-2" onclick="goStep(3)" disabled>Continue →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: Usage pattern ── -->
+    <div class="tf-step" id="tf-step-3">
+      <h2 class="tf-step-q">When do you use the most electricity?</h2>
+      <p class="tf-step-sub">Your daily routine determines which tariff structure saves you the most money.</p>
+      <div class="tf-options" style="grid-template-columns:1fr">
+        <button class="tf-opt" data-val="daytime" onclick="selectSingle(this,'q3')">
+          <span class="tf-opt-icon">🌅</span>
+          <div class="tf-opt-text"><strong>Mostly during the day</strong><span>Work from home, retired, or home with young children</span></div>
+        </button>
+        <button class="tf-opt" data-val="evening" onclick="selectSingle(this,'q3')">
+          <span class="tf-opt-icon">🌆</span>
+          <div class="tf-opt-text"><strong>Mostly evenings</strong><span>Out at work all day, heavy usage after 5pm</span></div>
+        </button>
+        <button class="tf-opt" data-val="overnight" onclick="selectSingle(this,'q3')">
+          <span class="tf-opt-icon">🌙</span>
+          <div class="tf-opt-text"><strong>Flexible — I can shift loads overnight</strong><span>Happy to run dishwasher, washing machine, and charge EV overnight</span></div>
+        </button>
+        <button class="tf-opt" data-val="mixed" onclick="selectSingle(this,'q3')">
+          <span class="tf-opt-icon">🔄</span>
+          <div class="tf-opt-text"><strong>All day, fairly evenly spread</strong><span>No strong peak times</span></div>
+        </button>
+      </div>
+      <div class="tf-nav">
+        <button class="tf-btn-back" onclick="goStep(2)">← Back</button>
+        <button class="tf-btn-next" id="tf-next-3" onclick="goStep(4)" disabled>Continue →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 4: Monthly bill ── -->
+    <div class="tf-step" id="tf-step-4">
+      <h2 class="tf-step-q">What's your typical monthly electricity bill?</h2>
+      <p class="tf-step-sub">An estimate is fine — this helps us calculate your potential savings.</p>
+      <div class="tf-slider-wrap">
+        <div class="tf-slider-val">£<span id="tf-bill-val">80</span><span>/month</span></div>
+        <input type="range" min="20" max="300" value="80" step="5" id="tf-bill-slider" oninput="updateBill(this.value)">
+        <div class="tf-slider-labels"><span>£20</span><span>£150</span><span>£300+</span></div>
+      </div>
+      <div class="tf-nav" style="margin-top:24px;">
+        <button class="tf-btn-back" onclick="goStep(3)">← Back</button>
+        <button class="tf-btn-next" onclick="goStep(5)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 5: Current supplier ── -->
+    <div class="tf-step" id="tf-step-5">
+      <h2 class="tf-step-q">Who is your current energy supplier?</h2>
+      <p class="tf-step-sub">This helps us understand your switching journey and the best next step for you.</p>
+      <div class="tf-options cols2">
+        <button class="tf-opt" data-val="octopus" onclick="selectSingle(this,'q5')">
+          <span class="tf-opt-icon">🐙</span>
+          <div class="tf-opt-text"><strong>Octopus Energy</strong><span>Already with Octopus</span></div>
+        </button>
+        <button class="tf-opt" data-val="edf" onclick="selectSingle(this,'q5')">
+          <span class="tf-opt-icon">⚡</span>
+          <div class="tf-opt-text"><strong>EDF Energy</strong><span>Already with EDF</span></div>
+        </button>
+        <button class="tf-opt" data-val="bg" onclick="selectSingle(this,'q5')">
+          <span class="tf-opt-icon">🔵</span>
+          <div class="tf-opt-text"><strong>British Gas</strong><span>Currently with British Gas</span></div>
+        </button>
+        <button class="tf-opt" data-val="eeon" onclick="selectSingle(this,'q5')">
+          <span class="tf-opt-icon">🟢</span>
+          <div class="tf-opt-text"><strong>E.ON / E.ON Next</strong><span>Currently with E.ON</span></div>
+        </button>
+        <button class="tf-opt" data-val="other" onclick="selectSingle(this,'q5')">
+          <span class="tf-opt-icon">🏢</span>
+          <div class="tf-opt-text"><strong>Other supplier</strong><span>Scottish Power, Ovo, etc.</span></div>
+        </button>
+        <button class="tf-opt" data-val="unsure_sup" onclick="selectSingle(this,'q5')">
+          <span class="tf-opt-icon">❓</span>
+          <div class="tf-opt-text"><strong>Not sure</strong><span>I'd need to check a bill</span></div>
+        </button>
+      </div>
+      <div class="tf-nav">
+        <button class="tf-btn-back" onclick="goStep(4)">← Back</button>
+        <button class="tf-btn-next" id="tf-next-5" onclick="getRecommendation()" disabled>Find My Tariff →</button>
+      </div>
+    </div>
+
+    <!-- ── LOADING ── -->
+    <div class="tf-step" id="tf-step-loading">
+      <div class="tf-loading">
+        <div class="tf-loading-spinner"></div>
+        <h3>Analysing your energy profile…</h3>
+        <p>Our AI is matching your home to the best available tariffs</p>
+        <div class="tf-loading-steps">
+          <div class="tf-ls" id="tfl1"><div class="tf-ls-dot"></div>Reviewing your green technology setup</div>
+          <div class="tf-ls" id="tfl2"><div class="tf-ls-dot"></div>Checking current tariff rates</div>
+          <div class="tf-ls" id="tfl3"><div class="tf-ls-dot"></div>Calculating potential savings</div>
+          <div class="tf-ls" id="tfl4"><div class="tf-ls-dot"></div>Preparing your personalised report</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── RESULT ── -->
+    <div class="tf-result" id="tf-result">
+      <h2 style="font-family:'DM Serif Display',serif;font-size:32px;color:var(--green-900);margin-bottom:8px;">Your personalised tariff report</h2>
+      <p style="font-size:15px;color:var(--stone-600);margin-bottom:28px;">Based on your answers, here's what our AI recommends for your home.</p>
+
+      <div class="tf-result-intro" id="tf-ai-intro">Loading your personalised analysis…</div>
+
+      <!-- PRIMARY TARIFF -->
+      <div class="tf-tariff-card" id="tf-primary-card">
+        <div class="tf-tariff-header">
+          <div class="tf-tariff-header-left">
+            <div class="tf-tariff-logo" id="tf-p-logo">🐙</div>
+            <div>
+              <h3 id="tf-p-name">Octopus Agile</h3>
+              <div class="sub" id="tf-p-provider">Octopus Energy</div>
+            </div>
+          </div>
+          <div class="tf-best-badge">⭐ Best Match</div>
+        </div>
+        <div class="tf-tariff-body">
+          <p class="tf-tariff-why" id="tf-p-why">Loading…</p>
+          <div class="tf-tariff-stats">
+            <div class="tf-stat"><span class="val" id="tf-p-saving">£0</span><span class="lbl">Est. annual saving</span></div>
+            <div class="tf-stat"><span class="val" id="tf-p-rate">—</span><span class="lbl">Peak unit rate</span></div>
+            <div class="tf-stat"><span class="val" id="tf-p-score">—</span><span class="lbl">Match score</span></div>
+          </div>
+          <div class="tf-cta-row">
+            <a href="#" id="tf-p-link" target="_blank" class="tf-cta-primary">Switch to this tariff →</a>
+            <a href="/" class="tf-cta-secondary">Learn about AI optimisation</a>
+          </div>
+          <p class="tf-referral-note" id="tf-p-ref-note">🎁 Use our referral link and <strong>you get £50 credit</strong> — and so do we. Win-win.</p>
+        </div>
+      </div>
+
+      <!-- SECONDARY TARIFF -->
+      <div class="tf-tariff-card secondary" id="tf-secondary-card">
+        <div class="tf-tariff-header">
+          <div class="tf-tariff-header-left">
+            <div class="tf-tariff-logo" id="tf-s-logo">⚡</div>
+            <div>
+              <h3 id="tf-s-name">Octopus Go</h3>
+              <div class="sub" id="tf-s-provider">Octopus Energy</div>
+            </div>
+          </div>
+          <div style="font-size:13px;color:var(--stone-600);font-weight:500;">Alternative pick</div>
+        </div>
+        <div class="tf-tariff-body">
+          <p class="tf-tariff-why" id="tf-s-why">Loading…</p>
+          <div class="tf-tariff-stats">
+            <div class="tf-stat"><span class="val" id="tf-s-saving">£0</span><span class="lbl">Est. annual saving</span></div>
+            <div class="tf-stat"><span class="val" id="tf-s-rate">—</span><span class="lbl">Peak unit rate</span></div>
+            <div class="tf-stat"><span class="val" id="tf-s-score">—</span><span class="lbl">Match score</span></div>
+          </div>
+          <div class="tf-cta-row">
+            <a href="#" id="tf-s-link" target="_blank" class="tf-cta-primary" style="background:var(--green-800);">Switch to this tariff →</a>
+          </div>
+          <p class="tf-referral-note" id="tf-s-ref-note">🎁 Use our referral link — <strong>£50 credit for you</strong> when you switch.</p>
+        </div>
+      </div>
+
+      <div class="tf-ai-note">
+        <span>🤖</span>
+        <span>This recommendation is generated by AI based on the information you provided and current UK tariff data. Energy prices and tariff terms change regularly — always check the latest rates on the supplier's website before switching. This page contains referral links; Decarbonarma may earn a commission if you switch.</span>
+      </div>
+
+      <div class="tf-restart">
+        <button onclick="restartFinder()">↺ Start again with different answers</button>
+      </div>
+    </div>
+
+  </div><!-- /tf-wrapper -->
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand"><span class="logo">Decarbon<span>arma</span></span><p>Helping UK homeowners transition to clean, affordable home energy.</p></div>
+      <div class="footer-col"><h5>Technologies</h5><a href="/#solar">Solar Panels</a><a href="/#battery">Battery Storage</a><a href="/#heatpump">Heat Pumps</a><a href="/#evcar">EV Charging</a><a href="/#ai">AI Technology</a></div>
+      <div class="footer-col"><h5>Company</h5><a href="/">About Us</a><a href="/#casestudies">Case Studies</a><a href="/#articles">Blog</a></div>
+      <div class="footer-col"><h5>Support</h5><a href="/#">Contact</a><a href="/#">FAQ</a><a href="/uk-grants-guide.html">Grants Guide</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 Decarbonarma. All rights reserved.</span></div>
+  </footer>
+</div>
+
+<script>
+/* ── TARIFF FINDER LOGIC ── */
+const tfAnswers = { q1: [], q2: null, q3: null, bill: 80, q5: null };
+
+function toggleMulti(btn, q) {
+  const val = btn.dataset.val;
+  if (val === 'none' || val === 'planning') {
+    document.querySelectorAll('#tf-q1-opts .tf-opt').forEach(b => b.classList.remove('selected'));
+    btn.classList.toggle('selected');
+    tfAnswers[q] = btn.classList.contains('selected') ? [val] : [];
+  } else {
+    document.querySelectorAll('#tf-q1-opts .tf-opt[data-val="none"], #tf-q1-opts .tf-opt[data-val="planning"]').forEach(b => b.classList.remove('selected'));
+    tfAnswers[q] = tfAnswers[q].filter(v => v !== 'none' && v !== 'planning');
+    btn.classList.toggle('selected');
+    if (btn.classList.contains('selected')) { if (!tfAnswers[q].includes(val)) tfAnswers[q].push(val); }
+    else { tfAnswers[q] = tfAnswers[q].filter(v => v !== val); }
+  }
+  document.getElementById('tf-next-1').disabled = tfAnswers[q].length === 0;
+}
+
+function selectSingle(btn, q) {
+  btn.closest('.tf-step').querySelectorAll('.tf-opt').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  tfAnswers[q] = btn.dataset.val;
+  const nextMap = { q2: 'tf-next-2', q3: 'tf-next-3', q5: 'tf-next-5' };
+  if (nextMap[q]) document.getElementById(nextMap[q]).disabled = false;
+}
+
+function updateBill(v) {
+  document.getElementById('tf-bill-val').textContent = v;
+  tfAnswers.bill = parseInt(v);
+}
+
+function goStep(n) {
+  document.querySelectorAll('.tf-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('tf-step-' + n).classList.add('active');
+  const pct = (n / 5) * 100;
+  document.getElementById('tf-fill').style.width = pct + '%';
+  document.getElementById('tf-prog-label').textContent = n <= 5 ? `Step ${n} of 5` : 'Complete';
+  window.scrollTo({ top: document.querySelector('.tf-wrapper').offsetTop - 90, behavior: 'smooth' });
+}
+
+/* ── AFFILIATE LINKS — REPLACE WITH YOUR CODES ── */
+const AFFILIATE = {
+  octopus_agile:  'https://share.octopus.energy/clean-hero-615',
+  octopus_go:     'https://share.octopus.energy/clean-hero-615',
+  octopus_flux:   'https://share.octopus.energy/clean-hero-615',
+  octopus_cosy:   'https://share.octopus.energy/clean-hero-615',
+  octopus_intelli:'https://share.octopus.energy/clean-hero-615',
+  edf_goelectric: 'https://www.edfenergy.com/electric-cars/tariffs?aff=YOUR-EDF-CODE',
+  edf_standard:   'https://www.edfenergy.com/for-homes/tariffs?aff=YOUR-EDF-CODE',
+  edf_freephase:  'https://www.edfenergy.com/gas-and-electricity/freephase?aff=YOUR-EDF-CODE',
+};
+
+const TARIFF_DATA = {
+  octopus_agile:  { name:'Octopus Agile', provider:'Octopus Energy', logo:'🐙', rate:'variable', refNote:'🎁 Use our link and <strong>you get £50 credit</strong> — and so do we.' },
+  octopus_go:     { name:'Octopus Go', provider:'Octopus Energy', logo:'🐙', rate:'7.5p overnight', refNote:'🎁 Switch via our link for <strong>£50 credit each</strong>.' },
+  octopus_flux:   { name:'Octopus Flux', provider:'Octopus Energy', logo:'🐙', rate:'buy & sell optimised', refNote:'🎁 Switch via our link for <strong>£50 credit each</strong>.' },
+  octopus_cosy:   { name:'Octopus Cosy', provider:'Octopus Energy', logo:'🐙', rate:'cheap afternoons', refNote:'🎁 Switch via our link for <strong>£50 credit each</strong>.' },
+  octopus_intelli:{ name:'Intelligent Octopus', provider:'Octopus Energy', logo:'🐙', rate:'auto-optimised', refNote:'🎁 Switch via our link for <strong>£50 credit each</strong>.' },
+  edf_goelectric: { name:'EDF GoElectric 35', provider:'EDF Energy', logo:'⚡', rate:'9p overnight', refNote:'🎁 Switch via our EDF link to support Decarbonarma.' },
+  edf_standard:   { name:'EDF Standard Variable', provider:'EDF Energy', logo:'⚡', rate:'standard rates', refNote:'Compare and switch via our EDF partner link.' },
+  edf_freephase:  { name:'EDF FreePhase Dynamic', provider:'EDF Energy', logo:'⚡', rate:'3 bands, daily prices', refNote:'🎁 Switch via our EDF link to support Decarbonarma.' },
+};
+
+async function getRecommendation() {
+  document.getElementById('tf-progress-bar').style.display = 'none';
+  document.querySelectorAll('.tf-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('tf-step-loading').classList.add('active');
+  window.scrollTo({ top: document.querySelector('.tf-wrapper').offsetTop - 90, behavior: 'smooth' });
+
+  // Animate loading steps
+  const steps = ['tfl1','tfl2','tfl3','tfl4'];
+  steps.forEach((id, i) => setTimeout(() => document.getElementById(id).classList.add('visible'), i * 700));
+
+  const tech = tfAnswers.q1.join(', ') || 'none';
+  const smartMeter = tfAnswers.q2;
+  const usagePattern = tfAnswers.q3;
+  const bill = tfAnswers.bill;
+  const supplier = tfAnswers.q5;
+
+  const prompt = `You are an expert UK energy tariff advisor working for Decarbonarma, a green home technology website.
+
+A homeowner has completed a tariff finder quiz. Here are their answers:
+- Green technology at home: ${tech}
+- Smart meter: ${smartMeter}
+- Main usage pattern: ${usagePattern}
+- Monthly electricity bill: £${bill}
+- Current supplier: ${supplier}
+
+Available tariffs to recommend from (choose the two BEST fits):
+1. octopus_agile - Half-hourly variable pricing. Best for: solar+battery owners who can shift loads, tech-savvy users, smart meter required
+2. octopus_go - Cheap overnight rate (7.5p/kWh 00:30-04:30). Best for: EV owners, smart meter required
+3. octopus_flux - Buy cheap, sell high, designed for solar+battery. Best for: solar AND battery owners, smart meter required
+4. octopus_cosy - Cheap afternoons (4-7pm). Best for: heat pump owners, daytime users, smart meter required  
+5. octopus_intelli - AI automatically charges EV at cheapest times. Best for: EV owners wanting no hassle, smart meter required
+6. edf_goelectric - 9p/kWh overnight EV charging. Best for: EV owners, alternative to Octopus
+7. edf_standard - Standard variable. Best for: no smart meter, not ready for time-of-use
+8. edf_freephase - Three bands (red/amber/green), daily wholesale prices. Best for: EDF customers wanting Agile-like savings with simpler 3-price structure, smart meter required
+
+Rules (follow strictly in this priority order):
+- If has EV (regardless of other tech): primary = octopus_intelli. NEVER recommend octopus_go when EV is present.
+- If has solar + battery + EV: primary = octopus_flux, secondary = octopus_intelli
+- If has solar + battery (no EV): primary = octopus_flux, secondary = octopus_agile
+- If has solar only (no battery, no EV): primary = octopus_agile, secondary = octopus_flux (as upgrade path once they add a battery)
+- If has heat pump + EV: primary = octopus_intelli, secondary = octopus_cosy
+- If has heat pump (no EV): primary = octopus_cosy, secondary = octopus_agile
+- If EV only (no solar, no battery): primary = octopus_intelli, secondary = edf_goelectric
+- If no smart meter: primary = edf_standard, secondary = octopus_intelli (note smart meter needed to unlock full savings)
+- If planning/none + smart meter: primary = octopus_intelli as future-proof, secondary = octopus_agile
+- If planning/none + no smart meter: primary = edf_standard, secondary = octopus_intelli
+- EDF customers wanting simple time-of-use without 48 half-hourly slots: edf_freephase is a good fit
+- NEVER recommend octopus_go when the customer has an EV — always use octopus_intelli instead
+
+Respond ONLY in this exact JSON format, no other text:
+{
+  "intro": "2-3 sentences personalised to their setup explaining the recommendation in plain English. Mention their specific tech. Be warm and specific.",
+  "primary": {
+    "tariff_key": "one of the 7 keys above",
+    "why": "2 sentences explaining exactly why this is their best match, referencing their specific answers",
+    "estimated_annual_saving": "£X-£Y (realistic range based on £${bill}/month bill)",
+    "match_score": "X/10"
+  },
+  "secondary": {
+    "tariff_key": "one of the 7 keys above",
+    "why": "1-2 sentences on why this is a solid alternative",
+    "estimated_annual_saving": "£X-£Y",
+    "match_score": "X/10"
+  }
+}`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const data = await res.json();
+    const text = data.content.map(c => c.text || '').join('').replace(/```json|```/g,'').trim();
+    const parsed = JSON.parse(text);
+    setTimeout(() => renderResult(parsed), 500);
+  } catch(e) {
+    const hasSolar = tfAnswers.q1.includes('solar');
+    const hasBattery = tfAnswers.q1.includes('battery');
+    const hasEV = tfAnswers.q1.includes('ev');
+    const hasHeatPump = tfAnswers.q1.includes('heatpump');
+    let fallbackPrimary, fallbackSecondary;
+    if (hasEV && hasSolar && hasBattery) {
+      fallbackPrimary = { tariff_key: 'octopus_flux', why: 'With solar, battery and an EV, Octopus Flux is designed exactly for you — buy cheap, sell high, and let your system optimise automatically.', estimated_annual_saving: '£400-£700', match_score: '10/10' };
+      fallbackSecondary = { tariff_key: 'octopus_intelli', why: 'Intelligent Octopus will automatically charge your EV at the cheapest times, a great alternative if you want simplicity over maximum optimisation.', estimated_annual_saving: '£300-£500', match_score: '9/10' };
+    } else if (hasEV) {
+      fallbackPrimary = { tariff_key: 'octopus_intelli', why: 'Intelligent Octopus Go is purpose-built for EV owners — it automatically charges your car at the cheapest times overnight with zero effort from you.', estimated_annual_saving: '£300-£500', match_score: '10/10' };
+      fallbackSecondary = { tariff_key: 'edf_goelectric', why: 'EDF GoElectric 35 offers a competitive overnight rate for EV charging and is a solid alternative to Octopus.', estimated_annual_saving: '£200-£350', match_score: '7/10' };
+    } else if (hasSolar && hasBattery) {
+      fallbackPrimary = { tariff_key: 'octopus_flux', why: 'Octopus Flux is built specifically for solar + battery owners — it lets you buy cheap and sell high automatically.', estimated_annual_saving: '£350-£600', match_score: '10/10' };
+      fallbackSecondary = { tariff_key: 'octopus_agile', why: 'Octopus Agile\'s variable half-hourly pricing pairs brilliantly with a battery that can store cheap overnight energy.', estimated_annual_saving: '£250-£450', match_score: '8/10' };
+    } else {
+      fallbackPrimary = { tariff_key: 'octopus_agile', why: 'Octopus Agile gives you access to the cheapest half-hourly rates in the UK — ideal for shifting your usage to low-cost windows.', estimated_annual_saving: '£200-£400', match_score: '8/10' };
+      fallbackSecondary = { tariff_key: 'edf_standard', why: 'A reliable standard variable tariff if you prefer a simpler billing structure without time-of-use pricing.', estimated_annual_saving: '£100-£200', match_score: '6/10' };
+    }
+    const fallback = {
+      intro: `Based on your home profile, we've matched you to the tariffs that will work hardest for your setup. Here's what our AI recommends.`,
+      primary: fallbackPrimary,
+      secondary: fallbackSecondary
+    };
+    setTimeout(() => renderResult(fallback), 500);
+  }
+}
+
+function renderResult(data) {
+  document.getElementById('tf-step-loading').classList.remove('active');
+  document.getElementById('tf-result').classList.add('active');
+
+  document.getElementById('tf-ai-intro').innerHTML = data.intro;
+
+  const p = data.primary;
+  const pData = TARIFF_DATA[p.tariff_key] || TARIFF_DATA['octopus_go'];
+  document.getElementById('tf-p-logo').textContent = pData.logo;
+  document.getElementById('tf-p-name').textContent = pData.name;
+  document.getElementById('tf-p-provider').textContent = pData.provider;
+  document.getElementById('tf-p-why').textContent = p.why;
+  document.getElementById('tf-p-saving').textContent = p.estimated_annual_saving;
+  document.getElementById('tf-p-rate').textContent = pData.rate;
+  document.getElementById('tf-p-score').textContent = p.match_score;
+  document.getElementById('tf-p-link').href = AFFILIATE[p.tariff_key] || '#';
+  document.getElementById('tf-p-ref-note').innerHTML = pData.refNote;
+
+  const s = data.secondary;
+  const sData = TARIFF_DATA[s.tariff_key] || TARIFF_DATA['edf_standard'];
+  document.getElementById('tf-s-logo').textContent = sData.logo;
+  document.getElementById('tf-s-name').textContent = sData.name;
+  document.getElementById('tf-s-provider').textContent = sData.provider;
+  document.getElementById('tf-s-why').textContent = s.why;
+  document.getElementById('tf-s-saving').textContent = s.estimated_annual_saving;
+  document.getElementById('tf-s-rate').textContent = sData.rate;
+  document.getElementById('tf-s-score').textContent = s.match_score;
+  document.getElementById('tf-s-link').href = AFFILIATE[s.tariff_key] || '#';
+  document.getElementById('tf-s-ref-note').innerHTML = sData.refNote;
+
+  window.scrollTo({ top: document.querySelector('.tf-wrapper').offsetTop - 90, behavior: 'smooth' });
+}
+
+function restartFinder() {
+  tfAnswers.q1 = []; tfAnswers.q2 = null; tfAnswers.q3 = null; tfAnswers.bill = 80; tfAnswers.q5 = null;
+  document.querySelectorAll('.tf-opt').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.tf-btn-next').forEach(b => { if(b.id !== 'tf-next-1' && b.closest('#tf-step-4')) return; b.disabled = true; });
+  document.getElementById('tf-next-1').disabled = true;
+  document.getElementById('tf-bill-slider').value = 80;
+  document.getElementById('tf-bill-val').textContent = 80;
+  document.getElementById('tf-result').classList.remove('active');
+  document.getElementById('tf-progress-bar').style.display = 'block';
+  ['tfl1','tfl2','tfl3','tfl4'].forEach(id => document.getElementById(id).classList.remove('visible'));
+  goStep(1);
+}
+
+</script>
+
+</body>
+</html>
