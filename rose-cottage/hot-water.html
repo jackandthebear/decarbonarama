@@ -59,6 +59,17 @@ h2.section{font-family:"Playfair Display",serif;font-size:20px;color:var(--fores
 .insight .d{font-size:14.5px;color:var(--ink-2);line-height:1.5;}
 
 .foot{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--ink-3);margin-top:28px;line-height:1.6;text-align:center;}
+
+.solar-strip{background:linear-gradient(135deg,#1A3D2B,#2d8a4a);border-radius:14px;padding:20px 22px 18px;margin-bottom:26px;color:#fff;}
+.solar-strip .solar-kicker{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#bfe8cf;margin-bottom:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.solar-strip .solar-kicker .dot{width:7px;height:7px;border-radius:50%;background:#8fe3a6;box-shadow:0 0 0 3px rgba(143,227,166,0.25);display:inline-block;}
+.solar-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px;}
+.solar-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);border-radius:10px;padding:12px 14px;}
+.solar-card .label{font-family:"JetBrains Mono",monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:#bfe8cf;margin-bottom:5px;}
+.solar-card .value{font-family:"Playfair Display",serif;font-size:22px;font-weight:900;color:#fff;}
+.solar-card .foot{font-size:11.5px;color:rgba(255,255,255,0.68);margin-top:3px;text-align:left;}
+.solar-context{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:rgba(255,255,255,0.78);display:flex;flex-wrap:wrap;gap:6px 20px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.15);}
+.solar-context b{color:#fff;}
 </style>
 </head>
 <body>
@@ -70,6 +81,14 @@ h2.section{font-family:"Playfair Display",serif;font-size:20px;color:var(--fores
     <div class="dateline">Ledger through <b id="ledgerThrough">—</b> · report generated <b id="genDate">—</b></div>
     <p class="lede">A real 16.08 kWp solar + Sunamp thermal-battery system, tracked day by day. This page shows exactly how much of Rose Cottage's hot water demand solar covers before any grid (Octopus overnight) top-up is needed — regenerated daily from the household's own energy ledger.</p>
   </div>
+
+  <!-- SOLAR_LIVE_START -->
+  <div class="solar-strip">
+    <div class="solar-kicker"><span class="dot"></span> Solar right now · refreshed hourly · <span id="solarLiveUpdated">—</span></div>
+    <div class="solar-cards" id="solar-live-cards"></div>
+    <div class="solar-context" id="solar-live-context"></div>
+  </div>
+  <!-- SOLAR_LIVE_END -->
 
   <div class="system-context">
     <div><b>16.08 kWp</b> array (22×510W IC8HC + 12×405W Viridian)</div>
@@ -107,7 +126,7 @@ h2.section{font-family:"Playfair Display",serif;font-size:20px;color:var(--fores
   <div class="insights" id="insights-grid"></div>
 
   <div class="foot">
-    Source: Rose Cottage hot-water day/night ledger (Homey → eddi meter, Octopus overnight rate 6.9p/kWh). Regenerated automatically each morning by a scheduled Decarbonarma reporting task.<br>
+    Sources: solar strip from Homey (Enphase Envoy + Main Roof/Garage CT clamps + sonnenBatterie integration + Octopus smart meter), refreshed hourly. Hot-water ledger below from the day/night ledger (Homey → eddi meter, Octopus overnight rate 6.9p/kWh), regenerated each morning.<br>
     <a href="https://www.buymeacoffee.com/jackandthebear" target="_blank" rel="noopener" style="color:var(--green);">☕ Support Decarbonarma</a>
   </div>
 </div>
@@ -131,6 +150,24 @@ const LEDGER_ROWS = [
   {date:"2026-07-07", day_solar_kwh:2.47,  night_octopus_kwh:0,     total_kwh:2.47, octopus_pct:0.0,  octopus_cost_gbp:0,    solar_offset_gbp:0.75},
   {date:"2026-07-08", day_solar_kwh:8.491, night_octopus_kwh:0.319, total_kwh:8.81, octopus_pct:3.6,  octopus_cost_gbp:0.02, solar_offset_gbp:2.58},
 ];
+
+// SOLAR_LIVE_DATA_START
+// Regenerated hourly by the rose-cottage-solar-live scheduled task, from Homey device readings.
+// Main Roof = North+South Enphase panels combined (Homey CT clamp). Garage = 4 Enphase panels on the garage roof.
+// Enphase combined = the Enphase Envoy's own site-wide meter (Main Roof + Garage), used as the authoritative Enphase total.
+// Sonnen = original 2022 array on the lower roof, read via Homey's sonnenBatterie integration (NOT the Sonnen app/website,
+// which has a known bug showing solar generation at roughly 2x the real figure).
+// Grid import/export figures are the Octopus smart meter (source of truth for the whole house), not the Sonnen circuit's own grid CT.
+const SOLAR_LIVE = {
+  generated_at: "2026-07-10T16:14:00Z",
+  main_roof:       { power_w: 3047, lifetime_kwh: 5007.81 },
+  garage:          { power_w: 859,  lifetime_kwh: 1303.61 },
+  enphase_total:   { power_w: 4317, today_kwh: 54.66, lifetime_kwh: 7592.86 },
+  sonnen:          { power_w: 1783, lifetime_kwh: 4225.16 },
+  battery:         { soc_pct: 99, state: "charging", power_w: 807, lifetime_charged_kwh: 2396.42, lifetime_discharged_kwh: 2682.06 },
+  grid:            { power_w: -359, today_export_kwh: 38.60, today_import_kwh: 14.27, lifetime_export_kwh: 7786.69, lifetime_import_kwh: 85142.08 },
+};
+// SOLAR_LIVE_DATA_END
 
 let charts = {};
 
@@ -159,6 +196,34 @@ function isoWeekRange(dateStr) {
   const monday = new Date(dt); monday.setDate(dt.getDate() + diffToMon);
   const sunday = new Date(monday); sunday.setDate(monday.getDate() + 6);
   return { start: monday, end: sunday };
+}
+
+function fmtKw(w) { return (w/1000).toFixed(w >= 995 ? 1 : 2); }
+
+function renderSolarLive(d) {
+  const genDate = new Date(d.generated_at);
+  document.getElementById('solarLiveUpdated').textContent = genDate.toLocaleString('en-GB', { weekday:'short', day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
+
+  const combinedNowW = d.enphase_total.power_w + d.sonnen.power_w;
+  const combinedLifetimeKwh = d.enphase_total.lifetime_kwh + d.sonnen.lifetime_kwh;
+
+  const cards = [
+    { label: 'Main Roof (N+S)', value: `${fmtKw(d.main_roof.power_w)} kW`, foot: `${fmt(d.main_roof.lifetime_kwh,0)} kWh lifetime` },
+    { label: 'Garage', value: `${fmtKw(d.garage.power_w)} kW`, foot: `${fmt(d.garage.lifetime_kwh,0)} kWh lifetime` },
+    { label: 'Sonnen (2022 array)', value: `${fmtKw(d.sonnen.power_w)} kW`, foot: `${fmt(d.sonnen.lifetime_kwh,0)} kWh lifetime · via Homey, not Sonnen app` },
+    { label: 'All solar, right now', value: `${fmtKw(combinedNowW)} kW`, foot: `${fmt(combinedLifetimeKwh,0)} kWh lifetime combined` },
+    { label: 'Enphase today', value: `${fmt(d.enphase_total.today_kwh,1)} kWh`, foot: `Main Roof + Garage combined` },
+  ];
+  document.getElementById('solar-live-cards').innerHTML = cards.map(c => `
+    <div class="solar-card"><div class="label">${c.label}</div><div class="value">${c.value}</div><div class="foot">${c.foot}</div></div>
+  `).join('');
+
+  const gridDir = d.grid.power_w < 0 ? 'exporting' : 'importing';
+  const gridAbsKw = fmtKw(Math.abs(d.grid.power_w));
+  document.getElementById('solar-live-context').innerHTML = `
+    <div><b>Battery</b> ${d.battery.soc_pct}% · ${d.battery.state} at ${fmtKw(d.battery.power_w)} kW</div>
+    <div><b>Grid (Octopus)</b> ${gridDir} ${gridAbsKw} kW · ${fmt(d.grid.today_export_kwh,1)} kWh exported / ${fmt(d.grid.today_import_kwh,1)} kWh imported today</div>
+  `;
 }
 
 function buildCards(container, rows) {
@@ -283,6 +348,8 @@ function buildInsights(rows) {
 }
 
 (function init(){
+  renderSolarLive(SOLAR_LIVE);
+
   const rows = LEDGER_ROWS;
   const latestDate = rows[rows.length-1].date;
   document.getElementById('ledgerThrough').textContent = shortDate(latestDate);
