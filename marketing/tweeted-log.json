@@ -1,0 +1,21 @@
+{
+  "_comment": "Articles already posted to X. The auto-tweet task posts 1 article NOT in this list per run, newest-first (top of the grid), running 5x/day (9,12,15,18,21). Backlog cleared 2026-07-07 so all existing articles get posted over ~6 days, then only genuinely new articles post. To skip an article, add its filename here. To force a re-tweet, remove it.",
+  "backlogClearedOn": "2026-07-07",
+  "tweeted": [
+    "air-to-air-heat-pumps-uk-cooling-2026.html",
+    "ev-charger-solar-battery-ct-clamps.html",
+    "air-source-heat-pumps.html",
+    "uk-wind-status-h1-2026.html",
+    "uk-nuclear-power-2026.html",
+    "rose-cottage-h1-2026.html",
+    "samsung-ehs-quint-deep-dive.html",
+    "superfoil-solar-roof-case-study.html",
+    "air-to-air-sunamp-case-study.html",
+    "heat-pump-worth-it-2026.html",
+    "solar-panels-worth-it-2026.html",
+    "air-to-air-heat-pumps-future.html",
+    "uk-grid-security-of-supply-2026.html",
+    "crazy-ev-lease-deals-2026.html",
+    "frontera-pay-for-itself.html"
+  ]
+}
