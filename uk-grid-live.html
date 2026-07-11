@@ -179,7 +179,8 @@
     <div class="ng-foot">
       Generation: <a href="https://bmrs.elexon.co.uk/" target="_blank" rel="noopener">Elexon Insights (FUELINST)</a>
       · Carbon intensity: <a href="https://carbonintensity.org.uk/" target="_blank" rel="noopener">National Grid ESO</a><br>
-      FUELINST is transmission-metered generation &mdash; embedded solar &amp; small-scale generation are not included.
+      FUELINST is transmission-metered generation; embedded solar &amp; wind are layered in from
+      <a href="https://www.neso.energy/data-portal/demand-data-update" target="_blank" rel="noopener">NESO&rsquo;s Demand Data Update</a> when that feed is reachable.
       Page auto-refreshes every 60&nbsp;s.
     </div>
   </div>
@@ -192,14 +193,18 @@
 (function(){
   const CI_API = "https://api.carbonintensity.org.uk";
   const ELEXON = "https://data.elexon.co.uk/bmrs/api/v1";
+  // NESO "Demand Data Update" CSV — half-hourly, includes embedded (distribution-connected)
+  // solar & wind output that never appears in Elexon FUELINST. Same source grid.iamkate.com uses.
+  const NESO_CSV = "https://api.neso.energy/dataset/7a12172a-939c-404c-b581-a6128b74f588/resource/177f6fa4-ae49-4182-81ea-0c6b35f26ca6/download/demanddataupdate.csv";
   const FUEL_TO_GROUP = {CCGT:"gas",OCGT:"gas",OIL:"oil",COAL:"coal",NUCLEAR:"nuclear",
-    WIND:"wind",NPSHYD:"hydro",PS:"ps",BIOMASS:"biomass",OTHER:"other"};
+    WIND:"wind",NPSHYD:"hydro",PS:"ps",BIOMASS:"biomass",SOLAR:"solar",OTHER:"other"};
   const GROUPS = {
     gas:    {label:"Gas",            color:"#f0823f", cat:"fossil"},
     oil:    {label:"Oil",            color:"#6b4f3a", cat:"fossil"},
     coal:   {label:"Coal",           color:"#4a4a4a", cat:"fossil"},
     nuclear:{label:"Nuclear",        color:"#a06fd6", cat:"nuclear"},
     wind:   {label:"Wind",           color:"#3aae8c", cat:"renewable"},
+    solar:  {label:"Solar",          color:"#f4c430", cat:"renewable"},
     hydro:  {label:"Hydro",          color:"#3d8fd1", cat:"renewable"},
     biomass:{label:"Biomass",        color:"#8a6d3b", cat:"renewable"},
     ps:     {label:"Pumped storage", color:"#9aa7b3", cat:"storage"},
@@ -208,6 +213,7 @@
   };
   const INDEX_COLOR = {"very low":"#2e9e6f","low":"#5cb85c","moderate":"#f0ad4e","high":"#f0823f","very high":"#d9534f"};
   let donut, started=false;
+  let embeddedSolarMW = 0, embeddedWindMW = 0, embeddedOk = false;
 
   const $ = id => document.getElementById(id);
   const fmtTime = d => d.toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
@@ -216,8 +222,53 @@
   const hideErr = id => { const e=$(id); if(e) e.style.display="none"; };
 
   async function loadAll(){
+    await loadEmbedded();               // must resolve before loadGeneration() merges it in
     await Promise.all([loadGeneration(), loadIntensity()]);
     if($("ng-updated")) $("ng-updated").textContent = "Updated " + fmtTime(new Date());
+  }
+
+  // ---- Embedded solar & wind (NESO Demand Data Update) ----
+  async function loadEmbedded(){
+    try{
+      const r = await fetch(NESO_CSV);
+      if(!r.ok) throw new Error("HTTP "+r.status);
+      const text = await r.text();
+      const lines = text.trim().split("\n");
+      const header = lines[0].split(",");
+      const col = name => header.indexOf(name);
+      const iDate=col("SETTLEMENT_DATE"), iPeriod=col("SETTLEMENT_PERIOD"),
+            iSolar=col("EMBEDDED_SOLAR_GENERATION"), iWind=col("EMBEDDED_WIND_GENERATION");
+      if([iDate,iPeriod,iSolar,iWind].some(i=>i<0)) throw new Error("unexpected CSV columns");
+
+      // Determine the current UK settlement period (30-min slots from local midnight, DST-aware)
+      const fmt = new Intl.DateTimeFormat("en-GB", {timeZone:"Europe/London", year:"numeric", month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit", hourCycle:"h23"});
+      const p = Object.fromEntries(fmt.formatToParts(new Date()).map(x=>[x.type,x.value]));
+      const today = p.year+"-"+p.month+"-"+p.day;
+      const curPeriod = Math.floor((Number(p.hour)*60 + Number(p.minute)) / 30) + 1;
+      const keyOf = (d,per) => d + "-" + String(per).padStart(2,"0");
+      const nowKey = keyOf(today, curPeriod);
+
+      // The feed carries both settled actuals and same/future-day estimates (FORECAST_ACTUAL_INDICATOR
+      // 'A' vs 'F'). Embedded solar/wind is modelled rather than metered, so it's never really "actual" —
+      // rows for the current half-hour stay tagged 'F' until backfilled later. Take the latest row whose
+      // period has already begun, ignoring that flag — the same approach grid.iamkate.com uses.
+      let best = null;
+      for(let i=1;i<lines.length;i++){
+        const c = lines[i].split(",");
+        const k = keyOf(c[iDate], Number(c[iPeriod]));
+        if(k <= nowKey && (!best || k > best.k)){
+          best = {k, solar:Number(c[iSolar])||0, wind:Number(c[iWind])||0};
+        }
+      }
+      if(!best) throw new Error("no current-period row found");
+
+      embeddedSolarMW = best.solar;
+      embeddedWindMW  = best.wind;
+      embeddedOk = true;
+    }catch(e){
+      embeddedOk = false;
+      console.warn("Embedded solar/wind unavailable (NESO feed unreachable): " + e.message);
+    }
   }
 
   async function loadIntensity(){
@@ -254,10 +305,17 @@
       for(const x of recs){
         const code = fuelOf(x), mw = mwOf(x);
         if(code.startsWith("INT")){ importsMW += mw; continue; }
-        const g = FUEL_TO_GROUP[code] || (code.includes("WIND")?"wind":"other");
+        const g = FUEL_TO_GROUP[code] || (code.includes("WIND")?"wind":code.includes("SOLAR")?"solar":"other");
         agg[g] = (agg[g]||0) + mw;
       }
       if(importsMW > 0) agg.imports = importsMW;
+
+      // Layer in embedded (distribution-connected) solar & wind — invisible to FUELINST
+      if(embeddedOk){
+        agg.solar = (agg.solar||0) + embeddedSolarMW;
+        agg.wind  = (agg.wind||0)  + embeddedWindMW;
+      }
+
       renderGeneration(agg, new Date(latest));
       hideErr("ng-gen-err");
     }catch(e){
@@ -271,7 +329,7 @@
       .map(([k,v])=>({key:k, mw:v, ...GROUPS[k]})).sort((a,b)=>b.mw-a.mw);
     const total = rows.reduce((s,r)=>s+r.mw, 0);
     $("ng-gen-total").textContent = gw(total);
-    $("ng-gen-note").textContent = "Transmission-metered output · settlement " + fmtTime(when);
+    $("ng-gen-note").textContent = (embeddedOk ? "Transmission + embedded solar/wind" : "Transmission-metered only (embedded feed unavailable)") + " · settlement " + fmtTime(when);
     const cat = {fossil:0, renewable:0, nuclear:0};
     rows.forEach(r=>{ if(r.cat in cat) cat[r.cat]+=r.mw; });
     setStat("fossil",cat.fossil,total); setStat("renew",cat.renewable,total);
