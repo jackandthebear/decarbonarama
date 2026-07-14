@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Putin's Accidental Climate Policy | Decarbonarama</title>
+<meta name="description" content="How the invasion of Ukraine and the collapse of Russian gas supply drove Europe's clean energy transition further and faster than three decades of climate policy — and where that argument breaks down.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d1510;
+    --bg-raised:#121c15;
+    --green:#4ade80;
+    --green-dim:#2f6b47;
+    --stone-100:#f4f2ec;
+    --stone-300:#d8d4c8;
+    --stone-500:#9a9788;
+    --stone-700:#5c5a4f;
+    --rule:#22301f;
+    --amber:#e0b24a;
+    --serif:'DM Serif Display', Georgia, serif;
+    --sans:'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--stone-300);
+    font-family:var(--sans);
+    font-size:17px;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+
+  header.masthead{
+    border-bottom:1px solid var(--rule);
+    padding:20px 0;
+  }
+  header.masthead .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .brand{
+    font-family:var(--serif);
+    font-size:1.35rem;
+    color:var(--stone-100);
+    letter-spacing:0.01em;
+    text-decoration:none;
+  }
+  .brand span{color:var(--green);}
+  .back-link{
+    font-size:0.85rem;
+    color:var(--stone-500);
+    text-decoration:none;
+    border-bottom:1px solid var(--rule);
+  }
+  .back-link:hover{color:var(--green);border-color:var(--green-dim);}
+
+  .article-head{
+    padding:64px 0 40px;
+    border-bottom:1px solid var(--rule);
+  }
+  .eyebrow{
+    font-size:0.75rem;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    color:var(--amber);
+    font-weight:600;
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:2.6rem;
+    line-height:1.15;
+    color:var(--stone-100);
+    margin:0 0 20px;
+    letter-spacing:-0.01em;
+  }
+  .dek{
+    font-size:1.15rem;
+    color:var(--stone-500);
+    line-height:1.55;
+    margin:0 0 24px;
+    max-width:60ch;
+  }
+  .meta{
+    display:flex;
+    gap:18px;
+    font-size:0.85rem;
+    color:var(--stone-700);
+  }
+
+  article{padding:48px 0 80px;}
+
+  article h2{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:1.6rem;
+    color:var(--stone-100);
+    margin:48px 0 18px;
+    letter-spacing:-0.005em;
+  }
+  article p{margin:0 0 22px;}
+  article p.lede{
+    font-size:1.2rem;
+    color:var(--stone-100);
+    line-height:1.6;
+  }
+  article ul{margin:0 0 24px;padding-left:0;list-style:none;}
+  article li{
+    position:relative;
+    padding-left:26px;
+    margin-bottom:14px;
+  }
+  article li::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0.65em;
+    width:8px;
+    height:8px;
+    background:var(--green);
+    border-radius:1px;
+    opacity:0.85;
+  }
+  article strong{color:var(--stone-100);font-weight:600;}
+  em{color:var(--stone-100);font-style:italic;}
+
+  .callout{
+    background:var(--bg-raised);
+    border-left:3px solid var(--green);
+    padding:22px 26px;
+    margin:32px 0;
+    border-radius:2px;
+  }
+  .callout p{margin:0;color:var(--stone-100);font-size:0.98rem;}
+  .callout p + p{margin-top:12px;}
+  .callout .callout-label{
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    color:var(--green);
+    font-weight:600;
+    margin-bottom:10px;
+    display:block;
+  }
+
+  .counter-box{
+    background:transparent;
+    border:1px solid var(--rule);
+    border-left:3px solid var(--amber);
+    padding:22px 26px;
+    margin:32px 0;
+    border-radius:2px;
+  }
+  .counter-box .callout-label{color:var(--amber);}
+  .counter-box ol{margin:14px 0 0;padding-left:20px;}
+  .counter-box li{padding-left:6px;}
+  .counter-box li::before{display:none;}
+
+  .verdict{
+    margin-top:56px;
+    padding-top:40px;
+    border-top:1px solid var(--rule);
+  }
+  .verdict .eyebrow{margin-bottom:14px;}
+  .verdict p{font-size:1.05rem;}
+  .kicker-line{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:1.35rem;
+    color:var(--green);
+    margin-top:28px;
+    line-height:1.4;
+  }
+
+  .stat-strip{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--rule);
+    margin:36px 0;
+    border:1px solid var(--rule);
+  }
+  .stat{
+    background:var(--bg);
+    padding:22px 18px;
+    text-align:center;
+  }
+  .stat .num{
+    font-family:var(--serif);
+    font-size:1.9rem;
+    color:var(--green);
+    display:block;
+    line-height:1.1;
+  }
+  .stat .label{
+    font-size:0.75rem;
+    color:var(--stone-500);
+    margin-top:8px;
+    line-height:1.4;
+  }
+
+  footer{
+    border-top:1px solid var(--rule);
+    padding:32px 0 60px;
+    font-size:0.8rem;
+    color:var(--stone-700);
+  }
+
+  @media (max-width:640px){
+    h1{font-size:1.9rem;}
+    .article-head{padding:44px 0 32px;}
+    .stat-strip{grid-template-columns:1fr;}
+    .stat{border-bottom:1px solid var(--rule);}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <a href="/" class="brand">Decarbon<span>arama</span></a>
+    <a href="/" class="back-link">&larr; All articles</a>
+  </div>
+</header>
+
+<div class="article-head">
+  <div class="wrap">
+    <div class="eyebrow">Energy Policy &middot; Opinion</div>
+    <h1>Putin's Accidental Climate Policy</h1>
+    <p class="dek">How the Kremlin out-performed the green lobby — and where that argument runs out of road.</p>
+    <div class="meta">
+      <span>Decarbonarama</span>
+      <span>&middot;</span>
+      <span>2026</span>
+    </div>
+  </div>
+</div>
+
+<article>
+  <div class="wrap">
+
+    <p class="lede">For thirty years, the environmental movement made the moral case for quitting fossil fuels. It took Vladimir Putin about three weeks in February 2022 to make the economic and security case — and Europe has been building faster ever since.</p>
+
+    <p>That is an uncomfortable thing to say out loud at a climate conference, but the numbers are hard to argue with. This isn't a claim that decades of subsidy schemes, R&D funding, and carbon pricing did nothing — they built the technology base that made a fast pivot possible at all. But the pivot itself, the sharp inflection in the deployment curve, tracks the invasion of Ukraine and the subsequent weaponisation of gas supply far more closely than it tracks any climate summit, target revision, or activist campaign.</p>
+
+    <h2>The baseline the green lobby built</h2>
+    <p>Wind and solar didn't start at zero in 2022. The EU had spent two decades on feed-in tariffs, renewable obligations, and falling module costs, and by 2019 wind and solar were already supplying roughly 20% of EU electricity. That's a real achievement, and it's the platform everything since has been built on — you can't scale a supply chain overnight, and the manufacturing and installer base that existed pre-invasion is precisely why Europe could respond so fast when it needed to.</p>
+    <p>But "20% and rising slowly" is a different growth story to what happened next.</p>
+
+    <h2>The inflection point</h2>
+    <p>Russia's invasion of Ukraine, and its subsequent throttling of pipeline gas to Europe, did something thirty years of COP summits hadn't managed: it made fossil fuel dependency an acute, visible, daily political liability rather than an abstract future risk. The response wasn't primarily driven by new climate ambition — it was driven by governments and households trying to get out from under Gazprom's thumb as fast as possible.</p>
+
+    <div class="stat-strip">
+      <div class="stat">
+        <span class="num">30%</span>
+        <span class="label">of EU electricity from wind &amp; solar in 2025 — overtaking fossil power (29%) for the first time on record</span>
+      </div>
+      <div class="stat">
+        <span class="num">9.2%</span>
+        <span class="label">EU coal share — a historic low, with 19 member states now below 5%</span>
+      </div>
+      <div class="stat">
+        <span class="num">50%</span>
+        <span class="label">of Germany's space-heating market now heat pumps — matching gas boilers unit for unit</span>
+      </div>
+    </div>
+
+    <p>Germany's shift wasn't gradual policy churn; it was a direct reaction to losing Russian pipeline gas and then discovering how expensive and geopolitically fraught the LNG replacement was. IEEFA calculates that the roughly 1.1 million heat pumps Germany installed from 2022 to 2025 saved the country €1.3 billion on LNG imports over three years alone.</p>
+
+    <h2>The pattern repeats every time gas gets expensive</h2>
+    <p>The really telling evidence isn't the 2022 spike itself — it's what happened every time a fresh fossil shock has hit since. In March 2026, when Iran closed the Strait of Hormuz and gas and oil prices jumped again, European heat pump sales rose 17% quarter-on-quarter across 11 countries, with France, Germany and Poland averaging 25% growth. UK government data explicitly linked a fresh wave of household solar adoption that spring to households wanting to generate their own power in the wake of the same crisis.</p>
+
+    <p>This is the opposite of what a purely values-driven, subsidy-driven market would look like. A market moved primarily by climate conviction doesn't lurch upward in lockstep with an oil price shock in the Persian Gulf. A market moved primarily by energy security and cost anxiety does exactly that.</p>
+
+    <div class="callout">
+      <span class="callout-label">The flywheel</span>
+      <p>SolarPower Europe estimates solar generation alone has saved Europe more than €100 million a day since March 2026 — over €3 billion so far, potentially €67.5 billion for the year if gas stays expensive.</p>
+      <p>Every fossil shock now makes the renewable alternative look better by comparison, which makes the next round of adoption easier — precisely the flywheel effect three decades of climate messaging struggled to generate on its own.</p>
+    </div>
+
+    <h2>Where this argument runs into its own limits</h2>
+    <p>It would be intellectually dishonest to leave it there, because the "Putin did it, not the greens" framing oversimplifies in at least three ways worth stating plainly.</p>
+
+    <div class="counter-box">
+      <span class="callout-label">Counterpoints</span>
+      <ol>
+        <li><strong>The war also drove a fossil rebound.</strong> EU gas generation actually rose 8% in 2025 as countries scrambled for alternatives to Russian supply, and the power sector's gas import bill hit €32 billion, 16% higher than the year before — much of it now flowing to US LNG rather than Russian pipelines. Putin didn't hand Europe a clean transition; he handed it a scramble, and some of that scramble went to more fossil fuel, not less.</li>
+        <li><strong>The technology and subsidy base predates the war.</strong> None of the 2025–26 acceleration would have been possible without the manufacturing scale-up, cost curves, and installer training pipelines that climate policy spent two decades building. Germany's heat pump industry didn't materialise in three weeks in 2022; it was ready to scale because it already existed.</li>
+        <li><strong>Subsidy design still matters at the margin.</strong> France's heat pump sales actually fell in 2025 specifically because of domestic subsidy uncertainty, even as the wider European market — facing the same gas prices — grew. Austria's Q1 2026 sales dropped 30% for the same reason. Energy security anxiety creates demand; policy stability still determines whether that demand converts into installations.</li>
+      </ol>
+    </div>
+
+    <div class="verdict">
+      <div class="eyebrow">Decarbonarama verdict</div>
+      <p>Putin didn't build Europe's clean energy transition. But he did something the green lobby's most optimistic modelling never quite managed: he made the cost of fossil fuel dependency immediate, personal, and impossible to ignore for tens of millions of European households and every government finance ministry on the continent — and in doing so, he collapsed the political economy of decarbonisation from "expensive long-term virtue" into "obvious near-term self-interest." That reframing, more than any single climate target, is what's driving the numbers in this piece.</p>
+      <p class="kicker-line">The green lobby built the ladder. Putin is the one who set the building on fire.</p>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <div class="wrap">
+    Decarbonarama &middot; data-led, no affiliate links, no sponsored content.
+  </div>
+</footer>
+
+</body>
+</html>

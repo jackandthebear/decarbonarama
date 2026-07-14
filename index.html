@@ -417,6 +417,7 @@
   </section>
   <script>
   const latestSlides = [
+    {icon:'🛢️', grad:'linear-gradient(135deg,#1e293b,#d97706)', meta:'Analysis · July 2026', title:"Putin's accidental climate policy", teaser:"The invasion of Ukraine and the collapse of Russian gas supply did more for Europe's clean energy transition than three decades of climate policy. Where that argument holds — and where it runs out of road.", src:'./articles/putin-vs-green-lobby.html', full:"Putin's Accidental Climate Policy"},
     {icon:'🧩', grad:'linear-gradient(135deg,#1A3D2B,#0D6E7B)', meta:'Product watch · July 2026', title:'Two heat pumps just landed. Do they change the game?', teaser:"Daikin's X Series and Samsung's EHS Quint both blend air-to-air and air-to-water into one box, days apart. What's real, what's still a press release, and what it means for your decision.", src:'./articles/daikin-x-series-wait-or-buy.html', full:'Daikin X Series vs Samsung EHS Quint: Do Either Change the Game?'},
     {icon:'🔋', grad:'linear-gradient(135deg,#1a5c3a,#2b6fb0)', meta:'Case study · H1 2026 update', title:'Six months, four arrays, one battery — the real H1 2026 numbers', teaser:'North, South, Garage and the original Sonnen array compared panel-by-panel, plus battery cycling, grid position and the real financial return for H1 2026.', src:'./articles/rose-cottage-h1-2026.html', full:'Six Months, Four Arrays, One Battery'},
     {icon:'🚙', grad:'linear-gradient(135deg,#0d6e7b,#1a3d2b)', meta:'Deal watch · July 2026', title:'3 genuinely mad EV lease deals right now', teaser:'A £137 city car, a £215 family SUV and a £368 estate that costs £55k to buy — plus the running-cost sum the brochures skip once you charge at home.', src:'./articles/crazy-ev-lease-deals-2026.html', full:'3 Mad EV Lease Deals Right Now'},
@@ -1325,6 +1326,20 @@ window.addEventListener('DOMContentLoaded', function(){
       </div>
 
       <div id="art-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+
+        <!-- Putin's accidental climate policy -->
+        <a class="art-card" data-tag="policy" href="./articles/putin-vs-green-lobby.html" onclick="artOpen('./articles/putin-vs-green-lobby.html','Putin&#39;s Accidental Climate Policy'); return false;" style="text-decoration:none;color:inherit;display:block;background:#fff;border:1px solid var(--stone-200);border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow='0 1px 4px rgba(0,0,0,0.05)'">
+          <div style="height:140px;background:linear-gradient(135deg,#1e293b,#d97706);display:flex;align-items:center;justify-content:center;font-size:48px;">🛢️</div>
+          <div style="padding:20px;">
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;">
+              <span style="background:#fef3c7;color:#92400e;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;">Analysis</span>
+              <span style="font-size:11px;color:var(--stone-600);">July 2026</span>
+            </div>
+            <h3 style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--green-900);line-height:1.3;margin-bottom:8px;">Putin's accidental climate policy</h3>
+            <p style="font-size:13px;color:var(--stone-600);line-height:1.6;">The invasion of Ukraine and the collapse of Russian gas supply did more for Europe's clean energy transition than three decades of climate policy. Where that argument holds &mdash; and where it runs out of road.</p>
+            <div style="margin-top:16px;font-size:13px;font-weight:600;color:var(--green-600);">Read article →</div>
+          </div>
+        </a>
 
         <!-- 2,700 heat deaths / A2A cooling -->
         <a class="art-card" data-tag="heating" href="./articles/uk-heatwave-deaths-heat-pump-cooling-2026.html" onclick="artOpen('./articles/uk-heatwave-deaths-heat-pump-cooling-2026.html','2,700 Heat Deaths, One Summer: Why the Heat Pump That Cools Is No Longer Optional'); return false;" style="text-decoration:none;color:inherit;display:block;background:#fff;border:1px solid var(--stone-200);border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow='0 1px 4px rgba(0,0,0,0.05)'">
