@@ -2,6 +2,7 @@
   "_comment": "Articles already posted to X. The auto-tweet task posts 1 article NOT in this list per run, newest-first (top of the grid), running 5x/day (9,12,15,18,21). Backlog cleared 2026-07-07 so all existing articles get posted over ~6 days, then only genuinely new articles post. To skip an article, add its filename here. To force a re-tweet, remove it.",
   "backlogClearedOn": "2026-07-07",
   "tweeted": [
+    "where-to-start-low-carbon-home.html",
     "uk-heatwave-deaths-heat-pump-cooling-2026.html",
     "daikin-x-series-wait-or-buy.html",
     "future-homes-standard-solar-resale-value.html",
@@ -36,6 +37,8 @@
     "heatpump-news-scop.html",
     "solar-quality-guide.html",
     "sonnen-shell-decarbonarama.html",
-    "putin-vs-green-lobby.html"
+    "putin-vs-green-lobby.html",
+    "decarbonarama-case-study-15.html",
+    "decarbonarma-5-storage-solutions.html"
   ]
 }
