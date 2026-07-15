@@ -159,13 +159,13 @@ const LEDGER_ROWS = [
 // which has a known bug showing solar generation at roughly 2x the real figure).
 // Grid import/export figures are the Octopus smart meter (source of truth for the whole house), not the Sonnen circuit's own grid CT.
 const SOLAR_LIVE = {
-  generated_at: "2026-07-15T06:33:56Z",
-  main_roof:       { power_w: 1018, lifetime_kwh: 5183.53 },
-  garage:          { power_w: 103, lifetime_kwh: 1349.78 },
-  enphase_total:   { power_w: 723, today_kwh: 0.59, lifetime_kwh: 7819.31 },
-  sonnen:          { power_w: 271, lifetime_kwh: 4326.93 },
-  battery:         { soc_pct: 100, state: "discharging", power_w: -2, lifetime_charged_kwh: 2409.96, lifetime_discharged_kwh: 2707.65 },
-  grid:            { power_w: -779, today_export_kwh: 0.075, today_import_kwh: 10.642, lifetime_export_kwh: 7949.93, lifetime_import_kwh: 85229.26 },
+  generated_at: "2026-07-15T07:01:28Z",
+  main_roof:       { power_w: 1216, lifetime_kwh: 5183.98 },
+  garage:          { power_w: 305, lifetime_kwh: 1349.89 },
+  enphase_total:   { power_w: 1318, today_kwh: 0.86, lifetime_kwh: 7819.58 },
+  sonnen:          { power_w: 464, lifetime_kwh: 4327.12 },
+  battery:         { soc_pct: 100, state: "charging", power_w: 3, lifetime_charged_kwh: 2409.96, lifetime_discharged_kwh: 2707.65 },
+  grid:            { power_w: -1379, today_export_kwh: 0.561, today_import_kwh: 10.642, lifetime_export_kwh: 7950.41, lifetime_import_kwh: 85229.26 },
 };
 // SOLAR_LIVE_DATA_END
 
