@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /skillbuilder-credibility-blocks.html
+Disallow: /snippets/
 
 Sitemap: https://decarbonarma.com/sitemap.xml
