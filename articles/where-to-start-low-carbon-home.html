@@ -94,7 +94,7 @@
   .door.dim{opacity:.4;filter:saturate(.4);}
 
   .path{margin-top:8px;overflow:hidden;max-height:0;opacity:0;transition:max-height .5s ease, opacity .4s ease;}
-  .path.open{max-height:2600px;opacity:1;margin-top:24px;}
+  .path.open{max-height:3600px;opacity:1;margin-top:24px;}
   .path-head{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-dim);text-align:center;margin-bottom:16px;}
 
   .node{display:flex;gap:14px;align-items:flex-start;background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:0 12px 12px 0;padding:14px 16px;margin:0 auto;max-width:560px;
@@ -121,6 +121,20 @@
   .bcard .bq{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--text-dim);}
   .bcard .ba{font-weight:600;color:var(--green);font-size:14.5px;margin-top:3px;}
   .bcard .bx{font-size:12.5px;color:var(--text-mid);line-height:1.45;margin-top:2px;}
+  .bcard.clickable{cursor:pointer;transition:border-color .15s, background .15s, transform .12s;}
+  .bcard.clickable:hover{border-color:var(--green);transform:translateY(-2px);}
+  .bcard.sel{border-style:solid;border-color:var(--green);background:var(--green-pale);}
+  .bcard .go{display:block;margin-top:8px;font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--green);}
+  .reveal{max-width:560px;margin:12px auto 0;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:0 16px;max-height:0;overflow:hidden;opacity:0;transition:max-height .45s ease, opacity .35s ease, padding .45s ease;}
+  .reveal.open{max-height:640px;opacity:1;padding:16px;}
+  .rv-h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--green);margin-bottom:10px;}
+  .rv-list{margin:0 0 13px;padding-left:20px;counter-reset:rv;list-style:none;}
+  .rv-list li{position:relative;font-size:14px;color:var(--text-mid);line-height:1.5;margin:7px 0;}
+  .rv-list li::before{counter-increment:rv;content:counter(rv);position:absolute;left:-20px;top:1px;font-family:var(--mono);font-size:11px;color:var(--green);}
+  .rv-list li strong{color:#fff;}
+  .rv-p{font-size:14px;color:var(--text-mid);line-height:1.55;margin:0 0 4px;}
+  .rv-link{display:inline-block;font-family:var(--mono);font-size:12px;color:var(--green);border-bottom:1px solid var(--green-deep);text-decoration:none;padding-bottom:1px;}
+  .rv-link:hover{border-bottom-color:var(--green);}
 
   .jreset{display:block;margin:22px auto 0;background:none;border:1px solid var(--border2);color:var(--text-mid);font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:8px 18px;border-radius:20px;cursor:pointer;}
   .jreset:hover{border-color:var(--green);color:var(--green);}
@@ -273,9 +287,21 @@
 (function(){
   var evSteps = [
     {c:'',      ico:'🚗', t:'1 · Get the EV', d:'The front door. An electric car opens up cheap off-peak overnight electricity — for the car, and for the whole house.'},
-    {c:'gate',  ico:'⚡', t:'2 · Want the very cheapest rates?', d:'Smart tariffs like Octopus Intelligent Go give you dirt-cheap overnight power — but to unlock them you need a <strong>smart charger</strong> the tariff can control. <a href="best-ev-chargers-2026.html">See our Top 5 smart EV chargers →</a>', branch:[
-        {q:'Yes — go for it', a:'Fit a smart charger', x:'Switch to an intelligent tariff (e.g. Octopus IOG). The car charges automatically in the cheapest hours — the rock-bottom rate.'},
-        {q:'No — keep it simple', a:'Standard EV rate', x:'A basic off-peak EV tariff still cuts costs plenty — just not to the smart-tariff bottom.'}
+    {c:'gate',  ico:'⚡', t:'2 · How cheap do you want to go?', d:'Smart tariffs like Octopus Intelligent Go give you the cheapest overnight power — but they need a smart charger the tariff can control. <strong>Tap a path to see what it means:</strong>', branch:[
+        {q:'Recommended', a:'⚡ Smart charger', x:'Unlock intelligent tariffs like Octopus IOG — rock-bottom overnight rate, car charged automatically.', reveal:
+          '<div class="rv-h">Top 5 smart chargers — all Intelligent Octopus Go-ready</div>'+
+          '<ol class="rv-list">'+
+          '<li><strong>Ohme Home Pro</strong> — tariff intelligence built into the charger; the IOG benchmark.</li>'+
+          '<li><strong>myenergi Zappi</strong> — best solar-diverting charger; one app across charging, hot water &amp; battery.</li>'+
+          '<li><strong>Hypervolt Home 3 Pro</strong> — the premium all-rounder; slickest app, full IOG support.</li>'+
+          '<li><strong>Indra Smart Pro</strong> — the value champion (~£499), Welsh-made, V2H on the horizon.</li>'+
+          '<li><strong>Easee One</strong> — tiny and clever; great where two EVs share one supply.</li>'+
+          '</ol>'+
+          '<a class="rv-link" href="best-ev-chargers-2026.html">Read the full Top 5 review →</a>'},
+        {q:'Simpler', a:'🔌 Standard EV rate', x:'A basic off-peak EV tariff — still a big saving, no smart charger required.', reveal:
+          '<div class="rv-h">Sticking with a standard EV rate</div>'+
+          '<p class="rv-p">Most suppliers offer a simple off-peak EV tariff — a cheap block of hours overnight — with no smart charger needed. You lose the automatic, dynamic scheduling of Intelligent Octopus Go, but it still slashes charging costs, and you can always upgrade to a smart charger later.</p>'+
+          '<a class="rv-link" href="best-ev-chargers-2026.html">Curious? Compare the smart chargers anyway →</a>'}
       ]},
     {c:'',      ico:'🔋', t:'3 · Add a home battery', d:'Fill it at the cheap overnight rate and run the house through the pricey daytime peak — no solar needed. <a href="decarbonarma-5-storage-solutions.html">See 5 batteries worth considering →</a>'},
     {c:'optional', ico:'☀️', t:'4 · Add solar <span class="opt">optional</span>', d:'Not essential on this route — with the battery already filling up cheaply overnight, solar is the cream on top: free daytime top-ups for the house and car.'}
@@ -301,13 +327,23 @@
       n.innerHTML='<div class="badge">'+s.ico+'</div><div><div class="nt">'+s.t+'</div><div class="nd">'+s.d+'</div></div>';
       container.appendChild(n);
       if(s.branch){
+        var interactive=s.branch.some(function(c){return c.reveal;});
         var b=document.createElement('div');
         b.className='branch';
         b.style.animationDelay='0.3s';
-        b.innerHTML=s.branch.map(function(c){
-          return '<div class="bcard"><div class="bq">'+c.q+'</div><div class="ba">'+c.a+'</div><div class="bx">'+c.x+'</div></div>';
+        b.innerHTML=s.branch.map(function(c,ci){
+          var cls='bcard'+(interactive?' clickable':'');
+          var attr=interactive?(' data-ci="'+ci+'" onclick="gateChoice('+ci+')"'):'';
+          var go=interactive?'<span class="go">Tap to see →</span>':'';
+          return '<div class="'+cls+'"'+attr+'><div class="bq">'+c.q+'</div><div class="ba">'+c.a+'</div><div class="bx">'+c.x+'</div>'+go+'</div>';
         }).join('');
         container.appendChild(b);
+        if(interactive){
+          window.__gateReveals=s.branch.map(function(c){return c.reveal||'';});
+          var rv=document.createElement('div');
+          rv.className='reveal'; rv.id='gate-reveal';
+          container.appendChild(rv);
+        }
       }
     });
   }
@@ -327,6 +363,15 @@
       ps.classList.add('open'); pe.classList.remove('open');
     }
     document.getElementById('jreset').style.display='block';
+  };
+
+  window.gateChoice=function(i){
+    var cards=document.querySelectorAll('#ev-steps .bcard.clickable');
+    Array.prototype.forEach.call(cards, function(c){
+      c.classList.toggle('sel', c.getAttribute('data-ci')===String(i));
+    });
+    var rv=document.getElementById('gate-reveal');
+    if(rv && window.__gateReveals){ rv.innerHTML=window.__gateReveals[i]; rv.classList.add('open'); }
   };
 
   window.reset=function(){
