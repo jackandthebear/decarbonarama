@@ -128,6 +128,10 @@
   .reveal-cta{display:block;width:100%;max-width:560px;margin:12px auto 0;background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:11px 15px;color:var(--green);font-family:var(--mono);font-size:12px;letter-spacing:.03em;cursor:pointer;text-align:left;transition:border-color .15s, background .15s;}
   .reveal-cta:hover{border-color:var(--green);background:var(--green-pale);}
   .reveal-cta.on{border-color:var(--green);background:var(--green-pale);}
+  .check-row{display:flex;align-items:center;gap:11px;max-width:560px;margin:12px auto 0;background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:12px 15px;cursor:pointer;transition:border-color .15s, background .15s;}
+  .check-row:hover{border-color:var(--green);background:var(--green-pale);}
+  .check-row input{width:18px;height:18px;accent-color:var(--green);cursor:pointer;flex:0 0 auto;}
+  .check-row span{font-size:14px;color:var(--text);line-height:1.4;}
   .reveal{max-width:560px;margin:12px auto 0;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:0 16px;max-height:0;overflow:hidden;opacity:0;transition:max-height .45s ease, opacity .35s ease, padding .45s ease;}
   .reveal.open{max-height:640px;opacity:1;padding:16px;}
   .rv-h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--green);margin-bottom:10px;}
@@ -327,7 +331,9 @@
     {c:'',      ico:'☀️', t:'1 · Put solar on the roof', d:'The front door. It starts cutting bills the day it’s switched on — and sets up everything after it.', branch:[
         {q:'Replacing the roof?', a:'In-roof solar', x:'Panels sit flush and become the roof surface — neat, and often cheaper while you’re re-roofing anyway.'},
         {q:'Roof staying put?', a:'On-roof solar', x:'Panels mount above the existing tiles — simpler and lower-disruption.'}
-      ]},
+      ], check:{label:'My roof is shaded, or faces more than one direction', reveal:
+        '<div class="rv-h">Then go for microinverters</div>'+
+        '<p class="rv-p">With shading or a multi-angle roof, a single string inverter drags every panel down to the performance of the weakest one. <strong>Microinverters</strong> — one per panel — sidestep that: each panel works independently, and you get panel-level monitoring to spot problems. Our pick is <strong>Enphase</strong>.</p>'}},
     {c:'',      ico:'🔋', t:'2 · Go battery-ready (hybrid inverter)', d:'Fit a <strong>hybrid inverter</strong> that’s battery-ready from the start — then add a battery now or later to store the free daytime surplus for the evening, instead of exporting it cheap and buying it back dear.', cta:'🔋 See the 5 batteries we’d shortlist →', reveal:batteryReveal},
     {c:'later', ico:'🚗', t:'3 · Add an EV later', d:'When the car does come up for renewal, it brings the cheap overnight rate with it — and the two routes meet.'}
   ];
@@ -362,6 +368,16 @@
           container.appendChild(rv);
         }
       }
+      if(s.check){
+        var cid=container.id+'-chk-'+i, crid=cid+'-rv';
+        var row=document.createElement('label');
+        row.className='check-row';
+        row.innerHTML='<input type="checkbox" onchange="toggleCheck(\''+crid+'\', this.checked)"><span>'+s.check.label+'</span>';
+        container.appendChild(row);
+        var crv=document.createElement('div');
+        crv.className='reveal'; crv.id=crid; crv.innerHTML=s.check.reveal;
+        container.appendChild(crv);
+      }
       if(s.reveal && !s.branch){
         var rid=container.id+'-rv-'+i;
         var cta=document.createElement('button');
@@ -392,6 +408,11 @@
       ps.classList.add('open'); pe.classList.remove('open');
     }
     document.getElementById('jreset').style.display='block';
+  };
+
+  window.toggleCheck=function(id, on){
+    var rv=document.getElementById(id);
+    if(rv) rv.classList.toggle('open', on);
   };
 
   window.toggleReveal=function(id, btn){
