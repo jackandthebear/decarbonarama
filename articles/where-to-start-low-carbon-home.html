@@ -306,24 +306,26 @@
     '<a class="rv-cta-link" href="/battery_sizing_tool.html">🔋 Battery calculator — find out how much you could save →</a>'+
     '<a class="rv-link" href="decarbonarma-5-storage-solutions.html">Read the full battery guide →</a>';
 
+  var evRateBranch = [
+    {q:'Recommended', a:'⚡ Smart charger', x:'Unlock intelligent tariffs like Octopus IOG — rock-bottom overnight rate, car charged automatically.', reveal:
+      '<div class="rv-h">Top 5 smart chargers — all Intelligent Octopus Go-ready</div>'+
+      '<ol class="rv-list">'+
+      '<li><strong>Ohme Home Pro</strong> — tariff intelligence built into the charger; the IOG benchmark.</li>'+
+      '<li><strong>myenergi Zappi</strong> — best solar-diverting charger; one app across charging, hot water &amp; battery.</li>'+
+      '<li><strong>Hypervolt Home 3 Pro</strong> — the premium all-rounder; slickest app, full IOG support.</li>'+
+      '<li><strong>Indra Smart Pro</strong> — the value champion (~£499), Welsh-made, V2H on the horizon.</li>'+
+      '<li><strong>Easee One</strong> — tiny and clever; great where two EVs share one supply.</li>'+
+      '</ol>'+
+      '<a class="rv-link" href="best-ev-chargers-2026.html">Read the full Top 5 review →</a>'},
+    {q:'Simpler', a:'🔌 Standard EV rate', x:'A basic off-peak EV tariff — still a big saving, no smart charger required.', reveal:
+      '<div class="rv-h">Sticking with a standard EV rate</div>'+
+      '<p class="rv-p">Most suppliers offer a simple off-peak EV tariff — a cheap block of hours overnight — with no smart charger needed. You lose the automatic, dynamic scheduling of Intelligent Octopus Go, but it still slashes charging costs, and you can always upgrade to a smart charger later.</p>'+
+      '<a class="rv-link" href="best-ev-chargers-2026.html">Curious? Compare the smart chargers anyway →</a>'}
+  ];
+
   var evSteps = [
     {c:'',      ico:'🚗', t:'1 · Get the EV', d:'The front door. An electric car opens up cheap off-peak overnight electricity — for the car, and for the whole house. <a href="crazy-ev-lease-deals-2026.html">See 3 mad EV lease deals →</a>'},
-    {c:'gate',  ico:'⚡', t:'2 · How cheap do you want to go?', d:'Smart tariffs like Octopus Intelligent Go (IOG) give you the cheapest overnight power — but they need a smart charger the tariff can control. <strong>Tap a path to see what it means:</strong>', branch:[
-        {q:'Recommended', a:'⚡ Smart charger', x:'Unlock intelligent tariffs like Octopus IOG — rock-bottom overnight rate, car charged automatically.', reveal:
-          '<div class="rv-h">Top 5 smart chargers — all Intelligent Octopus Go-ready</div>'+
-          '<ol class="rv-list">'+
-          '<li><strong>Ohme Home Pro</strong> — tariff intelligence built into the charger; the IOG benchmark.</li>'+
-          '<li><strong>myenergi Zappi</strong> — best solar-diverting charger; one app across charging, hot water &amp; battery.</li>'+
-          '<li><strong>Hypervolt Home 3 Pro</strong> — the premium all-rounder; slickest app, full IOG support.</li>'+
-          '<li><strong>Indra Smart Pro</strong> — the value champion (~£499), Welsh-made, V2H on the horizon.</li>'+
-          '<li><strong>Easee One</strong> — tiny and clever; great where two EVs share one supply.</li>'+
-          '</ol>'+
-          '<a class="rv-link" href="best-ev-chargers-2026.html">Read the full Top 5 review →</a>'},
-        {q:'Simpler', a:'🔌 Standard EV rate', x:'A basic off-peak EV tariff — still a big saving, no smart charger required.', reveal:
-          '<div class="rv-h">Sticking with a standard EV rate</div>'+
-          '<p class="rv-p">Most suppliers offer a simple off-peak EV tariff — a cheap block of hours overnight — with no smart charger needed. You lose the automatic, dynamic scheduling of Intelligent Octopus Go, but it still slashes charging costs, and you can always upgrade to a smart charger later.</p>'+
-          '<a class="rv-link" href="best-ev-chargers-2026.html">Curious? Compare the smart chargers anyway →</a>'}
-      ]},
+    {c:'gate',  ico:'⚡', t:'2 · How cheap do you want to go?', d:'Smart tariffs like Octopus Intelligent Go (IOG) give you the cheapest overnight power — but they need a smart charger the tariff can control. <strong>Tap a path to see what it means:</strong>', branch:evRateBranch},
     {c:'',      ico:'🔋', t:'3 · Add a home battery', d:'Fill it at the cheap overnight rate and run the house through the day on cheap off-peak power — no solar needed.', cta:'🔋 See the 5 batteries we’d shortlist →', reveal:batteryReveal},
     {c:'optional', ico:'☀️', t:'4 · Add solar <span class="opt">optional</span>', d:'Not essential on this route — with the battery already filling up cheaply overnight, solar is the cream on top: free daytime top-ups for the house and car. When you’re ready, we recommend <a href="https://getreadyfor.solar/directory/start/" target="_blank" rel="noopener">Gary Does Solar’s installer directory</a> to find a good, vetted installer.'}
   ];
@@ -335,7 +337,7 @@
         '<div class="rv-h">Then go for microinverters</div>'+
         '<p class="rv-p">With shading or a multi-angle roof, a single string inverter drags every panel down to the performance of the weakest one. <strong>Microinverters</strong> — one per panel — sidestep that: each panel works independently, and you get panel-level monitoring to spot problems. Our pick is <strong>Enphase</strong>.</p>'}},
     {c:'',      ico:'🔋', t:'2 · Go battery-ready (hybrid inverter)', d:'Fit a <strong>hybrid inverter</strong> that’s battery-ready from the start — then add a battery now or later to store the free daytime surplus for the evening, instead of exporting it cheap and buying it back dear.', cta:'🔋 See the 5 batteries we’d shortlist →', reveal:batteryReveal},
-    {c:'later', ico:'🚗', t:'3 · Add an EV later', d:'When the car does come up for renewal, it brings the cheap overnight rate with it — and the two routes meet.'}
+    {c:'later', ico:'🚗', t:'3 · Add an EV later', d:'When the car comes up for renewal, it brings the cheap overnight rate with it — and the two routes meet. Now the same question the EV route faces: <strong>how cheap do you want to go?</strong>', branch:evRateBranch}
   ];
 
   function connector(){ var d=document.createElement('div'); d.className='connector'; return d; }
@@ -351,20 +353,24 @@
       container.appendChild(n);
       if(s.branch){
         var interactive=s.branch.some(function(c){return c.reveal;});
+        var gid=container.id+'-gaterv-'+i;
+        if(interactive){
+          window.__reveals=window.__reveals||{};
+          window.__reveals[gid]=s.branch.map(function(c){return c.reveal||'';});
+        }
         var b=document.createElement('div');
         b.className='branch';
         b.style.animationDelay='0.3s';
         b.innerHTML=s.branch.map(function(c,ci){
           var cls='bcard'+(interactive?' clickable':'');
-          var attr=interactive?(' data-ci="'+ci+'" onclick="gateChoice('+ci+')"'):'';
+          var attr=interactive?(' onclick="gateChoice(\''+gid+'\','+ci+',this)"'):'';
           var go=interactive?'<span class="go">Tap to see →</span>':'';
           return '<div class="'+cls+'"'+attr+'><div class="bq">'+c.q+'</div><div class="ba">'+c.a+'</div><div class="bx">'+c.x+'</div>'+go+'</div>';
         }).join('');
         container.appendChild(b);
         if(interactive){
-          window.__gateReveals=s.branch.map(function(c){return c.reveal||'';});
           var rv=document.createElement('div');
-          rv.className='reveal'; rv.id='gate-reveal';
+          rv.className='reveal'; rv.id=gid;
           container.appendChild(rv);
         }
       }
@@ -422,13 +428,14 @@
     if(btn) btn.classList.toggle('on', open);
   };
 
-  window.gateChoice=function(i){
-    var cards=document.querySelectorAll('#ev-steps .bcard.clickable');
-    Array.prototype.forEach.call(cards, function(c){
-      c.classList.toggle('sel', c.getAttribute('data-ci')===String(i));
-    });
-    var rv=document.getElementById('gate-reveal');
-    if(rv && window.__gateReveals){ rv.innerHTML=window.__gateReveals[i]; rv.classList.add('open'); }
+  window.gateChoice=function(gid, i, card){
+    if(card && card.parentNode){
+      Array.prototype.forEach.call(card.parentNode.querySelectorAll('.bcard'), function(c){ c.classList.remove('sel'); });
+      card.classList.add('sel');
+    }
+    var rv=document.getElementById(gid);
+    var arr=window.__reveals && window.__reveals[gid];
+    if(rv && arr){ rv.innerHTML=arr[i]; rv.classList.add('open'); }
   };
 
   window.reset=function(){
