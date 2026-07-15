@@ -94,7 +94,7 @@
   .door.dim{opacity:.4;filter:saturate(.4);}
 
   .path{margin-top:8px;overflow:hidden;max-height:0;opacity:0;transition:max-height .5s ease, opacity .4s ease;}
-  .path.open{max-height:3600px;opacity:1;margin-top:24px;}
+  .path.open{max-height:6000px;opacity:1;margin-top:24px;}
   .path-head{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-dim);text-align:center;margin-bottom:16px;}
 
   .node{display:flex;gap:14px;align-items:flex-start;background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:0 12px 12px 0;padding:14px 16px;margin:0 auto;max-width:560px;
@@ -125,6 +125,9 @@
   .bcard.clickable:hover{border-color:var(--green);transform:translateY(-2px);}
   .bcard.sel{border-style:solid;border-color:var(--green);background:var(--green-pale);}
   .bcard .go{display:block;margin-top:8px;font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--green);}
+  .reveal-cta{display:block;width:100%;max-width:560px;margin:12px auto 0;background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:11px 15px;color:var(--green);font-family:var(--mono);font-size:12px;letter-spacing:.03em;cursor:pointer;text-align:left;transition:border-color .15s, background .15s;}
+  .reveal-cta:hover{border-color:var(--green);background:var(--green-pale);}
+  .reveal-cta.on{border-color:var(--green);background:var(--green-pale);}
   .reveal{max-width:560px;margin:12px auto 0;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:0 16px;max-height:0;overflow:hidden;opacity:0;transition:max-height .45s ease, opacity .35s ease, padding .45s ease;}
   .reveal.open{max-height:640px;opacity:1;padding:16px;}
   .rv-h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--green);margin-bottom:10px;}
@@ -285,6 +288,17 @@
 
 <script>
 (function(){
+  var batteryReveal =
+    '<div class="rv-h">5 home batteries worth shortlisting</div>'+
+    '<ol class="rv-list">'+
+    '<li><strong>Fogstar</strong> — max value: most storage per pound, for the technically confident.</li>'+
+    '<li><strong>Fox ESS</strong> — mainstream reliability: the UK’s best-seller, strong installer network, modular.</li>'+
+    '<li><strong>Alpha ESS</strong> — smart mid-range: official Octopus partner, ~30% less than Tesla.</li>'+
+    '<li><strong>Sigenergy</strong> — EV &amp; future-proof: built-in DC charger + V2H, 10,000-cycle rating.</li>'+
+    '<li><strong>Tesla Powerwall 3</strong> — premium simplicity: 11.5 kW output, most mature Octopus/Kraken VPP.</li>'+
+    '</ol>'+
+    '<a class="rv-link" href="decarbonarma-5-storage-solutions.html">Read the full battery guide →</a>';
+
   var evSteps = [
     {c:'',      ico:'🚗', t:'1 · Get the EV', d:'The front door. An electric car opens up cheap off-peak overnight electricity — for the car, and for the whole house.'},
     {c:'gate',  ico:'⚡', t:'2 · How cheap do you want to go?', d:'Smart tariffs like Octopus Intelligent Go give you the cheapest overnight power — but they need a smart charger the tariff can control. <strong>Tap a path to see what it means:</strong>', branch:[
@@ -303,7 +317,7 @@
           '<p class="rv-p">Most suppliers offer a simple off-peak EV tariff — a cheap block of hours overnight — with no smart charger needed. You lose the automatic, dynamic scheduling of Intelligent Octopus Go, but it still slashes charging costs, and you can always upgrade to a smart charger later.</p>'+
           '<a class="rv-link" href="best-ev-chargers-2026.html">Curious? Compare the smart chargers anyway →</a>'}
       ]},
-    {c:'',      ico:'🔋', t:'3 · Add a home battery', d:'Fill it at the cheap overnight rate and run the house through the pricey daytime peak — no solar needed. <a href="decarbonarma-5-storage-solutions.html">See 5 batteries worth considering →</a>'},
+    {c:'',      ico:'🔋', t:'3 · Add a home battery', d:'Fill it at the cheap overnight rate and run the house through the pricey daytime peak — no solar needed.', cta:'🔋 See the 5 batteries we’d shortlist →', reveal:batteryReveal},
     {c:'optional', ico:'☀️', t:'4 · Add solar <span class="opt">optional</span>', d:'Not essential on this route — with the battery already filling up cheaply overnight, solar is the cream on top: free daytime top-ups for the house and car.'}
   ];
   var solarSteps = [
@@ -311,7 +325,7 @@
         {q:'Replacing the roof?', a:'In-roof solar', x:'Panels sit flush and become the roof surface — neat, and often cheaper while you’re re-roofing anyway.'},
         {q:'Roof staying put?', a:'On-roof solar', x:'Panels mount above the existing tiles — simpler and lower-disruption.'}
       ]},
-    {c:'',      ico:'🔋', t:'2 · Add a battery', d:'Store the free daytime surplus and use it in the evening, instead of exporting it cheap and buying it back dear. <a href="decarbonarma-5-storage-solutions.html">See 5 batteries worth considering →</a>'},
+    {c:'',      ico:'🔋', t:'2 · Add a battery', d:'Store the free daytime surplus and use it in the evening, instead of exporting it cheap and buying it back dear.', cta:'🔋 See the 5 batteries we’d shortlist →', reveal:batteryReveal},
     {c:'later', ico:'🚗', t:'3 · Add an EV later', d:'When the car does come up for renewal, it brings the cheap overnight rate with it — and the two routes meet.'}
   ];
 
@@ -345,6 +359,18 @@
           container.appendChild(rv);
         }
       }
+      if(s.reveal && !s.branch){
+        var rid=container.id+'-rv-'+i;
+        var cta=document.createElement('button');
+        cta.type='button';
+        cta.className='reveal-cta';
+        cta.textContent=s.cta||'See our shortlist →';
+        cta.setAttribute('onclick', "toggleReveal('"+rid+"', this)");
+        container.appendChild(cta);
+        var nrv=document.createElement('div');
+        nrv.className='reveal'; nrv.id=rid; nrv.innerHTML=s.reveal;
+        container.appendChild(nrv);
+      }
     });
   }
 
@@ -363,6 +389,13 @@
       ps.classList.add('open'); pe.classList.remove('open');
     }
     document.getElementById('jreset').style.display='block';
+  };
+
+  window.toggleReveal=function(id, btn){
+    var rv=document.getElementById(id);
+    if(!rv) return;
+    var open=rv.classList.toggle('open');
+    if(btn) btn.classList.toggle('on', open);
   };
 
   window.gateChoice=function(i){
