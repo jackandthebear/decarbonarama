@@ -105,8 +105,15 @@
   .node.prize{border-left-color:var(--amber);}
   .node.prize .badge{background:var(--amber-pale);}
   .node.prize .nt{color:var(--amber);}
+  .node.gate{border-left-color:var(--blue);}
+  .node.gate .badge{background:rgba(90,167,214,.16);}
+  .node.gate .nt{color:var(--blue);}
   .node.later{border-left-color:var(--grey);opacity:.92;}
   .node.later .badge{background:rgba(138,154,144,.15);}
+  .node.optional{border-left-style:dashed;}
+  .node .nd a{color:var(--green);text-decoration:none;border-bottom:1px solid var(--green-deep);white-space:nowrap;}
+  .node .nd a:hover{border-bottom-color:var(--green);}
+  .opt{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--text-dim);border:1px solid var(--border2);border-radius:20px;padding:1px 8px;margin-left:6px;vertical-align:middle;}
   .connector{width:2px;height:16px;background:linear-gradient(var(--green-deep),transparent);margin:0 auto;}
 
   .branch{max-width:560px;margin:6px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
@@ -195,9 +202,11 @@
   <!-- ============ /INTERACTIVE JOURNEY MAP ============ -->
 
   <h2>Why the EV can come first</h2>
-  <p>It surprises people, but a car can be the smartest opening move in a <em>home</em> energy plan. Buying an EV qualifies you for a special overnight tariff — a few cheap hours in the small hours designed for charging. The twist is that those cheap hours don't only power the car. Anything you can shift to run overnight — and later, a home battery you fill up in that window — draws the same low rate. The EV is the key; the cheap electricity is the door it opens.</p>
+  <p>It surprises people, but a car can be the smartest opening move in a <em>home</em> energy plan. Buying an EV qualifies you for a special overnight tariff — a few cheap hours in the small hours designed for charging. The twist is that those cheap hours don't only power the car; anything you can shift to run overnight draws the same low rate. The EV is the key; the cheap electricity is the door it opens.</p>
 
-  <p>From there the path is open-ended. Add a <strong>home battery</strong> and you can hoard cheap overnight power to run the house through the expensive daytime peak — no solar required. Add <strong>solar</strong> on top and you're topping up the battery and the car straight from the roof for free. Battery, solar, or both — the order is yours.</p>
+  <p>There's one decision to make here. To unlock the <em>very</em> cheapest smart tariffs — the likes of <strong>Octopus Intelligent Go</strong> — you need a <strong>smart charger</strong> the supplier can control, so it charges the car automatically in the cheapest half-hours. Our <a href="best-ev-chargers-2026.html">Top 5 home EV chargers</a> covers the ones that do this well. Not fussed? A standard off-peak EV rate still saves plenty without one.</p>
+
+  <p>From there the path is open-ended. Add a <strong>home battery</strong> and you can hoard cheap overnight power to run the house through the expensive daytime peak — no solar required (our <a href="decarbonarma-5-storage-solutions.html">battery guide</a> has five worth a look). <strong>Solar</strong> is then optional: with the battery already filling up cheaply overnight, panels become the cream on top rather than the main event.</p>
 
   <h2>Why solar comes first for everyone else</h2>
   <p>If a new car isn't on the cards, the roof is the natural place to start. Solar begins cutting bills the day it's switched on, and it sets up everything that follows. The usual sequence is <strong>solar first, then a battery</strong> to store the daytime surplus for the evening — or both together if the budget allows. An EV can still join later, and when it does, it brings that overnight rate with it.</p>
@@ -263,14 +272,20 @@
 <script>
 (function(){
   var evSteps = [
-    {c:'',      ico:'🚗', t:'1 · Get the EV', d:'The front door. Buying an electric car qualifies you for a special overnight charging tariff.'},
-    {c:'prize', ico:'🌙', t:'2 · Unlock the cheap overnight rate', d:'The real prize. Those few cheap hours don’t just charge the car — they power anything in the house you can shift to run overnight.'},
-    {c:'',      ico:'🔋', t:'3 · Add a home battery', d:'Fill it up at the low overnight rate, then run the house on it through the pricey daytime peak. Works even with no solar.'},
-    {c:'',      ico:'☀️', t:'4 · Add solar', d:'Now you’re topping up the battery and the car straight from the roof, for free. Battery, solar, or both — the order is yours.'}
+    {c:'',      ico:'🚗', t:'1 · Get the EV', d:'The front door. An electric car opens up cheap off-peak overnight electricity — for the car, and for the whole house.'},
+    {c:'gate',  ico:'⚡', t:'2 · Want the very cheapest rates?', d:'Smart tariffs like Octopus Intelligent Go give you dirt-cheap overnight power — but to unlock them you need a <strong>smart charger</strong> the tariff can control. <a href="best-ev-chargers-2026.html">See our Top 5 smart EV chargers →</a>', branch:[
+        {q:'Yes — go for it', a:'Fit a smart charger', x:'Switch to an intelligent tariff (e.g. Octopus IOG). The car charges automatically in the cheapest hours — the rock-bottom rate.'},
+        {q:'No — keep it simple', a:'Standard EV rate', x:'A basic off-peak EV tariff still cuts costs plenty — just not to the smart-tariff bottom.'}
+      ]},
+    {c:'',      ico:'🔋', t:'3 · Add a home battery', d:'Fill it at the cheap overnight rate and run the house through the pricey daytime peak — no solar needed. <a href="decarbonarma-5-storage-solutions.html">See 5 batteries worth considering →</a>'},
+    {c:'optional', ico:'☀️', t:'4 · Add solar <span class="opt">optional</span>', d:'Not essential on this route — with the battery already filling up cheaply overnight, solar is the cream on top: free daytime top-ups for the house and car.'}
   ];
   var solarSteps = [
-    {c:'',      ico:'☀️', t:'1 · Put solar on the roof', d:'The front door. It starts cutting bills the day it’s switched on — and sets up everything after it.', branch:true},
-    {c:'',      ico:'🔋', t:'2 · Add a battery', d:'Store the free daytime surplus and use it in the evening, instead of exporting it cheap and buying it back dear.'},
+    {c:'',      ico:'☀️', t:'1 · Put solar on the roof', d:'The front door. It starts cutting bills the day it’s switched on — and sets up everything after it.', branch:[
+        {q:'Replacing the roof?', a:'In-roof solar', x:'Panels sit flush and become the roof surface — neat, and often cheaper while you’re re-roofing anyway.'},
+        {q:'Roof staying put?', a:'On-roof solar', x:'Panels mount above the existing tiles — simpler and lower-disruption.'}
+      ]},
+    {c:'',      ico:'🔋', t:'2 · Add a battery', d:'Store the free daytime surplus and use it in the evening, instead of exporting it cheap and buying it back dear. <a href="decarbonarma-5-storage-solutions.html">See 5 batteries worth considering →</a>'},
     {c:'later', ico:'🚗', t:'3 · Add an EV later', d:'When the car does come up for renewal, it brings the cheap overnight rate with it — and the two routes meet.'}
   ];
 
@@ -289,9 +304,9 @@
         var b=document.createElement('div');
         b.className='branch';
         b.style.animationDelay='0.3s';
-        b.innerHTML=
-          '<div class="bcard"><div class="bq">Replacing the roof?</div><div class="ba">In-roof solar</div><div class="bx">Panels sit flush and become the roof surface — neat, and often cheaper while you’re re-roofing anyway.</div></div>'+
-          '<div class="bcard"><div class="bq">Roof staying put?</div><div class="ba">On-roof solar</div><div class="bx">Panels mount above the existing tiles — simpler and lower-disruption.</div></div>';
+        b.innerHTML=s.branch.map(function(c){
+          return '<div class="bcard"><div class="bq">'+c.q+'</div><div class="ba">'+c.a+'</div><div class="bx">'+c.x+'</div></div>';
+        }).join('');
         container.appendChild(b);
       }
     });
