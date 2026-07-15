@@ -2056,13 +2056,19 @@ function gateSubmit(e) {
    so links can be shared/bookmarked and the back button works as expected. */
 var SPA_HOME_URL   = location.pathname + location.search;
 var SPA_HOME_TITLE = document.title;
+var SPA_ORIGIN     = location.origin;
 
-function spaResolvePath(src) {
-  var safeSrc = src.startsWith('./') || src.startsWith('/') ? src : './' + src.replace(/^\/+/, '');
-  return new URL(safeSrc, location.href).pathname;
+/* Every src passed to artOpen/csOpen is always meant to be relative to the SITE ROOT
+   (e.g. "./articles/x.html"), never relative to whatever page happens to be showing.
+   Once we start pushState-ing nested paths into the address bar, resolving a relative
+   src against `location.href` breaks (it can double up into /articles/articles/x.html).
+   So always anchor to the fixed origin, never to the current (possibly rewritten) location. */
+function spaAbsUrl(src) {
+  var rel = String(src).replace(/^\.\//, '').replace(/^\/+/, '');
+  return SPA_ORIGIN + '/' + rel;
 }
 function spaPushState(src, title, kind) {
-  var path = spaResolvePath(src);
+  var path = new URL(spaAbsUrl(src)).pathname;
   try { history.pushState({ spaSrc: src, spaTitle: title, spaKind: kind }, '', path); } catch (e) {}
   if (title) document.title = title + ' | Decarbonarma';
 }
@@ -2100,7 +2106,7 @@ function artOpenNow(src, title) {
   const viewer = document.getElementById('art-viewer');
   const hub    = document.getElementById('art-hub');
   const frame  = document.getElementById('art-frame');
-  const safeSrc = src.startsWith('./') ? src : './' + src.replace(/^\/+/, '');
+  const safeSrc = spaAbsUrl(src);
   document.getElementById('art-viewer-title').textContent = title || '';
   frame.removeAttribute('srcdoc');
   frame.src = safeSrc;
@@ -2137,7 +2143,7 @@ function csOpenNow(src, title) {
   const hub    = document.getElementById('cs-hub');
   const frame  = document.getElementById('cs-frame');
   document.getElementById('cs-viewer-title').textContent = title || '';
-  frame.src = src.includes('/') ? src : './articles/' + src;
+  frame.src = spaAbsUrl(src.includes('/') ? src : './articles/' + src);
   hub.style.display = 'none';
   viewer.style.display = 'flex';
   window.scrollTo({ top: 0, behavior: 'instant' });
