@@ -322,7 +322,7 @@
 </nav>
 
 <!-- ═══════════ HOME PAGE ═══════════ -->
-<div id="page-home" class="page active">
+<div id="page-home" class="page active" role="main">
 
   <!-- OCTOPUS REFERRAL BANNER -->
   <a href="https://share.octopus.energy/clean-hero-615" target="_blank" rel="noopener" style="display:block;background:linear-gradient(90deg,#1b0a4e,#3a1d8a);color:#fff;text-decoration:none;text-align:center;padding:11px 16px;font-size:14px;font-weight:500;letter-spacing:-0.01em;">
@@ -404,13 +404,13 @@
         <div id="latest-media" style="height:120px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:54px;"></div>
         <div>
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
-            <span style="background:var(--green-600);color:#fff;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:4px 12px;border-radius:20px;">Latest article</span>
+            <span style="background:var(--green-800);color:#fff;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:4px 12px;border-radius:20px;">Latest article</span>
             <span id="latest-meta" style="font-size:12px;color:var(--stone-600);"></span>
           </div>
-          <h2 id="latest-title" style="font-family:'DM Serif Display',serif;font-size:26px;color:var(--green-900);line-height:1.2;margin-bottom:8px;"></h2>
+          <p id="latest-title" style="font-family:'DM Serif Display',serif;font-size:26px;color:var(--green-900);line-height:1.2;margin-bottom:8px;font-weight:400;"></p>
           <p id="latest-teaser" style="font-size:14px;color:var(--stone-600);line-height:1.6;max-width:620px;"></p>
         </div>
-        <div style="font-size:14px;font-weight:600;color:var(--green-600);white-space:nowrap;">Read →</div>
+        <div style="font-size:14px;font-weight:600;color:var(--green-800);white-space:nowrap;">Read →</div>
       </div>
       <div id="latest-dots" style="display:flex;gap:9px;justify-content:center;margin-top:18px;"></div>
     </div>
@@ -438,7 +438,10 @@
     document.getElementById('latest-meta').textContent = s.meta;
     document.getElementById('latest-title').textContent = s.title;
     document.getElementById('latest-teaser').textContent = s.teaser;
-    document.querySelectorAll('#latest-dots button').forEach((d,i)=>{ d.style.background = (i===latestIdx) ? 'var(--green-600)' : 'var(--stone-200)'; });
+    document.querySelectorAll('#latest-dots button').forEach((d,i)=>{
+      d.querySelector('span').style.background = (i===latestIdx) ? 'var(--green-600)' : 'var(--stone-200)';
+      d.setAttribute('aria-current', i===latestIdx ? 'true' : 'false');
+    });
   }
   function latestGo(i){ latestIdx = (i + latestSlides.length) % latestSlides.length; latestRender(); }
   function latestNext(){ latestGo(latestIdx + 1); }
@@ -447,9 +450,13 @@
   function latestStop(){ if(latestTimer){ clearInterval(latestTimer); latestTimer = null; } }
   (function(){
     const dots = document.getElementById('latest-dots');
-    latestSlides.forEach(function(_, i){
+    latestSlides.forEach(function(slide, i){
       const b = document.createElement('button');
-      b.style.cssText = 'width:9px;height:9px;border-radius:50%;border:none;padding:0;cursor:pointer;background:var(--stone-200);transition:background .2s;';
+      b.style.cssText = 'width:24px;height:24px;border-radius:50%;border:none;padding:0;cursor:pointer;background:transparent;display:flex;align-items:center;justify-content:center;';
+      b.setAttribute('aria-label', 'Show article: ' + slide.title);
+      const dot = document.createElement('span');
+      dot.style.cssText = 'width:9px;height:9px;border-radius:50%;background:var(--stone-200);transition:background .2s;display:block;';
+      b.appendChild(dot);
       b.onclick = function(e){ e.stopPropagation(); latestGo(i); latestStart(); };
       dots.appendChild(b);
     });
@@ -760,7 +767,7 @@
 </div>
 
 <!-- ═══════════ DAILY NEWS PAGE ═══════════ -->
-<div id="page-news" class="page">
+<div id="page-news" class="page" role="main">
   <div style="background:linear-gradient(135deg,#0e3520 0%,#1a5530 60%,#2d8a4a 100%);padding:60px 48px 44px;">
     <div style="max-width:1000px;margin:0 auto;">
       <span style="font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--green-200);">Updated every morning · 5am</span>
@@ -774,7 +781,7 @@
 </div>
 
 <!-- ═══════════ ROSE COTTAGE (LIVE CASE STUDY) PAGE ═══════════ -->
-<div id="page-rosecottage" class="page">
+<div id="page-rosecottage" class="page" role="main">
   <div style="background:linear-gradient(135deg,#0e3520 0%,#1a5530 60%,#2d8a4a 100%);padding:60px 48px 44px;">
     <div style="max-width:1000px;margin:0 auto;">
       <span style="font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--green-200);">Solar updated hourly &middot; hot water updated every morning</span>
@@ -788,7 +795,7 @@
 </div>
 
 <!-- ═══════════ SOLAR PAGE ═══════════ -->
-<div id="page-solar" class="page">
+<div id="page-solar" class="page" role="main">
   <section class="inner-hero">
     <div class="inner-hero-text">
       <div class="page-tag">☀️ Solar Panels</div>
@@ -842,7 +849,7 @@
 </div>
 
 <!-- ═══════════ BATTERY PAGE ═══════════ -->
-<div id="page-battery" class="page">
+<div id="page-battery" class="page" role="main">
   <section class="inner-hero">
     <div class="inner-hero-text">
       <div class="page-tag">🔋 Battery Storage</div>
@@ -904,7 +911,7 @@
 </div>
 
 <!-- ═══════════ HEAT PUMP PAGE ═══════════ -->
-<div id="page-heatpump" class="page">
+<div id="page-heatpump" class="page" role="main">
   <section class="inner-hero">
     <div class="inner-hero-text">
       <div class="page-tag">♨️ Heat Pumps</div>
@@ -954,7 +961,7 @@
 </div>
 
 <!-- ═══════════ EV PAGE ═══════════ -->
-<div id="page-evcar" class="page">
+<div id="page-evcar" class="page" role="main">
   <section class="inner-hero">
     <div class="inner-hero-text">
       <div class="page-tag">⚡ EV & Home Charging</div>
@@ -1018,7 +1025,7 @@
 </div>
 
 <!-- ═══════════ AI PAGE ═══════════ -->
-<div id="page-ai" class="page">
+<div id="page-ai" class="page" role="main">
   <section class="inner-hero">
     <div class="inner-hero-text">
       <div class="page-tag">🤖 AI Technology</div>
@@ -1072,7 +1079,7 @@
 </div>
 
 <!-- ═══════════ TARIFF FINDER PAGE ═══════════ -->
-<div id="page-tariff" class="page">
+<div id="page-tariff" class="page" role="main">
   <iframe src="./ai-tariff-finder.html" title="AI Tariff Finder" style="width:100%;border:none;min-height:calc(100vh - var(--nav-h));display:block;"></iframe>
 </div>
 
@@ -1100,7 +1107,7 @@ window.addEventListener('DOMContentLoaded', function(){
 </script>
 
 <!-- ═══════════ HEAT LOSS ESTIMATOR PAGE ═══════════ -->
-<div id="page-heatloss" class="page">
+<div id="page-heatloss" class="page" role="main">
   <iframe src="./heat-loss-estimator.html" title="Heat Loss Estimator" style="width:100%;border:none;min-height:calc(100vh - var(--nav-h));display:block;"></iframe>
 </div><!-- /page-heatloss -->
 
@@ -1108,12 +1115,12 @@ window.addEventListener('DOMContentLoaded', function(){
 
 
 <!-- ═══════════ HOMEY SETUP GUIDE PAGE ═══════════ -->
-<div id="page-homeyguide" class="page">
+<div id="page-homeyguide" class="page" role="main">
   <iframe src="./homey-setup-guide.html" title="Homey Setup Guide" style="width:100%;border:none;min-height:calc(100vh - var(--nav-h));display:block;"></iframe>
 </div><!-- /page-homeyguide -->
 
 <!-- ═══════════ HOME ENERGY OPTIMISER (TOOL) ═══════════ -->
-<div id="page-optimiser" class="page">
+<div id="page-optimiser" class="page" role="main">
   <iframe src="./articles/decarbonarama-optimiser_4.html" title="Home Energy Optimiser" style="width:100%;border:none;min-height:calc(100vh - var(--nav-h));display:block;"></iframe>
 </div>
 
@@ -1121,7 +1128,7 @@ window.addEventListener('DOMContentLoaded', function(){
 <!-- CASE STUDIES HUB PAGE                                   -->
 <!-- ═══════════════════════════════════════════════════════ -->
 
-<div id="page-casestudies" class="page">
+<div id="page-casestudies" class="page" role="main">
 
   <!-- Full-screen article viewer (iframe overlay) -->
   <div id="cs-viewer" style="display:none;position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;z-index:200;background:#fff;flex-direction:column;">
@@ -1288,7 +1295,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
 
 <!-- ═══════════ ARTICLES PAGE ═══════════ -->
-<div id="page-articles" class="page">
+<div id="page-articles" class="page" role="main">
 
   <!-- Article viewer (hidden until card clicked) -->
   <div id="art-viewer" style="display:none;flex-direction:column;min-height:100vh;padding-top:var(--nav-h);">
@@ -2128,7 +2135,7 @@ function openArticle(src, title) { csOpen(src, title); }
 </div>
 
 <!-- ═══════════ UK NATIONAL GRID LIVE ═══════════ -->
-<div id="page-grid" class="page">
+<div id="page-grid" class="page" role="main">
   <iframe src="./uk-grid-live.html" title="UK Grid Live" style="width:100%;border:none;min-height:calc(100vh - var(--nav-h));display:block;"></iframe>
 </div>
 
