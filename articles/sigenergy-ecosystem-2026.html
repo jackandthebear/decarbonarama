@@ -144,11 +144,115 @@
 
   <p>That's a bold claim, and this year the range got broad enough to test it properly. Below we go product by product: the flagship <strong>SigenStor</strong> and its new smaller sibling the <strong>SigenStor Neo</strong>, the <strong>SigenMicro</strong> microinverter, the zero-downtime <strong>Gateway</strong>, the standalone <strong>Sigen Hybrid</strong> inverter, the <strong>AC and DC EV chargers</strong>, and the <strong>mySigen</strong> app that ties the lot together.</p>
 
+  <div class="card">
+    <svg viewBox="0 0 760 340" width="100%" role="img" aria-label="Diagram of the Sigenergy ecosystem: mySigen AI at the centre connecting solar, battery, EV charger, home and grid" style="display:block;">
+      <g font-family="'JetBrains Mono',monospace" font-size="12">
+        <!-- spokes -->
+        <g stroke="#2a3a2e" stroke-width="1.5">
+          <line x1="380" y1="170" x2="150" y2="70"/>
+          <line x1="380" y1="170" x2="610" y2="70"/>
+          <line x1="380" y1="170" x2="120" y2="240"/>
+          <line x1="380" y1="170" x2="640" y2="240"/>
+          <line x1="380" y1="170" x2="380" y2="300"/>
+        </g>
+        <!-- centre hub -->
+        <circle cx="380" cy="170" r="62" fill="#162019" stroke="#4ade80" stroke-width="2"/>
+        <text x="380" y="164" text-anchor="middle" fill="#4ade80" font-size="13">mySigen</text>
+        <text x="380" y="182" text-anchor="middle" fill="#94a894" font-size="10">AI · EMS</text>
+        <!-- nodes -->
+        <g>
+          <rect x="70"  y="42"  width="160" height="52" rx="10" fill="#111a13" stroke="#fbbf24"/>
+          <text x="150" y="66" text-anchor="middle" fill="#fbbf24">☀ SigenMicro</text>
+          <text x="150" y="82" text-anchor="middle" fill="#5a6c5a" font-size="10">panel-level solar</text>
+
+          <rect x="530" y="42"  width="160" height="52" rx="10" fill="#111a13" stroke="#4ade80"/>
+          <text x="610" y="66" text-anchor="middle" fill="#4ade80">🔋 SigenStor</text>
+          <text x="610" y="82" text-anchor="middle" fill="#5a6c5a" font-size="10">battery + inverter</text>
+
+          <rect x="40"  y="212" width="160" height="52" rx="10" fill="#111a13" stroke="#5aa7d6"/>
+          <text x="120" y="236" text-anchor="middle" fill="#5aa7d6">🚗 EV charger</text>
+          <text x="120" y="252" text-anchor="middle" fill="#5a6c5a" font-size="10">AC · DC V2H/V2G</text>
+
+          <rect x="560" y="212" width="160" height="52" rx="10" fill="#111a13" stroke="#a78bfa"/>
+          <text x="640" y="236" text-anchor="middle" fill="#a78bfa">⚡ Gateway</text>
+          <text x="640" y="252" text-anchor="middle" fill="#5a6c5a" font-size="10">0 ms backup</text>
+
+          <rect x="300" y="288" width="160" height="44" rx="10" fill="#111a13" stroke="#8a9a90"/>
+          <text x="380" y="315" text-anchor="middle" fill="#e4ede5">⌂ Home &amp; grid</text>
+        </g>
+      </g>
+    </svg>
+    <p class="chart-cap"><strong>The one-ecosystem idea.</strong> Every box is designed to talk to every other box, with the mySigen app and its AI energy-management system as the central brain. Schematic illustration.</p>
+  </div>
+
   <h2>1. SigenStor vs SigenStor Neo</h2>
 
-  <p>The <strong>SigenStor</strong> is the product that made Sigenergy's name. Its trick is cramming five things most brands sell separately into one stackable tower: a <strong>solar inverter, a battery inverter (PCS), the battery packs themselves, an optional EV DC charger, and the energy-management brain (EMS)</strong> — the "5-in-1" you see on every spec sheet. You start with an inverter base, then stack battery modules on top like books on a shelf.</p>
+  <p>The <strong>SigenStor</strong> is the product that made Sigenergy's name. Its trick is cramming five things most brands sell separately into one stackable tower: a <strong>solar inverter, a battery inverter (PCS), the battery packs themselves, an optional EV DC charger, and the energy-management brain (EMS)</strong> — the "5-in-1" you see on every spec sheet. You start with an inverter base, then stack battery modules on top like books on a shelf. The whole cabinet is <strong>IP66-rated</strong>, so it can be wall- or floor-mounted <strong>outdoors</strong> — no garage or plant room required, even in British weather.</p>
 
-  <p>Battery capacity scales from a single <strong>~6&nbsp;kWh</strong> module up to around <strong>48–54&nbsp;kWh</strong> per tower using 6.0&nbsp;kWh or 9.0&nbsp;kWh LiFePO&#8324; modules (see how it stacks up against rivals in our <a href="/articles/decarbonarma-5-storage-solutions.html">5 home battery systems worth considering</a>), with inverter outputs configurable across roughly <strong>5–12&nbsp;kW</strong> and single- or three-phase versions. The headline party trick is the built-in <strong>25&nbsp;kW EV DC fast charger</strong> module — a home battery that can rapid-charge your car directly from DC solar, something almost no rival offers in the same cabinet.</p>
+  <p>Battery capacity scales from a single <strong>~6&nbsp;kWh</strong> module up to around <strong>48–54&nbsp;kWh</strong> per tower using 6.0&nbsp;kWh or 9.0&nbsp;kWh LiFePO&#8324; modules (see how it stacks up against rivals in our <a href="/articles/decarbonarma-5-storage-solutions.html">5 home battery systems worth considering</a>), with the inverter itself — the <strong>SigenStor Energy Controller (EC)</strong> — offered in a wide ladder of power ratings so it can be matched to anything from a modest terrace to a large three-phase property. The headline party trick is the built-in <strong>25&nbsp;kW EV DC fast charger</strong> module — a home battery that can rapid-charge your car directly from DC solar, something almost no rival offers in the same cabinet.</p>
+
+  <div class="card">
+    <svg viewBox="0 0 760 300" width="100%" role="img" aria-label="Illustration of a stackable SigenStor tower: inverter base with stacked battery modules" style="display:block;max-width:520px;margin:0 auto;">
+      <defs>
+        <linearGradient id="modg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#1a2820"/><stop offset="1" stop-color="#111a13"/>
+        </linearGradient>
+      </defs>
+      <!-- battery modules -->
+      <g font-family="'JetBrains Mono',monospace" font-size="12">
+        <rect x="250" y="34"  width="180" height="42" rx="8" fill="url(#modg)" stroke="#1a5c38"/>
+        <rect x="250" y="82"  width="180" height="42" rx="8" fill="url(#modg)" stroke="#1a5c38"/>
+        <rect x="250" y="130" width="180" height="42" rx="8" fill="url(#modg)" stroke="#1a5c38"/>
+        <!-- capacity strip on each module -->
+        <rect x="262" y="49" width="90" height="12" rx="3" fill="#4ade80" opacity="0.85"/>
+        <rect x="262" y="97" width="90" height="12" rx="3" fill="#4ade80" opacity="0.6"/>
+        <rect x="262" y="145" width="90" height="12" rx="3" fill="#4ade80" opacity="0.4"/>
+        <text x="368" y="59" fill="#94a894">6–10 kWh</text>
+        <text x="368" y="107" fill="#94a894">6–10 kWh</text>
+        <text x="368" y="155" fill="#94a894">6–10 kWh</text>
+        <!-- inverter base -->
+        <rect x="242" y="182" width="196" height="70" rx="10" fill="#162019" stroke="#4ade80" stroke-width="1.5"/>
+        <circle cx="272" cy="205" r="8" fill="none" stroke="#fbbf24" stroke-width="1.5"/>
+        <path d="M272 200 v10 M267 205 h10" stroke="#fbbf24" stroke-width="1.5"/>
+        <text x="290" y="209" fill="#e4ede5" font-size="11">Energy Controller</text>
+        <text x="290" y="228" fill="#4ade80" font-size="11">3.6 – 30 kW · IP66</text>
+        <text x="290" y="245" fill="#5a6c5a" font-size="10">inverter · PCS · EMS · DC EV</text>
+      </g>
+      <!-- labels/leaders -->
+      <g font-family="'JetBrains Mono',monospace" font-size="11" fill="#8a9a90">
+        <line x1="242" y1="55" x2="150" y2="55" stroke="#2a3a2e"/><text x="30" y="59">Stack modules</text>
+        <line x1="150" y1="72" x2="150" y2="150" stroke="#2a3a2e"/>
+        <line x1="242" y1="217" x2="150" y2="217" stroke="#2a3a2e"/><text x="42" y="221">One base</text>
+        <!-- solar + ev + grid icons on right -->
+        <text x="470" y="60" fill="#fbbf24">☀ Solar in</text>
+        <text x="470" y="200" fill="#5aa7d6">🚗 EV DC out</text>
+        <text x="470" y="230" fill="#a78bfa">⌂ Home / grid</text>
+        <line x1="438" y1="205" x2="462" y2="205" stroke="#2a3a2e"/>
+        <line x1="430" y1="45" x2="462" y2="55" stroke="#2a3a2e"/>
+      </g>
+    </svg>
+    <p class="chart-cap"><strong>How a SigenStor stacks.</strong> One IP66 Energy Controller base does the inverting, battery management and (optionally) EV DC charging; battery modules clip on top to build capacity. Schematic illustration, not to scale.</p>
+  </div>
+
+  <h3>The inverter range: 3.6&nbsp;kW to 30&nbsp;kW</h3>
+
+  <p>This is where the SigenStor gets genuinely flexible. Rather than one or two fixed sizes, the Energy Controller comes as a <strong>ladder of power ratings</strong> — six single-phase options and nine three-phase — so your installer can size the inverter to your roof and your loads rather than rounding up to the nearest big box. The number of <strong>MPP trackers</strong> (independent solar inputs) climbs with size too, which matters for homes with panels on several roof faces.</p>
+
+  <div class="card">
+  <table>
+    <thead><tr><th>Phase</th><th>Power ratings (kW)</th><th class="num">MPPT</th><th>Typical use</th></tr></thead>
+    <tbody>
+      <tr><td>Single-phase</td><td class="num">3.6 · 5.0 · 6.0 · 8.0 · 10.0 · 12.0</td><td class="num">2–4</td><td>Most UK homes</td></tr>
+      <tr><td>Three-phase</td><td class="num">5.0 · 8.0 · 10.0 · 12.0 · 15.0 · 17.0 · 20.0 · 25.0 · 30.0</td><td class="num">4</td><td>Large homes, three-phase supply, light commercial</td></tr>
+    </tbody>
+  </table>
+  <p class="chart-cap">Single-phase: 5 and 6&nbsp;kW use 2 MPP trackers, 8&nbsp;kW uses 3, and 10 and 12&nbsp;kW use 4. All models allow up to 200% DC oversizing, so you can fit noticeably more panel wattage than the inverter's rating. Exact model availability varies by market — a certified installer confirms what's offered in the UK.</p>
+  </div>
+
+  <div class="card">
+    <div class="chart-box"><canvas id="sizeChart"></canvas></div>
+    <p class="chart-cap"><strong>Figure 1 — The SigenStor inverter ladder.</strong> Single-phase Energy Controllers (green) span 3.6–12&nbsp;kW; three-phase units (violet) extend all the way to 30&nbsp;kW — over eight times the smallest model. That range is why one product line can cover a small flat and a big three-phase house alike.</p>
+  </div>
 
   <p>In June/July 2026, at Intersolar Europe, Sigenergy launched the <strong>SigenStor Neo</strong>. Crucially, it is <em>not</em> a replacement — it's a slicker, more residential-focused companion that sits below the original in the range. Three things stand out.</p>
 
@@ -177,7 +281,7 @@
 
   <div class="card">
     <div class="chart-box"><canvas id="cmpChart"></canvas></div>
-    <p class="chart-cap"><strong>Figure 1 — SigenStor vs Neo, the numbers that changed.</strong> The Neo's biggest module grows to 10&nbsp;kWh, depth of discharge reaches a full 100%, and rated cycle life roughly doubles. Cycle life is shown in thousands of cycles for scale. Figures are manufacturer ratings, rounded.</p>
+    <p class="chart-cap"><strong>Figure 2 — SigenStor vs Neo, the numbers that changed.</strong> The Neo's biggest module grows to 10&nbsp;kWh, depth of discharge reaches a full 100%, and rated cycle life roughly doubles. Cycle life is shown in thousands of cycles for scale. Figures are manufacturer ratings, rounded.</p>
   </div>
 
   <h2>2. SigenMicro — the microinverter play</h2>
@@ -215,7 +319,7 @@
 
   <div class="card">
     <div class="chart-box"><canvas id="powChart"></canvas></div>
-    <p class="chart-cap"><strong>Figure 2 — The ecosystem by power rating.</strong> Where each residential product sits, from an 800&nbsp;W per-panel microinverter to the 25&nbsp;kW bidirectional DC charger and 24&nbsp;kW backup gateway. Ranges show the configurable spread; bars use the top of each range.</p>
+    <p class="chart-cap"><strong>Figure 3 — The ecosystem by power rating.</strong> Where each residential product sits, from an 800&nbsp;W per-panel microinverter to the 25&nbsp;kW bidirectional DC charger and 24&nbsp;kW backup gateway. Ranges show the configurable spread; bars use the top of each range.</p>
   </div>
 
   <h2>6. The mySigen app — the AI that runs it all</h2>
@@ -288,7 +392,29 @@ const brand = {
 Chart.defaults.font.family = "'Source Serif 4', Georgia, serif";
 Chart.defaults.color = brand.mid;
 
-/* Figure 1 — SigenStor vs Neo */
+/* Figure 1 — SigenStor inverter size ladder */
+new Chart(document.getElementById('sizeChart'), {
+  type:'bar',
+  data:{
+    labels:['3.6','5.0','6.0','8.0','10.0','12.0','15.0','17.0','20.0','25.0','30.0'],
+    datasets:[
+      {label:'Single-phase (kW)', data:[3.6,5,6,8,10,12,null,null,null,null,null], backgroundColor:brand.teal},
+      {label:'Three-phase (kW)',  data:[null,5,null,8,10,12,15,17,20,25,30], backgroundColor:brand.violet}
+    ]
+  },
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{
+      legend:{position:'bottom', labels:{boxWidth:12, padding:14, color:brand.mid}},
+      tooltip:{callbacks:{label:c=> c.parsed.y==null ? null : ` ${c.dataset.label}: ${c.parsed.y} kW`}}
+    },
+    scales:{
+      y:{ beginAtZero:true, title:{display:true,text:'Inverter output (kW)'}, grid:{color:brand.grid}, ticks:{callback:v=>v+' kW'} },
+      x:{ title:{display:true,text:'SigenStor EC power rating'}, grid:{display:false} }
+    }
+  }
+});
+
+/* Figure 2 — SigenStor vs Neo */
 new Chart(document.getElementById('cmpChart'), {
   type:'bar',
   data:{
