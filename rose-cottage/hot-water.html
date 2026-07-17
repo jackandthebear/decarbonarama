@@ -101,7 +101,7 @@ h2.section{font-family:"Playfair Display",serif;font-size:20px;color:var(--fores
   <div class="cards" id="hw-summary-cards"></div>
 
   <div class="subtabs">
-    <button class="sub-btn active" data-sub="overview">13-Day Rolling</button>
+    <button class="sub-btn active" data-sub="overview">30-Day Rolling</button>
     <button class="sub-btn" data-sub="week">This Week</button>
   </div>
 
@@ -118,7 +118,7 @@ h2.section{font-family:"Playfair Display",serif;font-size:20px;color:var(--fores
   <div id="sub-week" class="subpanel">
     <div class="cards" id="week-summary-cards"></div>
     <div class="chart-grid">
-      <div class="chart-box" style="grid-column:1/-1;"><h3>This week vs 13-day average</h3><div class="canvas-wrap"><canvas id="chart-weekcompare"></canvas></div></div>
+      <div class="chart-box" style="grid-column:1/-1;"><h3>This week vs 30-day average</h3><div class="canvas-wrap"><canvas id="chart-weekcompare"></canvas></div></div>
     </div>
     <div class="table-wrap"><table id="table-week"></table></div>
   </div>
@@ -135,8 +135,15 @@ h2.section{font-family:"Playfair Display",serif;font-size:20px;color:var(--fores
 <script>
 // ---------- Static daily snapshot: Rose Cottage hot-water ledger ----------
 // Regenerated each morning by the daily-rose-cottage-energy-report scheduled task.
-const LEDGER_GENERATED_AT = "2026-07-17T05:36:00Z";
+const LEDGER_GENERATED_AT = "2026-07-17T10:10:26Z";
 const LEDGER_ROWS = [
+  {date:"2026-06-26", day_solar_kwh:5.795, night_octopus_kwh:0.585, total_kwh:6.38, octopus_pct:9.2, octopus_cost_gbp:0.04, solar_offset_gbp:1.76},
+  {date:"2026-06-27", day_solar_kwh:3.01, night_octopus_kwh:0, total_kwh:3.01, octopus_pct:0.0, octopus_cost_gbp:0, solar_offset_gbp:0.91},
+  {date:"2026-06-28", day_solar_kwh:6.65, night_octopus_kwh:0, total_kwh:6.65, octopus_pct:0.0, octopus_cost_gbp:0, solar_offset_gbp:2.02},
+  {date:"2026-06-29", day_solar_kwh:3.18, night_octopus_kwh:0, total_kwh:3.18, octopus_pct:0.0, octopus_cost_gbp:0, solar_offset_gbp:0.97},
+  {date:"2026-06-30", day_solar_kwh:3.743, night_octopus_kwh:2.247, total_kwh:5.99, octopus_pct:37.5, octopus_cost_gbp:0.16, solar_offset_gbp:1.14},
+  {date:"2026-07-01", day_solar_kwh:5.69, night_octopus_kwh:0, total_kwh:5.69, octopus_pct:0.0, octopus_cost_gbp:0, solar_offset_gbp:1.73},
+  {date:"2026-07-02", day_solar_kwh:2.98, night_octopus_kwh:0, total_kwh:2.98, octopus_pct:0.0, octopus_cost_gbp:0, solar_offset_gbp:0.91},
   {date:"2026-07-03", day_solar_kwh:7.317, night_octopus_kwh:0.363, total_kwh:7.68, octopus_pct:4.7, octopus_cost_gbp:0.03, solar_offset_gbp:2.22},
   {date:"2026-07-04", day_solar_kwh:4.797, night_octopus_kwh:1.193, total_kwh:5.99, octopus_pct:19.9, octopus_cost_gbp:0.08, solar_offset_gbp:1.46},
   {date:"2026-07-05", day_solar_kwh:2.494, night_octopus_kwh:0.446, total_kwh:2.94, octopus_pct:15.2, octopus_cost_gbp:0.03, solar_offset_gbp:0.76},
@@ -321,7 +328,7 @@ function buildWeekCompareChart(weekRows, allRows) {
       labels: ['Avg daily demand (kWh)', 'Avg Octopus share (%)'],
       datasets: [
         { label: 'This week', data: [avgWeek, avgWeekOctPct], backgroundColor: '#1A3D2B' },
-        { label: '13-day average', data: [avgAll, avgAllOctPct], backgroundColor: '#C9A96E' },
+        { label: '30-day average', data: [avgAll, avgAllOctPct], backgroundColor: '#C9A96E' },
       ]
     },
     options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
