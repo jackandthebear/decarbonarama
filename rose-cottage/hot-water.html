@@ -248,6 +248,7 @@ function buildCards(container, rows) {
     <div class="card"><div class="label">Total demand</div><div class="value">${fmt(total,1)} kWh</div><div class="foot">${rows.length} days</div></div>
     <div class="card"><div class="label">Octopus (night) share</div><div class="value amber">${fmt(octPct,1)}%</div><div class="foot">${fmt(octTotal,1)} kWh from grid</div></div>
     <div class="card"><div class="label">Octopus cost</div><div class="value">£${fmt(cost,2)}</div><div class="foot">at 6.9p/kWh overnight</div></div>
+    <div class="card"><div class="label">Avg daily spend</div><div class="value amber">£${fmt(cost/rows.length,2)}</div><div class="foot">Octopus hot water · over ${rows.length} days</div></div>
     <div class="card"><div class="label">Solar offset value</div><div class="value">£${fmt(offset,2)}</div><div class="foot">demand met free by solar</div></div>
   `;
 }
