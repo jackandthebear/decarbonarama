@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Could the UK Grid Handle an All-Electric Vehicle Fleet? We Did the Maths | Decarbonarma</title>
+<meta name="description" content="Two independent methods to estimate how much electricity a fully electric UK car, van and HGV fleet would need — and whether the grid's generation and network can take it.">
+<link rel="canonical" href="https://decarbonarma.com/articles/can-uk-grid-handle-all-electric-vehicles.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Decarbonarma">
+<meta property="og:title" content="Could the UK Grid Handle an All-Electric Vehicle Fleet? We Did the Maths | Decarbonarma">
+<meta property="og:description" content="Two independent methods to estimate how much electricity a fully electric UK car, van and HGV fleet would need — and whether the grid's generation and network can take it.">
+<meta property="og:url" content="https://decarbonarma.com/articles/can-uk-grid-handle-all-electric-vehicles.html">
+<meta property="og:image" content="https://decarbonarma.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Could the UK Grid Handle an All-Electric Vehicle Fleet? We Did the Maths | Decarbonarma">
+<meta name="twitter:description" content="Two independent methods to estimate how much electricity a fully electric UK car, van and HGV fleet would need — and whether the grid's generation and network can take it.">
+<meta name="twitter:image" content="https://decarbonarma.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Could the UK Grid Handle an All-Electric Vehicle Fleet? We Did the Maths | Decarbonarma",
+  "description": "Two independent methods to estimate how much electricity a fully electric UK car, van and HGV fleet would need — and whether the grid's generation and network can take it.",
+  "url": "https://decarbonarma.com/articles/can-uk-grid-handle-all-electric-vehicles.html",
+  "image": "https://decarbonarma.com/og-image.png",
+  "author": { "@type": "Organization", "name": "Decarbonarma" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Decarbonarma",
+    "logo": { "@type": "ImageObject", "url": "https://decarbonarma.com/logo.png" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://decarbonarma.com/articles/can-uk-grid-handle-all-electric-vehicles.html" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0d1510; --bg2:#111a13; --bg3:#162019; --bg4:#1a2820;
+    --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.13);
+    --green:#4ade80; --green-dim:#22c55e; --green-deep:#1a5c38;
+    --green-pale:rgba(74,222,128,0.08); --green-pale2:rgba(74,222,128,0.13);
+    --amber:#fbbf24; --amber-pale:rgba(251,191,36,0.08);
+    --blue:#5aa7d6; --violet:#a78bfa; --grey:#8a9a90;
+    --red:#f87171;
+    --text:#e4ede5; --text-mid:#94a894; --text-dim:#5a6c5a;
+    --mono:'JetBrains Mono','Courier New',monospace;
+    --serif:'Playfair Display',Georgia,serif;
+    --body:'Source Serif 4',Georgia,serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.75;font-weight:300;-webkit-font-smoothing:antialiased;}
+
+  .site-header{border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:rgba(13,21,16,.9);backdrop-filter:blur(8px);z-index:20;}
+  .site-logo{text-decoration:none;display:flex;align-items:center;}
+  .site-nav{display:flex;gap:1.5rem;}
+  .site-nav a{color:var(--text-dim);text-decoration:none;font-size:12px;letter-spacing:.07em;text-transform:uppercase;}
+  .site-nav a:hover{color:var(--green);}
+
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px;}
+  .hero{padding:64px 0 34px;border-bottom:1px solid var(--border);}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);}
+  h1{font-family:var(--serif);font-weight:700;font-size:2.4rem;line-height:1.14;margin:.4em 0 .3em;color:#fff;}
+  .standfirst{font-size:1.2rem;color:var(--text-mid);font-weight:300;}
+  .byline{font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-top:18px;}
+
+  main{padding:10px 0 40px;}
+  h2{font-family:var(--serif);font-weight:700;font-size:1.7rem;color:#fff;margin:2em 0 .4em;}
+  h3{font-family:var(--body);font-weight:600;font-size:1.18rem;color:var(--green);margin:1.7em 0 .3em;}
+  p{margin:.85em 0;}
+  strong{color:#fff;font-weight:600;}
+  em{color:var(--text-mid);}
+  a{color:var(--green);}
+  ul,ol{margin:.85em 0 .85em 1.3em;}
+  li{margin:.35em 0;}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:30px 0;}
+  .stat{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+  .stat .n{font-family:var(--mono);font-size:1.5rem;font-weight:500;color:var(--green);line-height:1;}
+  .stat .l{font-size:13px;color:var(--text-mid);margin-top:8px;line-height:1.4;}
+
+  .card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px;margin:26px 0;}
+  .chart-box{position:relative;height:380px;width:100%;}
+  .chart-cap{font-size:13.5px;color:var(--text-mid);margin-top:14px;line-height:1.55;}
+
+  table{width:100%;border-collapse:collapse;font-size:14.5px;margin:6px 0;}
+  th,td{text-align:left;padding:10px 10px;border-bottom:1px solid var(--border);}
+  th{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim);font-weight:400;}
+  td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--text);}
+
+  .callout{border-left:3px solid var(--amber);background:var(--amber-pale);padding:18px 22px;border-radius:0 12px 12px 0;margin:28px 0;}
+  .callout h3{margin-top:0;color:var(--amber);}
+  .callout.green{border-left-color:var(--green);background:var(--green-pale);}
+  .callout.green h3{color:var(--green);}
+
+  footer{border-top:1px solid var(--border);padding:28px 0 60px;}
+  footer p{font-size:12.5px;color:var(--text-dim);line-height:1.65;}
+  footer a{color:var(--text-mid);}
+
+  @media(max-width:600px){ h1{font-size:1.8rem;} .chart-box{height:300px;} body{font-size:16px;} .hero{padding:40px 0 26px;} }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="site-logo"><img src="../logo-light.svg" alt="Decarbonarma" style="height:34px;width:auto;display:block;"></a>
+  <nav class="site-nav">
+    <a href="/">Home</a>
+    <a href="#">Grid</a>
+    <a href="#">EVs</a>
+    <a href="#">Policy</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">Grid Explainer &middot; Our Own Numbers</div>
+    <h1>Could the UK Grid Handle an All-Electric Vehicle Fleet? We Did the Maths</h1>
+    <!-- Article Start -->
+    <p class="standfirst">Every petrol and diesel car, van and lorry in Britain, switched to battery power overnight. Two independent ways of estimating the electricity bill for that, cross-checked against each other and against the grid's actual capacity — with the working shown.</p>
+    <div class="byline">Decarbonarma &middot; July 2026 &middot; ~11-min read &middot; Original analysis</div>
+  </div>
+
+  <main>
+
+  <div class="stats">
+    <div class="stat"><div class="n">~116 TWh/yr</div><div class="l">Extra electricity for a fully electric car, van &amp; HGV fleet</div></div>
+    <div class="stat"><div class="n">+34%</div><div class="l">Increase on the UK's current 322 TWh annual demand</div></div>
+    <div class="stat"><div class="n">~13 GW</div><div class="l">Average continuous power that adds up to, day and night</div></div>
+    <div class="stat"><div class="n">Network, not power stations</div><div class="l">Where the real bottleneck sits</div></div>
+  </div>
+
+  <p>"Can the grid cope with electric cars?" gets asked constantly, and it's usually answered with a vibe rather than a number. So we built one — twice, two different ways, using only public DVLA, DfT and NESO data — and compared the results. If they landed close together, that's a decent signal the estimate is sound. They did.</p>
+
+  <h2>1. Two ways to estimate the same number</h2>
+
+  <p>The question "how much electricity would an all-EV Britain need?" can be answered from two completely different starting points. If they agree, you can trust the answer more than either one alone.</p>
+
+  <h3>Method 1 — bottom-up: count the vehicles</h3>
+  <p>Take every car, van and HGV licensed in the UK, multiply by how far it drives in a year, then divide by how efficiently an electric version of that vehicle covers a mile. Sum the three vehicle classes.</p>
+
+  <h3>Method 2 — top-down: convert what we already burn</h3>
+  <p>Take the fuel the country's engines currently burn — petrol and diesel, in tonnes — convert it to its energy content, strip out the roughly 70–80% that an internal combustion engine wastes as heat, then re-express that "useful" energy as the electricity an EV motor (which wastes far less) would need to deliver the same motion.</p>
+
+  <p>One approach starts from vehicles and mileage. The other starts from fuel receipts. They shouldn't necessarily agree — but if they land in the same ballpark, that's a good sign neither is wildly off.</p>
+
+  <h2>2. Method 1: counting the fleet</h2>
+
+  <p>The UK's licensed vehicle fleet, per DVLA data for end of 2025: <strong>34.5 million cars</strong>, <strong>4.89 million light goods vehicles (vans)</strong>, and <strong>0.54 million HGVs</strong>. DfT traffic statistics give total miles driven by each class in 2024, which lets us back out a fleet-wide average annual mileage per vehicle — a more honest number than just quoting the highest-mileage sub-group.</p>
+
+  <div class="card">
+  <table>
+    <thead><tr><th>Vehicle class</th><th class="num">Fleet size</th><th class="num">Avg. miles/yr</th><th class="num">EV efficiency</th><th class="num">Electricity/yr</th></tr></thead>
+    <tbody>
+      <tr><td>Cars</td><td class="num">34.5m</td><td class="num">7,100</td><td class="num">3.7 mi/kWh</td><td class="num">66.2 TWh</td></tr>
+      <tr><td>Vans (LGV)</td><td class="num">4.89m</td><td class="num">11,963</td><td class="num">3.0 mi/kWh</td><td class="num">19.5 TWh</td></tr>
+      <tr><td>HGVs</td><td class="num">0.54m</td><td class="num">30,741</td><td class="num">0.83 mi/kWh</td><td class="num">20.0 TWh</td></tr>
+      <tr><td><strong>Total</strong></td><td></td><td></td><td></td><td class="num"><strong>105.7 TWh</strong></td></tr>
+    </tbody>
+  </table>
+  <p class="chart-cap">Mileage: DfT National Travel Survey (cars, 2024 fleet average) and DfT road traffic estimates (vans/HGVs, total vehicle-miles &divide; fleet size). EV efficiency: real-world UK figures for cars (3.5&ndash;4.2 mi/kWh typical, mid-point used); vans (2.8&ndash;3.7 mi/kWh); HGVs blended from published electric truck consumption (DAF CF Electric, Volvo FL Electric, Tesla Semi), which cluster around 1.2 kWh/mile once you weight for the mix of rigid and articulated trucks on UK roads.</p>
+  </div>
+
+  <p>The HGV number carries the most uncertainty by far — a 44-tonne electric artic and a 7.5-tonne electric rigid have very different appetites, and the UK doesn't yet have enough of either on the road to know the real-world fleet average. Treat it as the roughest of the three.</p>
+
+  <h2>3. Method 2: working back from the fuel pump</h2>
+
+  <p>UK road transport has burned a fairly stable <strong>~37 million tonnes of petrol and diesel a year</strong> for two decades (DESNZ/DUKES). Splitting that roughly 40% petrol / 60% diesel — diesel's share is pulled up by vans and HGVs, which are almost entirely diesel — and converting to energy content (petrol ~9.1 kWh/litre, diesel ~10.0 kWh/litre) gives the total chemical energy currently going into UK engines: <strong>~448 TWh a year</strong>.</p>
+
+  <p>That's not the number that matters, though — it's the number <em>before</em> the losses. A petrol engine turns roughly 20% of that energy into forward motion; the rest is heat, friction and idling. Diesel does somewhat better, around 25%. An EV drivetrain, by contrast, converts about 85% of the electricity it draws (after charging losses) into motion — because an electric motor doesn't need to burn anything to make torque.</p>
+
+  <div class="card">
+  <div class="chart-box"><canvas id="wasteChart"></canvas></div>
+  <p class="chart-cap"><strong>Figure 1 &mdash; Where the energy goes.</strong> Of the ~448 TWh of chemical energy in the fuel the UK burns for road transport each year, only ~103 TWh actually reaches the wheels &mdash; the rest is lost as heat and friction inside the engine. An EV needs far less input energy to deliver that same ~103 TWh of useful motion, because its drivetrain wastes so little.</p>
+  </div>
+
+  <p>Re-expressing that ~103 TWh of "useful, wheel-reaching" energy as electricity (dividing by the EV drivetrain's ~85% efficiency) gives <strong>~121 TWh</strong> &mdash; the electricity needed to replace all the fuel currently burned by vehicles that are still running on petrol or diesel today.</p>
+
+  <h2>4. Don't forget: some of this is already happening</h2>
+
+  <p>Both methods need one correction before they can be compared honestly. Roughly <strong>4.8% of licensed cars are already fully electric</strong>, plus a smaller but fast-growing share of vans and a handful of HGVs &mdash; and that draw is already sitting inside the UK's current 322 TWh of annual electricity demand. Method 1 (which counts the <em>whole</em> fleet as if it were electric) already includes it. Method 2 (which starts from fuel burned) doesn't, because those EVs aren't burning any fuel to be counted. Adding today's roughly <strong>4.7 TWh</strong> of existing EV electricity use back into Method 2 puts both estimates on the same footing: a genuinely 100% electric fleet, not "100% electric minus the bit that already is."</p>
+
+  <div class="stats">
+    <div class="stat"><div class="n">105.7 TWh</div><div class="l">Method 1 &mdash; bottom-up, full fleet</div></div>
+    <div class="stat"><div class="n">125.7 TWh</div><div class="l">Method 2 &mdash; top-down, adjusted to full fleet</div></div>
+    <div class="stat"><div class="n">~116 TWh</div><div class="l">Average of the two, full-fleet basis</div></div>
+  </div>
+
+  <p>Two methods, built from entirely different public datasets, land within about 20 TWh of each other &mdash; roughly 17% apart, either side of the average. For a back-of-envelope national estimate with this many moving parts, that's a genuinely reassuring level of agreement. It's also close to <a href="https://www.neso.energy/" target="_blank" rel="noopener">NESO's</a> own Future Energy Scenarios modelling, which puts electric vehicle demand at an average of around 117 TWh across its three net-zero pathways for 2050 &mdash; arrived at through a completely different, far more detailed modelling process. Three independent routes, one similar number, is about as good a sanity check as a napkin calculation is going to get.</p>
+
+  <h2>5. So: how big a deal is ~116 TWh, really?</h2>
+
+  <p>Subtracting the roughly 4.7 TWh already being drawn by today's EVs leaves about <strong>111 TWh of genuinely new demand</strong> &mdash; the extra the grid would need to find on top of what it supplies today. That's a big number in isolation, but it needs to sit next to the UK's current annual electricity demand of <strong>322 TWh</strong> (National Energy System Operator, 2025 figures, a record high after two consecutive years of growth).</p>
+
+  <div class="card">
+    <div class="chart-box"><canvas id="demandChart"></canvas></div>
+    <p class="chart-cap"><strong>Figure 2 &mdash; Current UK electricity demand vs. a fully electric road fleet.</strong> A 100% electric car, van and HGV fleet adds roughly a third again to what the grid already delivers &mdash; taking annual demand from ~322 TWh to somewhere around ~433 TWh.</p>
+  </div>
+
+  <p>Spread evenly across the year, ~111 TWh of new demand works out to about <strong>305 GWh a day</strong>, or an <strong>average continuous draw of roughly 13 GW</strong> &mdash; equivalent, in round terms, to adding a bit more than two Hinkley Point Cs' worth of constant output to the system, all day, every day. That's the headline "can the country generate enough electricity" number, and on an annual-energy basis it's manageable: total UK generation capacity already stands at <strong>71.7 GW</strong> (DESNZ, 2024), renewables are being added at record pace (127 TWh from wind, solar and biomass combined in 2025 alone, itself a record), and NESO's own long-term modelling assumes demand will roughly double to triple by 2050 as transport <em>and</em> heating electrify &mdash; this is the scenario the system is already being built for.</p>
+
+  <h2>6. The real constraint isn't power stations. It's the wires.</h2>
+
+  <p>Here's where the "the grid can't cope" instinct is onto something real &mdash; just aimed at the wrong part of the grid. Annual energy is a manageable problem because it averages out over 8,760 hours a year. Electricity demand doesn't average out; it spikes. And EV charging has an unhelpful habit of spiking exactly when the rest of the grid is already under the most strain.</p>
+
+  <div class="callout">
+    <h3>The 6pm problem</h3>
+    <p>Most people plug their car in when they get home from work &mdash; which is also, unhelpfully, right around the existing evening demand peak (already the UK's tightest window: winter 2024/25's peak cold-spell demand was forecast at 59.8 GW against 71.7 GW of capacity, a margin of just 5.2 GW). If even a modest slice of the country's 40 million cars, vans and HGVs all start pulling ~7kW from a home charger at the same moment, the maths turns ugly fast: <strong>just 5% charging simultaneously adds ~14 GW to peak demand; 10% adds ~28 GW; 20% adds ~56 GW</strong> &mdash; on top of a system that already has less than 6 GW of headroom on a cold winter evening. Unmanaged, mass EV adoption doesn't strain the year's electricity supply &mdash; it strains one specific hour, badly.</p>
+  </div>
+
+  <p>And the constraint that actually bites first usually isn't the national transmission network at all &mdash; it's the <strong>local distribution network</strong>: the substations and cables that carry power the last mile into streets and driveways, many of which were sized decades ago for gas boilers and a handful of kettles, not a street's worth of home chargers switching on at once. Industry estimates put the network reinforcement needed just to support 300,000 <em>public</em> rapid chargers by 2030 at around <strong>8 GW of additional capacity</strong> &mdash; roughly equivalent to eight new nuclear power stations' worth of connection headroom, and that's before counting the tens of millions of home chargers behind it.</p>
+
+  <div class="callout green">
+    <h3>The fix already exists &mdash; it's coordination, not concrete</h3>
+    <p>The gap between "56 GW of chaotic peak demand" and "13 GW of manageable average demand" is almost entirely closed by <strong>smart charging</strong>: shifting the bulk of EV charging into the middle of the night, when demand is low and (increasingly) wind generation is high. Tariffs like Intelligent Octopus Go already pay people to do exactly this. Industry analysis suggests optimised, time-shifted charging could support <strong>20&ndash;25 million EVs</strong> without breaching existing network limits &mdash; a very different picture from everyone charging at 6pm because that's when they got home. Vehicle-to-grid (V2G), where parked EV batteries feed power back at peak times, is the next layer NESO is now actively planning for: its 2025 Future Energy Scenarios assumes up to 41 GW of V2G capacity by 2050.</p>
+  </div>
+
+  <h2>The bottom line</h2>
+  <p>Two independent back-of-envelope methods, cross-checked against NESO's own far more sophisticated modelling, converge on roughly the same answer: fully electrifying Britain's cars, vans and HGVs would add somewhere around <strong>110&ndash;120 TWh a year</strong> to a grid that currently supplies 322 TWh &mdash; a big number, but one the UK's generation build-out is already sized for. The genuine engineering challenge isn't whether enough electrons exist across a full year. It's whether the wires reaching your street can survive everyone plugging in at 6pm on a cold Tuesday &mdash; and the honest answer is: not without smart charging, off-peak tariffs and a lot of substation upgrades doing the work quietly in the background. The grid can almost certainly handle an all-electric fleet. Whether it can handle an <em>uncoordinated</em> one is a very different, and much harder, question.</p>
+  <!-- Article End -->
+
+  </main>
+</div>
+
+<!-- dca-email-capture -->
+<div class="dca-signup-outer">
+  <div class="dca-signup">
+    <div class="dca-signup-kicker">Decarbonarma Newsletter</div>
+    <h3 class="dca-signup-h">Get the next one in your inbox</h3>
+    <p class="dca-signup-sub">Clear, no-nonsense analysis of UK home decarbonisation &mdash; heat pumps, solar, EVs, batteries and the grid. Occasional emails, no spam, unsubscribe anytime.</p>
+    <form action="https://decarbonarma.us15.list-manage.com/subscribe/post?u=cffa5aec4001ad97d9357f807&amp;id=8d5f19dec4&amp;f_id=0096a2e1f0" method="post" target="_blank" novalidate class="dca-signup-form">
+      <label class="dca-visually-hidden" for="dca-email">Email address</label>
+      <input type="email" name="EMAIL" id="dca-email" required placeholder="you@example.com" class="dca-signup-input">
+      <!-- Mailchimp bot-prevention honeypot: real users leave this empty -->
+      <div aria-hidden="true" style="position:absolute;left:-5000px;"><input type="text" name="b_cffa5aec4001ad97d9357f807_8d5f19dec4" tabindex="-1" value=""></div>
+      <button type="submit" name="subscribe" class="dca-signup-btn">Subscribe</button>
+    </form>
+    <div class="dca-signup-fine">We&rsquo;ll never share your email. Powered by Mailchimp.</div>
+  </div>
+</div>
+<style>
+  .dca-signup-outer{max-width:820px;margin:48px auto 10px;padding:0 24px;}
+  .dca-signup{background:var(--bg3,#162019);border:1px solid var(--green-pale2,rgba(74,222,128,0.13));border-radius:16px;padding:30px 28px;position:relative;overflow:hidden;}
+  .dca-signup::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green,#4ade80),var(--amber,#fbbf24));}
+  .dca-signup-kicker{font-family:var(--mono,'JetBrains Mono',monospace);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--green,#4ade80);margin-bottom:8px;}
+  .dca-signup-h{font-family:var(--serif,'Playfair Display',Georgia,serif);font-weight:700;font-size:1.5rem;color:#fff;margin:0 0 .3em;line-height:1.15;}
+  .dca-signup-sub{font-family:var(--body,'Source Serif 4',Georgia,serif);font-size:15px;color:var(--text-mid,#94a894);margin:0 0 18px;line-height:1.6;font-weight:300;}
+  .dca-signup-form{display:flex;gap:10px;flex-wrap:wrap;}
+  .dca-signup-input{flex:1 1 240px;min-width:0;background:var(--bg,#0d1510);border:1px solid var(--border2,rgba(255,255,255,0.13));border-radius:10px;padding:13px 15px;color:var(--text,#e4ede5);font-family:var(--body,'Source Serif 4',Georgia,serif);font-size:15px;}
+  .dca-signup-input:focus{outline:none;border-color:var(--green,#4ade80);box-shadow:0 0 0 3px var(--green-pale,rgba(74,222,128,0.08));}
+  .dca-signup-input::placeholder{color:var(--text-dim,#5a6c5a);}
+  .dca-signup-btn{flex:0 0 auto;background:var(--green,#4ade80);color:#062012;border:none;border-radius:10px;padding:13px 26px;font-family:var(--mono,'JetBrains Mono',monospace);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:background .15s;}
+  .dca-signup-btn:hover{background:var(--green-dim,#22c55e);}
+  .dca-signup-fine{font-family:var(--mono,'JetBrains Mono',monospace);font-size:11px;color:var(--text-dim,#5a6c5a);margin-top:12px;letter-spacing:.02em;}
+  .dca-visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  @media(max-width:520px){.dca-signup-btn{flex:1 1 100%;}}
+</style>
+<!-- /dca-email-capture -->
+
+<div data-toolref="1" style="max-width:760px;margin:2.5rem auto;padding:1.25rem 1.5rem;border:1px solid rgba(74,222,128,0.35);border-radius:12px;background:rgba(74,222,128,0.08);"><div style="font-weight:700;font-size:1.05rem;margin-bottom:0.85rem;">Free tools for this topic</div><div style="display:flex;flex-wrap:wrap;gap:0.6rem;"><a href="/#grid" target="_top" style="display:inline-block;background:#4ade80;color:#0d1510;font-weight:700;text-decoration:none;padding:0.6rem 1.1rem;border-radius:8px;font-size:0.95rem;line-height:1.2;">📡 UK Grid Live &rarr;</a></div></div>
+<footer>
+  <div class="wrap">
+    <p><strong style="color:var(--text-mid);">Sources:</strong>
+      Vehicle licensing statistics, United Kingdom: 2025 (GOV.UK/DVLA) &middot; Road traffic estimates in Great Britain, 2024 (DfT) &middot; National Travel Survey 2024, vehicle mileage and occupancy (DfT/NTS09) &middot; Energy Consumption in the UK 2025 &amp; DUKES 2025 Chapter 3, Oil and Oil Products (DESNZ) &middot; DUKES 2025 Chapter 5, Electricity (DESNZ) &middot; 2025 Electricity Review (Energy Dashboard / Carbon Brief) &middot; Winter Outlook 2024/25, supply margin (NESO) &middot; Future Energy Scenarios 2025 (NESO) &middot; published EV/electric-truck efficiency data (manufacturer specifications, aggregated). All calculations are Decarbonarma's own, built from public data; figures are estimates for illustration, not a substitute for NESO's full system modelling. Published on Decarbonarma. Analytical commentary, not investment or policy advice.</p>
+  </div>
+</footer>
+
+<script>
+const brand = {
+  text:'#e4ede5', mid:'#94a894', grid:'rgba(255,255,255,0.06)',
+  grey:'#8a9a90', blue:'#5aa7d6', teal:'#4ade80', violet:'#a78bfa', amber:'#fbbf24', red:'#f87171'
+};
+Chart.defaults.font.family = "'Source Serif 4', Georgia, serif";
+Chart.defaults.color = brand.mid;
+
+/* Figure 1 — Waste chart (chemical energy vs useful energy) */
+new Chart(document.getElementById('wasteChart'), {
+  type:'bar',
+  data:{
+    labels:['Chemical energy in fuel burned', 'Useful energy reaching the wheels'],
+    datasets:[{
+      label:'TWh/year',
+      data:[448, 103],
+      backgroundColor:[brand.grey, brand.teal],
+      borderRadius:6,
+      barThickness:70
+    }]
+  },
+  options:{
+    indexAxis:'y', responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{callbacks:{label:c=>` ${c.parsed.x} TWh/yr`}} },
+    scales:{
+      x:{ beginAtZero:true, title:{display:true,text:'TWh per year'}, grid:{color:brand.grid}, ticks:{callback:v=>v+' TWh'} },
+      y:{ grid:{display:false} }
+    }
+  }
+});
+
+/* Figure 2 — Current demand vs full EV fleet */
+new Chart(document.getElementById('demandChart'), {
+  type:'bar',
+  data:{
+    labels:['Today', 'With 100% electric car/van/HGV fleet'],
+    datasets:[
+      { label:'Current annual demand (incl. existing EVs)', data:[322, 322], backgroundColor:brand.blue, stack:'s' },
+      { label:'Additional demand from full EV conversion', data:[0, 111], backgroundColor:brand.teal, stack:'s' }
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false, interaction:{mode:'index', intersect:false},
+    plugins:{
+      legend:{position:'bottom', labels:{boxWidth:12, padding:12, font:{size:12}, color:brand.mid}},
+      tooltip:{callbacks:{
+        label:c=> ` ${c.dataset.label}: ${c.parsed.y} TWh`,
+        footer:items=>{ const tot = items.reduce((a,b)=>a+b.parsed.y,0); return 'Total: '+tot.toFixed(0)+' TWh/yr'; }
+      }}
+    },
+    scales:{
+      y:{ stacked:true, beginAtZero:true, suggestedMax:460, title:{display:true,text:'TWh per year'}, grid:{color:brand.grid}, ticks:{callback:v=>v+' TWh'} },
+      x:{ stacked:true, grid:{display:false} }
+    }
+  }
+});
+</script>
+</body>
+</html>
