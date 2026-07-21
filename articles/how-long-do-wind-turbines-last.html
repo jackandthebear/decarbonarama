@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Long Do Wind Turbines Actually Last? | Decarbonarma</title>
+<meta name="description" content="Do wind turbines really wear out after 10–15 years? What the evidence says about output degradation, real-world lifespans, the disputed Hughes study, and why operators repower.">
+<link rel="canonical" href="https://decarbonarma.com/articles/how-long-do-wind-turbines-last.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Decarbonarma">
+<meta property="og:title" content="How Long Do Wind Turbines Actually Last? | Decarbonarma">
+<meta property="og:description" content="Do wind turbines really wear out after 10–15 years? What the evidence actually shows about output degradation, real lifespans, the disputed Hughes study, and why operators repower.">
+<meta property="og:url" content="https://decarbonarma.com/articles/how-long-do-wind-turbines-last.html">
+<meta property="og:image" content="https://decarbonarma.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How Long Do Wind Turbines Actually Last? | Decarbonarma">
+<meta name="twitter:description" content="Do wind turbines really wear out after 10–15 years? What the evidence actually shows about output degradation, real lifespans, the disputed Hughes study, and why operators repower.">
+<meta name="twitter:image" content="https://decarbonarma.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How Long Do Wind Turbines Actually Last?",
+  "description": "Do wind turbines really wear out after 10–15 years? What the evidence actually shows about output degradation, real lifespans, the disputed Hughes study, and why operators repower.",
+  "url": "https://decarbonarma.com/articles/how-long-do-wind-turbines-last.html",
+  "image": "https://decarbonarma.com/og-image.png",
+  "author": {
+    "@type": "Organization",
+    "name": "Decarbonarma"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Decarbonarma",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://decarbonarma.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://decarbonarma.com/articles/how-long-do-wind-turbines-last.html"
+  }
+}
+</script>
+<link rel="alternate" type="application/rss+xml" title="Decarbonarma" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0d1510; --bg2:#111a13; --bg3:#162019; --bg4:#1a2820;
+    --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.13);
+    --green:#4ade80; --green-dim:#22c55e; --green-deep:#1a5c38;
+    --green-pale:rgba(74,222,128,0.08); --green-pale2:rgba(74,222,128,0.13);
+    --amber:#fbbf24; --amber-pale:rgba(251,191,36,0.08);
+    --blue:#5aa7d6; --violet:#a78bfa; --grey:#8a9a90;
+    --red:#f87171;
+    --text:#e4ede5; --text-mid:#94a894; --text-dim:#5a6c5a;
+    --mono:'JetBrains Mono','Courier New',monospace;
+    --serif:'Playfair Display',Georgia,serif;
+    --body:'Source Serif 4',Georgia,serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.75;font-weight:300;-webkit-font-smoothing:antialiased;}
+
+  .site-header{border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:rgba(13,21,16,.9);backdrop-filter:blur(8px);z-index:20;}
+  .site-logo{text-decoration:none;display:flex;align-items:center;}
+  .site-nav{display:flex;gap:1.5rem;}
+  .site-nav a{color:var(--text-dim);text-decoration:none;font-size:12px;letter-spacing:.07em;text-transform:uppercase;}
+  .site-nav a:hover{color:var(--green);}
+
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px;}
+  .hero{padding:64px 0 34px;border-bottom:1px solid var(--border);}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);}
+  h1{font-family:var(--serif);font-weight:700;font-size:2.5rem;line-height:1.12;margin:.4em 0 .3em;color:#fff;}
+  .standfirst{font-size:1.2rem;color:var(--text-mid);font-weight:300;}
+  .byline{font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-top:18px;}
+
+  main{padding:10px 0 40px;}
+  h2{font-family:var(--serif);font-weight:700;font-size:1.7rem;color:#fff;margin:2em 0 .4em;}
+  h3{font-family:var(--body);font-weight:600;font-size:1.18rem;color:var(--green);margin:1.7em 0 .3em;}
+  p{margin:.85em 0;}
+  strong{color:#fff;font-weight:600;}
+  em{color:var(--text-mid);}
+  a{color:var(--green);}
+  ul{margin:.6em 0 .6em 1.1em;} li{margin:.35em 0;}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:30px 0;}
+  .stat{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+  .stat .n{font-family:var(--mono);font-size:1.6rem;font-weight:500;color:var(--green);line-height:1;}
+  .stat .l{font-size:13px;color:var(--text-mid);margin-top:8px;line-height:1.4;}
+
+  .card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px;margin:26px 0;}
+  .chart-box{position:relative;height:420px;width:100%;}
+  .chart-cap{font-size:13.5px;color:var(--text-mid);margin-top:14px;line-height:1.55;}
+
+  table{width:100%;border-collapse:collapse;font-size:15px;margin:6px 0;}
+  th,td{text-align:left;padding:10px 10px;border-bottom:1px solid var(--border);}
+  th{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim);font-weight:400;}
+  td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--text);}
+  .pill{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;padding:2px 9px;border-radius:20px;}
+  .pill.on{background:var(--green-pale2);color:var(--green);border:1px solid var(--green-deep);}
+  .pill.build{background:var(--amber-pale);color:var(--amber);border:1px solid rgba(251,191,36,.35);}
+  .pill.plan{background:rgba(90,167,214,.1);color:var(--blue);border:1px solid rgba(90,167,214,.35);}
+
+  .callout{border-left:3px solid var(--amber);background:var(--amber-pale);padding:18px 22px;border-radius:0 12px 12px 0;margin:28px 0;}
+  .callout h3{margin-top:0;color:var(--amber);}
+
+  .live-cta{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;background:var(--bg3);border:1px solid var(--green-pale2);border-radius:14px;padding:22px 24px;margin:30px 0;position:relative;overflow:hidden;}
+  .live-cta::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--green),var(--blue));}
+  .live-cta-body{flex:1 1 300px;}
+  .live-cta-kicker{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:8px;}
+  .live-cta h3{margin:.35em 0 .2em;color:#fff;}
+  .live-cta p{font-size:15px;color:var(--text-mid);margin:.3em 0 0;}
+  .live-dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(74,222,128,.6);animation:livePulse 2s infinite;}
+  @keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(74,222,128,.55);}70%{box-shadow:0 0 0 8px rgba(74,222,128,0);}100%{box-shadow:0 0 0 0 rgba(74,222,128,0);}}
+  .live-cta-btn{flex:0 0 auto;background:var(--green);color:#062012;text-decoration:none;font-family:var(--mono);font-size:13.5px;font-weight:500;letter-spacing:.02em;padding:14px 22px;border-radius:10px;transition:background .15s;white-space:nowrap;}
+  .live-cta-btn:hover{background:var(--green-dim);}
+  @media(max-width:520px){.live-cta-btn{width:100%;text-align:center;}}
+
+  footer{border-top:1px solid var(--border);padding:28px 0 60px;}
+  footer p{font-size:12.5px;color:var(--text-dim);line-height:1.65;}
+  footer a{color:var(--text-mid);}
+
+  @media(max-width:600px){ h1{font-size:1.85rem;} .chart-box{height:340px;} body{font-size:16px;} .hero{padding:40px 0 26px;} }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="site-logo"><img src="../logo-light.svg" alt="Decarbonarma" style="height:34px;width:auto;display:block;"></a>
+  <nav class="site-nav">
+    <a href="/">Home</a>
+    <a href="#degradation">Degradation</a>
+    <a href="#hughes">The Hughes study</a>
+    <a href="#repowering">Repowering</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">Energy Explainer</div>
+    <h1>How Long Do Wind Turbines Actually Last?</h1>
+    <p class="standfirst">You'll see the claim everywhere: wind turbines secretly wear out after 10–15 years, and operators quietly scrap them before anyone notices. It's a sticky story — and it's built on one contested study. Here's what the wider evidence actually shows about how turbines age, how long they really run, and why operators sometimes replace them early.</p>
+    <div class="byline">Decarbonarma · Updated July 2026 · ~10-min read</div>
+  </div>
+
+  <main>
+  <!-- Article Start -->
+
+  <div class="stats">
+    <div class="stat"><div class="n">~1.6%</div><div class="l">Output a UK turbine loses per year as it ages, per the main peer-reviewed study</div></div>
+    <div class="stat"><div class="n">~12%</div><div class="l">Total output lost over a 20-year life — raising cost of power by about 9%</div></div>
+    <div class="stat"><div class="n">~23 yrs</div><div class="l">Typical retirement age of UK onshore turbines; many now run 25–30+</div></div>
+    <div class="stat"><div class="n">~12 yrs</div><div class="l">Average age of the UK onshore fleet today — most turbines are mid-life</div></div>
+  </div>
+
+  <p>Every machine wears out, and wind turbines are no exception. A turbine is a 100-tonne-plus assembly of gearing, bearings, generator and composite blades, sitting on an exposed hill or out at sea, turning tens of millions of times a year. It would be strange if its performance <em>didn't</em> drift downward with age. The real questions are: how fast, how far, and does it happen so quickly that turbines become uneconomic long before their supposed 20-to-25-year life? A viral version of the story says yes — that turbines are "skeletons of steel and composite plastic" past 12 years. This piece separates what's genuinely established from what's disputed.</p>
+
+  <h2 id="degradation">1. Turbines do degrade — here's the real number</h2>
+
+  <p>The single most cited piece of research on this is a 2014 study by Imperial College's <strong>Iain Staffell and Richard Green</strong>, <em>"How does wind farm performance decline with age?"</em>, which examined <strong>282 UK wind farms</strong> using detailed month-by-month output data and site-specific wind resource modelling (so that a windy year isn't mistaken for a young turbine). Their headline finding is clear and widely accepted:</p>
+
+  <ul>
+    <li>UK turbines lose about <strong>1.6% ± 0.2% of their output per year</strong> as they age.</li>
+    <li>Average <strong>load factor falls from around 28.5% when new to about 21% by age 19</strong>.</li>
+    <li>Over a 20-year life that's roughly a <strong>12% reduction in total output</strong>, which pushes up the levelised cost of electricity by about <strong>9%</strong>.</li>
+  </ul>
+
+  <p>That is real, measurable, and it matters for the economics — but it is a <em>gentle</em> decline, not a cliff. A turbine losing 1.6% a year is still producing around 85–88% of its youthful output at age 15. It has not become a "skeleton flapping in the breeze." The main physical culprit is <strong>erosion of the blade's leading edge</strong>: rain, hail and grit slowly roughen the aerodynamic surface, shaving efficiency. Falling availability (time spent offline for maintenance) and drivetrain wear add the rest.</p>
+
+  <div class="live-cta">
+    <div class="live-cta-body">
+      <div class="live-cta-kicker"><span class="live-dot"></span>Live now</div>
+      <h3>See how much wind is on the grid right now</h3>
+      <p>Curious how hard Britain's wind fleet — young and old turbines alike — is actually working <em>this minute</em>? Our free UK Grid Live tool shows the real-time generation mix: wind, gas, nuclear, solar and imports.</p>
+    </div>
+    <a class="live-cta-btn" data-toolref="1" href="/#grid">⚡ Open UK Grid Live →</a>
+  </div>
+
+  <h2 id="hughes">2. Where the "10–15 years" claim comes from</h2>
+
+  <p>The dramatic version of the story traces back to one specific piece of work: a <strong>2012 report for the Renewable Energy Foundation (REF) by the energy economist Professor Gordon Hughes</strong>, <em>"The Performance of Wind Farms in the United Kingdom and Denmark."</em> Hughes analysed operational records from hundreds of wind farms and concluded that load factors fell far faster than the industry assumed — by roughly a third within about a decade for UK onshore wind — implying an <strong>effective economic life of only 10–15 years</strong>.</p>
+
+  <p>It's a real study by a credentialed economist, and it's the source nearly every "turbines die young" post ultimately leans on. But three things are important for reading it fairly:</p>
+
+  <ul>
+    <li><strong>It's an outlier.</strong> Its estimated decline is several times steeper than what later, more granular studies found.</li>
+    <li><strong>Its method was heavily disputed.</strong> The UK Department of Energy and Climate Change rejected the findings; DECC's chief scientist, the late <strong>Professor Sir David MacKay</strong> — a physicist widely respected across the energy debate — published a detailed critique arguing the statistical approach produced spurious results, chiefly because it didn't properly separate ageing from other effects like turbines being built on progressively less windy sites.</li>
+    <li><strong>REF is an openly wind-sceptic body</strong>, and the study was described by the wind industry as advocacy. That doesn't make it wrong, but it's context: it was a contested claim from the start, not a settled consensus that's since been covered up.</li>
+  </ul>
+
+  <p>Hughes, for his part, stood by the direction of his finding — that measured UK wind farm output <em>has</em> fallen with age — while acknowledging disagreement over the rate. And on that narrow point, the later peer-reviewed work agrees with him: turbines do degrade. Where the evidence parts company is on <em>how much</em>. The 1.6%-a-year picture and the "a-third-gone-in-a-decade" picture are not the same story, and it's the gentler one that has held up.</p>
+
+  <div class="card">
+    <div class="chart-box"><canvas id="declineChart"></canvas></div>
+    <p class="chart-cap"><strong>Figure 1 — Two versions of how a turbine ages.</strong> Load factor (% of nameplate capacity actually produced) against turbine age. The green line is the peer-reviewed consensus (Staffell &amp; Green, ~1.6%/yr): a steady, modest decline from about 28.5% new to ~21% by age 19. The red line illustrates the far steeper drop implied by the disputed 2012 Hughes/REF study. The gap between them is the whole argument. Lines are illustrative of each study's trend, not exact reported values.</p>
+  </div>
+
+  <h2>3. Degradation isn't the same everywhere</h2>
+
+  <p>One reason the debate is messy is that ageing genuinely varies by country, climate and turbine generation — so it's easy to cherry-pick a scary number. The peer-reviewed literature gives a spread:</p>
+
+  <div class="card">
+  <table>
+    <thead><tr><th>Region / study</th><th class="num">Annual decline</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>UK (Staffell &amp; Green)</td><td class="num">~1.6%/yr</td><td>282 farms; load factor ~28.5% → ~21% by age 19</td></tr>
+      <tr><td>Denmark</td><td class="num">~0.3%/yr</td><td>Much gentler — ~4% decline over 15 years in some analyses</td></tr>
+      <tr><td>Germany</td><td class="num">~0.6%/yr</td><td>Average across the national fleet</td></tr>
+      <tr><td>United States</td><td class="num">~0.5%/yr</td><td>Pre-2008 turbines, first 10 years of operation</td></tr>
+    </tbody>
+  </table>
+  <p class="chart-cap">Why so much variation? Site selection (early UK farms took the windiest hills, so newer ones look worse by comparison), climate and salt exposure, turbine model, and how the maths controls for wind all shift the number. The UK figure sits at the higher end; Denmark's fleet ages notably more slowly. No credible study finds anything close to "uneconomic after 12 years."</p>
+  </div>
+
+  <div class="card">
+    <div class="chart-box"><canvas id="regionChart"></canvas></div>
+    <p class="chart-cap"><strong>Figure 2 — Estimated annual output decline by region (approx.).</strong> Peer-reviewed estimates cluster between about 0.3% and 1.6% per year. Even at the top of that range, a turbine keeps the large majority of its output well beyond 15 years. Figures rounded to show scale.</p>
+  </div>
+
+  <h2 id="repowering">4. So why do operators replace turbines "early"?</h2>
+
+  <p>The viral claim's final move is that "repowering" — pulling down turbines and putting up new ones — is a cover story to hide worn-out kit and chase fresh subsidies. The reality is more mundane, and it's mostly about economics and planning rather than mechanical collapse.</p>
+
+  <p>First, the fleet is young. The <strong>average UK onshore turbine is only about 12 years old</strong>, at roughly 1.8 MW rated capacity. Most machines spinning today are mid-life, not clapped out. When turbines <em>are</em> retired, the <strong>median age is around 23 years</strong>, and modern maintenance regimes increasingly push operating lives to 25–30 years, occasionally beyond.</p>
+
+  <p>Second, when a site <em>is</em> renewed, the driver is usually opportunity, not decay:</p>
+
+  <ul>
+    <li><strong>New turbines are dramatically better.</strong> A 15-year-old site might hold a dozen 1.3 MW turbines; replace them with a handful of modern 5–7 MW machines and the same land can produce two or three times the energy. That's a compelling reason to repower even a perfectly functional site.</li>
+    <li><strong>Planning consents expire.</strong> Onshore wind farms are typically consented for a fixed term (often ~25 years). Reaching that date forces a decision — extend, repower or decommission — regardless of how the hardware is performing.</li>
+    <li><strong>Life extension is usually cheaper than replacement.</strong> Extending an existing farm's life costs on the order of <strong>€100,000 per MW</strong>, versus roughly <strong>€1,000,000 per MW</strong> to repower. If turbines were genuinely falling apart at 12 years, operators would repower far more aggressively than they do. Instead, the cheap option — keep the old turbine spinning — is often the one they choose, which is the opposite of what the "hidden decay" story predicts.</li>
+  </ul>
+
+  <div class="callout">
+    <h3>The tell in the economics</h3>
+    <p>If turbines really became "uneconomic to maintain beyond 12 years," you'd expect operators to rush to replace them. In practice they overwhelmingly opt for low-cost life extension and run turbines two decades or more. Repowering happens when a good site can host <em>much</em> bigger, better turbines — a growth decision — or when a planning consent runs out, not to bury evidence of premature failure.</p>
+  </div>
+
+  <h2>5. The honest summary</h2>
+
+  <p>So, is the viral tweet factual? Partly, and misleadingly. It's true that turbines lose output as they age, that a real study (Hughes/REF, 2012) argued this decline is steep, and that operators do sometimes replace turbines before the theoretical 25-year mark. But it dresses a contested, outlier study up as suppressed truth, ignores the better evidence that followed, and reframes ordinary planning-and-upgrade economics as a cover-up.</p>
+
+  <p>The grounded picture: UK turbines degrade at roughly <strong>1.6% a year</strong> — meaningful for the levelised cost of power, but a slow drift, not a collapse. Real turbines routinely run <strong>20 to 30 years</strong>. Repowering is largely about fitting bigger, better machines and expiring consents, and life extension is the cheaper, commonly chosen path. Wind isn't perfect, and honest accounting of degradation belongs in the cost figures. But "skeletons flapping in the breeze after a decade" is a story, not a finding.</p>
+
+  <p><em>A footnote worth keeping in view: even a turbine that has lost 12% of its youthful output over 20 years has still repaid its carbon and cash cost many times over. Degradation changes the size of the win — it doesn't erase it.</em></p>
+
+  <!-- Article End -->
+
+  </main>
+</div>
+
+<!-- dca-email-capture -->
+<div class="dca-signup-outer">
+  <div class="dca-signup">
+    <div class="dca-signup-kicker">Decarbonarma Newsletter</div>
+    <h3 class="dca-signup-h">Get the next one in your inbox</h3>
+    <p class="dca-signup-sub">Clear, no-nonsense analysis of UK home decarbonisation &mdash; heat pumps, solar, EVs, batteries and the grid. Occasional emails, no spam, unsubscribe anytime.</p>
+    <form action="https://decarbonarma.us15.list-manage.com/subscribe/post?u=cffa5aec4001ad97d9357f807&amp;id=8d5f19dec4&amp;f_id=0096a2e1f0" method="post" target="_blank" novalidate class="dca-signup-form">
+      <label class="dca-visually-hidden" for="dca-email">Email address</label>
+      <input type="email" name="EMAIL" id="dca-email" required placeholder="you@example.com" class="dca-signup-input">
+      <!-- Mailchimp bot-prevention honeypot: real users leave this empty -->
+      <div aria-hidden="true" style="position:absolute;left:-5000px;"><input type="text" name="b_cffa5aec4001ad97d9357f807_8d5f19dec4" tabindex="-1" value=""></div>
+      <button type="submit" name="subscribe" class="dca-signup-btn">Subscribe</button>
+    </form>
+    <div class="dca-signup-fine">We&rsquo;ll never share your email. Powered by Mailchimp.</div>
+  </div>
+</div>
+<style>
+  .dca-signup-outer{max-width:820px;margin:48px auto 10px;padding:0 24px;}
+  .dca-signup{background:var(--bg3,#162019);border:1px solid var(--green-pale2,rgba(74,222,128,0.13));border-radius:16px;padding:30px 28px;position:relative;overflow:hidden;}
+  .dca-signup::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green,#4ade80),var(--amber,#fbbf24));}
+  .dca-signup-kicker{font-family:var(--mono,'JetBrains Mono',monospace);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--green,#4ade80);margin-bottom:8px;}
+  .dca-signup-h{font-family:var(--serif,'Playfair Display',Georgia,serif);font-weight:700;font-size:1.5rem;color:#fff;margin:0 0 .3em;line-height:1.15;}
+  .dca-signup-sub{font-family:var(--body,'Source Serif 4',Georgia,serif);font-size:15px;color:var(--text-mid,#94a894);margin:0 0 18px;line-height:1.6;font-weight:300;}
+  .dca-signup-form{display:flex;gap:10px;flex-wrap:wrap;}
+  .dca-signup-input{flex:1 1 240px;min-width:0;background:var(--bg,#0d1510);border:1px solid var(--border2,rgba(255,255,255,0.13));border-radius:10px;padding:13px 15px;color:var(--text,#e4ede5);font-family:var(--body,'Source Serif 4',Georgia,serif);font-size:15px;}
+  .dca-signup-input:focus{outline:none;border-color:var(--green,#4ade80);box-shadow:0 0 0 3px var(--green-pale,rgba(74,222,128,0.08));}
+  .dca-signup-input::placeholder{color:var(--text-dim,#5a6c5a);}
+  .dca-signup-btn{flex:0 0 auto;background:var(--green,#4ade80);color:#062012;border:none;border-radius:10px;padding:13px 26px;font-family:var(--mono,'JetBrains Mono',monospace);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:background .15s;}
+  .dca-signup-btn:hover{background:var(--green-dim,#22c55e);}
+  .dca-signup-fine{font-family:var(--mono,'JetBrains Mono',monospace);font-size:11px;color:var(--text-dim,#5a6c5a);margin-top:12px;letter-spacing:.02em;}
+  .dca-visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  @media(max-width:520px){.dca-signup-btn{flex:1 1 100%;}}
+</style>
+<!-- /dca-email-capture -->
+
+<footer>
+  <div class="wrap">
+    <p><strong style="color:var(--text-mid);">Sources:</strong>
+      Staffell, I. &amp; Green, R. (2014) "How does wind farm performance decline with age?", <em>Renewable Energy</em> (ScienceDirect) — ~1.6%/yr decline, load factor 28.5% → 21% by age 19 · Carbon Commentary, "As they age, wind turbines generate about 1.6% less power each year" (2014) · Hughes, G. (2012) "The Performance of Wind Farms in the United Kingdom and Denmark", Renewable Energy Foundation · Prof. David MacKay, critique of REF wind-farm lifetime analysis (DECC) &amp; REF response · EWEA blog, "Study on turbine lifespan 'just more anti-wind propaganda'" (2012) · MDPI <em>Energies</em>, "A Study of Wind Turbine Performance Decline with Age" — regional degradation rates (UK, Denmark, Germany, US) · RenewableUK &amp; CMS, UK onshore wind repowering and life-extension guidance (2024–25) · AIS Wind Energy, "How long do onshore wind turbines usually last?"
+      Degradation figures vary by study, region and turbine generation; numbers here are rounded to show scale and the range of the evidence. Published on Decarbonarma. Analytical commentary, not investment or policy advice.</p>
+  </div>
+</footer>
+
+<script>
+const brand = {
+  text:'#e4ede5', mid:'#94a894', grid:'rgba(255,255,255,0.06)',
+  grey:'#8a9a90', blue:'#5aa7d6', teal:'#4ade80', violet:'#a78bfa', amber:'#fbbf24', red:'#f87171'
+};
+Chart.defaults.font.family = "'Source Serif 4', Georgia, serif";
+Chart.defaults.color = brand.mid;
+
+/* Figure 1 — Two versions of load-factor decline with age */
+const ages = [0,2,4,6,8,10,12,14,16,18,20];
+// Peer-reviewed: ~28.5% new, ~1.6%/yr relative decline
+const consensus = ages.map(a => +(28.5 * Math.pow(1 - 0.016, a)).toFixed(1));
+// Hughes/REF-style steep decline: ~a third gone by ~10-12 yrs (illustrative)
+const hughes = ages.map(a => +(28.5 * Math.pow(1 - 0.045, a)).toFixed(1));
+new Chart(document.getElementById('declineChart'), {
+  type:'line',
+  data:{ labels:ages.map(a=>a+' yr'), datasets:[
+    {label:'Peer-reviewed consensus (~1.6%/yr)', data:consensus, borderColor:brand.teal, backgroundColor:'rgba(74,222,128,0.10)', tension:.25, fill:true, pointRadius:3},
+    {label:'Disputed Hughes/REF claim (illustrative)', data:hughes, borderColor:brand.red, backgroundColor:'transparent', borderDash:[6,5], tension:.25, pointRadius:0}
+  ]},
+  options:{ responsive:true, maintainAspectRatio:false, interaction:{mode:'index', intersect:false},
+    plugins:{
+      legend:{position:'bottom', labels:{boxWidth:12, padding:14, font:{size:12}, color:brand.mid}},
+      tooltip:{callbacks:{label:c=> ` ${c.dataset.label}: ${c.parsed.y}% load factor`}}
+    },
+    scales:{
+      y:{ beginAtZero:true, suggestedMax:30, title:{display:true,text:'Load factor (%)'}, grid:{color:brand.grid}, ticks:{callback:v=>v+'%'} },
+      x:{ grid:{display:false}, title:{display:true, text:'Turbine age'} }
+    }
+  }
+});
+
+/* Figure 2 — Annual decline by region */
+new Chart(document.getElementById('regionChart'), {
+  type:'bar',
+  data:{ labels:['Denmark','United States','Germany','UK'], datasets:[
+    {label:'Estimated annual output decline (%/yr)', data:[0.3,0.5,0.6,1.6],
+     backgroundColor:[brand.blue,brand.blue,brand.blue,brand.teal]}
+  ]},
+  options:{ responsive:true, maintainAspectRatio:false, indexAxis:'y',
+    plugins:{
+      legend:{display:false},
+      tooltip:{callbacks:{label:c=> ` ${c.parsed.x}% per year`}}
+    },
+    scales:{
+      x:{ beginAtZero:true, suggestedMax:2, title:{display:true,text:'% output lost per year'}, grid:{color:brand.grid}, ticks:{callback:v=>v+'%'} },
+      y:{ grid:{display:false} }
+    }
+  }
+});
+</script>
+</body>
+</html>
