@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Could the UK Grid Survive a January Dunkelflaute? Part 3 of 3 | Decarbonarma</title>
+<meta name="description" content="Part 3 of our UK grid series: how much power we need vs how much we've got, whether we're too dependent on interconnectors, and a worst-case January dunkelflaute stress test.">
+<link rel="canonical" href="https://decarbonarma.com/articles/can-uk-grid-survive-january-dunkelflaute.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Decarbonarma">
+<meta property="og:title" content="Could the UK Grid Survive a January Dunkelflaute? Part 3 of 3 | Decarbonarma">
+<meta property="og:description" content="Part 3 of our UK grid series: how much power we need vs how much we've got, whether we're too dependent on interconnectors, and a worst-case January dunkelflaute stress test.">
+<meta property="og:url" content="https://decarbonarma.com/articles/can-uk-grid-survive-january-dunkelflaute.html">
+<meta property="og:image" content="https://decarbonarma.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Could the UK Grid Survive a January Dunkelflaute? Part 3 of 3 | Decarbonarma">
+<meta name="twitter:description" content="Part 3 of our UK grid series: how much power we need vs how much we've got, whether we're too dependent on interconnectors, and a worst-case January dunkelflaute stress test.">
+<meta name="twitter:image" content="https://decarbonarma.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Could the UK Grid Survive a January Dunkelflaute? Part 3 of 3 | Decarbonarma",
+  "description": "Part 3 of our UK grid series: how much power we need vs how much we've got, whether we're too dependent on interconnectors, and a worst-case January dunkelflaute stress test.",
+  "url": "https://decarbonarma.com/articles/can-uk-grid-survive-january-dunkelflaute.html",
+  "image": "https://decarbonarma.com/og-image.png",
+  "author": { "@type": "Organization", "name": "Decarbonarma" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Decarbonarma",
+    "logo": { "@type": "ImageObject", "url": "https://decarbonarma.com/logo.png" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://decarbonarma.com/articles/can-uk-grid-survive-january-dunkelflaute.html" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0d1510; --bg2:#111a13; --bg3:#162019; --bg4:#1a2820;
+    --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.13);
+    --green:#4ade80; --green-dim:#22c55e; --green-deep:#1a5c38;
+    --green-pale:rgba(74,222,128,0.08); --green-pale2:rgba(74,222,128,0.13);
+    --amber:#fbbf24; --amber-pale:rgba(251,191,36,0.08);
+    --blue:#5aa7d6; --violet:#a78bfa; --grey:#8a9a90;
+    --red:#f87171;
+    --text:#e4ede5; --text-mid:#94a894; --text-dim:#5a6c5a;
+    --mono:'JetBrains Mono','Courier New',monospace;
+    --serif:'Playfair Display',Georgia,serif;
+    --body:'Source Serif 4',Georgia,serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.75;font-weight:300;-webkit-font-smoothing:antialiased;}
+
+  .site-header{border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:rgba(13,21,16,.9);backdrop-filter:blur(8px);z-index:20;}
+  .site-logo{text-decoration:none;display:flex;align-items:center;}
+  .site-nav{display:flex;gap:1.5rem;}
+  .site-nav a{color:var(--text-dim);text-decoration:none;font-size:12px;letter-spacing:.07em;text-transform:uppercase;}
+  .site-nav a:hover{color:var(--green);}
+
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px;}
+  .hero{padding:64px 0 34px;border-bottom:1px solid var(--border);}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);}
+  h1{font-family:var(--serif);font-weight:700;font-size:2.3rem;line-height:1.15;margin:.4em 0 .3em;color:#fff;}
+  .standfirst{font-size:1.2rem;color:var(--text-mid);font-weight:300;}
+  .byline{font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-top:18px;}
+
+  main{padding:10px 0 40px;}
+  h2{font-family:var(--serif);font-weight:700;font-size:1.7rem;color:#fff;margin:2em 0 .4em;}
+  h3{font-family:var(--body);font-weight:600;font-size:1.18rem;color:var(--green);margin:1.7em 0 .3em;}
+  p{margin:.85em 0;}
+  strong{color:#fff;font-weight:600;}
+  em{color:var(--text-mid);}
+  a{color:var(--green);}
+  ul,ol{margin:.85em 0 .85em 1.3em;}
+  li{margin:.35em 0;}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:30px 0;}
+  .stat{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+  .stat .n{font-family:var(--mono);font-size:1.4rem;font-weight:500;color:var(--green);line-height:1;}
+  .stat .l{font-size:13px;color:var(--text-mid);margin-top:8px;line-height:1.4;}
+
+  .card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px;margin:26px 0;}
+  .chart-box{position:relative;height:380px;width:100%;}
+  .chart-cap{font-size:13.5px;color:var(--text-mid);margin-top:14px;line-height:1.55;}
+
+  table{width:100%;border-collapse:collapse;font-size:14.5px;margin:6px 0;}
+  th,td{text-align:left;padding:10px 10px;border-bottom:1px solid var(--border);}
+  th{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim);font-weight:400;}
+  td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--text);}
+
+  .callout{border-left:3px solid var(--amber);background:var(--amber-pale);padding:18px 22px;border-radius:0 12px 12px 0;margin:28px 0;}
+  .callout h3{margin-top:0;color:var(--amber);}
+  .callout.green{border-left-color:var(--green);background:var(--green-pale);}
+  .callout.green h3{color:var(--green);}
+  .callout.red{border-left-color:var(--red);background:rgba(248,113,113,0.08);}
+  .callout.red h3{color:var(--red);}
+
+  footer{border-top:1px solid var(--border);padding:28px 0 60px;}
+  footer p{font-size:12.5px;color:var(--text-dim);line-height:1.65;}
+  footer a{color:var(--text-mid);}
+
+  @media(max-width:600px){ h1{font-size:1.75rem;} .chart-box{height:300px;} body{font-size:16px;} .hero{padding:40px 0 26px;} }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="site-logo"><img src="../logo-light.svg" alt="Decarbonarma" style="height:34px;width:auto;display:block;"></a>
+  <nav class="site-nav">
+    <a href="/">Home</a>
+    <a href="#">Grid</a>
+    <a href="#">Supply</a>
+    <a href="#">Policy</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">The UK Grid Series &middot; Part 3 of 3</div>
+    <h1>Could the UK Grid Survive a January Dunkelflaute?</h1>
+    <!-- Article Start -->
+    <p class="standfirst">Parts 1 and 2 asked whether the grid could generate enough electricity across a full year for an all-electric fleet and an all-electric housing stock. The answer was broadly yes. Part 3 asks the sharper question: what happens on the worst week of the worst winter, when the wind stops, the sun barely rises, and every heat pump in the country wants power at once?</p>
+    <div class="byline">Decarbonarma &middot; July 2026 &middot; ~13-min read &middot; Original analysis</div>
+  </div>
+
+  <main>
+
+  <div class="callout green">
+    <h3>Part 3 of 3 &mdash; The UK Grid Under Pressure</h3>
+    <p>This is the last in a three-part series asking whether Britain's electricity grid can deliver on government policy. <strong><a href="./can-uk-grid-handle-all-electric-vehicles.html">Part 1</a></strong> found that a fully electric car, van and HGV fleet adds roughly 111 TWh/year of new demand. <strong><a href="./can-uk-grid-handle-heating-electrification.html">Part 2</a></strong> found that fully electrifying home heating adds a further ~61 TWh/year, concentrated heavily into winter. <strong>Part 3 (below)</strong> puts both of those on top of today's grid and asks whether the supply side &mdash; generation, interconnectors, and the specific test of a January dunkelflaute &mdash; can actually carry it.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">494 TWh/yr</div><div class="l">Eventual demand: today's 322 TWh + Parts 1 &amp; 2</div></div>
+    <div class="stat"><div class="n">~10%</div><div class="l">Share of today's electricity that already comes from interconnector imports</div></div>
+    <div class="stat"><div class="n">3 GW</div><div class="l">What Britain's 32.6 GW of wind capacity actually produced on 8 Jan 2025</div></div>
+    <div class="stat"><div class="n">£1,071/MWh</div><div class="l">The price spike that dunkelflaute caused &mdash; 40&times; a normal evening</div></div>
+  </div>
+
+  <p>"Dunkelflaute" is a German word the UK energy industry has adopted wholesale, because there wasn't a good English one: a period, sometimes lasting days, when it's both dark (little or no solar) and calm (little or no wind) across a wide area at once. It is the single scenario that most directly tests whether a wind-and-solar-heavy grid has enough of anything else. This piece works through what Britain has, what it needs, and what actually happened the last time this scenario arrived for real.</p>
+
+  <h2>1. How much power do we need?</h2>
+
+  <p>Stack Part 1 and Part 2 on top of today's grid and the number is <strong>494 TWh a year</strong> &mdash; today's 322 TWh, plus 111 TWh from a fully electric vehicle fleet, plus 61 TWh from a fully electrified housing stock. Spread evenly, that's an average continuous draw of roughly <strong>56 GW</strong>, up from about <strong>37 GW</strong> today.</p>
+
+  <p>But "spread evenly" is precisely the assumption Part 2 spent a whole article dismantling. Averages are not what breaks a grid; peaks are. NESO's own Winter Outlook for 2025/26 &mdash; the most recent one published &mdash; puts winter peak demand at around <strong>48 GW</strong>, with a 5% chance of a cold snap pushing it higher, against a forecast margin of <strong>6.1 GW</strong> (the strongest since 2019/20, thanks to new battery capacity, more available gas plant, and the new Greenlink interconnector to Ireland). That's the number that actually matters for security of supply, and it's the number this piece is built around.</p>
+
+  <h2>2. How much have we got?</h2>
+
+  <p>Britain's generation fleet today, by nameplate capacity:</p>
+
+  <div class="card">
+  <table>
+    <thead><tr><th>Source</th><th class="num">Nameplate capacity</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td>Gas (unabated)</td><td class="num">~35 GW</td><td>The existing fleet; NESO expects this to stay broadly this size into the 2030s as backup</td></tr>
+      <tr><td>Wind (onshore + offshore)</td><td class="num">32.6 GW</td><td>16.0 GW onshore, 16.6 GW offshore</td></tr>
+      <tr><td>Solar</td><td class="num">22.3 GW</td><td>Effectively zero contribution after dark, i.e. at winter evening peak</td></tr>
+      <tr><td>Interconnectors</td><td class="num">10.3 GW</td><td>10 cables to France, Belgium, Netherlands, Norway, Denmark, Ireland &amp; N. Ireland</td></tr>
+      <tr><td>Battery storage</td><td class="num">7.5 GW</td><td>Now bigger than the entire nuclear fleet &mdash; but measured in hours, not days</td></tr>
+      <tr><td>Nuclear</td><td class="num">5.9 GW</td><td>Falling to ~2.8 GW by 2030 as AGRs retire faster than Hinkley Point C arrives &mdash; see <a href="./uk-nuclear-power-2026.html">our nuclear explainer</a></td></tr>
+    </tbody>
+  </table>
+  <p class="chart-cap">Nameplate capacity sums to roughly <strong>114 GW</strong> &mdash; nearly 2.4&times; the 48 GW winter peak. On paper that looks enormously comfortable. It isn't, because nameplate capacity is not the same thing as capacity you can actually call on at 6pm on a still, freezing Wednesday. DESNZ's official de-rated capacity figure for security-of-supply planning &mdash; which discounts wind and solar heavily for exactly this reason &mdash; puts the real, reliable figure at <strong>71.7 GW</strong>. The gap between 114 GW and 71.7 GW is, in one number, the entire subject of this article.</p>
+  </div>
+
+  <h2>3. Are we dependent on interconnectors?</h2>
+
+  <p>Yes, to a real but bounded degree. Interconnectors supplied roughly <strong>10% of Britain's electricity in 2025</strong> &mdash; about 8% from France's largely nuclear grid, 3% from Norwegian hydro, the rest from smaller flows with Belgium, the Netherlands, Denmark and Ireland. That's a meaningful chunk of the annual energy balance, and it's grown steadily as more subsea cables have been built; Ofgem has more in the pipeline.</p>
+
+  <p>The question isn't whether interconnectors help &mdash; on an average day, they clearly do. It's whether they can be relied on for the one scenario that matters here: everybody needing extra power at the same time. Our <a href="./uk-grid-security-of-supply-2026.html">grid security piece</a> from earlier this year already stress-tested this for summer heatwaves: three Electricity Margin Notices in six weeks, caused partly by French and Dutch generation being just as heat-stressed as Britain's own, at exactly the moment Britain wanted to lean on them. A dunkelflaute is the winter mirror image of that problem, and arguably a worse one &mdash; the high-pressure weather systems that kill wind output tend to be large, slow-moving, and parked over the whole of northwest Europe at once, not just the UK. If Britain, France, Germany, Denmark and the Netherlands are all becalmed on the same January evening &mdash; which is exactly what a proper dunkelflaute looks like &mdash; the countries on the other end of the interconnectors are managing their own shortfall, not sitting on spare capacity to sell.</p>
+
+  <div class="callout">
+    <h3>An insurance policy that pays out less when everyone claims at once</h3>
+    <p>Interconnectors are genuinely valuable for arbitrage, for absorbing one country's localised surplus, and for the huge majority of days when weather isn't correlated across the whole continent. They are a weaker backstop specifically for the system-wide, weather-driven event this article is about &mdash; which is inconveniently the exact scenario security-of-supply planning most needs to cover.</p>
+  </div>
+
+  <h2>4. Generation by year: old plant retiring, new plant arriving</h2>
+
+  <p>The capacity mix isn't static. Britain is running two clocks at once: an old fleet winding down on a fairly fixed schedule, and a new one being built on a much less certain one.</p>
+
+  <div class="card">
+    <div class="chart-box"><canvas id="capacityChart"></canvas></div>
+    <p class="chart-cap"><strong>Figure 1 &mdash; Illustrative UK generation capacity by source, 2026&ndash;2050 (GW, nameplate).</strong> Nuclear dips before Hinkley Point C, Sizewell C and SMRs rebuild it (see our nuclear explainer for the detail). Gas is held roughly flat &mdash; not because nobody wants to retire it, but because NESO's own modelling says the system needs about this much dispatchable backup capacity through the early 2030s regardless of how much wind and solar gets built. Wind, solar and battery storage grow toward the government's Clean Power 2030 targets and beyond; figures past 2030 are Decarbonarma's own illustrative extrapolation, not official targets, since 2030 is as far as current published targets reach.</p>
+  </div>
+
+  <p>The single most important line on that chart, for this article's purposes, is the flat grey one. Gas capacity isn't scheduled to shrink much even in the government's own "clean power" scenario &mdash; NESO's central 2030 forecast is about <strong>37 GW</strong> of unabated gas (range 32&ndash;46 GW), broadly the size of today's fleet. What changes by 2030 is how <em>often</em> that gas fleet runs &mdash; official ambition is for unabated gas to supply <strong>less than 5% of annual generation</strong>, down from around 28% in 2025. The capacity stays; the utilisation collapses. That's not a contradiction, it's the whole point: you don't need the gas fleet running often, you need it there for the days you can't do without it. This article is about identifying exactly which days those are.</p>
+
+  <h2>5. What a real dunkelflaute actually looked like</h2>
+
+  <p>Britain didn't have to wait for a hypothetical. The winter of 2024/25 delivered a textbook case.</p>
+
+  <div class="callout red">
+    <h3>12 December 2024 &rarr; 8 January 2025: the dress rehearsal</h3>
+    <p>Around <strong>12 December 2024</strong>, a prolonged cold snap combined with near-still air across the country. Wind output fell to just <strong>6% of total supply</strong>. Gas plants responded by hitting their <strong>highest output ever recorded</strong>, supplying more than <strong>73% of Britain's electricity</strong> &mdash; and Britain's gas storage, drawn down hard to cover the gap, fell to what analysts called "concerningly low" levels. Three and a half weeks later, on <strong>8 January 2025</strong>, it happened again: wind generation dropped to just <strong>3 GW</strong> &mdash; out of 32.6 GW of installed capacity, a capacity factor under 10% &mdash; while a cold snap pushed heating demand up. Gas plants ramped to over <strong>24 GW</strong>, and intraday power prices spiked to <strong>£1,071.46 per megawatt-hour</strong>, roughly 40 times a typical evening price. Analysts explicitly called it a dunkelflaute event. Nobody's power was cut off. But the record gas output and record prices are exactly what a system running close to its real margin looks like from the outside.</p>
+  </div>
+
+  <p>That event is the template for the stress test below &mdash; not a hypothetical worst case pulled from a spreadsheet, but what actually happened the last time Britain's weather delivered this scenario, before Part 1 and Part 2's extra demand had arrived at any scale.</p>
+
+  <h2>6. The stress test: two ways of counting "available"</h2>
+
+  <p>Take that real event &mdash; wind at 3 GW, solar at zero because it's a dark winter evening &mdash; and apply it to today's fleet and a plausible 2030 fleet. The answer depends enormously on whether you're asking about a single evening peak or a sustained multi-day event, and that difference is the most important finding in this piece.</p>
+
+  <h3>Layer 1: the single evening peak (batteries help)</h3>
+  <p>For one evening's peak hour, Britain's 7.5 GW of battery storage counts in full &mdash; it doesn't care that it's been dark and still all day, it just needs to have been charged at some point in the previous 24 hours. Add batteries to de-rated nuclear, de-rated gas, the observed 3 GW of dunkelflaute wind, and interconnector imports, and the picture looks comfortable: roughly <strong>51&ndash;53 GW available today against a 48 GW peak</strong> (a margin of 3&ndash;5 GW depending on how much interconnector capacity you assume is actually available), improving to a wide <strong>71&ndash;74 GW available in a 2030 Clean Power scenario</strong>. On this measure, the system copes, and copes increasingly well as storage grows.</p>
+
+  <h3>Layer 2: the sustained multi-day event (batteries run out)</h3>
+  <p>Here's the catch. A real dunkelflaute, like the one in December 2024, doesn't last one evening &mdash; it lasted the better part of a month, with two acute peaks three and a half weeks apart. A battery that discharges its 7.5 GW for a few hours on day one has nothing to recharge it with on day two, because the wind still isn't blowing and the sun still isn't out. Strip batteries out of the sum &mdash; leaving only nuclear, gas, dunkelflaute-level wind, and interconnectors, the generation that can actually sustain output day after day &mdash; and the picture changes sharply: <strong>roughly 43&ndash;45 GW available today against the 48 GW peak, a shortfall of 3&ndash;5 GW</strong>. That gap is exactly why prices spiked to £1,071/MWh on 8 January 2025 rather than staying flat: price is the mechanism that turns a physical shortfall into voluntary demand reduction (industrial users cutting back, flexible contracts kicking in) instead of an involuntary one.</p>
+
+  <div class="card">
+    <div class="chart-box"><canvas id="stressChart"></canvas></div>
+    <p class="chart-cap"><strong>Figure 2 &mdash; The two-layer dunkelflaute stress test (GW, illustrative).</strong> Single-evening-peak availability (batteries included) looks comfortable both today and in 2030. Sustained multi-day availability (batteries excluded, since there's nothing to recharge them with in a prolonged calm spell) is far tighter &mdash; roughly flat between today and 2030's Clean Power scenario, and pushed into shortfall once even a fifth of Parts 1 and 2's electrification demand is added on top.</p>
+  </div>
+
+  <h2>7. Why Clean Power 2030 doesn't fix this &mdash; and isn't trying to</h2>
+
+  <p>Run the sustained multi-day test forward to 2030 using the government's own Clean Power targets &mdash; wind toward 70 GW, solar toward 46 GW, batteries toward 25 GW &mdash; and, on demand held at today's level, the sustained-availability margin is almost unchanged: essentially break-even, not meaningfully better than today. That's not a flaw in the modelling; it's the structural point. Building more wind and solar capacity does nothing for a scenario defined by wind and solar not producing. The only things on that chart that move the sustained-availability number are gas (flat by design), nuclear (rising slowly), and interconnectors (a bounded, correlated-risk backstop) &mdash; and none of those grow anywhere near as fast as wind, solar and batteries do in the government's own plan, because they were never the part of the plan meant to solve this problem.</p>
+
+  <p>Add back even a modest slice of Part 1 and Part 2's electrification &mdash; say a fifth of the eventual 172 TWh of new EV and heating demand achieved by 2030, pushing winter peak demand from 48 GW toward the mid-50s &mdash; and the sustained multi-day margin, which was already roughly flat, turns clearly negative: a shortfall in the high single digits of gigawatts, on the same weather that Britain has already lived through twice in one winter.</p>
+
+  <div class="callout green">
+    <h3>What would actually close this gap</h3>
+    <p>Three things, none of them "more wind turbines." First, <strong>long-duration storage</strong> &mdash; the 4&ndash;6 GW the government's own plan allows for is a start, but multi-day dunkelflaute resilience needs storage measured in days, not the 2&ndash;4 hours batteries provide. Second, <strong>keeping the nuclear pipeline on schedule</strong> &mdash; every gigawatt of Hinkley Point C, Sizewell C and the SMR programme that lands on time is a gigawatt that doesn't care whether the wind is blowing. Third, <strong>demand flexibility done deliberately rather than by price shock</strong> &mdash; the £1,071/MWh spike on 8 January 2025 worked, but relying on price spikes to ration power is a blunt instrument; smart EV charging and managed heat pump demand (the subjects of Parts 1 and 2) can shave a genuine slice off the peak if the incentives are built in advance rather than discovered in the moment.</p>
+  </div>
+
+  <h2>The bottom line &mdash; across all three parts</h2>
+  <p>Put the series together and a consistent shape emerges. On an annual-energy basis, Britain's grid can plausibly support full electrification of transport and heating &mdash; Parts 1 and 2 both found manageable, broadly comparable-to-precedent totals. The problem was never really the year-round average; it's the worst hour, the worst week, and now, in Part 3, the worst season. A January dunkelflaute is the scenario that most cleanly separates capacity that helps from capacity that doesn't: wind and solar, however much of it gets built, contribute almost nothing on the specific days that matter most, and neither do batteries once you ask them to run for longer than an evening. What's left &mdash; a roughly flat gas fleet, a slowly rebuilding nuclear fleet, and interconnectors that are least available exactly when needed most &mdash; is the real margin of safety, and on the evidence of this winter's own dress rehearsal, it is thinner than the headline capacity numbers suggest. The grid survived December 2024 and January 2025. It did so by paying record prices for record gas output, with very little room to spare, before a single new electric heat pump or EV from Parts 1 and 2 had materially added to the load. That is the honest starting point for whatever comes next.</p>
+  <!-- Article End -->
+
+  </main>
+</div>
+
+<!-- dca-email-capture -->
+<div class="dca-signup-outer">
+  <div class="dca-signup">
+    <div class="dca-signup-kicker">Decarbonarma Newsletter</div>
+    <h3 class="dca-signup-h">Get the next one in your inbox</h3>
+    <p class="dca-signup-sub">Clear, no-nonsense analysis of UK home decarbonisation &mdash; heat pumps, solar, EVs, batteries and the grid. Occasional emails, no spam, unsubscribe anytime.</p>
+    <form action="https://decarbonarma.us15.list-manage.com/subscribe/post?u=cffa5aec4001ad97d9357f807&amp;id=8d5f19dec4&amp;f_id=0096a2e1f0" method="post" target="_blank" novalidate class="dca-signup-form">
+      <label class="dca-visually-hidden" for="dca-email">Email address</label>
+      <input type="email" name="EMAIL" id="dca-email" required placeholder="you@example.com" class="dca-signup-input">
+      <!-- Mailchimp bot-prevention honeypot: real users leave this empty -->
+      <div aria-hidden="true" style="position:absolute;left:-5000px;"><input type="text" name="b_cffa5aec4001ad97d9357f807_8d5f19dec4" tabindex="-1" value=""></div>
+      <button type="submit" name="subscribe" class="dca-signup-btn">Subscribe</button>
+    </form>
+    <div class="dca-signup-fine">We&rsquo;ll never share your email. Powered by Mailchimp.</div>
+  </div>
+</div>
+<style>
+  .dca-signup-outer{max-width:820px;margin:48px auto 10px;padding:0 24px;}
+  .dca-signup{background:var(--bg3,#162019);border:1px solid var(--green-pale2,rgba(74,222,128,0.13));border-radius:16px;padding:30px 28px;position:relative;overflow:hidden;}
+  .dca-signup::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green,#4ade80),var(--amber,#fbbf24));}
+  .dca-signup-kicker{font-family:var(--mono,'JetBrains Mono',monospace);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--green,#4ade80);margin-bottom:8px;}
+  .dca-signup-h{font-family:var(--serif,'Playfair Display',Georgia,serif);font-weight:700;font-size:1.5rem;color:#fff;margin:0 0 .3em;line-height:1.15;}
+  .dca-signup-sub{font-family:var(--body,'Source Serif 4',Georgia,serif);font-size:15px;color:var(--text-mid,#94a894);margin:0 0 18px;line-height:1.6;font-weight:300;}
+  .dca-signup-form{display:flex;gap:10px;flex-wrap:wrap;}
+  .dca-signup-input{flex:1 1 240px;min-width:0;background:var(--bg,#0d1510);border:1px solid var(--border2,rgba(255,255,255,0.13));border-radius:10px;padding:13px 15px;color:var(--text,#e4ede5);font-family:var(--body,'Source Serif 4',Georgia,serif);font-size:15px;}
+  .dca-signup-input:focus{outline:none;border-color:var(--green,#4ade80);box-shadow:0 0 0 3px var(--green-pale,rgba(74,222,128,0.08));}
+  .dca-signup-input::placeholder{color:var(--text-dim,#5a6c5a);}
+  .dca-signup-btn{flex:0 0 auto;background:var(--green,#4ade80);color:#062012;border:none;border-radius:10px;padding:13px 26px;font-family:var(--mono,'JetBrains Mono',monospace);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:background .15s;}
+  .dca-signup-btn:hover{background:var(--green-dim,#22c55e);}
+  .dca-signup-fine{font-family:var(--mono,'JetBrains Mono',monospace);font-size:11px;color:var(--text-dim,#5a6c5a);margin-top:12px;letter-spacing:.02em;}
+  .dca-visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  @media(max-width:520px){.dca-signup-btn{flex:1 1 100%;}}
+</style>
+<!-- /dca-email-capture -->
+
+<div data-toolref="1" style="max-width:760px;margin:2.5rem auto;padding:1.25rem 1.5rem;border:1px solid rgba(74,222,128,0.35);border-radius:12px;background:rgba(74,222,128,0.08);"><div style="font-weight:700;font-size:1.05rem;margin-bottom:0.85rem;">Free tools for this topic</div><div style="display:flex;flex-wrap:wrap;gap:0.6rem;"><a href="/#grid" target="_top" style="display:inline-block;background:#4ade80;color:#0d1510;font-weight:700;text-decoration:none;padding:0.6rem 1.1rem;border-radius:8px;font-size:0.95rem;line-height:1.2;">📡 UK Grid Live &rarr;</a></div></div>
+<footer>
+  <div class="wrap">
+    <p><strong style="color:var(--text-mid);">Sources:</strong>
+      DUKES 2025 Chapter 5, Electricity, and DESNZ de-rated capacity figures (DESNZ) &middot; NESO Winter Outlook 2025/26, initial expectations, 6.1 GW margin (NESO, June 2025) &middot; UK interconnector capacity, 10.3 GW / 10 links (Elexon BSC; New Civil Engineer; Ofgem) &middot; 2025 net import share by country (Electric Insights / Carbon Brief) &middot; UK wind and solar capacity, H1 2026 (Decarbonarma's own <a href="./uk-wind-status-h1-2026.html">UK Wind: Status H1 2026</a>; pv magazine, June 2026) &middot; Grid-scale battery storage statistics (DESNZ) &middot; Clean Power 2030 Action Plan and Annex 1, gas/wind/solar/storage targets (NESO; DESNZ) &middot; December 2024 and 8 January 2025 dunkelflaute events, wind output, gas record output, price spikes (Electric Insights Q4 2024 &amp; Q3 2025 Quarterly Reports; energyconnects.com; bmmagazine.co.uk) &middot; nuclear fleet trajectory from Decarbonarma's own <a href="./uk-nuclear-power-2026.html">Nuclear Power in the UK: 2026</a> &middot; interconnector dependency during heatwaves from Decarbonarma's own <a href="./uk-grid-security-of-supply-2026.html">grid security of supply</a> piece. All calculations are Decarbonarma's own, built from public data; figures beyond 2030 are illustrative extrapolation, not official targets. Published on Decarbonarma. Analytical commentary, not investment or policy advice.</p>
+  </div>
+</footer>
+
+<script>
+const brand = {
+  text:'#e4ede5', mid:'#94a894', grid:'rgba(255,255,255,0.06)',
+  grey:'#8a9a90', blue:'#5aa7d6', teal:'#4ade80', violet:'#a78bfa', amber:'#fbbf24', red:'#f87171'
+};
+Chart.defaults.font.family = "'Source Serif 4', Georgia, serif";
+Chart.defaults.color = brand.mid;
+
+/* Figure 1 — Capacity by source over time (stacked area-ish via bar) */
+const capYears = ['2026','2030','2035','2040','2050'];
+const nuclear = [5.9, 2.8, 7.0, 12.1, 16.2];
+const gas     = [35, 37, 36, 35, 33];
+const wind    = [32.6, 70, 85, 100, 120];
+const solar   = [22.3, 46, 65, 85, 110];
+const battery = [7.5, 25, 35, 45, 60];
+new Chart(document.getElementById('capacityChart'), {
+  type:'bar',
+  data:{ labels:capYears, datasets:[
+    {label:'Nuclear', data:nuclear, backgroundColor:brand.violet, stack:'s'},
+    {label:'Gas (unabated, backup)', data:gas, backgroundColor:brand.grey, stack:'s'},
+    {label:'Wind', data:wind, backgroundColor:brand.teal, stack:'s'},
+    {label:'Solar', data:solar, backgroundColor:brand.amber, stack:'s'},
+    {label:'Battery storage', data:battery, backgroundColor:brand.blue, stack:'s'}
+  ]},
+  options:{ responsive:true, maintainAspectRatio:false, interaction:{mode:'index', intersect:false},
+    plugins:{
+      legend:{position:'bottom', labels:{boxWidth:12, padding:12, font:{size:11.5}, color:brand.mid}},
+      tooltip:{callbacks:{
+        label:c=> ` ${c.dataset.label}: ${c.parsed.y} GW`,
+        footer:items=>{ const t=items.reduce((a,b)=>a+b.parsed.y,0); return 'Total nameplate: '+t.toFixed(0)+' GW'; }
+      }}
+    },
+    scales:{
+      y:{ stacked:true, beginAtZero:true, title:{display:true,text:'Nameplate capacity (GW)'}, grid:{color:brand.grid}, ticks:{callback:v=>v+' GW'} },
+      x:{ stacked:true, grid:{display:false} }
+    }
+  }
+});
+
+/* Figure 2 — Two-layer dunkelflaute stress test */
+const stressLabels = ['2026 today', '2030 Clean Power\n(demand flat)', '2030 Clean Power\n(+20% of Parts 1&2)'];
+const singleHour = [52, 74, 74];
+const sustained  = [45, 49, 47];
+const peakDemand = [48, 48, 55];
+new Chart(document.getElementById('stressChart'), {
+  type:'bar',
+  data:{ labels:stressLabels, datasets:[
+    {label:'Available: single evening peak (batteries help)', data:singleHour, backgroundColor:brand.blue},
+    {label:'Available: sustained multi-day (batteries exhausted)', data:sustained, backgroundColor:brand.red},
+    {type:'line', label:'Winter peak demand', data:peakDemand, borderColor:brand.amber, borderDash:[6,5], borderWidth:2.5, pointRadius:4, pointBackgroundColor:brand.amber, fill:false}
+  ]},
+  options:{ responsive:true, maintainAspectRatio:false, interaction:{mode:'index', intersect:false},
+    plugins:{
+      legend:{position:'bottom', labels:{boxWidth:12, padding:12, font:{size:11.5}, color:brand.mid}},
+      tooltip:{callbacks:{label:c=> ` ${c.dataset.label}: ${c.parsed.y} GW`}}
+    },
+    scales:{
+      y:{ beginAtZero:true, suggestedMax:80, title:{display:true,text:'GW available vs peak demand'}, grid:{color:brand.grid}, ticks:{callback:v=>v+' GW'} },
+      x:{ grid:{display:false} }
+    }
+  }
+});
+</script>
+</body>
+</html>
