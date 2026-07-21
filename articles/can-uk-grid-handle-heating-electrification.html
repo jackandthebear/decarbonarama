@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Could the UK Grid Handle Every Home Going Electric for Heat? Part 2 of 3 | Decarbonarma</title>
+<meta name="description" content="Part 2 of our UK grid series: how much extra electricity a full switch from gas boilers to heat pumps would need, cross-checked two ways — and why heating's peak problem is worse than EVs'.">
+<link rel="canonical" href="https://decarbonarma.com/articles/can-uk-grid-handle-heating-electrification.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Decarbonarma">
+<meta property="og:title" content="Could the UK Grid Handle Every Home Going Electric for Heat? Part 2 of 3 | Decarbonarma">
+<meta property="og:description" content="Part 2 of our UK grid series: how much extra electricity a full switch from gas boilers to heat pumps would need, cross-checked two ways — and why heating's peak problem is worse than EVs'.">
+<meta property="og:url" content="https://decarbonarma.com/articles/can-uk-grid-handle-heating-electrification.html">
+<meta property="og:image" content="https://decarbonarma.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Could the UK Grid Handle Every Home Going Electric for Heat? Part 2 of 3 | Decarbonarma">
+<meta name="twitter:description" content="Part 2 of our UK grid series: how much extra electricity a full switch from gas boilers to heat pumps would need, cross-checked two ways — and why heating's peak problem is worse than EVs'.">
+<meta name="twitter:image" content="https://decarbonarma.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Could the UK Grid Handle Every Home Going Electric for Heat? Part 2 of 3 | Decarbonarma",
+  "description": "Part 2 of our UK grid series: how much extra electricity a full switch from gas boilers to heat pumps would need, cross-checked two ways — and why heating's peak problem is worse than EVs'.",
+  "url": "https://decarbonarma.com/articles/can-uk-grid-handle-heating-electrification.html",
+  "image": "https://decarbonarma.com/og-image.png",
+  "author": { "@type": "Organization", "name": "Decarbonarma" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Decarbonarma",
+    "logo": { "@type": "ImageObject", "url": "https://decarbonarma.com/logo.png" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://decarbonarma.com/articles/can-uk-grid-handle-heating-electrification.html" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0d1510; --bg2:#111a13; --bg3:#162019; --bg4:#1a2820;
+    --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.13);
+    --green:#4ade80; --green-dim:#22c55e; --green-deep:#1a5c38;
+    --green-pale:rgba(74,222,128,0.08); --green-pale2:rgba(74,222,128,0.13);
+    --amber:#fbbf24; --amber-pale:rgba(251,191,36,0.08);
+    --blue:#5aa7d6; --violet:#a78bfa; --grey:#8a9a90;
+    --red:#f87171;
+    --text:#e4ede5; --text-mid:#94a894; --text-dim:#5a6c5a;
+    --mono:'JetBrains Mono','Courier New',monospace;
+    --serif:'Playfair Display',Georgia,serif;
+    --body:'Source Serif 4',Georgia,serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.75;font-weight:300;-webkit-font-smoothing:antialiased;}
+
+  .site-header{border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:rgba(13,21,16,.9);backdrop-filter:blur(8px);z-index:20;}
+  .site-logo{text-decoration:none;display:flex;align-items:center;}
+  .site-nav{display:flex;gap:1.5rem;}
+  .site-nav a{color:var(--text-dim);text-decoration:none;font-size:12px;letter-spacing:.07em;text-transform:uppercase;}
+  .site-nav a:hover{color:var(--green);}
+
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px;}
+  .hero{padding:64px 0 34px;border-bottom:1px solid var(--border);}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);}
+  h1{font-family:var(--serif);font-weight:700;font-size:2.3rem;line-height:1.15;margin:.4em 0 .3em;color:#fff;}
+  .standfirst{font-size:1.2rem;color:var(--text-mid);font-weight:300;}
+  .byline{font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-top:18px;}
+
+  main{padding:10px 0 40px;}
+  h2{font-family:var(--serif);font-weight:700;font-size:1.7rem;color:#fff;margin:2em 0 .4em;}
+  h3{font-family:var(--body);font-weight:600;font-size:1.18rem;color:var(--green);margin:1.7em 0 .3em;}
+  p{margin:.85em 0;}
+  strong{color:#fff;font-weight:600;}
+  em{color:var(--text-mid);}
+  a{color:var(--green);}
+  ul,ol{margin:.85em 0 .85em 1.3em;}
+  li{margin:.35em 0;}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:30px 0;}
+  .stat{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+  .stat .n{font-family:var(--mono);font-size:1.45rem;font-weight:500;color:var(--green);line-height:1;}
+  .stat .l{font-size:13px;color:var(--text-mid);margin-top:8px;line-height:1.4;}
+
+  .card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px;margin:26px 0;}
+  .chart-box{position:relative;height:380px;width:100%;}
+  .chart-cap{font-size:13.5px;color:var(--text-mid);margin-top:14px;line-height:1.55;}
+
+  table{width:100%;border-collapse:collapse;font-size:14.5px;margin:6px 0;}
+  th,td{text-align:left;padding:10px 10px;border-bottom:1px solid var(--border);}
+  th{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim);font-weight:400;}
+  td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--text);}
+
+  .callout{border-left:3px solid var(--amber);background:var(--amber-pale);padding:18px 22px;border-radius:0 12px 12px 0;margin:28px 0;}
+  .callout h3{margin-top:0;color:var(--amber);}
+  .callout.green{border-left-color:var(--green);background:var(--green-pale);}
+  .callout.green h3{color:var(--green);}
+  .callout.red{border-left-color:var(--red);background:rgba(248,113,113,0.08);}
+  .callout.red h3{color:var(--red);}
+
+  footer{border-top:1px solid var(--border);padding:28px 0 60px;}
+  footer p{font-size:12.5px;color:var(--text-dim);line-height:1.65;}
+  footer a{color:var(--text-mid);}
+
+  @media(max-width:600px){ h1{font-size:1.75rem;} .chart-box{height:300px;} body{font-size:16px;} .hero{padding:40px 0 26px;} }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="site-logo"><img src="../logo-light.svg" alt="Decarbonarma" style="height:34px;width:auto;display:block;"></a>
+  <nav class="site-nav">
+    <a href="/">Home</a>
+    <a href="#">Grid</a>
+    <a href="#">Heating</a>
+    <a href="#">Policy</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">The UK Grid Series &middot; Part 2 of 3</div>
+    <h1>Could the UK Grid Handle Every Home Going Electric for Heat?</h1>
+    <!-- Article Start -->
+    <p class="standfirst">Every gas boiler in Britain, replaced with a heat pump. Same two-method approach as Part 1 — a national top-down number checked against a bottom-up one — plus the twist that makes heating a harder grid problem than EVs: it doesn't spread its demand evenly across the year.</p>
+    <div class="byline">Decarbonarma &middot; July 2026 &middot; ~12-min read &middot; Original analysis</div>
+  </div>
+
+  <main>
+
+  <div class="callout green">
+    <h3>Part 2 of 3 &mdash; The UK Grid Under Pressure</h3>
+    <p>This is the second in a three-part series asking whether Britain's electricity grid can actually deliver on government policy: electrifying transport, electrifying heat, and rebuilding the generation fleet that has to supply both. <strong><a href="./can-uk-grid-handle-all-electric-vehicles.html">Part 1</a></strong> covered electric vehicles &mdash; a full EV fleet adds roughly 111 TWh/year of new demand. <strong>Part 2 (below)</strong> covers heating. <strong>Part 3 (coming soon)</strong> covers supply: the retirement of old coal, gas and nuclear plant, the build-out of wind, solar and new nuclear, and whether it can plausibly cover what Parts 1 and 2 add up to.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">~63 TWh/yr</div><div class="l">Electricity for a fully heat-pumped UK housing stock (range 54&ndash;75 TWh)</div></div>
+    <div class="stat"><div class="n">~2 TWh/yr</div><div class="l">What heat pumps draw today &mdash; barely 3% of the job done</div></div>
+    <div class="stat"><div class="n">371 vs 15 yrs</div><div class="l">Time to convert every gas home at 2025's install rate, vs a 15-year target</div></div>
+    <div class="stat"><div class="n">~4&times;</div><div class="l">Winter peak-day gas demand vs an average summer day</div></div>
+  </div>
+
+  <p>Part 1 asked whether the grid could power every car, van and lorry in Britain. This one asks the harder question: every gas boiler. Harder, because heating isn't just a bigger number &mdash; it behaves completely differently across the year. An EV wants roughly the same top-up most days. A heat pump wants almost nothing in July and everything in January. That shape matters as much as the total, so this piece builds both.</p>
+
+  <h2>1. What's actually being proposed, and by when</h2>
+
+  <p>Two separate things are happening to UK home heating, on two very different timelines, and it's worth being precise about which is government policy and which is our own modelling assumption.</p>
+
+  <h3>New homes: a real mandate, dated</h3>
+  <p>The <strong>Future Homes Standard</strong> was published in final form on <strong>24 March 2026</strong> and comes into force on <strong>24 March 2027</strong> (with a 12-month transitional window to March 2028 for developments already under way). It doesn't ban gas boilers in so many words &mdash; instead it sets carbon targets roughly 75&ndash;80% below current standards that a gas boiler simply cannot hit, making low-carbon heating (in practice, almost always a heat pump) mandatory in all new construction. The government has also confirmed that from 2028, no new-build home in England will be connected to the gas network at all. This part is genuinely locked in.</p>
+
+  <h3>Existing homes: no mandate &mdash; this is our assumption</h3>
+  <p>For the roughly <strong>22 million UK homes already on mains gas</strong>, there is no ban and no fixed switch-over date. Government policy leans on incentives (the Boiler Upgrade Scheme) and a manufacturer-side sales quota (the Clean Heat Market Mechanism), not a consumer mandate. So for this piece, we're doing what you suggested: modelling the existing stock converting as boilers naturally reach end of life &mdash; a typical UK boiler lasts <strong>10&ndash;15 years</strong> &mdash; and assuming that failure-driven turnover completes a full conversion over <strong>15 years</strong>. That's a modelling choice, not a policy fact, and we flag it clearly every time it does the heavy lifting below.</p>
+
+  <h2>2. Two ways to size the electricity, cross-checked</h2>
+
+  <p>Same discipline as Part 1: one estimate built top-down from national fuel-supply statistics, one built bottom-up from household-level data, checked against each other.</p>
+
+  <h3>Method 1 &mdash; top-down: the nation's gas bill</h3>
+  <p>UK homes burned <strong>253.5 TWh of gas in 2024</strong> (DESNZ, Energy Consumption in the UK 2025: 21.8 million tonnes of oil equivalent, domestic sector). DESNZ also splits out what that gas is for: <strong>75.5% space heating, 22.1% hot water, 2.4% cooking</strong>. Heat pumps replace the first two, not a gas hob, so the relevant slice is <strong>247.4 TWh</strong> (97.6% of the total).</p>
+
+  <p>That's gas <em>burned</em>, not heat <em>delivered</em> &mdash; a boiler wastes some of it. Blending modern condensing boilers with the older, less efficient units still in the fleet gives a working average of <strong>85% efficiency</strong>, so UK homes are extracting roughly <strong>210 TWh of useful heat</strong> a year from that gas.</p>
+
+  <div class="card">
+  <div class="chart-box"><canvas id="wasteChart"></canvas></div>
+  <p class="chart-cap"><strong>Figure 1 &mdash; From gas burned to heat delivered.</strong> Of the 253.5 TWh of gas UK homes burn each year, ~247 TWh is for space heating and hot water (the rest is cooking, which a heat pump doesn't touch), and roughly 210 TWh of that actually ends up as useful warmth &mdash; the other ~37 TWh is lost as flue and standing losses inside the boiler itself.</p>
+  </div>
+
+  <p>Re-expressing that ~210 TWh of useful heat as electricity means dividing by a heat pump's <strong>SCOP</strong> (seasonal coefficient of performance &mdash; how many units of heat it delivers per unit of electricity in). This is the number you specifically pointed to: real, independently metered UK heat pump data, not a manufacturer's lab figure. <a href="https://heatpumpmonitor.org/" target="_blank" rel="noopener">HeatpumpMonitor.org</a>, the OpenEnergyMonitor community's public dataset, puts the average SCOP at <strong>3.87</strong> across 252 UK air-source systems with billing-grade metering (as of November 2025). The government's own 2021 Electrification of Heat field trial &mdash; a less self-selected, more representative sample of 427 installs &mdash; found a lower average of <strong>2.80</strong>. The gap is mostly about installation quality (correctly sized radiators, sensible flow temperatures) rather than the technology itself, and it's real: it's the difference between a well-installed and a poorly-installed system, not a rounding error.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="n">54 TWh</div><div class="l">At SCOP 3.87 (OpenEnergyMonitor, well-designed systems)</div></div>
+    <div class="stat"><div class="n">75 TWh</div><div class="l">At SCOP 2.80 (Electrification of Heat trial, all-comers)</div></div>
+    <div class="stat"><div class="n">~63 TWh</div><div class="l">Midpoint, used as our headline figure</div></div>
+  </div>
+
+  <h3>Method 2 &mdash; bottom-up: homes &times; typical use</h3>
+  <p>Cross-checking from the other direction: the UK has roughly <strong>22.2 million gas-heated homes</strong> (weighting each nation's dwelling stock by its mains-gas connection rate &mdash; 73.8% in England, 73.4% in Scotland, 31.6% in Northern Ireland, where oil dominates instead). Ofgem's <strong>Typical Domestic Consumption Value</strong> for a medium gas user is <strong>11,500 kWh/year</strong>. Multiply the two and you get <strong>255.7 TWh</strong> &mdash; within 1% of the DESNZ national total above. Running that through the same heat-relevant share, boiler efficiency and SCOP gives <strong>~64 TWh</strong>, essentially identical to Method 1.</p>
+
+  <div class="callout">
+    <h3>Why these two aren't fully independent (and that's still useful)</h3>
+    <p>Unlike Part 1 &mdash; where vehicle-mileage data and national fuel-sales data are genuinely separate sources &mdash; Ofgem's typical consumption value is itself derived from the same underlying supply-meter data DESNZ uses. So this isn't as strong a cross-check as Part 1's. What it does confirm is that our household count and per-home assumption are consistent with the official national total, which matters because the phased rollout model in Section 4 depends on getting that household count right.</p>
+  </div>
+
+  <h2>3. Don't forget: this has barely started</h2>
+
+  <p>Heat pumps already draw <strong>1.97 TWh a year</strong> in UK homes (DESNZ, 2024) &mdash; just 2.1% of domestic electricity demand, and already counted inside the grid's current 322 TWh. That leaves roughly <strong>61 TWh of genuinely new demand</strong> still to add for a fully converted stock.</p>
+
+  <div class="callout red">
+    <h3>The pace problem</h3>
+    <p>2025 was a record year for UK heat pump installs: <strong>around 60,000</strong>, per MCS. At that rate, converting all 22.2 million gas-heated homes would take <strong>371 years</strong>. Hitting full conversion within our 15-year modelling window instead requires roughly <strong>1.5 million installs a year</strong> &mdash; nearly <strong>25 times</strong> the current record pace, sustained for a decade and a half. This is the gap between the ambition implied by net-zero targets and what's actually happening on the ground, and it's considerably wider than the equivalent gap for EVs.</p>
+  </div>
+
+  <h2>4. So: how big a deal is ~63 TWh, really?</h2>
+
+  <p>Stacked on Part 1's EV figure, the series total so far: <strong>+111 TWh</strong> from EVs, <strong>+61 TWh</strong> of new demand from heating, on top of today's <strong>322 TWh</strong>. That's a grid supplying somewhere around <strong>485&ndash;506 TWh a year</strong> once both transport and heat are fully electrified &mdash; and heating alone is a smaller number than EVs, which may be counter-intuitive given how much bigger "replace the boiler in 22 million homes" sounds than "replace the car in 40 million driveways." The reason is efficiency: a heat pump's SCOP of 3&ndash;4 beats an EV's efficiency multiplier over a petrol engine less dramatically once boiler losses are already fairly low to start with, and UK homes, while poorly insulated by European standards, don't need anywhere near as much continuous energy input as moving a two-tonne vehicle at motorway speed.</p>
+
+  <div class="card">
+    <div class="chart-box"><canvas id="seriesChart"></canvas></div>
+    <p class="chart-cap"><strong>Figure 2 &mdash; Running total across the series.</strong> Today's 322 TWh, plus Part 1's EV fleet (+111 TWh), plus Part 2's heating stock (+61 TWh new demand) &mdash; a grid supplying somewhere in the region of 494 TWh a year, before Part 3 asks whether supply can actually get there.</p>
+  </div>
+
+  <h2>5. The real problem isn't the annual total &mdash; it's January</h2>
+
+  <p>Here's where heating diverges sharply from Part 1's EV story. An EV's ~111 TWh spreads reasonably evenly across 365 days &mdash; people drive roughly similar distances in June and December. Heat demand does not. It tracks outdoor temperature almost exactly, and the UK's coldest weeks concentrate an outsized share of the year's total heat demand into a handful of winter months.</p>
+
+  <div class="card">
+    <div class="chart-box"><canvas id="seasonChart"></canvas></div>
+    <p class="chart-cap"><strong>Figure 3 &mdash; Illustrative monthly heat demand shape.</strong> Indexed to UK heating degree-days (base 15.5&deg;C) across a typical year &mdash; a rough proxy for how heat demand actually distributes, not a precise monthly gas figure. December and January alone account for roughly a third of the year's heating degree-days; June to August barely register.</p>
+  </div>
+
+  <p>The gas system already lives with this: peak winter gas-supply days have hit <strong>340&ndash;400 million cubic metres</strong> in recent Januarys &mdash; equivalent to roughly <strong>4&ndash;4.5 TWh in a single day</strong>, against a typical summer day nearer <strong>1.1 TWh</strong>, a swing of roughly <strong>4&times;</strong>. During the 2018 "Beast from the East" cold snap, gas demand hit a still-standing record. Gas can absorb swings like that because Britain has enormous underground and LNG storage acting as a buffer. Electricity, largely, does not &mdash; it has to be generated and delivered in very close to real time.</p>
+
+  <div class="callout">
+    <h3>Cold snaps hit heat pumps twice</h3>
+    <p>It gets worse before it gets better: a heat pump's SCOP falls in cold weather &mdash; there's less ambient heat in the outside air to extract &mdash; right at the moment demand for heat is highest. Published UK modelling of extreme cold events finds peak average electricity demand from air-source heat pumps can run around <strong>65% above</strong> a typical winter day. Layer a genuinely bitter cold snap on top of Part 1's evening EV-charging peak and the numbers stop being additive in any comfortable way &mdash; they compound at precisely the moment the electricity system is already tightest, which is exactly the scenario NESO's winter outlook modelling exists to stress-test.</p>
+  </div>
+
+  <h2>6. What would actually make this work</h2>
+  <p>Three things do most of the work in closing the gap between "63 TWh sounds fine on paper" and "the network survives a cold January evening in a mostly-electrified Britain." First, <strong>fabric first</strong>: every kWh of insulation and draught-proofing installed before a heat pump goes in lowers both the annual total and, more importantly, the peak &mdash; a well-insulated home needs far less oversizing to cope with a cold snap. Second, <strong>correct sizing and design</strong>, which is most of the gap between the 2.80 and 3.87 SCOP figures above &mdash; this is a workmanship problem as much as a technology one, and it's fixable with better installer standards. Third, <strong>diversity and flexibility</strong>: not every home hits peak demand at the identical minute, and smart controls, thermal stores and (increasingly) hybrid systems that lean on a small backup heat source during the very coldest snaps can shave the top off the peak without anyone being cold.</p>
+
+  <h2>The bottom line</h2>
+  <p>Fully electrifying UK home heating adds a smaller annual energy bill than fully electrifying transport &mdash; roughly 61 TWh of new demand against Part 1's 111 TWh &mdash; but a nastier peak problem. It arrives concentrated into a few winter months rather than spread evenly across the year, it coincides with the exact weeks a heat pump is least efficient, and it stacks on top of a gas system's storage buffer that electricity doesn't have. The bigger question, though, may not be engineering at all: at 2025's installation pace it would take <strong>371 years</strong> to convert the existing gas-heated stock, against a 15-year window that would require a near-25-fold acceleration. New-build homes are locked onto heat pumps by law from 2027. The other 22 million homes are not &mdash; and that gap, more than any wire or turbine, is what Part 3 has to reckon with.</p>
+  <!-- Article End -->
+
+  </main>
+</div>
+
+<!-- dca-email-capture -->
+<div class="dca-signup-outer">
+  <div class="dca-signup">
+    <div class="dca-signup-kicker">Decarbonarma Newsletter</div>
+    <h3 class="dca-signup-h">Get the next one in your inbox</h3>
+    <p class="dca-signup-sub">Clear, no-nonsense analysis of UK home decarbonisation &mdash; heat pumps, solar, EVs, batteries and the grid. Occasional emails, no spam, unsubscribe anytime.</p>
+    <form action="https://decarbonarma.us15.list-manage.com/subscribe/post?u=cffa5aec4001ad97d9357f807&amp;id=8d5f19dec4&amp;f_id=0096a2e1f0" method="post" target="_blank" novalidate class="dca-signup-form">
+      <label class="dca-visually-hidden" for="dca-email">Email address</label>
+      <input type="email" name="EMAIL" id="dca-email" required placeholder="you@example.com" class="dca-signup-input">
+      <!-- Mailchimp bot-prevention honeypot: real users leave this empty -->
+      <div aria-hidden="true" style="position:absolute;left:-5000px;"><input type="text" name="b_cffa5aec4001ad97d9357f807_8d5f19dec4" tabindex="-1" value=""></div>
+      <button type="submit" name="subscribe" class="dca-signup-btn">Subscribe</button>
+    </form>
+    <div class="dca-signup-fine">We&rsquo;ll never share your email. Powered by Mailchimp.</div>
+  </div>
+</div>
+<style>
+  .dca-signup-outer{max-width:820px;margin:48px auto 10px;padding:0 24px;}
+  .dca-signup{background:var(--bg3,#162019);border:1px solid var(--green-pale2,rgba(74,222,128,0.13));border-radius:16px;padding:30px 28px;position:relative;overflow:hidden;}
+  .dca-signup::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green,#4ade80),var(--amber,#fbbf24));}
+  .dca-signup-kicker{font-family:var(--mono,'JetBrains Mono',monospace);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--green,#4ade80);margin-bottom:8px;}
+  .dca-signup-h{font-family:var(--serif,'Playfair Display',Georgia,serif);font-weight:700;font-size:1.5rem;color:#fff;margin:0 0 .3em;line-height:1.15;}
+  .dca-signup-sub{font-family:var(--body,'Source Serif 4',Georgia,serif);font-size:15px;color:var(--text-mid,#94a894);margin:0 0 18px;line-height:1.6;font-weight:300;}
+  .dca-signup-form{display:flex;gap:10px;flex-wrap:wrap;}
+  .dca-signup-input{flex:1 1 240px;min-width:0;background:var(--bg,#0d1510);border:1px solid var(--border2,rgba(255,255,255,0.13));border-radius:10px;padding:13px 15px;color:var(--text,#e4ede5);font-family:var(--body,'Source Serif 4',Georgia,serif);font-size:15px;}
+  .dca-signup-input:focus{outline:none;border-color:var(--green,#4ade80);box-shadow:0 0 0 3px var(--green-pale,rgba(74,222,128,0.08));}
+  .dca-signup-input::placeholder{color:var(--text-dim,#5a6c5a);}
+  .dca-signup-btn{flex:0 0 auto;background:var(--green,#4ade80);color:#062012;border:none;border-radius:10px;padding:13px 26px;font-family:var(--mono,'JetBrains Mono',monospace);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:background .15s;}
+  .dca-signup-btn:hover{background:var(--green-dim,#22c55e);}
+  .dca-signup-fine{font-family:var(--mono,'JetBrains Mono',monospace);font-size:11px;color:var(--text-dim,#5a6c5a);margin-top:12px;letter-spacing:.02em;}
+  .dca-visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  @media(max-width:520px){.dca-signup-btn{flex:1 1 100%;}}
+</style>
+<!-- /dca-email-capture -->
+
+<div data-toolref="1" style="max-width:760px;margin:2.5rem auto;padding:1.25rem 1.5rem;border:1px solid rgba(74,222,128,0.35);border-radius:12px;background:rgba(74,222,128,0.08);"><div style="font-weight:700;font-size:1.05rem;margin-bottom:0.85rem;">Free tools for this topic</div><div style="display:flex;flex-wrap:wrap;gap:0.6rem;"><a href="/#heatloss" target="_top" style="display:inline-block;background:#4ade80;color:#0d1510;font-weight:700;text-decoration:none;padding:0.6rem 1.1rem;border-radius:8px;font-size:0.95rem;line-height:1.2;">🏠 Heat Loss Estimator &rarr;</a><a href="/#grid" target="_top" style="display:inline-block;background:none;color:#4ade80;font-weight:700;text-decoration:none;padding:0.6rem 1.1rem;border-radius:8px;font-size:0.95rem;line-height:1.2;border:1px solid rgba(74,222,128,0.35);">📡 UK Grid Live &rarr;</a></div></div>
+<footer>
+  <div class="wrap">
+    <p><strong style="color:var(--text-mid);">Sources:</strong>
+      Energy Consumption in the UK (ECUK) 2025 &amp; DUKES 2025, domestic gas consumption, end-use split and domestic heat pump electricity (DESNZ) &middot; Future Homes Standard, published March 2026, in force March 2027 (MHCLG) &middot; Dwelling stock estimates, England, 31 March 2025 (MHCLG/GOV.UK), with Scotland/Wales/NI dwelling and gas-connection estimates from national census and House of Commons Library briefings &middot; Typical Domestic Consumption Values, gas, medium user (Ofgem, from July 2026) &middot; HeatpumpMonitor.org / OpenEnergyMonitor community metered SCOP dataset (November 2025) &middot; Electrification of Heat Demonstration Project field trial SCOP data (Ofgem/BEIS, 2021) &middot; MCS heat pump deployment statistics 2025 &middot; UK winter gas peak-day and Q3 2025 summer demand data (National Gas / DESNZ Energy Trends) &middot; published research on UK heat pump peak demand under cold events. All calculations are Decarbonarma's own, built from public data; figures are estimates for illustration, not a substitute for NESO's full system modelling. Published on Decarbonarma. Analytical commentary, not investment or policy advice.</p>
+  </div>
+</footer>
+
+<script>
+const brand = {
+  text:'#e4ede5', mid:'#94a894', grid:'rgba(255,255,255,0.06)',
+  grey:'#8a9a90', blue:'#5aa7d6', teal:'#4ade80', violet:'#a78bfa', amber:'#fbbf24', red:'#f87171'
+};
+Chart.defaults.font.family = "'Source Serif 4', Georgia, serif";
+Chart.defaults.color = brand.mid;
+
+/* Figure 1 — Gas burned -> heat delivered waterfall-style bar */
+new Chart(document.getElementById('wasteChart'), {
+  type:'bar',
+  data:{
+    labels:['Total domestic gas burned', 'Heat-relevant (space + water heating)', 'Useful heat actually delivered'],
+    datasets:[{
+      label:'TWh/year',
+      data:[253.5, 247.4, 210.3],
+      backgroundColor:[brand.grey, brand.blue, brand.teal],
+      borderRadius:6,
+      barThickness:60
+    }]
+  },
+  options:{
+    indexAxis:'y', responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{callbacks:{label:c=>` ${c.parsed.x} TWh/yr`}} },
+    scales:{
+      x:{ beginAtZero:true, title:{display:true,text:'TWh per year'}, grid:{color:brand.grid}, ticks:{callback:v=>v+' TWh'} },
+      y:{ grid:{display:false} }
+    }
+  }
+});
+
+/* Figure 2 — Running series total */
+new Chart(document.getElementById('seriesChart'), {
+  type:'bar',
+  data:{
+    labels:['Today', '+ Part 1: EV fleet', '+ Part 2: heating stock'],
+    datasets:[
+      { label:'Current annual demand', data:[322, 322, 322], backgroundColor:brand.grey, stack:'s' },
+      { label:'EV electrification (Part 1)', data:[0, 111, 111], backgroundColor:brand.blue, stack:'s' },
+      { label:'Heating electrification (Part 2)', data:[0, 0, 61], backgroundColor:brand.teal, stack:'s' }
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false, interaction:{mode:'index', intersect:false},
+    plugins:{
+      legend:{position:'bottom', labels:{boxWidth:12, padding:12, font:{size:12}, color:brand.mid}},
+      tooltip:{callbacks:{
+        label:c=> ` ${c.dataset.label}: ${c.parsed.y} TWh`,
+        footer:items=>{ const tot = items.reduce((a,b)=>a+b.parsed.y,0); return 'Total: '+tot.toFixed(0)+' TWh/yr'; }
+      }}
+    },
+    scales:{
+      y:{ stacked:true, beginAtZero:true, suggestedMax:520, title:{display:true,text:'TWh per year'}, grid:{color:brand.grid}, ticks:{callback:v=>v+' TWh'} },
+      x:{ stacked:true, grid:{display:false} }
+    }
+  }
+});
+
+/* Figure 3 — Illustrative monthly heat demand shape (indexed to UK heating degree-days, base 15.5°C) */
+const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const hdd    = [350, 300, 280, 180, 90, 30, 10, 15, 60, 150, 250, 330];
+new Chart(document.getElementById('seasonChart'), {
+  type:'bar',
+  data:{ labels:months, datasets:[{
+    label:'Illustrative heat demand (indexed to heating degree-days)',
+    data:hdd, backgroundColor:brand.teal, borderRadius:5
+  }]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{callbacks:{label:c=>` index ${c.parsed.y}`}} },
+    scales:{
+      y:{ beginAtZero:true, title:{display:true,text:'Heating degree-days (illustrative index)'}, grid:{color:brand.grid} },
+      x:{ grid:{display:false} }
+    }
+  }
+});
+</script>
+</body>
+</html>

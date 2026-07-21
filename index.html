@@ -418,7 +418,8 @@
   </section>
   <script>
   const latestSlides = [
-    {icon:'🔌', grad:'linear-gradient(135deg,#0D6E7B,#4ade80)', meta:'Grid explainer · July 2026', title:'Could the UK grid handle an all-electric vehicle fleet?', teaser:"Two independent methods to estimate the electricity bill for an all-EV Britain, cross-checked against NESO's own modelling — and why the wires, not the power stations, are the real constraint.", src:'./articles/can-uk-grid-handle-all-electric-vehicles.html', full:'Could the UK Grid Handle an All-Electric Vehicle Fleet? We Did the Maths'},
+    {icon:'🔥', grad:'linear-gradient(135deg,#d97706,#0D6E7B)', meta:'Grid series · Part 2 of 3 · July 2026', title:'Could the UK grid handle every home going electric for heat?', teaser:"Gas boilers vs heat pumps, cross-checked two ways — and why heating's winter peak problem is worse than EVs', because it doesn't spread evenly across the year.", src:'./articles/can-uk-grid-handle-heating-electrification.html', full:'Could the UK Grid Handle Every Home Going Electric for Heat? Part 2 of 3'},
+    {icon:'🔌', grad:'linear-gradient(135deg,#0D6E7B,#4ade80)', meta:'Grid series · Part 1 of 3 · July 2026', title:'Could the UK grid handle an all-electric vehicle fleet?', teaser:"Two independent methods to estimate the electricity bill for an all-EV Britain, cross-checked against NESO's own modelling — and why the wires, not the power stations, are the real constraint.", src:'./articles/can-uk-grid-handle-all-electric-vehicles.html', full:'Could the UK Grid Handle an All-Electric Vehicle Fleet? We Did the Maths'},
     {icon:'🛢️', grad:'linear-gradient(135deg,#1e293b,#d97706)', meta:'Analysis · July 2026', title:"Putin's accidental climate policy", teaser:"The invasion of Ukraine and the collapse of Russian gas supply did more for Europe's clean energy transition than three decades of climate policy. Where that argument holds — and where it runs out of road.", src:'./articles/putin-vs-green-lobby.html', full:"Putin's Accidental Climate Policy"},
     {icon:'🧩', grad:'linear-gradient(135deg,#1A3D2B,#0D6E7B)', meta:'Product watch · July 2026', title:'Two heat pumps just landed. Do they change the game?', teaser:"Daikin's X Series and Samsung's EHS Quint both blend air-to-air and air-to-water into one box, days apart. What's real, what's still a press release, and what it means for your decision.", src:'./articles/daikin-x-series-wait-or-buy.html', full:'Daikin X Series vs Samsung EHS Quint: Do Either Change the Game?'},
     {icon:'🔋', grad:'linear-gradient(135deg,#1a5c3a,#2b6fb0)', meta:'Case study · H1 2026 update', title:'Six months, four arrays, one battery — the real H1 2026 numbers', teaser:'North, South, Garage and the original Sonnen array compared panel-by-panel, plus battery cycling, grid position and the real financial return for H1 2026.', src:'./articles/rose-cottage-h1-2026.html', full:'Six Months, Four Arrays, One Battery'},
@@ -1338,12 +1339,26 @@ window.addEventListener('DOMContentLoaded', function(){
 
       <div id="art-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
 
+        <!-- Could the UK grid handle heating electrification -->
+        <a class="art-card" data-tag="grid" href="./articles/can-uk-grid-handle-heating-electrification.html" onclick="artOpen('./articles/can-uk-grid-handle-heating-electrification.html','Could the UK Grid Handle Every Home Going Electric for Heat? Part 2 of 3'); return false;" style="text-decoration:none;color:inherit;display:block;background:#fff;border:1px solid var(--stone-200);border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow='0 1px 4px rgba(0,0,0,0.05)'">
+          <div style="height:140px;background:linear-gradient(135deg,#d97706,#0D6E7B);display:flex;align-items:center;justify-content:center;font-size:48px;">🔥</div>
+          <div style="padding:20px;">
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;">
+              <span style="background:#dcfce7;color:#166534;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;">Grid series &middot; Part 2 of 3</span>
+              <span style="font-size:11px;color:var(--stone-600);">July 2026</span>
+            </div>
+            <h3 style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--green-900);line-height:1.3;margin-bottom:8px;">Could the UK grid handle every home going electric for heat?</h3>
+            <p style="font-size:13px;color:var(--stone-600);line-height:1.6;">Two cross-checked ways of estimating the electricity bill for a fully heat-pumped Britain &mdash; and why heating's winter peak problem is worse than EVs'.</p>
+            <div style="margin-top:16px;font-size:13px;font-weight:600;color:var(--green-600);">Read article →</div>
+          </div>
+        </a>
+
         <!-- Could the UK grid handle an all-electric fleet -->
         <a class="art-card" data-tag="grid" href="./articles/can-uk-grid-handle-all-electric-vehicles.html" onclick="artOpen('./articles/can-uk-grid-handle-all-electric-vehicles.html','Could the UK Grid Handle an All-Electric Vehicle Fleet? We Did the Maths'); return false;" style="text-decoration:none;color:inherit;display:block;background:#fff;border:1px solid var(--stone-200);border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow='0 1px 4px rgba(0,0,0,0.05)'">
           <div style="height:140px;background:linear-gradient(135deg,#0D6E7B,#4ade80);display:flex;align-items:center;justify-content:center;font-size:48px;">🔌</div>
           <div style="padding:20px;">
             <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;">
-              <span style="background:#dcfce7;color:#166534;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;">Grid explainer</span>
+              <span style="background:#dcfce7;color:#166534;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;">Grid series &middot; Part 1 of 3</span>
               <span style="font-size:11px;color:var(--stone-600);">July 2026</span>
             </div>
             <h3 style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--green-900);line-height:1.3;margin-bottom:8px;">Could the UK grid handle an all-electric vehicle fleet?</h3>
