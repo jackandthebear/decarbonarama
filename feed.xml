@@ -5,14 +5,28 @@
 <link>https://decarbonarma.com/</link>
 <description>Clear, no-nonsense analysis of UK home decarbonisation - heat pumps, solar, EVs, batteries and the grid.</description>
 <language>en-gb</language>
-<lastBuildDate>Tue, 21 Jul 2026 04:05:55 -0000</lastBuildDate>
+<lastBuildDate>Wed, 22 Jul 2026 04:08:38 -0000</lastBuildDate>
 <atom:link href="https://decarbonarma.com/feed.xml" rel="self" type="application/rss+xml" />
 <item>
-<title>Could the UK Grid Handle an All-Electric Vehicle Fleet? We Did the Maths</title>
+<title>Could the UK Grid Survive a January Dunkelflaute? Part 3 of 3</title>
+<link>https://decarbonarma.com/articles/can-uk-grid-survive-january-dunkelflaute.html</link>
+<guid isPermaLink="true">https://decarbonarma.com/articles/can-uk-grid-survive-january-dunkelflaute.html</guid>
+<pubDate>Tue, 21 Jul 2026 06:25:58 -0000</pubDate>
+<description>Part 3 of our UK grid series: how much power we need vs how much we've got, whether we're too dependent on interconnectors, and a worst-case January dunkelflaute stress test.</description>
+</item>
+<item>
+<title>Could the UK Grid Handle Every Home Going Electric for Heat? Part 2 of 3</title>
+<link>https://decarbonarma.com/articles/can-uk-grid-handle-heating-electrification.html</link>
+<guid isPermaLink="true">https://decarbonarma.com/articles/can-uk-grid-handle-heating-electrification.html</guid>
+<pubDate>Tue, 21 Jul 2026 06:03:45 -0000</pubDate>
+<description>Part 2 of our UK grid series: how much extra electricity a full switch from gas boilers to heat pumps would need, cross-checked two ways — and why heating's peak problem is worse than EVs'.</description>
+</item>
+<item>
+<title>Could the UK Grid Handle an All-Electric Vehicle Fleet? Part 1 of 3</title>
 <link>https://decarbonarma.com/articles/can-uk-grid-handle-all-electric-vehicles.html</link>
 <guid isPermaLink="true">https://decarbonarma.com/articles/can-uk-grid-handle-all-electric-vehicles.html</guid>
 <pubDate>Tue, 21 Jul 2026 04:03:31 -0000</pubDate>
-<description>Two independent methods to estimate how much electricity a fully electric UK car, van and HGV fleet would need — and whether the grid's generation and network can take it.</description>
+<description>Part 1 of a three-part series on Britain's grid: two independent methods to estimate how much electricity a fully electric UK car, van and HGV fleet would need — and whether the grid's generation and network can take it.</description>
 </item>
 <item>
 <title>Sigenergy Reviewed: One AI Energy Ecosystem, Every Product Explained</title>
