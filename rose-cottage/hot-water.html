@@ -135,7 +135,7 @@ h2.section{font-family:"Playfair Display",serif;font-size:20px;color:var(--fores
 <script>
 // ---------- Static daily snapshot: Rose Cottage hot-water ledger ----------
 // Regenerated each morning by the daily-rose-cottage-energy-report scheduled task.
-const LEDGER_GENERATED_AT = "2026-07-23T06:27:00Z";
+const LEDGER_GENERATED_AT = "2026-07-24T05:30:00Z";
 const LEDGER_ROWS = [
   {date:"2026-06-26", day_solar_kwh:5.795, night_octopus_kwh:0.585, total_kwh:6.38, octopus_pct:9.2, octopus_cost_gbp:0.04, solar_offset_gbp:1.76},
   {date:"2026-06-27", day_solar_kwh:3.01, night_octopus_kwh:0, total_kwh:3.01, octopus_pct:0.0, octopus_cost_gbp:0, solar_offset_gbp:0.91},
@@ -163,6 +163,8 @@ const LEDGER_ROWS = [
   {date:"2026-07-19", day_solar_kwh:6.03, night_octopus_kwh:0, total_kwh:6.03, octopus_pct:0.0, octopus_cost_gbp:0, solar_offset_gbp:1.83},
   {date:"2026-07-20", day_solar_kwh:6.994, night_octopus_kwh:0.826, total_kwh:7.82, octopus_pct:10.56, octopus_cost_gbp:0.06, solar_offset_gbp:2.12},
   {date:"2026-07-21", day_solar_kwh:2.84, night_octopus_kwh:0, total_kwh:2.84, octopus_pct:0.0, octopus_cost_gbp:0, solar_offset_gbp:0.86},
+  {date:"2026-07-22", day_solar_kwh:7.64, night_octopus_kwh:0, total_kwh:7.64, octopus_pct:0.0, octopus_cost_gbp:0, solar_offset_gbp:2.32},
+  {date:"2026-07-23", day_solar_kwh:3.03, night_octopus_kwh:0, total_kwh:3.03, octopus_pct:0.0, octopus_cost_gbp:0, solar_offset_gbp:0.92},
 ];
 
 // SOLAR_LIVE_DATA_START
@@ -173,13 +175,13 @@ const LEDGER_ROWS = [
 // which has a known bug showing solar generation at roughly 2x the real figure).
 // Grid import/export figures are the Octopus smart meter (source of truth for the whole house), not the Sonnen circuit's own grid CT.
 const SOLAR_LIVE = {
-  generated_at: "2026-07-23T15:01:53Z",
-  main_roof:       { power_w: 4827, lifetime_kwh: 5536.15 },
-  garage:          { power_w: 1352, lifetime_kwh: 1438.81 },
-  enphase_total:   { power_w: 4609, today_kwh: 38.22, lifetime_kwh: 8263.29 },
-  sonnen:          { power_w: 2731, lifetime_kwh: 4538.03 },
-  battery:         { soc_pct: 100, state: "discharging", power_w: -544, lifetime_charged_kwh: 2434.01, lifetime_discharged_kwh: 2738.75 },
-  grid:            { power_w: 300, today_export_kwh: 31.1, today_import_kwh: 10.399, lifetime_export_kwh: 8334.04, lifetime_import_kwh: 85367.86 },
+  generated_at: "2026-07-24T06:02:24Z",
+  main_roof:       { power_w: 1034, lifetime_kwh: 5545.84 },
+  garage:          { power_w: 83, lifetime_kwh: 1441.23 },
+  enphase_total:   { power_w: 492, today_kwh: 0.31, lifetime_kwh: 8276.02 },
+  sonnen:          { power_w: 228, lifetime_kwh: 4542.79 },
+  battery:         { soc_pct: 97, state: "charging", power_w: 571, lifetime_charged_kwh: 2436.94, lifetime_discharged_kwh: 2743.31 },
+  grid:            { power_w: 0, today_export_kwh: 0.001, today_import_kwh: 14.225, lifetime_export_kwh: 8340.51, lifetime_import_kwh: 85383.79 },
 };
 // SOLAR_LIVE_DATA_END
 
