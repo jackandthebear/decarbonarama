@@ -1,0 +1,274 @@
+{
+ "_meta": {
+  "purpose": "Compact knowledge cards for every Decarbonarma article + key guides. The agent reasons over these and links users to the most relevant piece. Summaries only (not full text). Regenerate when articles change.",
+  "generated": "2026-07-27",
+  "count": 53
+ },
+ "articles": [
+  {
+   "title": "The Beginner's Guide to Air Source Heat Pumps",
+   "url": "https://decarbonarma.com/articles/air-source-heat-pumps.html",
+   "summary": "Ground source, air-to-water, air-to-air — three different machines all called 'heat pumps'. Which is simplest, and which one is basically air-con. — Three very different machines all get called a \"heat pump\". One needs a small building project's worth of plumbing; another is basically air conditioning you can run in reverse. Here's what actually separates them — and why the simple one is the one we fitted at Rose Cottage. \"Heat pump\" is one of those phrases that sounds like a single product but hides at least three quite different machines. They all work on the same clever trick — moving heat"
+  },
+  {
+   "title": "Air-to-Water Heat Pumps Are Dead",
+   "url": "https://decarbonarma.com/articles/air-to-air-heat-pumps-future.html",
+   "summary": "Air-to-water heat pumps dominate UK grants, but air-to-air is cheaper, simpler and works year-round. The case for a quiet revolution, and the honest caveats. — Cost, complexity and an entire industry built around them are the only things keeping air-to-water alive — propped up by a grant worth £5,000 more than the alternative. Meanwhile the real revolution is happening quietly in air-to-air: cheaper, simpler, and working 365 days a year. Here’s the case — and the honest caveats. Say it quietly in a heat-pump forum and you’ll start a fight. But somebody needs to: for a large and growing slice"
+  },
+  {
+   "title": "Has the British Summer Started Needing Air-Con?",
+   "url": "https://decarbonarma.com/articles/air-to-air-heat-pumps-uk-cooling-2026.html",
+   "summary": "We counted every day above 25C at Heathrow for five years. British summers are turning into an air-con season — a heat pump that cools on solar is the answer. — We counted every single day above 25°C at Heathrow for the last five years. The British summer is quietly becoming an air-con season — and an air-to-air heat pump, cooling on free solar surplus, is the neatest way to meet it. There is a certain kind of British stubbornness about air conditioning. It is what other countries have — hot countries, unserious countries. Here we open a window, put a fan on, and complain. But sit with the"
+  },
+  {
+   "title": "My A2A Heat Pump + Sunamp Setup, Not a Gas Boiler",
+   "url": "https://decarbonarma.com/articles/air-to-air-sunamp-case-study.html",
+   "summary": "Why I chose an air-to-air heat pump and a Sunamp heat battery over a gas boiler or air-to-water system — real costs, the grant catch, who it suits. — The heat pump the UK mostly ignores, plus a heat battery for hot water — heating and cooling my main living rooms for £5,300, all hot water from a compact Sunamp. My air-to-water quote for the same house? £27,000. Here's the real cost, the grant catch, and who it actually suits. // Walking through the air-to-air units and the Sunamp heat battery, filmed for Skill Builder. Watch on YouTube ↗ Heating/cooling: Daikin multi-split air-to-air — one"
+  },
+  {
+   "title": "The Top 5 Home EV Chargers (2026)",
+   "url": "https://decarbonarma.com/articles/best-ev-chargers-2026.html",
+   "summary": "The five best home EV chargers for 2026, ranked on tech and integration with Intelligent Octopus Go, the cheap-charging tariff. The good, bad and ugly of each. — The most popular, the best tech and the most integrated — ranked. Every one works with Intelligent Octopus Go, the cheap-charging tariff that does more for your bills than the box on the wall. The good, the bad and the ugly of each. A home charger is a ten-year purchase you’ll use almost every night, and the market has quietly split into camps: the tariff specialists, the solar specialists, the design-led tech brands, and the ones"
+  },
+  {
+   "title": "How to Buy, Size and Run a Gas Boiler Efficiently",
+   "url": "https://decarbonarma.com/articles/best-gas-boiler-low-carbon.html",
+   "summary": "Heat pumps are the right long-term answer, but if gas is still your only option: how to size, buy and run a boiler to use the least gas possible. — Tuesday 26 May 2026 · Pragmatic guide — For homes that cannot yet make the switch The last good gas boiler · proper sizing · high modulation · low carbon operation Heat pumps are the right long-term answer. But for millions of UK homes — limited space, limited budget, a tenancy, a timing problem — the honest answer for right now is still a gas boiler. This is not a guide to doing the wrong thing. It is a guide to doing a difficult thing as well as"
+  },
+  {
+   "title": "Could the UK Grid Handle an All-Electric Vehicle Fleet? Part 1 of 3",
+   "url": "https://decarbonarma.com/articles/can-uk-grid-handle-all-electric-vehicles.html",
+   "summary": "Part 1 of a three-part series on Britain's grid: two independent methods to estimate how much electricity a fully electric UK car, van and HGV fleet would need — and whether the grid's generation and network can take it. — Every petrol and diesel car, van and lorry in Britain, switched to battery power overnight. Two independent ways of estimating the electricity bill for that, cross-checked against each other and against the grid's actual capacity — with the working shown. Government policy assumes Britain can electrify almost everything: the cars on its roads, the boilers in its homes, and"
+  },
+  {
+   "title": "Could the UK Grid Handle Every Home Going Electric for Heat? Part 2 of 3",
+   "url": "https://decarbonarma.com/articles/can-uk-grid-handle-heating-electrification.html",
+   "summary": "Part 2 of our UK grid series: how much extra electricity a full switch from gas boilers to heat pumps would need, cross-checked two ways — and why heating's peak problem is worse than EVs'. — Every gas boiler in Britain, replaced with a heat pump. Same two-method approach as Part 1 — a national top-down number checked against a bottom-up one — plus the twist that makes heating a harder grid problem than EVs: it doesn't spread its demand evenly across the year. This is the second in a three-part series asking whether Britain's electricity grid can actually deliver on government policy:"
+  },
+  {
+   "title": "Could the UK Grid Survive a January Dunkelflaute? Part 3 of 3",
+   "url": "https://decarbonarma.com/articles/can-uk-grid-survive-january-dunkelflaute.html",
+   "summary": "Part 3 of our UK grid series: how much power we need vs how much we've got, whether we're too dependent on interconnectors, and a worst-case January dunkelflaute stress test. — Parts 1 and 2 asked whether the grid could generate enough electricity across a full year for an all-electric fleet and an all-electric housing stock. The answer was broadly yes. Part 3 asks the sharper question: what happens on the worst week of the worst winter, when the wind stops, the sun barely rises, and every heat pump in the country wants power at once? This is the last in a three-part series asking whether"
+  },
+  {
+   "title": "The Cheapest New Car in Britain?",
+   "url": "https://decarbonarma.com/articles/cheapest-motoring-uk-frontera.html",
+   "summary": "A new electric SUV is leasing for £138.55 a month, cheaper than a city car. What you really pay after tax, insurance and charging, and whether it's any good. — A brand-new electric SUV is leasing for £138.55 a month — less than a tiny city car, with road tax thrown in. We dig into what you really pay once tax, insurance and charging are in, whether it's any good, and whether you can do better. Every so often a lease deal turns up that makes you read it twice. This is one of them: a Vauxhall Frontera Electric — a five-seat, 460-litre family SUV with a real-world-ish 248-mile range — advertised"
+  },
+  {
+   "title": "3 Mad EV Lease Deals Right Now",
+   "url": "https://decarbonarma.com/articles/crazy-ev-lease-deals-2026.html",
+   "summary": "Three genuinely cheap UK EV leases from £137/month — plus what the brochures skip: real running costs once you charge overnight or off solar. — A £137-a-month city car, a £215 family SUV and a £368 motorway estate that costs £55k to buy. EV lease prices have fallen off a cliff — but the monthly figure is only half the story. Here's the bit the brochures skip: what each one really costs once you charge it at home. EV lease prices have quietly fallen off a cliff. A wave of new, mostly Chinese-built electric cars, plus manufacturers chasing their ZEV-mandate targets, means personal lease deals"
+  },
+  {
+   "title": "Daikin X Series vs Samsung EHS Quint: Worth It?",
+   "url": "https://decarbonarma.com/articles/daikin-x-series-wait-or-buy.html",
+   "summary": "Daikin's X Series and Samsung's EHS Quint both blend air-to-air and air-to-water heating in one unit. What's real, what's marketing, what buyers need to know. — Within days of each other, Daikin and Samsung both announced heat pumps that blend air-to-air and air-to-water into a single outdoor unit. That's not a coincidence — it's a trend. Here's what's real, what's still marketing, and what it means if you're deciding on a heat pump this year. For years the heat pump decision in the UK has been a fork in the road: air-to-water, which heats radiators and hot water but sits idle all summer, or"
+  },
+  {
+   "title": "World Decarbonisation: State of Play, H1 2026",
+   "url": "https://decarbonarma.com/articles/decarb-world-h1-2026.html",
+   "summary": "Renewables overtook coal globally in 2025. A review of the world's biggest decarbonisation efforts from January to May 2026, and what comes next. — The world's biggest decarbonisation efforts — January to May 2026 For the first time in history, renewables generated more electricity globally than coal in 2025 — and in 2026, the transition is accelerating into sectors, countries and corners of the economy that have resisted it for decades. Here is where the world stands at the halfway point of what may be the most consequential year in the history of the energy transition. Somewhere between the"
+  },
+  {
+   "title": "Rose Cottage: From Gas to Nearly Zero",
+   "url": "https://decarbonarma.com/articles/decarbonarama-case-study-15.html",
+   "summary": "How one homeowner combined fabric upgrades, a heating cascade, solar PV and smart energy management to cut gas use by 60% in a season, with the data. — How one homeowner combined fabric improvements, a four-layer heating cascade, solar PV, and smart energy management to cut gas consumption by 60% in a single heating season — with the metered data to prove it. Rose Cottage is a 177 m² stone-built four-bedroom home in rural Oxfordshire. Faced with a £27,000 whole-system heat pump quote and the risk of surrendering a working gas boiler to claim the BUS grant, the owner chose a staged,"
+  },
+  {
+   "title": "The Netherlands is Running Out of Grid. The UK is Next",
+   "url": "https://decarbonarma.com/articles/decarbonarama-dutch-grid-crisis.html",
+   "summary": "7,300 Dutch households are stuck in a decade-long grid connection queue. What the Netherlands' electrification crunch means for Britain's own grid plans. — The Dutch are discovering, the hard way, what happens when a country accelerates electrification faster than it builds the infrastructure to support it. The lesson is uncomfortable. And it has Britain's name written all over it. The Netherlands has long been held up as a European leader in EV adoption — it has more public charging stations per capita than any other country on the continent. It has been rolling out heat pumps. It has been"
+  },
+  {
+   "title": "Nature as Climate Engine",
+   "url": "https://decarbonarma.com/articles/decarbonarama-nature-carbon.html",
+   "summary": "Reintroducing a single predator can reshape a landscape and pull carbon back into the soil — how trophic cascades make nature a powerful climate tool. — Reintroduce a predator. Watch the grassland recover. Watch the river change course. Watch the carbon return to the soil. The most powerful climate interventions may not come from technology — they may come from stepping back. There is a concept in ecology called a trophic cascade. It describes the way that a change at the top of a food chain — the arrival or removal of a single apex predator — ripples downward through every level of an"
+  },
+  {
+   "title": "Home Energy Optimiser",
+   "url": "https://decarbonarma.com/articles/decarbonarama-optimiser_4.html",
+   "summary": "A free tool that works out the cheapest way to run your home's actual heating mix, picks the right tariff, and ranks every upgrade by payback period. — Most UK homes have a mix of heating equipment added over the years — a gas boiler here, an air-to-air heat pump there, maybe a Sunamp or a battery. This tool works out the optimal way to run your specific combination , identifies which tariff you should be on, and ranks every possible upgrade by payback period. The model is calibrated to your building using the De Podesta heat-loss method. The heat-loss calibration uses the De Podesta method,"
+  },
+  {
+   "title": "5 Home Battery Storage Systems Worth Considering",
+   "url": "https://decarbonarma.com/articles/decarbonarma-5-storage-solutions.html",
+   "summary": "Five UK home battery storage systems compared cheapest to premium, with real specs and prices, from budget DIY kits to fully managed smart systems. — From budget-friendly DIY options to fully managed smart systems — ranked cheapest to premium with real specs, prices, and VPP ratings. The home battery market has matured fast. What was once a premium add-on reserved for early adopters is now a serious financial and environmental decision for anyone with solar — or anyone looking to cut ties with peak-rate grid energy. We've dug into the tech specs, VPP support, smart features, throughput"
+  },
+  {
+   "title": "Does Brand Matter? What 600+ Heat Pumps Tell Us",
+   "url": "https://decarbonarma.com/articles/does-brand-matter-heatpump.html",
+   "summary": "Vaillant vs Mitsubishi vs Samsung vs Daikin: what 639 real, metered heat pumps from HeatpumpMonitor.org actually say about whether brand affects performance. — Vaillant vs Mitsubishi vs Samsung vs Daikin — the question every buyer asks and the one manufacturers least want answered with real data. We went to the only dataset that can answer it honestly. Walk into any heat pump forum, online community, or installer conversation and within minutes someone asks: which brand should I choose? Vaillant or Mitsubishi? Samsung or Daikin? Is it worth paying the premium for a Viessmann? The question is"
+  },
+  {
+   "title": "Eddi + Sunamp + Tepeo ZEB: The Triple Barrel",
+   "url": "https://decarbonarma.com/articles/eddi-sunamp-double-barrel.html",
+   "summary": "Adding a Tepeo Zero Emission Boiler to an Eddi-and-Sunamp setup pushes Scotland's curtailed wind absorption even higher. Part 2 of the Wasted Wind series. — Sunday 24 May 2026 · Follow-up Analysis — Distributed Thermal Storage Part 2 of the Wasted Wind series · Eddi + Sunamp + Tepeo ZEB · three UK manufacturers · one solution In Part 1, 816,000 Eddis on Scottish hot water cylinders absorbed 9.9 GWh of curtailed wind. Add the Eddi's second channel wired to a Sunamp Thermino ePlus and you reach 18.1 GWh. Now add a Tepeo Zero Emission Boiler — a smart heat battery that replaces the gas boiler"
+  },
+  {
+   "title": "Which EV Charger Should You Buy?",
+   "url": "https://decarbonarma.com/articles/ev-charger-decision-guide.html",
+   "summary": "Don't buy the wrong EV charger. A plain-English decision flow from 'should I go electric?' to exactly which home charging setup fits your driveway and tariff. — Most people overpay or buy the wrong charger because nobody explains the choices in order. Answer a few questions below and you'll land on one of three clear setups — A, B or C — with the reasons why. Going electric is really two decisions, not one. First: should you get an EV at all , and how do you pay for it? Second — the bit people rush — how will you charge it? Get the charging decision wrong and you either overspend on kit you"
+  },
+  {
+   "title": "EV Charger + Solar + Battery: The CT-Clamp Trick",
+   "url": "https://decarbonarma.com/articles/ev-charger-solar-battery-ct-clamps.html",
+   "summary": "Add an EV charger to a home with solar and a battery and the two can fight each other. The fix: a Henley block and getting your CT clamps in the right order. — Add a car charger to a home that already has solar and a battery and the two can quietly work against each other — the battery empties itself to feed the car. The fix is cheap and well understood: a Henley block, and getting the little clip-on sensors in the right order. Here's how it works, without the jargon. If you're putting a smart EV charger (a Zappi, an Ohme, a hypervolt and so on) onto a house that already has solar panels and"
+  },
+  {
+   "title": "The Real Cost of Going Electric: EV vs Diesel",
+   "url": "https://decarbonarma.com/articles/ev-vs-diesel-case-study.html",
+   "summary": "A diesel Mercedes GLE and Mini against their electric equivalents, same household, same mileage. The real cost comparison, with no fudged assumptions. — From Mercedes GLE diesel and Mini diesel to Mercedes EQE 53 AMG and Mini Cooper Electric — the same household, the same mileage, the real numbers. No green optimism, no fudged assumptions. When this comparison was first assembled, diesel at the pump cost around £1.55/litre and the case for going electric was already compelling on cost grounds. That figure is now £1.85/litre — and rising. The conflict in the Gulf that began in February 2026"
+  },
+  {
+   "title": "Can an EV Pay for Itself? The Frontera Test",
+   "url": "https://decarbonarma.com/articles/frontera-pay-for-itself.html",
+   "summary": "Can switching from petrol to a £138.55-a-month EV lease pay for itself in saved fuel, tax, MOT and tyres? We ran the numbers on the Vauxhall Frontera. — We took that £138.55-a-month Vauxhall Frontera lease and asked a harder question: if a normal family ditches a tired petrol car, can the money they stop spending on fuel, tax, MOT and tyres actually cover the payments — a car for nothing? We ran the numbers. The pitch is seductive: ditch the petrol car, plug in overnight at a few pence a unit, and let what you used to spend on fuel quietly cover the monthly payment on a brand-new electric"
+  },
+  {
+   "title": "Solar Becomes Law in 2027 — Does Resale Value Survive?",
+   "url": "https://decarbonarma.com/articles/future-homes-standard-solar-resale-value.html",
+   "summary": "From March 2027 every new English home needs solar covering 40% of its footprint. Once it's law, not a luxury, does the resale premium survive? — Once every new home is required to carry solar, \"has solar\" stops being a selling point and starts being a box on a compliance form. Here's what actually happens to the premium — and why the more interesting risk is a communication gap, not a pricing one. The Future Homes Standard was laid on 24 March 2026 and takes legal effect a year later, on 24 March 2027. From that date, almost every new home built in England needs a roof-mounted solar PV array"
+  },
+  {
+   "title": "Decarbonised Your Home. Should You Have Bought Stocks?",
+   "url": "https://decarbonarma.com/articles/green-stocks-vs-home-decarb.html",
+   "summary": "£30,000 on solar, a battery and a heat pump is a bet on the green economy. We compare that against what the same money would've returned in green stocks. — Sunday 24 May 2026 · Analysis — Green Investment vs Home Decarbonisation Solar · Batteries · Heat pumps — versus the stock market If you spent £30,000 on solar panels, a home battery and a heat pump over the past five years, you made a meaningful bet on the green economy — just not via the stock market. We looked at what the same money would have returned in UK-listed green energy stocks. The answer is complicated, humbling, and"
+  },
+  {
+   "title": "Is a Heat Pump Worth It in the UK? 2026 Answer",
+   "url": "https://decarbonarma.com/articles/heat-pump-worth-it-2026.html",
+   "summary": "No sales pitch. A homeowner who fitted his own heat pump runs the real 2026 numbers — grant, running costs vs gas, and when it genuinely isn't worth it. — No sales pitch. A homeowner who fitted one to his own home runs the real numbers — the grant, running costs versus gas, the bit the adverts won't tell you, and when it genuinely isn't worth it yet. For most UK homes in 2026, yes — but not for the reason the adverts give you, and not for everyone. A heat pump is worth it if you can get it installed well , run it on a smart tariff , and you're not expecting it to be cheaper than gas on day"
+  },
+  {
+   "title": "SCOP 6 Has Already Been Broken",
+   "url": "https://decarbonarma.com/articles/heatpump-news-scop.html",
+   "summary": "A six-year-old Austrian startup, Lambda Wärmepumpen, has posted a WPZ-certified SCOP of 6.06, breaking a barrier the industry wasn't expecting yet. — Thursday 21 May 2026 · News & Analysis — Updated with Lambda Wärmepumpen We asked whether heat pumps would ever break SCOP 6. The answer arrived from the Austrian Alps. Lambda Wärmepumpen — a six-year-old startup from Tyrol with a patented heat transfer process — has posted a WPZ-certified SCOP of 6.06. They just don't have a UK distributor yet. The last twelve months have produced a series of real-world performance milestones that would have"
+  },
+  {
+   "title": "HeatpumpMonitor.org — What the Data Actually Says",
+   "url": "https://decarbonarma.com/articles/heatpumpmonitor-summary.html",
+   "summary": "What 639 real UK heat pumps, tracked by HeatpumpMonitor.org, reveal about efficiency, flow temperatures and what good installation design actually looks like. — HeatpumpMonitor.org is the UK's most rigorous open dataset on heat pump performance — built by owners, for owners. Here's what the numbers reveal about efficiency, flow temperatures, and what good design really looks like. HeatpumpMonitor.org is an open-source community initiative run under the OpenEnergyMonitor umbrella. Heat pump owners — many of them among the UK's most technically rigorous installers and enthusiasts — connect"
+  },
+  {
+   "title": "How Long Do Wind Turbines Actually Last?",
+   "url": "https://decarbonarma.com/articles/how-long-do-wind-turbines-last.html",
+   "summary": "Do wind turbines really wear out after 10–15 years? What the evidence says about output degradation, real-world lifespans, the disputed Hughes study, and why operators repower. — You'll see the claim everywhere: wind turbines secretly wear out after 10–15 years, and operators quietly scrap them before anyone notices. It's a sticky story — and it's built on one contested study. Here's what the wider evidence actually shows about how turbines age, how long they really run, and why operators sometimes replace them early. Every machine wears out, and wind turbines are no exception. A turbine is a"
+  },
+  {
+   "title": "COP 4.8 in Scotland: Barry Sharp's NIBE S1155 PVT",
+   "url": "https://decarbonarma.com/articles/nibe-s1155-pvt-barry-sharp.html",
+   "summary": "A NIBE S1155 PVT ground source heat pump using roof-mounted PVT panels instead of a borehole has delivered a COP of 4.8 in Scotland over 954 days. — Tuesday 26 May 2026 · Case Study — Real-World Performance · HeatpumpMonitor.org NIBE S1155 PVT · Broxburn, West Lothian · 954 days of data Barry Sharp of Renewable Heat installed a NIBE S1155 PVT ground source heat pump in Broxburn, West Lothian — using roof-mounted photovoltaic-thermal panels as the heat source instead of a borehole. After 954 days of independently monitored operation, the system has achieved a sustained COP of 4.8. This is what"
+  },
+  {
+   "title": "Drill, Baby, Drill? UK Domestic Fossil Fuels",
+   "url": "https://decarbonarma.com/articles/north-sea-fracking-case-study.html",
+   "summary": "New North Sea licences and fracking are now banned in the UK. The case for and against domestic fossil fuel production, and why the tension remains. — The debate ran for years. The government has now decided. New North Sea licences are banned. Fracking is banned. But the arguments on both sides were real — and the tension between energy security and decarbonisation commitment hasn't gone away just because a policy was set. Decision made, May 2026. The King's Speech of 13 May 2026 introduced permanent legislation banning new North Sea oil and gas licences. A North Sea licensing ban covering"
+  },
+  {
+   "title": "Putin's Accidental Climate Policy",
+   "url": "https://decarbonarma.com/articles/putin-vs-green-lobby.html",
+   "summary": "How the invasion of Ukraine and the collapse of Russian gas drove Europe's clean energy transition faster than three decades of climate policy. — How the Kremlin out-performed the green lobby — and where that argument runs out of road. For thirty years, the environmental movement made the moral case for quitting fossil fuels. It took Vladimir Putin about three weeks in February 2022 to make the economic and security case — and Europe has been building faster ever since. That is an uncomfortable thing to say out loud at a climate conference, but the numbers are hard to argue with. This isn't a"
+  },
+  {
+   "title": "H1 2026: Six Months of Solar & Battery Data",
+   "url": "https://decarbonarma.com/articles/rose-cottage-h1-2026.html",
+   "summary": "Six months, four solar arrays, one battery: the full metered H1 2026 breakdown from Rose Cottage, plus battery cycling and the real financial return. — Rose Cottage now runs two solar systems and a battery: 18 Aiko panels split North and South, 4 more on the garage, and the original Sonnen-connected array on the lower roof. Here's exactly what each of them produced between 1 January and 30 June, down to the panel. The \"solar generation\" number I usually quote is really four different arrays lumped together, and lumping them together hides the interesting part. The newer Enphase system is 18"
+  },
+  {
+   "title": "Samsung EHS Quint Deep Dive: One Box, Five Modes",
+   "url": "https://decarbonarma.com/articles/samsung-ehs-quint-deep-dive.html",
+   "summary": "A technical breakdown of Samsung's EHS Quint — the first heat pump doing air-to-air and air-to-water from one unit, with free hot water from cooling. — Launched at InstallerSHOW 2026, the EHS Quint is the first residential heat pump that runs air-to-air and air-to-water from a single outdoor unit — and recovers the heat it pulls out while cooling to make your hot water. We pull apart the specs, the genuinely clever bit, the grant angle nobody's talking about, and the honest caveats. For years the UK heat-pump argument has been a binary: air-to-water (the big white box that heats water for"
+  },
+  {
+   "title": "Sigenergy Reviewed: One AI Energy Ecosystem, Every Product Explained",
+   "url": "https://decarbonarma.com/articles/sigenergy-ecosystem-2026.html",
+   "summary": "SigenStor vs SigenStor Neo, SigenMicro microinverters, the zero-downtime Gateway, standalone hybrid inverters, EV chargers and the AI-driven mySigen app — a full 2026 review of Sigenergy's one-ecosystem home energy range. — A single Chinese newcomer now sells the solar inverter, the battery, the EV charger, the backup gateway and the AI brain that runs them all. We walk through the whole Sigenergy range — including the brand-new SigenStor Neo — and ask whether \"one ecosystem\" is marketing or genuinely a better way to build a home energy system. Most home energy setups are a committee of"
+  },
+  {
+   "title": "Can SMRs Replace Britain's Ageing Gas Fleet?",
+   "url": "https://decarbonarma.com/articles/smr-case-study.html",
+   "summary": "The UK signed its first Small Modular Reactor contract in 2026. Replacing the whole gas fleet would need roughly 70 reactors and £175 billion. — The UK signed its first Small Modular Reactor contract in April 2026. Three reactors at Wylfa. 1.4 GW. Sixty years of clean baseload. But replacing the full gas-fired fleet requires something far more ambitious — roughly 70 reactors, £175 billion, and 30 years of political will. Here's what the numbers actually say. Britain's gas-fired power stations generate roughly 30 GW of installed capacity . Many were commissioned in the 1990s. Most are"
+  },
+  {
+   "title": "Are Solar Panels Worth It in the UK in 2026?",
+   "url": "https://decarbonarma.com/articles/solar-panels-worth-it-2026.html",
+   "summary": "No sales pitch. The real 2026 cost of solar and a battery, honest payback by region, and when it's not worth it — from a homeowner who fitted it. — No sales pitch. The actual 2026 cost of solar (and a battery), honest payback maths by region, the bit installers gloss over — and when it's genuinely not worth it. From a homeowner who fitted it and monitors every panel. For most UK homes with a decent south-ish roof, solar is worth it in 2026 — payback lands around 7–10 years and the panels keep going for 25+. Add a battery and you'll use far more of your own power, but you'll stretch the"
+  },
+  {
+   "title": "Cheap or Premium Solar? The Real Differences",
+   "url": "https://decarbonarma.com/articles/solar-quality-guide.html",
+   "summary": "Budget panels vs premium panels, microinverters, and the battery brands everyone argues about: the real quality differences that matter in a solar system. — Budget panels, premium panels, and the brands everyone argues about. Is a SunPower worth it over an Aiko? Is a Tesla Powerwall worth the badge price? And why a battery without heating might be useless precisely when you need it most. Panel quality differences are real but mostly relevant at the margins — constrained roofs, extreme climates, warranty confidence over 30 years. For most UK homes, a good mid-tier N-type panel (Aiko, DMEGC,"
+  },
+  {
+   "title": "Shell Bought Home Battery Storage, Then Shelved It",
+   "url": "https://decarbonarma.com/articles/sonnen-shell-decarbonarama.html",
+   "summary": "Shell paid around €500 million for home battery startup Sonnen in 2019, then tried to sell it five years later. What went wrong with the Green Acquisition. — Sunday 24 May 2026 · Analysis — Energy Storage & Corporate Strategy Shell · Sonnen · The Green Acquisition That Went Nowhere In 2019, Shell paid around €500 million for Sonnen, a German home battery startup with a working virtual power plant, 200,000 annual installations, and a genuine vision for distributed energy. Five years later, Shell tried to sell it. The story of what happened in between is a case study in how oil majors consume"
+  },
+  {
+   "title": "The Heat Battery That Replaced Our Hot Water Tank",
+   "url": "https://decarbonarma.com/articles/sunamp-300e-case-study.html",
+   "summary": "When Rose Cottage's hot water cylinder failed, a Sunamp Thermino 300e replaced it in four hours and has run on free solar surplus ever since. How it works. — When the hot water cylinder at Rose Cottage failed, a Sunamp Thermino 300e was installed the same day and charged from solar by midday. This is the technology that made that possible — and why it's been delivering free hot water from surplus solar every day since March. The Sunamp Thermino 300e is not a hot water cylinder. It contains no stored water. What it contains is a compact block of phase-change material — sodium acetate"
+  },
+  {
+   "title": "Superfoil + Solar Roof Retrofit: What It Cost",
+   "url": "https://decarbonarma.com/articles/superfoil-solar-roof-case-study.html",
+   "summary": "A re-roof with Superfoil insulation and solar gets the whole-home energy bill to £20/month — real cost, metered output, is multifoil worth it? — The roof needed replacing anyway. So I insulated it properly and put the solar on at the same time — and my whole-home energy bill is now a £20/month direct debit. Here are the real numbers, the metered output, and the honest bits. // The roof stripped, insulated and re-covered — filmed for Skill Builder. Watch on YouTube ↗ Most people add solar by bolting panels onto whatever roof they already have. I did it differently, and on purpose: my roof"
+  },
+  {
+   "title": "Can the Grid Handle Electrifying Every UK Home?",
+   "url": "https://decarbonarma.com/articles/uk-grid-heat-pumps-evs.html",
+   "summary": "23 million gas boilers, 37 million EVs, 100% clean power by 2030: we ran the maths on whether the UK grid can actually handle full electrification. — Sunday 24 May 2026 · Analysis — Grid Capacity & Electrification UK Grid · Heat Pumps · EVs · Single-phase homes · The numbers The UK wants to replace 23 million gas boilers with heat pumps, put 37 million electric vehicles on the road, and reach 100% clean power by 2030. We ran the maths. We took the UK's gas heating demand, divided it by the real-world SCOP from HeatpumpMonitor.org, added the EV load, and then calculated what happens when a"
+  },
+  {
+   "title": "Britain's Grid Keeps Getting Margin Notices",
+   "url": "https://decarbonarma.com/articles/uk-grid-security-of-supply-2026.html",
+   "summary": "Three heatwave-driven Electricity Margin Notices in one summer, low wind, and French interconnectors that couldn't help. Why supply security matters. — Three Electricity Margin Notices in six weeks, low wind during a heatwave, and interconnectors that can't help because France and the continent are just as squeezed. The lights stayed on this time. That's not the same as the system being safe. On the evening of 9 July 2026, the National Energy System Operator (NESO) issued an Electricity Margin Notice — a signal to the market that forecast supply margins for the evening peak were tighter than"
+  },
+  {
+   "title": "2,700 Heat Deaths — Why Cooling Heat Pumps Matter",
+   "url": "https://decarbonarma.com/articles/uk-heatwave-deaths-heat-pump-cooling-2026.html",
+   "summary": "The official Met Office/Imperial toll from this summer's heatwaves passed 2,700. Why most heat pumps can't cool well, and what worked at Rose Cottage. — Sky News this week reported the death toll from this summer's UK heatwaves passing 2,000. The actual figure, from Imperial College London, the Met Office and the London School of Hygiene & Tropical Medicine, is more than 2,700 . Rose Cottage sat at 21°C throughout. Here's the difference an air-to-air heat pump makes — and why the air-to-water system sitting outside your house probably can't do the same job. Two heatwaves, one study, one very"
+  },
+  {
+   "title": "Nuclear Power in the UK: Where It Stands in 2026",
+   "url": "https://decarbonarma.com/articles/uk-nuclear-power-2026.html",
+   "summary": "Britain's ageing reactors are winding down as a new generation of giant plants and small modular reactors gears up. The full 2026 picture, with charts. — Britain's ageing reactors are winding down just as a new generation of giant plants and small modular reactors gears up. Here's the full picture, in plain English, with the numbers that matter. Nuclear power has quietly kept Britain's lights on for seventy years, but the fleet doing that work today is old and shrinking fast. Most of the reactors running in 2026 were built in the 1980s and were only ever meant to last a few decades. One by"
+  },
+  {
+   "title": "The Wind's Blowing, Turbines Are Off — You're Paying",
+   "url": "https://decarbonarma.com/articles/uk-wasted-wind-grid.html",
+   "summary": "Britain pays wind farms to switch off while firing up gas elsewhere to cover the gap, costing every household £34 in 2025. The scandal, and the fix. — Sunday 24 May 2026 · Investigative Analysis — UK Grid Infrastructure UK wasted wind · the £1.5 billion scandal and the decade-long fix Britain is breaking zero-carbon electricity records. At the same moment, it is paying Scotland's biggest wind farms to stand idle while firing up gas power stations in England to replace them. In 2025 this cost every household in the country £34. By 2030, without urgent action, it could cost eight times more."
+  },
+  {
+   "title": "UK Wind: Status H1 2026",
+   "url": "https://decarbonarma.com/articles/uk-wind-status-h1-2026.html",
+   "summary": "Where UK wind power stands in mid-2026 — capacity and output, what's under construction, the record AR7 auction, floating wind, and curtailment costs. — Wind is now Britain's biggest single source of electricity. Here's exactly where it stands in mid-2026 — what's spinning today, what's being built, what's being bid for, the promise of floating turbines, and the elephant in the room: the billions we spend paying wind farms to switch off. For the first time, wind is the single largest source of electricity in Great Britain. In 2025 wind turbines generated more than 85 terawatt-hours (TWh) —"
+  },
+  {
+   "title": "Where Do You Start? The Two Front Doors Into a Low-Carbon Home",
+   "url": "https://decarbonarma.com/articles/where-to-start-low-carbon-home.html",
+   "summary": "Most people begin their low-carbon journey one of two ways: with solar, or with an EV. An interactive map of both routes — and how replacing your roof or your car decides the first step. — Almost everyone begins the same way — one of two ways, and both start saving you money from day one. Here's a simple map of the routes, and how what you're replacing next quietly decides your first move. The hardest part of decarbonising a home isn't the technology — it's knowing where to begin. The good news is that there are really only two front doors , and most people walk through one of them without"
+  },
+  {
+   "title": "Why Home Wind Power Doesn't Add Up",
+   "url": "https://decarbonarma.com/articles/wind-at-home-doesnt-add-up.html",
+   "summary": "A turbine on your roof seems like the natural twin to solar panels. The cube law explains why home wind almost never works, in plain English. — A turbine on your roof feels like the obvious twin to solar panels. It almost never is. The reason isn't bad luck or cheap kit — it's physics. Two simple equations explain why the same technology that powers Britain offshore produces almost nothing on a house. Here's the maths, in plain English. If solar works on your roof, surely wind does too? It's a fair instinct — the wind is free, turbines are proven, and Britain is one of the windiest countries"
+  },
+  {
+   "title": "UK Home Decarbonisation Grants 2026",
+   "url": "https://decarbonarma.com/uk-grants-guide.html",
+   "summary": "£15 billion committed across six overlapping UK grant schemes, plus a separate Scottish system. Every route to funded heat pumps, insulation and solar, mapped. — £15 billion committed. Six overlapping schemes. Scotland operating an entirely different system. New oil and LPG uplift from July. Banks offering interest-free top-ups. This guide maps every available route to funded upgrades — and the interactive checker tells you what your specific circumstances can unlock. Select all that apply. Results are indicative — verify eligibility with scheme administrators before applying. These results"
+  },
+  {
+   "title": "What Does a Heat Pump Actually Cost to Install in 2026?",
+   "url": "https://decarbonarma.com/heat-pump-installation-cost.html",
+   "summary": "The MCS data tells part of the story. But the real question is: what are you comparing it against? We run the numbers honestly — and ask whether the grant has quietly inflated the price it was designed to reduce. The Microgeneration Certification Scheme tracks every certified heat pump installation in the UK, making its dashboard one of the most reliable sources of real-world pricing data. The numbers for 2026 are striking: the average air source heat pump installation in May 2026 cost £13,943 , with the year-to-date 2026 average running at £13,645. Average cost per kilowatt of installed"
+  },
+  {
+   "title": "The State of Nuclear Power in the UK (2026)",
+   "url": "https://decarbonarma.com/uk-nuclear-power-2026.html",
+   "summary": "Britain's ageing reactors are winding down just as a new generation of giant plants and small modular reactors gears up. Here's the full picture, in plain English, with the numbers that matter. Nuclear power has quietly kept Britain's lights on for seventy years, but the fleet doing that work today is old and shrinking fast. Most of the reactors running in 2026 were built in the 1980s and were only ever meant to last a few decades. One by one they are being switched off. At the same time, the country is trying to build the biggest wave of new nuclear it has attempted since the 1980s — two"
+  }
+ ]
+}

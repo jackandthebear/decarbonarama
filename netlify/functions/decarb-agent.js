@@ -14,9 +14,10 @@ const MAX_HISTORY = 16;           // cap conversation length sent upstream
 // --- Knowledge base: single source of truth is /agent/*.json ---
 // esbuild bundles required JSON. Fall back to a distilled summary if the
 // path can't be resolved in the build.
-let BENCHMARKS = null, RULES = null;
+let BENCHMARKS = null, RULES = null, ARTICLES = null;
 try { BENCHMARKS = require('../../agent/price-benchmarks.json'); } catch (e) {}
 try { RULES = require('../../agent/g98-g99-rules.json'); } catch (e) {}
+try { ARTICLES = require('../../agent/article-knowledge.json'); } catch (e) {}
 
 const KB_FALLBACK = `
 PRICE BENCHMARKS (UK, 0% VAT to 31 Mar 2027):
@@ -42,6 +43,10 @@ function buildSystemPrompt(facts) {
         .map(([k, v]) => `- ${k}: ${Array.isArray(v) ? v.join(', ') : v}`).join('\n')
     : '(none provided yet)';
 
+  const articlesBlock = (ARTICLES && Array.isArray(ARTICLES.articles))
+    ? ARTICLES.articles.map(a => `- ${a.title} — ${a.url}\n  ${a.summary}`).join('\n')
+    : '(article knowledge unavailable)';
+
   return `You are the Decarbonarma Home Energy Adviser — a straight-talking UK home-decarbonisation guide for solar, batteries, EV chargers and heat pumps. You speak to homeowners the way someone who has actually installed all of this themselves would: warm, concrete, no jargon, no sales fluff.
 
 WHAT THE VISITOR TOLD THE WIZARD:
@@ -50,8 +55,12 @@ ${factLines}
 YOUR KNOWLEDGE BASE (reason over this — do not invent numbers):
 ${kb}
 
+DECARBONARMA ARTICLES — you are familiar with every article and guide on the site (summaries below). Draw on them to answer in depth, and when a question maps to one, point the reader to it with its exact URL (e.g. "there's a full write-up here: <url>"). Don't invent article content beyond these summaries:
+${articlesBlock}
+
 HOW TO BEHAVE:
 - Be concise and direct. Plain English. UK context and £.
+- When your answer relates to a published article or guide, mention it briefly and give its URL so they can read the full piece.
 - QUOTE CHECKING: when given a quote, work out the £/kW or £/kWh and compare to the benchmark. State the typical range, say plainly whether it's typical / high / suspiciously cheap, and list 2-3 specific things to question. This is factual ("that's ~20% above the typical range"), never a personalised buy/don't-buy recommendation.
 - GRID: when relevant, tell them exactly which application they need (G98 vs G99), and CRUCIALLY whether it must be approved BEFORE work starts. Always end grid answers with: "Confirm with your DNO before ordering equipment."
 - Hand off to the site's own free tools when useful: Battery Sizing (/battery_sizing_tool.html), Heat-Loss Estimator (/heat-loss-estimator.html), Tariff Finder (/ai-tariff-finder.html), Grants Guide (/uk-grants-guide.html).
