@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Energy Adviser: Plan Solar, Battery, EV & Heat Pump — and Check Your Quotes | Decarbonarma</title>
+<meta name="description" content="A free guided adviser for UK homeowners. Work out what to install, sanity-check installer quotes against real UK prices, and find out exactly what G98/G99 grid paperwork you need — before you commit.">
+<link rel="canonical" href="https://decarbonarma.com/home-energy-adviser.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Decarbonarma">
+<meta property="og:title" content="Home Energy Adviser — Plan & Quote-Check Solar, Battery, EV, Heat Pump | Decarbonarma">
+<meta property="og:description" content="Free guided adviser: choose the right tech, check your quotes against real UK prices, and get your G98/G99 grid answer up front.">
+<meta property="og:url" content="https://decarbonarma.com/home-energy-adviser.html">
+<meta property="og:image" content="https://decarbonarma.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Home Energy Adviser | Decarbonarma">
+<meta name="twitter:description" content="Free guided adviser: choose the right tech, check your quotes, and get your G98/G99 grid answer up front.">
+<meta name="twitter:image" content="https://decarbonarma.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Decarbonarma Home Energy Adviser",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (web browser)",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"},
+  "description": "Guided adviser to choose solar, battery, EV charging and heat pumps, check installer quotes against UK price benchmarks, and determine G98/G99 grid-connection requirements.",
+  "url": "https://decarbonarma.com/home-energy-adviser.html",
+  "publisher": {"@type": "Organization", "name": "Decarbonarma", "logo": {"@type": "ImageObject", "url": "https://decarbonarma.com/logo.png"}}
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-50:#f0faf3; --green-100:#dcf1e3; --green-200:#aee3c1;
+    --green-400:#34c759; --green-500:#2ba84a; --green-600:#1f8a4c; --green-800:#14622f; --green-900:#0b3a1c;
+    --stone-50:#f5f5f7; --stone-100:#ececf0; --stone-200:#d2d2d7;
+    --stone-500:#86868b; --stone-600:#6e6e73; --stone-800:#1d1d1f; --white:#ffffff;
+    --amber:#c77f0a;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+  body {
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background:var(--white); color:var(--stone-800);
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; letter-spacing:-0.011em;
+  }
+  a { color:inherit; }
+  .site-header { padding:14px 32px; border-bottom:1px solid var(--stone-100); display:flex; align-items:center; justify-content:space-between; }
+  .site-header img { height:28px; display:block; }
+  .site-header .back-link { font-size:13px; color:var(--stone-600); text-decoration:none; font-weight:500; }
+  .site-header .back-link:hover { color:var(--green-600); }
+
+  .wrap { max-width:760px; margin:0 auto; padding:40px 20px 24px; }
+  .hero { text-align:center; margin-bottom:28px; }
+  .hero .eyebrow { font-family:'Instrument Sans',sans-serif; text-transform:uppercase; letter-spacing:.12em; font-size:12px; font-weight:600; color:var(--green-600); }
+  .hero h1 { font-family:'DM Serif Display',serif; font-size:38px; line-height:1.1; margin:10px 0 12px; color:var(--stone-800); }
+  .hero p { font-size:17px; color:var(--stone-600); max-width:560px; margin:0 auto; }
+
+  .card { background:var(--white); border:1px solid var(--stone-200); border-radius:20px; box-shadow:0 1px 3px rgba(0,0,0,.04); overflow:hidden; }
+  .card-pad { padding:26px 24px; }
+
+  /* progress */
+  .steps-dots { display:flex; gap:8px; justify-content:center; padding:20px 0 4px; }
+  .dot { width:8px; height:8px; border-radius:50%; background:var(--stone-200); transition:.25s; }
+  .dot.on { background:var(--green-500); width:22px; border-radius:4px; }
+
+  .q-title { font-family:'DM Serif Display',serif; font-size:23px; margin-bottom:6px; }
+  .q-sub { font-size:14px; color:var(--stone-600); margin-bottom:18px; }
+
+  .chips { display:flex; flex-wrap:wrap; gap:10px; }
+  .chip { border:1.5px solid var(--stone-200); background:var(--white); border-radius:14px; padding:14px 16px; font-size:15px; font-weight:500; cursor:pointer; transition:.15s; display:flex; align-items:center; gap:9px; user-select:none; }
+  .chip:hover { border-color:var(--green-400); }
+  .chip.sel { border-color:var(--green-500); background:var(--green-50); color:var(--green-900); }
+  .chip .ic { font-size:18px; }
+
+  .field { margin-top:16px; }
+  .field label { display:block; font-size:13px; font-weight:600; color:var(--stone-600); margin-bottom:6px; }
+  .field input, .field select { width:100%; padding:12px 14px; border:1.5px solid var(--stone-200); border-radius:12px; font-size:15px; font-family:inherit; background:var(--white); color:var(--stone-800); }
+  .field input:focus, .field select:focus { outline:none; border-color:var(--green-400); }
+  .field .hint { font-size:12px; color:var(--stone-500); margin-top:5px; }
+
+  .nav-row { display:flex; justify-content:space-between; align-items:center; margin-top:24px; }
+  .btn { font-family:inherit; font-size:15px; font-weight:600; border-radius:13px; padding:13px 24px; cursor:pointer; border:none; transition:.15s; }
+  .btn-primary { background:var(--green-600); color:#fff; }
+  .btn-primary:hover { background:var(--green-800); }
+  .btn-primary:disabled { background:var(--stone-200); color:var(--stone-500); cursor:not-allowed; }
+  .btn-ghost { background:transparent; color:var(--stone-600); }
+  .btn-ghost:hover { color:var(--stone-800); }
+
+  /* chat */
+  #chat { display:none; }
+  .chat-head { display:flex; align-items:center; gap:12px; padding:18px 20px; border-bottom:1px solid var(--stone-100); }
+  .chat-head .avatar { width:36px; height:36px; border-radius:50%; background:var(--green-500); color:#fff; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+  .chat-head .who { font-weight:600; font-size:15px; }
+  .chat-head .status { font-size:12px; color:var(--green-600); }
+  .chat-log { padding:20px; display:flex; flex-direction:column; gap:14px; min-height:280px; max-height:52vh; overflow-y:auto; }
+  .msg { max-width:82%; padding:12px 15px; border-radius:16px; font-size:15px; line-height:1.5; white-space:pre-wrap; word-wrap:break-word; }
+  .msg.bot { background:var(--stone-50); border-bottom-left-radius:5px; align-self:flex-start; }
+  .msg.me { background:var(--green-600); color:#fff; border-bottom-right-radius:5px; align-self:flex-end; }
+  .msg.bot a { color:var(--green-600); font-weight:600; }
+  .msg strong { font-weight:600; }
+  .typing { align-self:flex-start; background:var(--stone-50); border-radius:16px; border-bottom-left-radius:5px; padding:13px 16px; display:flex; gap:5px; }
+  .typing span { width:7px; height:7px; border-radius:50%; background:var(--stone-500); animation:blink 1.3s infinite both; }
+  .typing span:nth-child(2){ animation-delay:.2s } .typing span:nth-child(3){ animation-delay:.4s }
+  @keyframes blink { 0%,80%,100%{opacity:.25} 40%{opacity:1} }
+  .quick { display:flex; flex-wrap:wrap; gap:8px; padding:0 20px 12px; }
+  .quick button { font-family:inherit; font-size:13px; border:1px solid var(--stone-200); background:var(--white); border-radius:20px; padding:8px 13px; cursor:pointer; color:var(--stone-600); }
+  .quick button:hover { border-color:var(--green-400); color:var(--green-800); }
+  .chat-input { display:flex; gap:10px; padding:14px 16px; border-top:1px solid var(--stone-100); }
+  .chat-input textarea { flex:1; resize:none; border:1.5px solid var(--stone-200); border-radius:14px; padding:12px 14px; font-family:inherit; font-size:15px; max-height:120px; }
+  .chat-input textarea:focus { outline:none; border-color:var(--green-400); }
+  .chat-input button { background:var(--green-600); color:#fff; border:none; border-radius:12px; width:46px; font-size:18px; cursor:pointer; flex-shrink:0; }
+  .chat-input button:disabled { background:var(--stone-200); cursor:not-allowed; }
+
+  .disclaimer { font-size:12px; color:var(--stone-500); text-align:center; margin:18px auto 0; max-width:620px; line-height:1.5; }
+
+  footer { padding:44px 32px 30px; border-top:1px solid var(--stone-100); margin-top:44px; }
+  .footer-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:32px; max-width:1120px; margin:0 auto 24px; }
+  .footer-brand .logo { font-family:'DM Serif Display',serif; font-size:20px; color:var(--green-900); }
+  .footer-brand p { font-size:13px; color:var(--stone-600); margin-top:8px; max-width:240px; }
+  .footer-col h5 { font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--stone-500); margin-bottom:12px; }
+  .footer-col a { display:block; font-size:14px; color:var(--stone-600); text-decoration:none; margin-bottom:8px; }
+  .footer-col a:hover { color:var(--green-600); }
+  .footer-bottom { max-width:1120px; margin:0 auto; font-size:12px; color:var(--stone-500); border-top:1px solid var(--stone-100); padding-top:18px; }
+  @media (max-width:640px){ .hero h1{font-size:30px} .footer-grid{grid-template-columns:1fr 1fr} }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/"><img src="logo.svg" alt="Decarbonarma"></a>
+  <a href="/" class="back-link">&larr; Back to Decarbonarma</a>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Free · No sign-up</div>
+    <h1>Home Energy Adviser</h1>
+    <p>Answer a few quick questions, then chat through your project — what to install, whether a quote stacks up against real UK prices, and exactly what grid paperwork you need before you start.</p>
+  </div>
+
+  <!-- WIZARD -->
+  <div class="card" id="wizard">
+    <div class="steps-dots"><div class="dot on"></div><div class="dot"></div><div class="dot"></div></div>
+
+    <!-- step 1 -->
+    <div class="card-pad step" data-step="0">
+      <div class="q-title">What have you got, or are you planning?</div>
+      <div class="q-sub">Pick any that apply — this shapes the advice.</div>
+      <div class="chips" id="q-tech">
+        <div class="chip" data-v="solar"><span class="ic">☀️</span>Solar panels</div>
+        <div class="chip" data-v="battery"><span class="ic">🔋</span>Battery storage</div>
+        <div class="chip" data-v="ev"><span class="ic">🚗</span>EV / EV charger</div>
+        <div class="chip" data-v="heatpump"><span class="ic">♨️</span>Heat pump</div>
+        <div class="chip" data-v="starting"><span class="ic">🌱</span>Just getting started</div>
+      </div>
+      <div class="nav-row"><span></span><button class="btn btn-primary" id="next0" disabled>Continue</button></div>
+    </div>
+
+    <!-- step 2 -->
+    <div class="card-pad step" data-step="1" style="display:none">
+      <div class="q-title">A little about your property</div>
+      <div class="q-sub">Rough numbers are fine — leave blank if unsure.</div>
+      <div class="field">
+        <label>Electricity supply</label>
+        <select id="q-phase">
+          <option value="">Not sure</option>
+          <option value="single-phase">Single phase (most homes)</option>
+          <option value="three-phase">Three phase</option>
+        </select>
+        <div class="hint">Most UK homes are single phase. It decides how much you can install.</div>
+      </div>
+      <div class="field">
+        <label>Annual electricity use (kWh, optional)</label>
+        <input id="q-elec" type="number" inputmode="numeric" placeholder="e.g. 3500">
+      </div>
+      <div class="field">
+        <label>Annual gas use (kWh, optional)</label>
+        <input id="q-gas" type="number" inputmode="numeric" placeholder="e.g. 12000">
+        <div class="hint">Only if you're thinking about a heat pump.</div>
+      </div>
+      <div class="nav-row"><button class="btn btn-ghost" data-back>&larr; Back</button><button class="btn btn-primary" id="next1">Continue</button></div>
+    </div>
+
+    <!-- step 3 -->
+    <div class="card-pad step" data-step="2" style="display:none">
+      <div class="q-title">What do you want help with first?</div>
+      <div class="q-sub">You can ask anything once we start — this just sets the scene.</div>
+      <div class="chips" id="q-goal">
+        <div class="chip" data-v="choose"><span class="ic">🧭</span>Choosing what to install</div>
+        <div class="chip" data-v="quote"><span class="ic">🧾</span>Checking a quote</div>
+        <div class="chip" data-v="grid"><span class="ic">⚡</span>Grid / G98–G99 question</div>
+        <div class="chip" data-v="general"><span class="ic">💬</span>General questions</div>
+      </div>
+      <div class="nav-row"><button class="btn btn-ghost" data-back>&larr; Back</button><button class="btn btn-primary" id="startChat" disabled>Start &rarr;</button></div>
+    </div>
+  </div>
+
+  <!-- CHAT -->
+  <div class="card" id="chat">
+    <div class="chat-head">
+      <div class="avatar">🌿</div>
+      <div><div class="who">Decarbonarma Adviser</div><div class="status">● Ready to help</div></div>
+    </div>
+    <div class="chat-log" id="log"></div>
+    <div class="quick" id="quick"></div>
+    <div class="chat-input">
+      <textarea id="input" rows="1" placeholder="Ask anything, or paste a quote…"></textarea>
+      <button id="send" title="Send">➤</button>
+    </div>
+  </div>
+
+  <p class="disclaimer">Guidance only — not financial advice. Prices are ballpark UK ranges and change over time; your DNO and MCS installer have the final say on grid connection and sizing. Always confirm before ordering equipment.</p>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><span class="logo">Decarbon<span>arma</span></span><p>Helping UK homeowners transition to clean, affordable home energy.</p></div>
+    <div class="footer-col"><h5>Technologies</h5><a href="/#solar">Solar Panels</a><a href="/#battery">Battery Storage</a><a href="/#heatpump">Heat Pumps</a><a href="/#evcar">EV Charging</a><a href="/#ai">AI Technology</a></div>
+    <div class="footer-col"><h5>Tools</h5><a href="/ai-tariff-finder.html">Tariff Finder</a><a href="/battery_sizing_tool.html">Battery Sizing</a><a href="/heat-loss-estimator.html">Heat-Loss Estimator</a><a href="/uk-grid-live.html">UK Grid Live</a></div>
+    <div class="footer-col"><h5>Support</h5><a href="/uk-grants-guide.html">Grants Guide</a><a href="/#">FAQ</a><a href="/#">Contact</a></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 Decarbonarma. All rights reserved.</span></div>
+</footer>
+
+<script>
+(function(){
+  var facts = { tech:[], phase:'', annual_electricity_kwh:'', annual_gas_kwh:'', primary_goal:'' };
+  var messages = [];           // {role, content}
+  var busy = false;
+  var ENDPOINT = '/.netlify/functions/decarb-agent';
+
+  // ---- wizard ----
+  function multi(containerId, arrRefName){
+    document.querySelectorAll('#'+containerId+' .chip').forEach(function(c){
+      c.addEventListener('click', function(){
+        c.classList.toggle('sel');
+        var vals = Array.prototype.slice.call(document.querySelectorAll('#'+containerId+' .chip.sel')).map(function(x){return x.dataset.v;});
+        facts[arrRefName] = vals;
+        if(containerId==='q-tech') document.getElementById('next0').disabled = vals.length===0;
+      });
+    });
+  }
+  function single(containerId, key, btnId){
+    document.querySelectorAll('#'+containerId+' .chip').forEach(function(c){
+      c.addEventListener('click', function(){
+        document.querySelectorAll('#'+containerId+' .chip').forEach(function(x){x.classList.remove('sel');});
+        c.classList.add('sel'); facts[key]=c.dataset.v;
+        if(btnId) document.getElementById(btnId).disabled=false;
+      });
+    });
+  }
+  multi('q-tech','tech');
+  single('q-goal','primary_goal','startChat');
+
+  var dots = document.querySelectorAll('.dot');
+  function goStep(n){
+    document.querySelectorAll('.step').forEach(function(s){ s.style.display = (+s.dataset.step===n)?'block':'none'; });
+    dots.forEach(function(d,i){ d.classList.toggle('on', i<=n); });
+  }
+  document.getElementById('next0').addEventListener('click', function(){ goStep(1); });
+  document.getElementById('next1').addEventListener('click', function(){
+    facts.phase = document.getElementById('q-phase').value;
+    facts.annual_electricity_kwh = document.getElementById('q-elec').value;
+    facts.annual_gas_kwh = document.getElementById('q-gas').value;
+    goStep(2);
+  });
+  document.querySelectorAll('[data-back]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var cur = +b.closest('.step').dataset.step; goStep(cur-1);
+    });
+  });
+
+  // ---- chat ----
+  var log = document.getElementById('log');
+  function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function fmt(s){
+    s = esc(s);
+    s = s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+    // turn /page.html and full links into anchors
+    s = s.replace(/(^|\s)(\/[a-z0-9_\-]+\.html)/g,'$1<a href="$2">$2</a>');
+    s = s.replace(/(https?:\/\/[^\s)]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>');
+    return s;
+  }
+  function addMsg(role, text){
+    var d = document.createElement('div');
+    d.className = 'msg ' + (role==='user'?'me':'bot');
+    d.innerHTML = role==='user' ? esc(text) : fmt(text);
+    log.appendChild(d); log.scrollTop = log.scrollHeight;
+  }
+  function showTyping(on){
+    var t = document.getElementById('typing');
+    if(on){ if(!t){ t=document.createElement('div'); t.id='typing'; t.className='typing'; t.innerHTML='<span></span><span></span><span></span>'; log.appendChild(t); log.scrollTop=log.scrollHeight; } }
+    else if(t){ t.remove(); }
+  }
+
+  var QUICK = {
+    choose:['Where should I start?','What order should I install things?','Is solar worth it for me?'],
+    quote:['How do I check my quote?','What price is normal for solar?','Is my battery quote fair?'],
+    grid:['Do I need G98 or G99?','What can my single phase take?','What is an export limit?'],
+    general:['Where should I start?','What grants can I get?','Check my quote']
+  };
+  function renderQuick(){
+    var box = document.getElementById('quick');
+    var set = QUICK[facts.primary_goal] || QUICK.general;
+    box.innerHTML = '';
+    set.forEach(function(q){
+      var b=document.createElement('button'); b.textContent=q;
+      b.addEventListener('click', function(){ if(!busy){ document.getElementById('input').value=q; sendMsg(); } });
+      box.appendChild(b);
+    });
+  }
+
+  function greeting(){
+    var t = facts.tech.filter(function(x){return x!=='starting';});
+    var have = t.length ? 'I can see you\'ve got '+t.map(label).join(', ')+'. ' : '';
+    var map = {
+      choose:'Let\'s work out what makes sense for your home and in what order. Ask me anything, or tap a starter below.',
+      quote:'Paste a quote (or the key numbers) and I\'ll tell you how it compares to typical UK prices and what to question.',
+      grid:'Ask me your grid question — I\'ll tell you whether it\'s G98 or G99 and, crucially, whether you need approval before you start.',
+      general:'Ask me anything about solar, batteries, EVs or heat pumps.'
+    };
+    return 'Hi — I\'m the Decarbonarma adviser. '+have+(map[facts.primary_goal]||map.general);
+  }
+  function label(v){ return {solar:'solar',battery:'a battery',ev:'an EV / charger',heatpump:'a heat pump'}[v]||v; }
+
+  document.getElementById('startChat').addEventListener('click', function(){
+    document.getElementById('wizard').style.display='none';
+    document.getElementById('chat').style.display='block';
+    addMsg('assistant', greeting());
+    renderQuick();
+    document.getElementById('input').focus();
+  });
+
+  var input = document.getElementById('input');
+  input.addEventListener('input', function(){ input.style.height='auto'; input.style.height=Math.min(input.scrollHeight,120)+'px'; });
+  input.addEventListener('keydown', function(e){ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendMsg(); } });
+  document.getElementById('send').addEventListener('click', sendMsg);
+
+  function sendMsg(){
+    var text = input.value.trim();
+    if(!text || busy) return;
+    input.value=''; input.style.height='auto';
+    addMsg('user', text);
+    messages.push({role:'user', content:text});
+    setBusy(true); showTyping(true);
+
+    fetch(ENDPOINT, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ facts:facts, messages:messages })
+    }).then(function(r){ return r.json().then(function(j){ return {ok:r.ok, j:j}; }); })
+    .then(function(res){
+      showTyping(false); setBusy(false);
+      if(res.ok && res.j.reply){
+        addMsg('assistant', res.j.reply);
+        messages.push({role:'assistant', content:res.j.reply});
+      } else {
+        var m = (res.j && res.j.message) ? res.j.message
+          : 'Sorry — I hit a snag reaching the adviser. Please try again in a moment.';
+        addMsg('assistant', m);
+      }
+    }).catch(function(){
+      showTyping(false); setBusy(false);
+      addMsg('assistant', 'Sorry — I couldn\'t reach the adviser just now. Please try again shortly.');
+    });
+  }
+  function setBusy(b){ busy=b; document.getElementById('send').disabled=b; }
+})();
+</script>
+</body>
+</html>

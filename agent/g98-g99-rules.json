@@ -1,0 +1,65 @@
+{
+  "_meta": {
+    "purpose": "Deterministic UK grid-connection rules (ENA EREC G98/G99/G100). The Decarbonarma agent applies these to tell a user which application they need, whether it must happen BEFORE install, and how much generation their supply can take. These are rules of thumb for domestic advice — the DNO's own network study is always final.",
+    "compiled": "2026-07-27",
+    "assumed_voltage": 230,
+    "disclaimer": "Guidance only. The homeowner's DNO (SSEN, UKPN, NGED, SP Energy Networks, Electricity North West, NIE) makes the binding decision. Always tell users to confirm with their DNO / MCS installer before ordering equipment."
+  },
+
+  "key_principle": "Two different limits that people confuse: (1) INVERTER / generation capacity = the total size of inverter(s) you install; (2) EXPORT capacity = the most you're allowed to push to the grid. The DNO mainly cares about export. A G100 export limiter lets you install a big inverter while capping export low — that's how homes run 12kW+ of inverters on a single phase with, say, a 6kW export cap.",
+
+  "thresholds": {
+    "g98": {
+      "single_phase_max_kw": 3.68,
+      "single_phase_max_amps": 16,
+      "three_phase_max_kw": 11.04,
+      "three_phase_max_amps": 16,
+      "process": "'Fit and inform'. You can install FIRST, then notify the DNO within 28 days of commissioning. No prior approval needed.",
+      "applies_when": "Total generation+storage inverter capacity is at or below the per-phase limit AND export is within it."
+    },
+    "g99": {
+      "trigger": "Any time inverter/export exceeds the G98 threshold (>3.68kW single phase, >11.04kW three phase).",
+      "process": "APPLY AND GET APPROVAL BEFORE YOU CONNECT OR COMMISSION. This is the critical timing point — do it before ordering/installing, not after.",
+      "dno_response_time": "Up to 45 working days (fast-track bands can be quicker).",
+      "single_phase_ceiling_kw": 17,
+      "single_phase_ceiling_note": "The G99 'A1' application band covers total aggregate generation up to ~17kW on single phase. Above that the DNO will normally require a three-phase supply. Treat ~16-17kW as the practical single-phase ceiling.",
+      "three_phase_ceiling_kw": 50,
+      "three_phase_ceiling_note": "A1 band up to 50kW three phase."
+    },
+    "g100": {
+      "what": "Export Limitation Scheme. A compliant device must cut export to within the agreed limit within 5 seconds of exceeding it.",
+      "why": "Lets you install more inverter capacity than your export limit for self-consumption/battery, while guaranteeing the grid never sees more than the cap. Makes bigger systems approvable on constrained networks.",
+      "typical": "Common single-phase export caps: 3.68kW, 5kW, 6kW. The cap is set in the G99 offer."
+    }
+  },
+
+  "decision_logic": {
+    "inputs": ["phase (single|three)", "total_inverter_kw (all PV + battery inverters combined)", "intended_export_kw", "existing_generation_kw"],
+    "steps": [
+      "1. Sum ALL inverter capacity (existing PV + new PV + battery inverter). Batteries count.",
+      "2. If single phase and total <= 3.68kW AND export <= 3.68kW -> G98 (fit & inform, 28 days after).",
+      "3. If three phase and total <= 11.04kW AND export <= 11.04kW -> G98.",
+      "4. Otherwise -> G99: MUST be approved before connecting. Include a G100 export limiter if export needs capping below inverter size.",
+      "5. If single phase and total > ~17kW -> expect DNO to require a three-phase supply upgrade (big, costly job).",
+      "6. Any INCREASE to an already-approved system (bigger inverter, extra panels) needs a G99 VARIATION to the existing connection agreement — not fit-and-inform, even if export is unchanged.",
+      "7. Zero-export / no-export systems still need the correct G98/G99 notification based on inverter capacity."
+    ]
+  },
+
+  "timing_warnings": [
+    "G99 approval must be in hand BEFORE commissioning. Installing first and applying later can mean the DNO orders disconnection or refuses retrospective approval.",
+    "Battery-only additions still count toward inverter capacity and can tip a G98 system into G99 territory.",
+    "A change of inverter (e.g. swapping a 3.6kW for a 5kW) is a capacity increase -> G99 variation required first."
+  ],
+
+  "worked_example_single_phase": {
+    "note": "Illustrative single-phase case the agent can use to explain the maths.",
+    "supply": "single phase",
+    "new_pv_kw": 8.36,
+    "existing_pv_kw": 4.6,
+    "total_generation_kw": 12.96,
+    "export_limit_kw": 6,
+    "mechanism": "G99 approved with a 6kW G100 export limit; no network reinforcement required.",
+    "headroom": "Against the ~17kW single-phase ceiling, ~4kW of capacity headroom. Swapping the 4.6kW unit for a 5kW one stays under the ceiling but needs a G99 variation (a capacity increase must be approved first)."
+  }
+}

@@ -1,6 +1,14 @@
 [build]
   publish = "."
 
+# Internal agent knowledge/spec files live in /agent for the function to bundle,
+# but must not be publicly served. Block them (build-time bundling is unaffected).
+[[redirects]]
+  from = "/agent/*"
+  to = "/"
+  status = 404
+  force = true
+
 [build.processing]
   skip_processing = false
 
