@@ -15,7 +15,7 @@
       "uw.co.uk/energy/guides/ev-charger-installation-costs-and-requirements",
       "pricingpenguin.co.uk/cost-guides/ev-charger-installation"
     ],
-    "note": "Facebook 'Solar & battery UK' public quote sheets (12/16/20 panel PDFs) + battery comparison xlsx to be folded in once G moves them into this folder — those give REAL UK quotes to tighten these public averages."
+    "note": "Real UK homeowner quotes are folded in below under 'real_uk_quotes_observed' (community quote sheets + individual quotes, mid-2026). Use those as concrete reference points alongside the public averages above."
   },
 
   "solar_pv": {
@@ -31,7 +31,7 @@
     "quote_check_flags": {
       "over_the_odds_per_kw": 1800,
       "suspiciously_cheap_per_kw": 1150,
-      "notes": "Above ~£1,800/kW = high, push back or get another quote. Below ~£1,150/kW = check panel/inverter brand, MCS status, warranty, and whether scaffolding is really included. Economies of scale: £/kW should FALL as system grows, so a big system priced like a small one is a red flag."
+      "notes": "Above ~£1,800/kW = high, push back or get another quote. Below ~£1,150/kW = check panel/inverter brand, MCS status, warranty, and whether scaffolding is really included. Economies of scale: £/kW should FALL as system grows, so a big system priced like a small one is a red flag. IMPORTANT: on larger systems (8kWp+) and competitive solar+battery bundles, real UK quotes show the panel portion at £700-1,000/kW (see real_uk_quotes_observed) — that's good value, not a red flag. Reserve the cheap-flag for small standalone systems."
     }
   },
 
@@ -76,5 +76,22 @@
       "over_the_odds": 1500,
       "notes": "Above ~£1,500 (outside London/SE) = high unless a long cable run or consumer-unit upgrade is genuinely needed. Ask what's driving any premium: cable distance, earthing/PEN protection, load management, groundworks."
     }
+  },
+
+  "real_uk_quotes_observed": {
+    "_note": "Actual UK quotes shared by homeowners (community quote sheets + individual quotes), mid-2026. Use as concrete, real-world reference points and to sanity-check — these are individual quotes, not a formal distribution. Installer names are fine to mention; no personal data.",
+    "solar_plus_battery": [
+      { "label": "20-panel sheet — small / independent installer", "solar_kwp": 8.9, "panels": "20x AIKO 445W", "inverter": "Sigenergy 6kW controller", "battery_kwh": 8, "battery": "Sigenergy 8kWh", "est_annual_kwh": 7124, "total_gbp": 10650, "implied": "~£1,197/kW all-in INCLUDING an 8kWh battery; the panel portion works out around £700-750/kW. Excellent value." },
+      { "label": "20-panel sheet — large / national installer (premium battery)", "solar_kwp": 8.7, "panels": "20x JA Solar 435W", "battery_kwh": 13.5, "battery": "Tesla Powerwall 3", "est_annual_kwh": 6807, "total_gbp": 16520, "implied": "~£1,899/kW all-in; the ~£5,900 premium over the small installer is almost entirely the Tesla Powerwall 3 vs a modular 8kWh battery, not extra generation." },
+      { "label": "Octopus install (real homeowner, ~2025)", "solar_kw": 4.8, "panels": 14, "battery_kwh": 10, "extras": "Zappi EV charger, bird netting, full install", "total_gbp": 12500, "finance": "0% over 3 years", "notes": "Homeowner got 5 quotes ranging £11,000-£15,000 for a similar job (~36% spread). Estimated payback ~7 years. Chose a large installer for 0% finance + warranty security over a cheaper independent." },
+      { "label": "Evergen quote (real homeowner)", "solar_kwp": 5.58, "panels": "12x Aiko 465W (8 south / 4 west)", "inverter": "Growatt Hybrid 3.6kW", "battery_kwh": 10, "battery": "2x 5kWh Growatt", "extras": "scaffolding, bird protection, warranties", "total_gbp": 13500, "finance": "£166.54/mo x 120 months (~£20k total with interest)", "flag": "Pricey for the size: 5.58kWp + 10kWh at £13,500 vs the small installer's 8.9kWp + 8kWh at £10,650 — a smaller system for more money. The quoted 'year-1 return £1,988 / it offsets the finance' is optimistic; recompute payback from real SEG rates and actual usage." }
+    ],
+    "lessons_for_quote_checking": [
+      "Always get at least 3 quotes — a real-world spread of £11k-£15k (~36%) for the same job is normal.",
+      "Small/independent installers are frequently far cheaper than large national firms for comparable solar; the big premium usually buys a Tesla Powerwall and brand/finance security, not more generation.",
+      "A premium all-in-one battery (e.g. Tesla Powerwall 3, 13.5kWh) can add ~£6k over a modular 8-10kWh battery for little extra usable benefit — compare on usable kWh.",
+      "On larger systems (8kWp+) and competitive solar+battery bundles, the panel portion can genuinely be £700-1,000/kW — that's good value, NOT 'suspiciously cheap'. The <£1,150/kW cheap-flag mainly applies to small standalone systems.",
+      "Be sceptical of headline 'year-1 return' or 'it pays for the finance' claims — they often assume high SEG rates and full self-consumption. Recompute from the buyer's real numbers."
+    ]
   }
 }
