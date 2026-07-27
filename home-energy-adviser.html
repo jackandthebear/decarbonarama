@@ -125,9 +125,17 @@
   .footer-col a:hover { color:var(--green-600); }
   .footer-bottom { max-width:1120px; margin:0 auto; font-size:12px; color:var(--stone-500); border-top:1px solid var(--stone-100); padding-top:18px; }
   @media (max-width:640px){ .hero h1{font-size:30px} .footer-grid{grid-template-columns:1fr 1fr} }
+
+  /* embed mode: when loaded inside the floating widget (?embed=1 or in an iframe) */
+  body.embed .site-header, body.embed .hero, body.embed footer, body.embed .disclaimer { display:none !important; }
+  body.embed { background:transparent; }
+  body.embed .wrap { max-width:100%; margin:0; padding:0; }
+  body.embed .card { border:none; border-radius:0; box-shadow:none; }
+  body.embed .chat-log { max-height:none; height:auto; }
 </style>
 </head>
 <body>
+<script>if(new URLSearchParams(location.search).get('embed')==='1'||window.self!==window.top){document.body.classList.add('embed');}</script>
 
 <header class="site-header">
   <a href="/"><img src="logo.svg" alt="Decarbonarma"></a>
