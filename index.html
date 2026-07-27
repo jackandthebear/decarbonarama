@@ -303,7 +303,8 @@
     <li><a href="#" onclick="showPage('rosecottage')" id="nav-rosecottage">Rose Cottage</a></li>
     <li style="position:relative;" id="nav-tools-wrap" onmouseenter="document.getElementById('tools-drop').style.display='block'" onmouseleave="document.getElementById('tools-drop').style.display='none'">
       <a href="#" style="color:var(--green-600);font-weight:600;padding:8px 14px;border-radius:8px;background:var(--green-100);text-decoration:none;font-size:14px;display:block;">🛠 AI Tools ▾</a>
-      <div id="tools-drop" style="display:none;position:absolute;top:100%;right:0;background:#fff;border:1px solid var(--green-100);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.1);padding:8px;min-width:200px;z-index:200;">
+      <div id="tools-drop" style="display:none;position:absolute;top:100%;right:0;background:#fff;border:1px solid var(--green-100);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.1);padding:8px;min-width:220px;z-index:200;">
+        <a href="./home-energy-adviser.html" style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;text-decoration:none;color:var(--green-600);font-size:14px;font-weight:700;transition:background 0.15s;" onmouseover="this.style.background='var(--green-50)'" onmouseout="this.style.background='none'">🌿 Home Energy Adviser</a>
         <a href="./articles/where-to-start-low-carbon-home.html" style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;text-decoration:none;color:var(--green-600);font-size:14px;font-weight:600;transition:background 0.15s;" onmouseover="this.style.background='var(--green-50)'" onmouseout="this.style.background='none'">🧭 Getting Started</a>
         <a href="./articles/ev-charger-decision-guide.html" style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;text-decoration:none;color:var(--stone-800);font-size:14px;font-weight:500;transition:background 0.15s;" onmouseover="this.style.background='var(--green-50)'" onmouseout="this.style.background='none'">🔌 EV Charger Chooser</a>
         <a href="./ai-tariff-finder.html" style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;text-decoration:none;color:var(--stone-800);font-size:14px;font-weight:500;transition:background 0.15s;" onmouseover="this.style.background='var(--green-50)'" onmouseout="this.style.background='none'">⚡ AI Tariff Finder</a>
@@ -651,6 +652,14 @@
       <p class="section-sub" style="color:rgba(255,255,255,0.7);">Use our AI-powered tools before you spend a penny — find the right energy tariff, check your heat pump sizing, and choose the right EV charger.</p>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;">
+      <div onclick="window.location.href='./home-energy-adviser.html'" style="background:rgba(52,199,89,0.16);border:1.5px solid var(--green-400);border-radius:20px;padding:36px;cursor:pointer;transition:all 0.25s;" onmouseover="this.style.background='rgba(52,199,89,0.24)'" onmouseout="this.style.background='rgba(52,199,89,0.16)'">
+        <div style="display:inline-block;background:var(--green-400);color:#fff;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:4px 10px;border-radius:6px;margin-bottom:14px;">New · Start here</div>
+        <div style="font-size:44px;margin-bottom:16px;">🌿</div>
+        <h3 style="font-family:DM Serif Display,serif;font-size:26px;color:#fff;margin-bottom:10px;">Home Energy Adviser</h3>
+        <p style="font-size:15px;color:rgba(255,255,255,0.8);line-height:1.7;margin-bottom:24px;">Your AI guide for the whole journey — solar, battery, EV and heat pump. Get a plan, sanity-check any quote against real UK prices, and find out exactly what G98/G99 grid paperwork you need before you start.</p>
+        <div style="display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--green-800);padding:12px 22px;border-radius:9px;font-weight:700;font-size:14px;">Ask the Adviser →</div>
+        <div style="margin-top:14px;font-size:12px;color:rgba(255,255,255,0.6);">💬 Guided chat &nbsp;·&nbsp; 🧾 Quote-checker &nbsp;·&nbsp; ⚡ Grid guidance</div>
+      </div>
       <div onclick="window.location.href='./ai-tariff-finder.html'" style="background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.15);border-radius:20px;padding:36px;cursor:pointer;transition:all 0.25s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">
         <div style="font-size:44px;margin-bottom:16px;">⚡</div>
         <h3 style="font-family:DM Serif Display,serif;font-size:26px;color:#fff;margin-bottom:10px;">AI Tariff Finder</h3>
@@ -2075,7 +2084,7 @@ window.addEventListener('DOMContentLoaded', function(){
       <div class="footer-grid">
         <div class="footer-brand"><span class="logo">Decarbon<span>arma</span></span><p>Helping UK homeowners transition to clean, affordable home energy.</p></div>
         <div class="footer-col"><h5>Articles</h5><a href="./articles/uk-wasted-wind-grid.html" onclick="artOpen('./articles/uk-wasted-wind-grid.html','Wasted Wind'); return false;">Wasted Wind</a><a href="./articles/eddi-sunamp-double-barrel.html" onclick="artOpen('./articles/eddi-sunamp-double-barrel.html','Triple Barrel'); return false;">Triple Barrel</a><a href="./articles/nibe-s1155-pvt-barry-sharp.html" onclick="artOpen('./articles/nibe-s1155-pvt-barry-sharp.html','NIBE PVT'); return false;">NIBE S1155 PVT</a><a href="./articles/best-gas-boiler-low-carbon.html" onclick="artOpen('./articles/best-gas-boiler-low-carbon.html','Best Gas Boiler'); return false;">Best Gas Boiler</a></div>
-        <div class="footer-col"><h5>Tools</h5><a href="./ai-tariff-finder.html">Tariff Finder</a><a href="./heat-loss-estimator.html">Heat Loss Estimator</a><a href="./battery_sizing_tool.html">Battery Sizing</a><a href="#" onclick="showPage('casestudies')">Case Studies</a></div>
+        <div class="footer-col"><h5>Tools</h5><a href="./home-energy-adviser.html">Home Energy Adviser</a><a href="./ai-tariff-finder.html">Tariff Finder</a><a href="./heat-loss-estimator.html">Heat Loss Estimator</a><a href="./battery_sizing_tool.html">Battery Sizing</a><a href="#" onclick="showPage('casestudies')">Case Studies</a></div>
         <div class="footer-col"><h5>Support</h5><a href="#">Contact</a><a href="#">FAQ</a><a href="#">Grants Guide</a></div>
       </div>
       <div class="footer-bottom"><span>© 2025 Decarbonarma. All rights reserved.</span></div>
