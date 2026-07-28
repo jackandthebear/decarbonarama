@@ -19,6 +19,15 @@ try { BENCHMARKS = require('../../agent/price-benchmarks.json'); } catch (e) {}
 try { RULES = require('../../agent/g98-g99-rules.json'); } catch (e) {}
 try { ARTICLES = require('../../agent/article-knowledge.json'); } catch (e) {}
 
+// --- Quote capture (Netlify Blobs). Best-effort; must NEVER break a reply. ---
+// Real visitor quotes are stored privately server-side to build better UK price
+// benchmarks over time. Raw text is pruned after RAW_RETENTION_DAYS by the
+// weekly refresh task once the useful numbers have been extracted.
+let getStore = null;
+try { ({ getStore } = require('@netlify/blobs')); } catch (e) {}
+const QUOTE_STORE = 'quote-submissions';
+const RAW_RETENTION_DAYS = 90;
+
 const KB_FALLBACK = `
 PRICE BENCHMARKS (UK, 0% VAT to 31 Mar 2027):
 - Solar PV: ~£1,400-1,600/kW installed. Flag HIGH >£1,800/kW, CHEAP <£1,150/kW. By size: 4kW ~£5.5k, 6kW ~£8.5k, 10kW ~£13k.
@@ -79,8 +88,71 @@ function rateLimited(ip) {
   return arr.length > max;
 }
 
+// Does this visitor message look like a price quote worth capturing?
+function looksLikeQuote(text) {
+  if (!text) return false;
+  const t = String(text);
+  return /£\s?\d/.test(t)                                   // a £ figure
+    || /\b\d[\d,.]*\s?(kw|kwp|kwh|kilowatt)\b/i.test(t)     // a kW/kWh size
+    || (/\bquote\b/i.test(t) && /\d/.test(t));              // says "quote" + a number
+}
+
+// Best-effort capture of a likely quote into the private blob store.
+async function captureQuote(facts, text) {
+  if (!getStore) return;
+  try {
+    const store = getStore(QUOTE_STORE);
+    const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+    await store.setJSON(`raw/${id}.json`, {
+      id,
+      ts: new Date().toISOString(),
+      facts: facts || {},          // structured wizard answers (tech, region, sizes)
+      message: String(text).slice(0, 4000)   // raw quote text — private, pruned after 90d
+    });
+  } catch (e) { /* capture must never break the adviser */ }
+}
+
+// Admin read/prune endpoint (GET). Disabled unless ADMIN_KEY env var is set and matches.
+// Used by the weekly knowledge-refresh task to pull submissions and prune old raw text.
+async function handleAdmin(event) {
+  const headers = { 'Content-Type': 'application/json' };
+  const params = event.queryStringParameters || {};
+  if (!process.env.ADMIN_KEY || params.key !== process.env.ADMIN_KEY) {
+    return { statusCode: 404, headers, body: JSON.stringify({ error: 'not_found' }) };
+  }
+  if (!getStore) {
+    return { statusCode: 503, headers, body: JSON.stringify({ error: 'blobs_unavailable' }) };
+  }
+  const store = getStore(QUOTE_STORE);
+  try {
+    const { blobs } = await store.list({ prefix: 'raw/' });
+    if (params.action === 'prune') {
+      const days = Math.max(1, parseInt(params.days || String(RAW_RETENTION_DAYS), 10));
+      const cutoff = Date.now() - days * 86400000;
+      let deleted = 0;
+      for (const b of blobs) {
+        const rec = await store.get(b.key, { type: 'json' });
+        if (rec && Date.parse(rec.ts) < cutoff) { await store.delete(b.key); deleted++; }
+      }
+      return { statusCode: 200, headers, body: JSON.stringify({ ok: true, deleted, remaining: blobs.length - deleted }) };
+    }
+    const out = [];
+    for (const b of blobs) {
+      const rec = await store.get(b.key, { type: 'json' });
+      if (rec) out.push(rec);
+    }
+    out.sort((a, b) => (a.ts < b.ts ? 1 : -1));
+    return { statusCode: 200, headers, body: JSON.stringify({ count: out.length, submissions: out }) };
+  } catch (e) {
+    return { statusCode: 500, headers, body: JSON.stringify({ error: 'server', message: String(e).slice(0, 200) }) };
+  }
+}
+
 exports.handler = async (event) => {
   const headers = { 'Content-Type': 'application/json' };
+  if (event.httpMethod === 'GET') {
+    return handleAdmin(event);
+  }
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
@@ -108,6 +180,12 @@ exports.handler = async (event) => {
     .map(m => ({ role: m.role, content: m.content.slice(0, MAX_USER_CHARS) }));
   if (!messages.length) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'no_messages' }) };
+  }
+
+  // Capture likely price quotes for benchmark-building (best-effort).
+  const lastUser = [...messages].reverse().find(m => m.role === 'user');
+  if (lastUser && looksLikeQuote(lastUser.content)) {
+    await captureQuote(facts, lastUser.content);
   }
 
   try {
