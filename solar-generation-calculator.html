@@ -206,6 +206,17 @@
   table.sg-table td { text-align:right; padding:7px 10px; border-bottom:1px solid var(--stone-50); color:var(--stone-800); }
   table.sg-table tr.total td { font-weight:600; border-top:1.5px solid var(--stone-100); background:var(--green-50); }
 
+  .sg-fc-tiles { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:18px; }
+  .sg-fc-tile { background:var(--green-50); border:1px solid var(--green-100); border-radius:14px; padding:16px 18px; }
+  .sg-fc-tile.alt { background:var(--stone-50); border-color:var(--stone-100); }
+  .sg-fc-tile .fc-day { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--stone-600); margin-bottom:6px; }
+  .sg-fc-tile .fc-kwh { font-family:'DM Serif Display',serif; font-size:26px; color:var(--green-800); }
+  .sg-fc-tile.alt .fc-kwh { color:var(--stone-800); }
+  .sg-fc-tile .fc-sub { font-size:11.5px; color:var(--stone-600); margin-top:4px; line-height:1.5; }
+
+  .sg-saved-note { display:none; align-items:center; gap:10px; flex-wrap:wrap; font-size:13px; color:var(--green-800); background:var(--green-50); border:1px solid var(--green-100); border-radius:12px; padding:12px 16px; margin-bottom:20px; line-height:1.6; }
+  .sg-saved-note button { font-size:12px; font-weight:600; color:var(--stone-600); background:none; border:none; cursor:pointer; text-decoration:underline; font-family:inherit; padding:0; }
+
   .sg-method { font-size:12px; color:var(--stone-600); line-height:1.7; background:var(--stone-50); border-radius:12px; padding:18px 20px; margin-bottom:20px; }
   .sg-method strong { color:var(--stone-800); }
   .sg-offline-note { display:none; font-size:12.5px; color:#9a3412; background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:12px 16px; margin-bottom:16px; line-height:1.6; }
@@ -248,6 +259,11 @@
 
   <div style="font-size:14px;color:var(--stone-600);margin-bottom:28px;line-height:1.7;max-width:680px;">
     Installers quote generation from a standard table. This tool instead asks the EU's PVGIS service — nearly 20 years of satellite-measured sunlight for your actual location — so east-, west- and even north-facing roofs get a fair, realistic number.
+  </div>
+
+  <div class="sg-saved-note" id="savedNote">
+    <span>👋 <strong>Welcome back</strong> — loaded your saved setup and fetched today's forecast.</span>
+    <button type="button" onclick="clearSaved()">Start fresh</button>
   </div>
 
   <!-- STEP 1: LOCATION -->
@@ -338,6 +354,26 @@
         <div class="rc-val" id="resYield">—</div>
         <div class="rc-sub" id="resYieldSub">kWh generated per kWp installed — the fair way to compare systems</div>
       </div>
+    </div>
+
+    <!-- TODAY / TOMORROW FORECAST -->
+    <div class="sg-chart-card" id="forecastCard" style="display:none;">
+      <h4>⛅ Today &amp; tomorrow</h4>
+      <div class="sg-chart-sub">Live weather-based forecast for your array(s) at this location — data by <a href="https://forecast.solar" target="_blank" rel="noopener" style="color:var(--green-600);">Forecast.Solar</a>, the same service Homey and Home Assistant use.</div>
+      <div class="sg-fc-tiles">
+        <div class="sg-fc-tile">
+          <div class="fc-day" id="fcDay0">Today</div>
+          <div class="fc-kwh" id="fcKwh0">—</div>
+          <div class="fc-sub" id="fcSub0">—</div>
+        </div>
+        <div class="sg-fc-tile alt">
+          <div class="fc-day" id="fcDay1">Tomorrow</div>
+          <div class="fc-kwh" id="fcKwh1">—</div>
+          <div class="fc-sub" id="fcSub1">—</div>
+        </div>
+      </div>
+      <div class="sg-chart-wrap" style="height:240px;"><canvas id="fcChart" role="img" aria-label="Line chart of forecast solar power today and tomorrow"></canvas></div>
+      <div class="sg-hint" id="fcHint" style="margin-top:10px;">Forecasts update through the day as the weather model refreshes.</div>
     </div>
 
     <!-- MONTHLY CHART -->
@@ -617,7 +653,7 @@ function setTech(t) {
 }
 
 /* ═══════════════ CALCULATION ═══════════════ */
-async function runCalc() {
+async function runCalc(auto) {
   const status = document.getElementById('calcStatus');
   status.classList.remove('err');
   if (!loc) { status.textContent = 'First find your location in Step 1 ↑'; status.classList.add('err'); return; }
@@ -661,7 +697,7 @@ async function runCalc() {
 
   renderResults();
   status.textContent = '';
-  document.getElementById('results').scrollIntoView({ behavior:'smooth', block:'start' });
+  if (auto !== true) document.getElementById('results').scrollIntoView({ behavior:'smooth', block:'start' });
   } finally {
     btn.disabled = false;
   }
@@ -709,6 +745,137 @@ function renderResults() {
   renderTable();
   updateMoney();
   renderMethod();
+  saveSetup();
+  loadForecast(); // async, fills the Today & Tomorrow card when it arrives
+}
+
+/* ═══════════════ TODAY / TOMORROW FORECAST (Forecast.Solar) ═══════════════ */
+const fcCache = {};
+let fcChart = null;
+
+async function loadForecast() {
+  const card = document.getElementById('forecastCard');
+  if (!loc || !lastResult) return;
+  const active = arrays.map((a,i)=>({...a, idx:i})).filter(a => a.enabled);
+  try {
+    const per = await Promise.all(active.map(async a => {
+      const aspect = ((a.azimuth - 180 + 540) % 360) - 180;
+      const key = [loc.lat.toFixed(3), loc.lon.toFixed(3), a.pitch, aspect, a.kwp].join('/');
+      if (!fcCache[key]) {
+        const r = await fetch('https://api.forecast.solar/estimate/' + loc.lat.toFixed(4) + '/' + loc.lon.toFixed(4) + '/' + a.pitch + '/' + aspect + '/' + a.kwp);
+        if (!r.ok) throw new Error('forecast http ' + r.status);
+        const j = await r.json();
+        if (!j?.result?.watt_hours_day) throw new Error('forecast shape');
+        fcCache[key] = j.result;
+      }
+      return { res: fcCache[key], sf: 1 - a.shade / 100 };
+    }));
+
+    // Aggregate daily totals (Wh → kWh) and hourly watts across arrays
+    const dayTotals = {}, hourly = { }; // hourly[date][hour] = W
+    per.forEach(({res, sf}) => {
+      Object.entries(res.watt_hours_day).forEach(([d, wh]) => { dayTotals[d] = (dayTotals[d] || 0) + wh * sf; });
+      Object.entries(res.watts).forEach(([ts, w]) => {
+        const d = ts.slice(0, 10), h = parseInt(ts.slice(11, 13), 10);
+        (hourly[d] = hourly[d] || {})[h] = (hourly[d][h] || 0) + w * sf;
+      });
+    });
+    const days = Object.keys(dayTotals).sort().slice(0, 2);
+    if (!days.length) throw new Error('no days');
+
+    // typical daily average for this month, from the long-term result
+    const now = new Date();
+    const dim = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+    const typical = lastResult.totalMonthly[now.getMonth()] / dim;
+
+    days.forEach((d, i) => {
+      const kwh = dayTotals[d] / 1000;
+      const dt = new Date(d + 'T12:00:00');
+      const label = (i === 0 ? 'Today · ' : 'Tomorrow · ') + dt.toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short' });
+      document.getElementById('fcDay' + i).textContent = label;
+      document.getElementById('fcKwh' + i).textContent = (kwh >= 10 ? Math.round(kwh) : kwh.toFixed(1)) + ' kWh';
+      const pct = Math.round(kwh / typical * 100);
+      document.getElementById('fcSub' + i).textContent = pct + '% of a typical ' + dt.toLocaleDateString('en-GB',{month:'long'}) + ' day (~' + typical.toFixed(1) + ' kWh)';
+    });
+
+    renderForecastChart(days, hourly);
+    card.style.display = 'block';
+  } catch(e) {
+    card.style.display = 'none'; // rate-limited or unreachable — quietly skip
+  }
+}
+
+function renderForecastChart(days, hourly) {
+  if (typeof Chart === 'undefined') return;
+  const hours = Array.from({length: 19}, (_, i) => i + 3); // 03:00 → 21:00 covers UK daylight year-round
+  const mk = d => hours.map(h => (hourly[d] && hourly[d][h] != null) ? +(hourly[d][h] / 1000).toFixed(2) : 0);
+  if (fcChart) fcChart.destroy();
+  fcChart = new Chart(document.getElementById('fcChart'), {
+    type: 'line',
+    data: {
+      labels: hours.map(h => String(h).padStart(2,'0') + ':00'),
+      datasets: [
+        { label: 'Today', data: mk(days[0]), borderColor: '#1f8a4c', backgroundColor: 'rgba(31,138,76,0.12)',
+          fill: true, borderWidth: 2, pointRadius: 0, pointHitRadius: 12, tension: 0.35 },
+        { label: 'Tomorrow', data: days[1] ? mk(days[1]) : [], borderColor: '#1e4fa3', backgroundColor: 'transparent',
+          fill: false, borderWidth: 2, borderDash: [6, 4], pointRadius: 0, pointHitRadius: 12, tension: 0.35 },
+      ],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: true, position: 'top', align: 'end',
+          labels: { usePointStyle: true, pointStyle: 'line', boxWidth: 18, color: '#1d1d1f', font: { size: 12, weight: '500' } } },
+        tooltip: { backgroundColor: '#1d1d1f', padding: 10, cornerRadius: 8,
+          callbacks: { label: ctx => ' ' + ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(2) + ' kW' } },
+      },
+      scales: {
+        x: { grid: { display: false }, border: { color: '#d2d2d7' }, ticks: { color: '#6e6e73', font: { size: 11 }, maxTicksLimit: 10 } },
+        y: { grid: { color: '#ececf0' }, border: { display: false }, beginAtZero: true,
+             ticks: { color: '#6e6e73', font: { size: 11 } },
+             title: { display: true, text: 'kW', color: '#6e6e73', font: { size: 11 } } },
+      },
+    },
+  });
+}
+
+/* ═══════════════ SAVED SETUP (visitor's browser only) ═══════════════ */
+const STORE_KEY = 'decarbonarma-solar-calc-v1';
+
+function saveSetup() {
+  try {
+    localStorage.setItem(STORE_KEY, JSON.stringify({
+      loc, arrays, tech,
+      loss: document.getElementById('sysLoss').value,
+      selfUse: document.getElementById('selfUse').value,
+      impRate: document.getElementById('impRate').value,
+      expRate: document.getElementById('expRate').value,
+      postcode: document.getElementById('pcInput').value,
+    }));
+  } catch(e) { /* private browsing etc — no problem */ }
+}
+
+function restoreSetup() {
+  let s = null;
+  try { s = JSON.parse(localStorage.getItem(STORE_KEY)); } catch(e) {}
+  if (!s || !s.loc || !Array.isArray(s.arrays)) return false;
+  loc = s.loc;
+  s.arrays.forEach((a, i) => { if (arrays[i]) Object.assign(arrays[i], a); });
+  if (s.tech) setTech(s.tech);
+  if (s.loss) { document.getElementById('sysLoss').value = s.loss; document.getElementById('sysLossOut').textContent = s.loss + '%'; }
+  ['selfUse','impRate','expRate'].forEach(k => { if (s[k]) document.getElementById(k).value = s[k]; });
+  if (s.postcode) document.getElementById('pcInput').value = s.postcode;
+  const ok = document.getElementById('locOk');
+  ok.innerHTML = '✅ <strong>' + esc(loc.label || 'Saved location') + '</strong> &nbsp;(' + (+loc.lat).toFixed(4) + ', ' + (+loc.lon).toFixed(4) + ')';
+  ok.style.display = 'block';
+  renderTabs(); renderEditor();
+  return true;
+}
+
+function clearSaved() {
+  try { localStorage.removeItem(STORE_KEY); } catch(e) {}
+  location.reload();
 }
 
 function renderChart() {
@@ -840,12 +1007,17 @@ function renderMethod() {
     '% system losses</strong> (inverter, cabling, dirt). Your shading percentage is then applied per array. ' +
     'Results are a <strong>long-term annual average</strong> — a sunny year can be ~10% above it and a dull one ~10% below, and month-to-month swings are bigger. ' +
     'Specific yield (kWh per kWp) is the fair way to compare arrays: in the UK, ~950–1,050 for a good south roof, ~800–900 for east/west, and ~550–700 for north — ' +
-    'north-facing panels still pay their way on modern low-cost panels with microinverters. Figures are estimates, not a guarantee.';
+    'north-facing panels still pay their way on modern low-cost panels with microinverters. The today/tomorrow forecast comes from <strong>Forecast.Solar</strong>\'s weather model. ' +
+    'Your setup is saved <strong>in your own browser only</strong> (nothing is sent to us), so next time you visit this page your forecast appears automatically. Figures are estimates, not a guarantee.';
 }
 
 /* init */
 renderTabs();
 renderEditor();
+if (restoreSetup()) {
+  document.getElementById('savedNote').style.display = 'flex';
+  runCalc(true); // self-prompting: returning visitors get their numbers + today's forecast automatically
+}
 </script>
 </body>
 </html>
