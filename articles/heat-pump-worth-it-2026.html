@@ -103,6 +103,10 @@
   .data-box p { color: rgba(255,255,255,0.82); margin: 0; font-size: 1.05rem; line-height: 1.65; }
   .data-box strong { color: #fff; }
 
+  /* --- answer capsule (AI/SERP extractable direct answer) --- */
+  .answer-capsule { border: 1px solid var(--rule); border-left: 4px solid var(--green); background: var(--green-pale); padding: 1.15rem 1.35rem; margin: 0 0 1.75rem; border-radius: 0 3px 3px 0; }
+  .answer-capsule .ac-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-bottom: 0.5rem; }
+  .answer-capsule p { margin: 0; font-size: 1.06rem; line-height: 1.6; color: var(--ink); font-weight: 400; }
   .callout { border-left: 3px solid var(--blue); padding: 1rem 1.25rem; background: var(--blue-pale); margin: 1.75rem 0; border-radius: 0 2px 2px 0; }
   .callout p { margin: 0; color: var(--ink); font-size: 1rem; }
   .callout-warn { border-left-color: var(--orange); background: var(--orange-pale); }
@@ -182,6 +186,9 @@
 <div class="content">
 
   <h2>The short answer</h2>
+  <div class="answer-capsule">
+    <p>Yes, for most UK homes in 2026. After the £7,500 Boiler Upgrade Scheme grant a typical air-source heat pump costs <strong>£3,000–£7,000</strong> to fit — similar to a premium boiler. On a heat-pump tariff it runs <strong>£200–£600 a year cheaper than gas</strong>. It is not worth it if the install is undersized or you stay on the standard price cap.</p>
+  </div>
   <p>For most UK homes in 2026, yes — but not for the reason the adverts give you, and not for everyone.</p>
   <p>A heat pump is worth it if you can get it <strong>installed well</strong>, run it on a <strong>smart tariff</strong>, and you're not expecting it to be cheaper than gas on day one of a botched install. Get those three things right and it's cheaper to run than a gas boiler, far cleaner, and — after the £7,500 government grant — often costs about the same to fit as a premium new boiler. Get them wrong and you'll be one of the unhappy people writing angry forum posts.</p>
   <p>Which camp you end up in is mostly about <em>how</em> it's done, not <em>whether</em> you should do it. This is what I'd tell a friend.</p>
@@ -197,6 +204,18 @@
 
   <h2>The cost to install in 2026 — after the grant</h2>
   <p>The number that scares people is the sticker price: a typical air source heat pump install runs <strong>£10,000–£14,000</strong> before any help. But almost nobody pays that, because of the <strong>Boiler Upgrade Scheme (BUS)</strong>.</p>
+  <div class="brand-table-wrap">
+    <table>
+      <thead><tr><th>Scope of job</th><th>Before grant</th><th>After £7,500 grant</th></tr></thead>
+      <tbody>
+        <tr><td>4–6kW, one cylinder, modest radiator changes</td><td>£8,000–£10,500</td><td><strong>£500–£3,000</strong></td></tr>
+        <tr><td>6–10kW, 200–250L cylinder, 4–6 radiators</td><td>£9,500–£13,500</td><td><strong>£2,000–£6,000</strong></td></tr>
+        <tr><td>8–14kW, 250–300L cylinder, broad radiator upgrade</td><td>£11,000–£16,000</td><td><strong>£3,500–£8,500</strong></td></tr>
+        <tr><td>UK average (Ofgem BUS data, 8kW system)</td><td>£12,500</td><td><strong>£5,000</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
   <p>In 2026 the BUS gives you <strong>£7,500 off</strong> an air source or ground source heat pump in England and Wales. You don't apply — your MCS-certified installer claims it and knocks it straight off your quote.</p>
   <p>There's also a temporary uplift worth knowing: from <strong>21 July 2026 to 31 March 2027</strong>, homes <strong>off the gas grid</strong> (on heating oil or LPG) can get <strong>£9,000</strong> instead. If you're currently on oil, a heat pump is close to a no-brainer.</p>
   <p>So the real-world figure for most people is roughly <strong>£3,000–£7,000 installed</strong>, after the grant. That's comparable to — sometimes less than — a high-end gas boiler swap. The headline price and the price you actually pay are very different things, and a lot of "too expensive" conclusions are people staring at the wrong number.</p>
@@ -205,11 +224,12 @@
   <p>Here's where it used to be genuinely close, and where 2026 has tilted things. A heat pump turns one unit of electricity into roughly <strong>3–3.5 units of heat</strong> (the SCOP — seasonal coefficient of performance; real metered UK data clusters around 3.5–3.9 for well-installed systems). Gas is cheaper per unit, but you burn more than one unit of gas per unit of heat. So the comparison comes down to the price gap between gas and electricity, and the efficiency you actually achieve.</p>
   <div class="brand-table-wrap">
     <table>
-      <thead><tr><th>Scenario</th><th>What you'll pay vs gas</th></tr></thead>
+      <thead><tr><th>Heating setup</th><th>Efficiency</th><th>Running cost vs gas</th></tr></thead>
       <tbody>
-        <tr><td>Heat pump on the standard price cap</td><td>Broadly level-pegging at ~SCOP 3.5</td></tr>
-        <tr><td>Heat pump on a smart tariff (e.g. Cosy Octopus, ~7.5p off-peak)</td><td>£200–£600/yr cheaper than gas</td></tr>
-        <tr><td>Gas boiler</td><td>Getting relatively more expensive each year</td></tr>
+        <tr><td>Gas boiler (baseline)</td><td>~85–90%</td><td>Baseline — rising relative to electricity each year</td></tr>
+        <tr><td>Heat pump, standard price cap</td><td>SCOP ~3.5</td><td>Roughly level-pegging</td></tr>
+        <tr><td>Heat pump, heat-pump tariff (~7.5p off-peak)</td><td>SCOP ~3.5</td><td><strong>£200–£600/yr cheaper</strong></td></tr>
+        <tr><td>Heat pump, poor install</td><td>SCOP 2.5 or below</td><td>£100–£300/yr <em>more expensive</em></td></tr>
       </tbody>
     </table>
   </div>

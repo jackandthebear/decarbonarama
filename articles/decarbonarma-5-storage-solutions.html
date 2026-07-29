@@ -477,7 +477,11 @@
     footer strong { color: var(--white); }
     footer .footer-logo { font-size: 1.1rem; font-weight: 800; color: var(--white); margin-bottom: 0.5rem; }
     footer .footer-logo span { color: var(--green-light); }
-  </style>
+  
+  /* --- answer capsule (extractable direct answer for AI/SERP) --- */
+  .answer-capsule { border: 1px solid #dce8d8; border-left: 4px solid #245c42; background: rgba(36,92,66,0.07); padding: 1.15rem 1.35rem; margin: 0 0 1.75rem; border-radius: 0 3px 3px 0; }
+  .answer-capsule p { margin: 0; color: #111a14; font-size: 1.06rem; line-height: 1.6; }
+</style>
 </head>
 <body>
 
@@ -816,7 +820,10 @@
 <div class="comparison-section">
   <div class="container">
     <div class="section-heading">
-      <h2>Side-by-Side Comparison</h2>
+      <div class="answer-capsule">
+    <p>Five home battery systems worth considering in 2026: <strong>Fogstar</strong> for DIY value, <strong>Fox ESS</strong> and <strong>Alpha ESS</strong> for mainstream installs, <strong>Sigenergy</strong> for an all-in-one AI ecosystem, and the <strong>Tesla Powerwall 3</strong> for brand and simplicity. The right pick depends on install route and how much capacity you actually need.</p>
+  </div>
+  <h2>Side-by-Side Comparison</h2>
       <p>All five systems at a glance — specs, smart features, and price.</p>
     </div>
     <div class="table-wrap">

@@ -103,6 +103,10 @@
   .data-box p { color: rgba(255,255,255,0.82); margin: 0; font-size: 1.05rem; line-height: 1.65; }
   .data-box strong { color: #fff; }
 
+  /* --- answer capsule (AI/SERP extractable direct answer) --- */
+  .answer-capsule { border: 1px solid var(--rule); border-left: 4px solid var(--green); background: var(--green-pale); padding: 1.15rem 1.35rem; margin: 0 0 1.75rem; border-radius: 0 3px 3px 0; }
+  .answer-capsule .ac-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-bottom: 0.5rem; }
+  .answer-capsule p { margin: 0; font-size: 1.06rem; line-height: 1.6; color: var(--ink); font-weight: 400; }
   .callout { border-left: 3px solid var(--blue); padding: 1rem 1.25rem; background: var(--blue-pale); margin: 1.75rem 0; border-radius: 0 2px 2px 0; }
   .callout p { margin: 0; color: var(--ink); font-size: 1rem; }
   .callout-warn { border-left-color: var(--orange); background: var(--orange-pale); }
@@ -184,18 +188,21 @@
 <div class="content">
 
   <h2>The short answer</h2>
+  <div class="answer-capsule">
+    <p>Yes on a decent south-facing roof. A typical 4kW system costs <strong>£6,500–£8,500</strong> fitted in 2026 with 0% VAT, generates around <strong>3,400kWh a year</strong>, and pays back in <strong>7–10 years</strong> against a 25-year panel life. A battery raises self-use but stretches payback by roughly 3–5 years.</p>
+  </div>
   <p>For most UK homes with a decent south-ish roof, solar is worth it in 2026 — payback lands around <strong>7–10 years</strong> and the panels keep going for 25+. Add a battery and you'll use far more of your own power, but you'll stretch the payback, so a battery is worth it for <em>some</em> people and not others. The honest version of this answer depends on three things: your roof, your tariff, and how much electricity you use during the day. Let's do the actual maths instead of the brochure version.</p>
 
   <h2>What solar actually costs in 2026</h2>
   <p>Real installed prices this year, MCS-certified, including the 0% VAT relief that's still running:</p>
   <div class="brand-table-wrap">
     <table>
-      <thead><tr><th>System</th><th>Fitted cost (2026)</th></tr></thead>
+      <thead><tr><th>System size</th><th>Fitted cost (2026)</th><th>Typical annual output</th></tr></thead>
       <tbody>
-        <tr><td>Typical 4kW system</td><td>~£6,500–£8,500</td></tr>
-        <tr><td>Smaller 3kW</td><td>from ~£5,500</td></tr>
-        <tr><td>Larger 6kW</td><td>up to ~£11,500</td></tr>
-        <tr><td>Add a battery (4–5kWh)</td><td>+£3,000–£5,000</td></tr>
+        <tr><td>3kW (~7–8 panels)</td><td>from ~£5,500</td><td>~2,550kWh</td></tr>
+        <tr><td>4kW (~9–10 panels)</td><td>~£6,500–£8,500</td><td>~3,400kWh</td></tr>
+        <tr><td>6kW (~13–15 panels)</td><td>up to ~£11,500</td><td>~5,100kWh</td></tr>
+        <tr><td>Add a battery (4–5kWh usable)</td><td>+£3,000–£5,000</td><td>—</td></tr>
       </tbody>
     </table>
   </div>

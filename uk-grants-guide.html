@@ -240,6 +240,10 @@
     .conclusion{margin-left:-1.25rem;margin-right:-1.25rem;}
     .jump-nav{padding:.75rem 1.25rem;}
   }
+
+  /* --- answer capsule (extractable direct answer for AI/SERP) --- */
+  .answer-capsule { border: 1px solid rgba(255,255,255,0.07); border-left: 4px solid #4ade80; background: rgba(74,222,128,0.07); padding: 1.15rem 1.35rem; margin: 0 0 1.75rem; border-radius: 0 3px 3px 0; }
+  .answer-capsule p { margin: 0; color: #e4ede5; font-size: 1.06rem; line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -270,6 +274,7 @@
     <div class="tb-num green">£15bn</div>
     <div class="tb-label">Warm Homes Plan total commitment 2025–2030</div>
   </div>
+
   <div class="tb-cell">
     <div class="tb-num green">£9,000</div>
     <div class="tb-label">Max BUS grant — oil/LPG homes from July 2026</div>
@@ -302,10 +307,14 @@
 
 <!-- ═══════════════════ CHECKER ═══════════════════ -->
 <div id="checker" style="max-width:960px;margin:2rem auto;padding:0 2rem;">
+  <div class="answer-capsule">
+    <p>The main UK schemes in 2026: the <strong>Boiler Upgrade Scheme</strong> takes £7,500 off a heat pump in England and Wales, <strong>ECO4</strong> and the <strong>Warm Homes: Local Grant</strong> fund insulation and heating for eligible households, and <strong>Home Energy Scotland</strong> adds grants plus interest-free loans in Scotland. Several can be combined.</p>
+  </div>
+
 <div class="checker">
   <div class="checker-header">
     <p class="checker-kicker">// Interactive eligibility checker</p>
-    <h2>What can you get? Answer six questions.</h2>
+  <h2>What can you get? Answer six questions.</h2>
     <p>Select all that apply. Results are indicative — verify eligibility with scheme administrators before applying.</p>
   </div>
   <div class="checker-body">
