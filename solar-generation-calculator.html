@@ -35,7 +35,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   :root {
     --green-50: #f0faf3; --green-100: #dcf1e3; --green-200: #aee3c1;
@@ -712,7 +712,10 @@ function renderResults() {
 }
 
 function renderChart() {
-  if (typeof Chart === 'undefined') return;
+  if (typeof Chart === 'undefined') {
+    document.getElementById('chartSub').textContent = 'Chart unavailable right now — the full monthly figures are in the table below.';
+    return;
+  }
   const R = lastResult;
   const multi = R.arrays.length > 1;
   const datasets = multi
