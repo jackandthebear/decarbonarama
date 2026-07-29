@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solar Generation Calculator: How Much Will Your Panels Really Generate? | Decarbonarma</title>
+<meta name="description" content="Satellite-modelled annual solar generation for any UK postcode. Up to 4 arrays, any orientation and pitch, plus £ savings and export earnings. Free, no sign-up.">
+<link rel="canonical" href="https://decarbonarma.com/solar-generation-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Decarbonarma">
+<meta property="og:title" content="Solar Generation Calculator: How Much Will Your Panels Really Generate? | Decarbonarma">
+<meta property="og:description" content="Satellite-modelled annual solar generation for any UK postcode. Up to 4 arrays, any orientation and pitch, plus £ savings and export earnings.">
+<meta property="og:url" content="https://decarbonarma.com/solar-generation-calculator.html">
+<meta property="og:image" content="https://decarbonarma.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Solar Generation Calculator | Decarbonarma">
+<meta name="twitter:description" content="Satellite-modelled annual solar generation for any UK postcode, with £ savings and SEG export earnings.">
+<meta name="twitter:image" content="https://decarbonarma.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Solar Generation Calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (web browser)",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"},
+  "description": "Estimate annual solar PV generation for any UK postcode using EU PVGIS satellite irradiance data, with monthly breakdown, multiple arrays, and savings estimates.",
+  "url": "https://decarbonarma.com/solar-generation-calculator.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Decarbonarma",
+    "logo": {"@type": "ImageObject", "url": "https://decarbonarma.com/logo.png"}
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<style>
+  :root {
+    --green-50: #f0faf3; --green-100: #dcf1e3; --green-200: #aee3c1;
+    --green-400: #34c759; --green-500: #2ba84a; --green-600: #1f8a4c; --green-800: #14622f; --green-900: #0b3a1c;
+    --stone-50: #f5f5f7; --stone-100: #ececf0; --stone-200: #d2d2d7;
+    --stone-600: #6e6e73; --stone-800: #1d1d1f; --white: #ffffff;
+    --s1: #1f8a4c; --s2: #1e4fa3; --s3: #b45309; --s4: #7c3aed;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: var(--white); color: var(--stone-800);
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.011em;
+  }
+  a { color: inherit; }
+  .site-header { padding:14px 32px; border-bottom:1px solid var(--stone-100); display:flex; align-items:center; justify-content:space-between; }
+  .site-header img { height:28px; display:block; }
+  .site-header .back-link { font-size:13px; color:var(--stone-600); text-decoration:none; font-weight:500; }
+  .site-header .back-link:hover { color:var(--green-600); }
+  footer { padding:48px 32px 32px; border-top:1px solid var(--stone-100); margin-top:40px; }
+  .footer-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:32px; max-width:1120px; margin:0 auto 24px; }
+  .footer-brand .logo { font-family:'DM Serif Display',serif; font-size:20px; color:var(--green-900); }
+  .footer-brand .logo span { color:var(--green-600); }
+  .footer-brand p { font-size:13px; color:var(--stone-600); margin-top:10px; line-height:1.6; }
+  .footer-col h5 { font-size:12px; text-transform:uppercase; letter-spacing:0.06em; color:var(--stone-600); margin-bottom:12px; }
+  .footer-col a { display:block; font-size:14px; color:var(--stone-800); text-decoration:none; margin-bottom:8px; }
+  .footer-col a:hover { color:var(--green-600); }
+  .footer-bottom { max-width:1120px; margin:0 auto; font-size:12px; color:var(--stone-600); border-top:1px solid var(--stone-100); padding-top:16px; }
+
+  /* ── SOLAR GEN CALC ── */
+  .sg-hero {
+    background: linear-gradient(150deg, #0e3520 0%, #1a5530 55%, #2d8a4a 100%);
+    padding: 72px 80px 60px; text-align:center; position:relative; overflow:hidden;
+  }
+  .sg-hero::before {
+    content:''; position:absolute; width:520px; height:520px; border-radius:50%;
+    background:rgba(251,191,36,0.10); top:-180px; left:50%; transform:translateX(-50%);
+    pointer-events:none;
+  }
+  .sg-hero .page-tag { display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:2px; background:rgba(255,255,255,0.15); color:rgba(255,255,255,0.9); padding:6px 14px; border-radius:100px; margin-bottom:20px; }
+  .sg-hero h1 { font-family:'DM Serif Display',serif; font-size:clamp(34px,4vw,56px); color:#fff; line-height:1.1; letter-spacing:-0.5px; margin-bottom:16px; position:relative; }
+  .sg-hero h1 em { font-style:italic; color:#ffe9a8; }
+  .sg-hero p { font-size:17px; color:rgba(255,255,255,0.75); max-width:640px; margin:0 auto; line-height:1.7; position:relative; }
+  .sg-trust { display:flex; justify-content:center; gap:28px; margin-top:24px; flex-wrap:wrap; position:relative; }
+  .sg-trust span { font-size:13px; color:rgba(255,255,255,0.6); display:flex; align-items:center; gap:6px; }
+
+  .sg-wrapper { max-width:960px; margin:0 auto; padding:56px 24px 80px; }
+
+  .sg-card { background:var(--white); border-radius:18px; border:1px solid var(--green-100); padding:28px; margin-bottom:20px; }
+  .sg-card .sg-eyebrow { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--green-600); margin-bottom:6px; }
+  .sg-card h3 { font-family:'DM Serif Display',serif; font-size:20px; color:var(--green-900); margin-bottom:20px; }
+
+  .sg-field { margin-bottom:18px; }
+  .sg-field:last-child { margin-bottom:0; }
+  .sg-field label { font-size:13px; font-weight:600; color:var(--stone-800); display:block; margin-bottom:8px; }
+  .sg-hint { font-size:11.5px; color:var(--stone-600); margin-top:6px; line-height:1.5; }
+  .sg-range-row { display:flex; align-items:center; gap:12px; }
+  .sg-range-row input[type=range] { flex:1; accent-color:var(--green-600); }
+  .sg-range-val { font-size:14px; font-weight:600; color:var(--green-800); min-width:64px; text-align:right; font-variant-numeric:tabular-nums; }
+
+  .sg-postcode-row { display:flex; gap:10px; }
+  .sg-postcode-row input {
+    flex:1; font-size:16px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase;
+    padding:13px 16px; border:1.5px solid var(--stone-200); border-radius:12px; outline:none;
+    font-family:inherit; color:var(--stone-800); min-width:0;
+  }
+  .sg-postcode-row input:focus { border-color:var(--green-400); }
+  .sg-btn {
+    font-size:14px; font-weight:600; padding:13px 22px; border-radius:12px; border:none;
+    background:var(--green-600); color:#fff; cursor:pointer; transition:background 0.2s; font-family:inherit;
+    white-space:nowrap;
+  }
+  .sg-btn:hover { background:var(--green-800); }
+  .sg-btn:disabled { background:var(--stone-200); cursor:default; }
+  .sg-loc-ok { display:none; margin-top:12px; font-size:13px; color:var(--green-800); background:var(--green-50); border:1px solid var(--green-100); border-radius:10px; padding:10px 14px; line-height:1.6; }
+  .sg-loc-err { display:none; margin-top:12px; font-size:13px; color:#9a3412; background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:10px 14px; }
+  .sg-advloc { font-size:12px; color:var(--stone-600); margin-top:10px; cursor:pointer; text-decoration:underline; background:none; border:none; font-family:inherit; padding:0; }
+  .sg-latlon { display:none; gap:10px; margin-top:12px; }
+  .sg-latlon input { flex:1; font-size:14px; padding:10px 12px; border:1.5px solid var(--stone-200); border-radius:10px; outline:none; font-family:inherit; min-width:0; }
+  .sg-latlon input:focus { border-color:var(--green-400); }
+
+  .sg-pills { display:flex; gap:8px; flex-wrap:wrap; }
+  .sg-pill {
+    font-size:12.5px; font-weight:600; padding:8px 13px; border-radius:100px;
+    border:1.5px solid var(--green-200); background:var(--white); color:var(--stone-600);
+    cursor:pointer; transition:all 0.2s; font-family:inherit;
+  }
+  .sg-pill:hover { border-color:var(--green-400); }
+  .sg-pill.active { background:var(--green-600); color:var(--white); border-color:var(--green-600); }
+
+  /* array tabs */
+  .sg-array-tabs { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+  .sg-atab {
+    display:flex; align-items:center; gap:8px; font-size:13px; font-weight:600; padding:9px 16px;
+    border-radius:10px; border:1.5px solid var(--stone-100); background:var(--stone-50);
+    color:var(--stone-600); cursor:pointer; transition:all 0.2s; font-family:inherit;
+  }
+  .sg-atab .dot { width:9px; height:9px; border-radius:50%; background:var(--stone-200); }
+  .sg-atab.enabled .dot { background:var(--adot, var(--s1)); }
+  .sg-atab.current { border-color:var(--green-400); background:var(--white); color:var(--stone-800); }
+  .sg-atab-add { border-style:dashed; }
+  .sg-array-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px 24px; }
+  .sg-array-name input { width:100%; font-size:14px; padding:10px 12px; border:1.5px solid var(--stone-200); border-radius:10px; outline:none; font-family:inherit; }
+  .sg-array-name input:focus { border-color:var(--green-400); }
+  .sg-remove-array { margin-top:16px; font-size:12px; color:#b91c1c; background:none; border:none; cursor:pointer; text-decoration:underline; font-family:inherit; padding:0; }
+
+  /* compass */
+  .sg-compass-row { display:flex; align-items:center; gap:16px; }
+  .sg-compass { flex-shrink:0; }
+  .sg-compass svg { display:block; }
+  .sg-orient-pills { display:flex; gap:6px; flex-wrap:wrap; }
+
+  .sg-adv-toggle { display:flex; align-items:center; justify-content:space-between; cursor:pointer; user-select:none; }
+  .sg-adv-toggle h3 { margin-bottom:0; }
+  .sg-adv-body { display:none; margin-top:20px; }
+  .sg-adv-body.open { display:block; }
+  .sg-chev { color:var(--stone-600); font-size:13px; transition:transform 0.2s; }
+
+  .sg-calcbar { text-align:center; margin:8px 0 8px; }
+  .sg-calcbar .sg-btn { font-size:16px; padding:16px 40px; border-radius:14px; box-shadow:0 6px 18px rgba(31,138,76,0.25); }
+  .sg-status { font-size:13px; color:var(--stone-600); margin-top:12px; min-height:20px; }
+  .sg-status.err { color:#9a3412; }
+
+  /* RESULTS */
+  .sg-results { display:none; }
+  .sg-results-hero { display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; margin:28px 0 20px; }
+  .sg-rcard { background:var(--green-800); border-radius:18px; padding:26px 24px; }
+  .sg-rcard.money { background:#0e3520; }
+  .sg-rcard.alt { background:var(--stone-800); }
+  .sg-rcard .rc-label { font-size:11px; color:rgba(255,255,255,0.55); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px; }
+  .sg-rcard .rc-val { font-family:'DM Serif Display',serif; font-size:36px; color:var(--white); line-height:1; }
+  .sg-rcard .rc-val small { font-size:18px; }
+  .sg-rcard .rc-sub { font-size:13px; color:rgba(255,255,255,0.65); margin-top:8px; line-height:1.5; }
+
+  .sg-chart-card { background:var(--white); border:1px solid var(--green-100); border-radius:18px; padding:26px 26px 18px; margin-bottom:20px; }
+  .sg-chart-card h4 { font-family:'DM Serif Display',serif; font-size:18px; color:var(--green-900); margin-bottom:4px; }
+  .sg-chart-sub { font-size:12.5px; color:var(--stone-600); margin-bottom:16px; }
+  .sg-chart-wrap { position:relative; height:300px; }
+
+  .sg-contrib { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:12px; margin-bottom:20px; }
+  .sg-contrib-card { background:var(--stone-50); border:1px solid var(--stone-100); border-radius:14px; padding:16px 18px; }
+  .sg-contrib-card .cc-name { display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:600; color:var(--stone-800); margin-bottom:8px; }
+  .sg-contrib-card .cc-dot { width:10px; height:10px; border-radius:3px; flex-shrink:0; }
+  .sg-contrib-card .cc-kwh { font-family:'DM Serif Display',serif; font-size:24px; color:var(--stone-800); }
+  .sg-contrib-card .cc-sub { font-size:11.5px; color:var(--stone-600); margin-top:4px; line-height:1.5; }
+  .sg-contrib-bar { height:8px; border-radius:100px; background:var(--stone-100); overflow:hidden; display:flex; margin-top:10px; }
+
+  .sg-money-card { background:var(--white); border:1px solid var(--green-100); border-radius:18px; padding:26px; margin-bottom:20px; }
+  .sg-money-card h4 { font-family:'DM Serif Display',serif; font-size:18px; color:var(--green-900); margin-bottom:4px; }
+  .sg-money-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; margin-top:18px; }
+  .sg-money-grid .sg-field label { font-size:12.5px; }
+  .sg-money-out { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-top:20px; }
+  .sg-money-line { background:var(--green-50); border:1px solid var(--green-100); border-radius:12px; padding:14px 16px; }
+  .sg-money-line .ml-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--stone-600); margin-bottom:6px; }
+  .sg-money-line .ml-val { font-family:'DM Serif Display',serif; font-size:22px; color:var(--green-800); }
+  .sg-money-line .ml-sub { font-size:11px; color:var(--stone-600); margin-top:4px; }
+
+  .sg-table-card { background:var(--white); border:1px solid var(--green-100); border-radius:18px; padding:26px; margin-bottom:20px; overflow-x:auto; }
+  .sg-table-head { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:14px; flex-wrap:wrap; }
+  .sg-table-head h4 { font-family:'DM Serif Display',serif; font-size:18px; color:var(--green-900); }
+  .sg-csv-btn { font-size:12.5px; font-weight:600; padding:8px 16px; border-radius:100px; border:1.5px solid var(--green-200); background:var(--white); color:var(--green-800); cursor:pointer; font-family:inherit; transition:all 0.2s; }
+  .sg-csv-btn:hover { border-color:var(--green-400); background:var(--green-50); }
+  table.sg-table { width:100%; border-collapse:collapse; font-size:13px; font-variant-numeric:tabular-nums; }
+  table.sg-table th { text-align:right; font-size:11px; text-transform:uppercase; letter-spacing:0.05em; color:var(--stone-600); font-weight:600; padding:8px 10px; border-bottom:1.5px solid var(--stone-100); }
+  table.sg-table th:first-child, table.sg-table td:first-child { text-align:left; }
+  table.sg-table td { text-align:right; padding:7px 10px; border-bottom:1px solid var(--stone-50); color:var(--stone-800); }
+  table.sg-table tr.total td { font-weight:600; border-top:1.5px solid var(--stone-100); background:var(--green-50); }
+
+  .sg-method { font-size:12px; color:var(--stone-600); line-height:1.7; background:var(--stone-50); border-radius:12px; padding:18px 20px; margin-bottom:20px; }
+  .sg-method strong { color:var(--stone-800); }
+  .sg-offline-note { display:none; font-size:12.5px; color:#9a3412; background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:12px 16px; margin-bottom:16px; line-height:1.6; }
+
+  .sg-related { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .sg-related a { display:block; background:var(--green-50); border:1.5px solid var(--green-200); border-radius:14px; padding:18px 20px; text-decoration:none; transition:border-color 0.2s; }
+  .sg-related a:hover { border-color:var(--green-400); }
+  .sg-related .rl-title { font-size:14px; font-weight:600; color:var(--green-900); margin-bottom:4px; }
+  .sg-related .rl-sub { font-size:12px; color:var(--stone-600); line-height:1.5; }
+
+  @media(max-width:720px) {
+    .sg-hero { padding:60px 24px 48px; }
+    .sg-wrapper { padding:32px 16px 60px; }
+    .sg-array-grid, .sg-results-hero, .sg-money-grid, .sg-money-out, .sg-related { grid-template-columns:1fr; }
+    .sg-compass-row { flex-direction:column; align-items:flex-start; }
+    .footer-grid { grid-template-columns:1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/"><img src="logo.svg" alt="Decarbonarma"></a>
+  <a href="/" class="back-link">&larr; Back to Decarbonarma</a>
+</header>
+
+<!-- HERO -->
+<section class="sg-hero">
+  <div class="page-tag">☀️ Solar Generation Calculator</div>
+  <h1>How much will your solar<br><em>really</em> generate?</h1>
+  <p>A satellite-modelled annual generation estimate for your exact roof — any UK postcode, any orientation, up to four arrays — plus what it's worth in pounds.</p>
+  <div class="sg-trust">
+    <span>📡 EU PVGIS satellite irradiance data</span>
+    <span>📍 Works from your postcode</span>
+    <span>💷 Savings &amp; export earnings included</span>
+  </div>
+</section>
+
+<div class="sg-wrapper">
+
+  <div style="font-size:14px;color:var(--stone-600);margin-bottom:28px;line-height:1.7;max-width:680px;">
+    Installers quote generation from a standard table. This tool instead asks the EU's PVGIS service — nearly 20 years of satellite-measured sunlight for your actual location — so east-, west- and even north-facing roofs get a fair, realistic number.
+  </div>
+
+  <!-- STEP 1: LOCATION -->
+  <div class="sg-card">
+    <div class="sg-eyebrow">Step 1</div>
+    <h3>📍 Where is the roof?</h3>
+    <div class="sg-field">
+      <label for="pcInput">UK postcode</label>
+      <div class="sg-postcode-row">
+        <input id="pcInput" placeholder="e.g. OX5 1AA" autocomplete="postal-code" onkeydown="if(event.key==='Enter'){lookupPostcode();}">
+        <button class="sg-btn" type="button" onclick="lookupPostcode()" id="pcBtn">Find location</button>
+      </div>
+      <div class="sg-loc-ok" id="locOk"></div>
+      <div class="sg-loc-err" id="locErr"></div>
+      <button class="sg-advloc" type="button" onclick="toggleLatLon()">Or enter latitude / longitude manually</button>
+      <div class="sg-latlon" id="latlonRow">
+        <input id="latInput" type="number" step="0.0001" placeholder="Latitude e.g. 51.7520" oninput="manualLatLon()">
+        <input id="lonInput" type="number" step="0.0001" placeholder="Longitude e.g. -1.2577" oninput="manualLatLon()">
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: ARRAYS -->
+  <div class="sg-card">
+    <div class="sg-eyebrow">Step 2</div>
+    <h3>◱ Your solar array(s)</h3>
+    <div class="sg-hint" style="margin:-12px 0 16px;">Panels facing different directions? Add each group as its own array — like 9 panels south + 9 panels north — and we'll model each separately.</div>
+    <div class="sg-array-tabs" id="arrayTabs"></div>
+    <div id="arrayEditor"></div>
+  </div>
+
+  <!-- ADVANCED -->
+  <div class="sg-card">
+    <div class="sg-adv-toggle" onclick="toggleAdv()">
+      <div>
+        <div class="sg-eyebrow">Optional</div>
+        <h3>⚙️ Advanced settings</h3>
+      </div>
+      <span class="sg-chev" id="advChev">▼ show</span>
+    </div>
+    <div class="sg-adv-body" id="advBody">
+      <div class="sg-array-grid">
+        <div class="sg-field">
+          <label>System losses</label>
+          <div class="sg-range-row">
+            <input type="range" id="sysLoss" min="4" max="20" step="1" value="10" oninput="document.getElementById('sysLossOut').textContent=this.value+'%'">
+            <span class="sg-range-val" id="sysLossOut">10%</span>
+          </div>
+          <div class="sg-hint">Cabling, inverter efficiency, dirt, downtime. PVGIS' old default was 14%; ~8–10% suits modern kit (microinverters/optimisers: use 8%).</div>
+        </div>
+        <div class="sg-field">
+          <label>Panel technology</label>
+          <div class="sg-pills">
+            <button class="sg-pill active" id="tech-new" type="button" onclick="setTech('new')">Modern panels (2020+)</button>
+            <button class="sg-pill" id="tech-old" type="button" onclick="setTech('old')">Older panels</button>
+          </div>
+          <div class="sg-hint">Modern panels lose slightly less output on hot days (better temperature coefficient).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sg-calcbar">
+    <button class="sg-btn" type="button" id="calcBtn" onclick="runCalc()">Calculate my generation ☀️</button>
+    <div class="sg-status" id="calcStatus"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="sg-results" id="results">
+
+    <div class="sg-offline-note" id="offlineNote">
+      ⚠️ The PVGIS satellite service couldn't be reached just now, so these figures use our built-in UK irradiance model instead — a good approximation, but re-run later for the satellite-modelled numbers.
+    </div>
+
+    <div class="sg-results-hero">
+      <div class="sg-rcard">
+        <div class="rc-label">Annual generation</div>
+        <div class="rc-val" id="resKwh">—</div>
+        <div class="rc-sub" id="resKwhSub">—</div>
+      </div>
+      <div class="sg-rcard money">
+        <div class="rc-label">Worth per year</div>
+        <div class="rc-val" id="resMoney">—</div>
+        <div class="rc-sub" id="resMoneySub">bill savings + export earnings</div>
+      </div>
+      <div class="sg-rcard alt">
+        <div class="rc-label">Specific yield</div>
+        <div class="rc-val" id="resYield">—</div>
+        <div class="rc-sub" id="resYieldSub">kWh generated per kWp installed — the fair way to compare systems</div>
+      </div>
+    </div>
+
+    <!-- MONTHLY CHART -->
+    <div class="sg-chart-card">
+      <h4>Month by month</h4>
+      <div class="sg-chart-sub" id="chartSub">Estimated generation, kWh per month</div>
+      <div class="sg-chart-wrap"><canvas id="monthlyChart" role="img" aria-label="Bar chart of estimated monthly solar generation"></canvas></div>
+    </div>
+
+    <!-- ARRAY CONTRIBUTION -->
+    <div id="contribWrap">
+      <div class="sg-contrib" id="contribCards"></div>
+    </div>
+
+    <!-- MONEY -->
+    <div class="sg-money-card">
+      <h4>💷 What it's worth</h4>
+      <div class="sg-chart-sub">Adjust the assumptions — the figures update instantly.</div>
+      <div class="sg-money-grid">
+        <div class="sg-field">
+          <label>Self-use share <span style="font-weight:400;color:var(--stone-600);">(used at home)</span></label>
+          <div class="sg-range-row">
+            <input type="range" id="selfUse" min="10" max="95" step="5" value="35" oninput="updateMoney()">
+            <span class="sg-range-val" id="selfUseOut">35%</span>
+          </div>
+          <div class="sg-hint">Typical: 25–40% without a battery · 60–90% with one.</div>
+        </div>
+        <div class="sg-field">
+          <label>Import rate you avoid</label>
+          <div class="sg-range-row">
+            <input type="range" id="impRate" min="10" max="45" step="0.5" value="26" oninput="updateMoney()">
+            <span class="sg-range-val" id="impRateOut">26p</span>
+          </div>
+          <div class="sg-hint">Your unit rate, p/kWh. Check your bill.</div>
+        </div>
+        <div class="sg-field">
+          <label>SEG export rate</label>
+          <div class="sg-range-row">
+            <input type="range" id="expRate" min="1" max="30" step="0.5" value="15" oninput="updateMoney()">
+            <span class="sg-range-val" id="expRateOut">15p</span>
+          </div>
+          <div class="sg-hint">What you're paid per exported kWh. Best SEG tariffs pay ~15p; the worst under 5p — see our <a href="/ai-tariff-finder.html" style="color:var(--green-600);">Tariff Finder</a>.</div>
+        </div>
+      </div>
+      <div class="sg-money-out">
+        <div class="sg-money-line">
+          <div class="ml-label">Bill savings</div>
+          <div class="ml-val" id="moneySelf">—</div>
+          <div class="ml-sub" id="moneySelfSub">—</div>
+        </div>
+        <div class="sg-money-line">
+          <div class="ml-label">Export earnings</div>
+          <div class="ml-val" id="moneyExp">—</div>
+          <div class="ml-sub" id="moneyExpSub">—</div>
+        </div>
+        <div class="sg-money-line" style="background:var(--green-100);">
+          <div class="ml-label">Total per year</div>
+          <div class="ml-val" id="moneyTotal">—</div>
+          <div class="ml-sub">at today's rates</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="sg-table-card">
+      <div class="sg-table-head">
+        <h4>The numbers</h4>
+        <button class="sg-csv-btn" type="button" onclick="downloadCsv()">⬇ Download CSV</button>
+      </div>
+      <table class="sg-table" id="resultTable"></table>
+    </div>
+
+    <div class="sg-method" id="methodNote"></div>
+
+    <div class="sg-related">
+      <a href="/battery_sizing_tool.html">
+        <div class="rl-title">🔋 Next: size a battery for it</div>
+        <div class="rl-sub">A battery can lift your self-use share from ~35% to 70%+ — our sizing calculator works out how many kWh you need.</div>
+      </a>
+      <a href="/home-energy-adviser.html">
+        <div class="rl-title">🌿 Ask the Home Energy Adviser</div>
+        <div class="rl-sub">Not sure if solar should come before a battery or heat pump? Our AI adviser builds you a whole-home plan.</div>
+      </a>
+    </div>
+
+  </div><!-- /results -->
+
+</div><!-- /sg-wrapper -->
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><span class="logo">Decarbon<span>arma</span></span><p>Helping UK homeowners transition to clean, affordable home energy.</p></div>
+    <div class="footer-col"><h5>Technologies</h5><a href="/#solar">Solar Panels</a><a href="/#battery">Battery Storage</a><a href="/#heatpump">Heat Pumps</a><a href="/#evcar">EV Charging</a><a href="/#ai">AI Technology</a></div>
+    <div class="footer-col"><h5>Tools</h5><a href="/home-energy-adviser.html">Home Energy Adviser</a><a href="/ai-tariff-finder.html">Tariff Finder</a><a href="/heat-loss-estimator.html">Heat Loss Estimator</a><a href="/battery_sizing_tool.html">Battery Sizing</a><a href="/solar-generation-calculator.html">Solar Generation</a></div>
+    <div class="footer-col"><h5>Support</h5><a href="/#">Contact</a><a href="/#">FAQ</a><a href="/uk-grants-guide.html">Grants Guide</a></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Decarbonarma. All rights reserved. Generation estimates are modelled, not guaranteed — real output varies with weather, shading and equipment.</span></div>
+</footer>
+
+<script>
+/* ═══════════════ STATE ═══════════════ */
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const ACOLORS = ['#1f8a4c','#1e4fa3','#b45309','#7c3aed']; // validated categorical order
+const COMPASS = [['N',0],['NE',45],['E',90],['SE',135],['S',180],['SW',225],['W',270],['NW',315]];
+
+let loc = null;            // {lat, lon, label}
+let tech = 'new';
+let currentArray = 0;
+let lastResult = null;     // {arrays:[{name,kwp,monthly:[12],annual}], totalMonthly, totalAnnual, source}
+let chart = null;
+
+const arrays = [
+  { enabled:true,  name:'South roof', kwp:4.0, azimuth:180, pitch:35, shade:0 },
+  { enabled:false, name:'Array 2',    kwp:2.0, azimuth:90,  pitch:35, shade:0 },
+  { enabled:false, name:'Array 3',    kwp:2.0, azimuth:270, pitch:35, shade:0 },
+  { enabled:false, name:'Array 4',    kwp:2.0, azimuth:0,   pitch:35, shade:0 },
+];
+
+/* ═══════════════ LOCATION ═══════════════ */
+async function lookupPostcode() {
+  const pc = document.getElementById('pcInput').value.trim();
+  const ok = document.getElementById('locOk'), err = document.getElementById('locErr');
+  ok.style.display = 'none'; err.style.display = 'none';
+  if (!pc) { err.textContent = 'Please enter a postcode.'; err.style.display = 'block'; return; }
+  const btn = document.getElementById('pcBtn');
+  btn.disabled = true; btn.textContent = 'Looking up…';
+  try {
+    const r = await fetch('https://api.postcodes.io/postcodes/' + encodeURIComponent(pc));
+    const j = await r.json();
+    if (j.status !== 200 || !j.result) throw new Error('not found');
+    loc = { lat: j.result.latitude, lon: j.result.longitude,
+            label: j.result.postcode + ' — ' + (j.result.admin_district || j.result.region || 'UK') };
+    ok.innerHTML = '✅ <strong>' + loc.label + '</strong> &nbsp;(' + loc.lat.toFixed(4) + ', ' + loc.lon.toFixed(4) + ')';
+    ok.style.display = 'block';
+  } catch(e) {
+    err.textContent = 'Couldn\'t find that postcode — check it, or enter latitude/longitude manually below.';
+    err.style.display = 'block';
+  }
+  btn.disabled = false; btn.textContent = 'Find location';
+}
+function toggleLatLon() {
+  const row = document.getElementById('latlonRow');
+  row.style.display = row.style.display === 'flex' ? 'none' : 'flex';
+}
+function manualLatLon() {
+  const lat = parseFloat(document.getElementById('latInput').value);
+  const lon = parseFloat(document.getElementById('lonInput').value);
+  if (isFinite(lat) && isFinite(lon) && lat > 40 && lat < 65 && lon > -12 && lon < 5) {
+    loc = { lat, lon, label: 'Manual location' };
+    const ok = document.getElementById('locOk');
+    ok.innerHTML = '✅ Using coordinates (' + lat.toFixed(4) + ', ' + lon.toFixed(4) + ')';
+    ok.style.display = 'block';
+    document.getElementById('locErr').style.display = 'none';
+  }
+}
+
+/* ═══════════════ ARRAY UI ═══════════════ */
+function renderTabs() {
+  const wrap = document.getElementById('arrayTabs');
+  let html = '';
+  arrays.forEach((a, i) => {
+    if (!a.enabled && !(i === firstDisabled())) return;
+    if (a.enabled) {
+      html += '<button type="button" class="sg-atab enabled' + (i === currentArray ? ' current' : '') + '" style="--adot:' + ACOLORS[i] + '" onclick="selectArray(' + i + ')"><span class="dot"></span>' + esc(a.name) + ' · ' + a.kwp.toFixed(1) + ' kWp</button>';
+    }
+  });
+  const fd = firstDisabled();
+  if (fd !== -1) html += '<button type="button" class="sg-atab sg-atab-add" onclick="addArray()">＋ Add array</button>';
+  wrap.innerHTML = html;
+}
+function firstDisabled() { return arrays.findIndex(a => !a.enabled); }
+function selectArray(i) { currentArray = i; renderTabs(); renderEditor(); }
+function addArray() {
+  const i = firstDisabled();
+  if (i === -1) return;
+  arrays[i].enabled = true;
+  selectArray(i);
+}
+function removeArray(i) {
+  if (i === 0) return;
+  arrays[i].enabled = false;
+  currentArray = 0;
+  renderTabs(); renderEditor();
+}
+function esc(s){ return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+function renderEditor() {
+  const a = arrays[currentArray];
+  const el = document.getElementById('arrayEditor');
+  el.innerHTML = `
+    <div class="sg-array-grid">
+      <div class="sg-field sg-array-name">
+        <label>Array name</label>
+        <input value="${esc(a.name)}" oninput="arrays[${currentArray}].name=this.value" onchange="renderTabs()">
+        <div class="sg-hint">e.g. "South roof", "Garage east"</div>
+      </div>
+      <div class="sg-field">
+        <label>Array size</label>
+        <div class="sg-range-row">
+          <input type="range" min="0.5" max="20" step="0.1" value="${a.kwp}" oninput="arrays[${currentArray}].kwp=parseFloat(this.value);this.nextElementSibling.textContent=parseFloat(this.value).toFixed(1)+' kWp';renderTabs()">
+          <span class="sg-range-val">${a.kwp.toFixed(1)} kWp</span>
+        </div>
+        <div class="sg-hint">Panels × panel watts ÷ 1000. E.g. 10 × 440 W = 4.4 kWp.</div>
+      </div>
+      <div class="sg-field" style="grid-column:1/-1;">
+        <label>Orientation — which way do the panels face?</label>
+        <div class="sg-compass-row">
+          <div class="sg-compass">${compassSvg(a.azimuth, ACOLORS[currentArray])}</div>
+          <div style="flex:1;">
+            <div class="sg-orient-pills sg-pills">
+              ${COMPASS.map(([n,d]) => `<button type="button" class="sg-pill${a.azimuth===d?' active':''}" onclick="setAz(${d})">${n}</button>`).join('')}
+            </div>
+            <div class="sg-range-row" style="margin-top:12px;">
+              <input type="range" min="0" max="359" step="1" value="${a.azimuth}" id="azSlider" oninput="setAz(parseInt(this.value,10), true)">
+              <span class="sg-range-val" id="azOut">${a.azimuth}°</span>
+            </div>
+            <div class="sg-hint">0° = north, 90° = east, 180° = south, 270° = west. Roughly right is fine — a 10° error barely changes the result.</div>
+          </div>
+        </div>
+      </div>
+      <div class="sg-field">
+        <label>Roof pitch</label>
+        <div class="sg-range-row">
+          <input type="range" min="0" max="90" step="1" value="${a.pitch}" oninput="arrays[${currentArray}].pitch=parseInt(this.value,10);this.nextElementSibling.textContent=this.value+'°'">
+          <span class="sg-range-val">${a.pitch}°</span>
+        </div>
+        <div class="sg-hint">Typical UK roof: 30–40°. Flat roof on frames: 10–15°. Vertical (wall): 90°.</div>
+      </div>
+      <div class="sg-field">
+        <label>Shading</label>
+        <div class="sg-range-row">
+          <input type="range" min="0" max="80" step="5" value="${a.shade}" oninput="arrays[${currentArray}].shade=parseInt(this.value,10);this.nextElementSibling.textContent=this.value+'%'">
+          <span class="sg-range-val">${a.shade}%</span>
+        </div>
+        <div class="sg-hint">0% = clear sky all day. Got a quote with a "shading factor" (0–1)? Shading % = (1 − factor) × 100.</div>
+      </div>
+    </div>
+    ${currentArray > 0 ? `<button type="button" class="sg-remove-array" onclick="removeArray(${currentArray})">Remove this array</button>` : ''}
+  `;
+}
+function setAz(deg, fromSlider) {
+  arrays[currentArray].azimuth = deg;
+  if (fromSlider) {
+    document.getElementById('azOut').textContent = deg + '°';
+    document.querySelectorAll('.sg-orient-pills .sg-pill').forEach((b, idx) => b.classList.toggle('active', COMPASS[idx][1] === deg));
+    const c = document.querySelector('.sg-compass');
+    if (c) c.innerHTML = compassSvg(deg, ACOLORS[currentArray]);
+  } else {
+    renderEditor();
+  }
+  renderTabs();
+}
+function compassSvg(deg, color) {
+  return `<svg width="110" height="110" viewBox="0 0 110 110">
+    <circle cx="55" cy="55" r="50" fill="#f5f5f7" stroke="#d2d2d7" stroke-width="1.5"/>
+    <text x="55" y="16" text-anchor="middle" font-size="10" font-weight="600" fill="#6e6e73">N</text>
+    <text x="99" y="59" text-anchor="middle" font-size="10" fill="#6e6e73">E</text>
+    <text x="55" y="102" text-anchor="middle" font-size="10" fill="#6e6e73">S</text>
+    <text x="11" y="59" text-anchor="middle" font-size="10" fill="#6e6e73">W</text>
+    <g transform="rotate(${deg} 55 55)">
+      <path d="M55 20 L62 55 L55 50 L48 55 Z" fill="${color}"/>
+      <circle cx="55" cy="55" r="4" fill="${color}"/>
+    </g>
+  </svg>`;
+}
+
+/* ═══════════════ ADVANCED ═══════════════ */
+function toggleAdv() {
+  const b = document.getElementById('advBody');
+  b.classList.toggle('open');
+  document.getElementById('advChev').textContent = b.classList.contains('open') ? '▲ hide' : '▼ show';
+}
+function setTech(t) {
+  tech = t;
+  document.getElementById('tech-new').classList.toggle('active', t === 'new');
+  document.getElementById('tech-old').classList.toggle('active', t === 'old');
+}
+
+/* ═══════════════ CALCULATION ═══════════════ */
+async function runCalc() {
+  const status = document.getElementById('calcStatus');
+  status.classList.remove('err');
+  if (!loc) { status.textContent = 'First find your location in Step 1 ↑'; status.classList.add('err'); return; }
+  const active = arrays.map((a,i)=>({...a, idx:i})).filter(a => a.enabled);
+  if (!active.length) { status.textContent = 'Enable at least one array.'; status.classList.add('err'); return; }
+
+  const btn = document.getElementById('calcBtn');
+  btn.disabled = true;
+  status.textContent = '📡 Asking the PVGIS satellite database…';
+  const loss = parseFloat(document.getElementById('sysLoss').value);
+
+  let source = 'pvgis';
+  const results = [];
+  try {
+  try {
+    for (const a of active) {
+      status.textContent = '📡 Modelling "' + a.name + '" (' + (results.length+1) + '/' + active.length + ')…';
+      const aspect = ((a.azimuth - 180 + 540) % 360) - 180; // compass → PVGIS aspect (0=S, -90=E, 90=W)
+      const qs = new URLSearchParams({ lat: loc.lat, lon: loc.lon, kwp: a.kwp, angle: a.pitch, aspect: aspect, loss: loss, tech: tech });
+      const r = await fetch('/.netlify/functions/pvgis?' + qs.toString());
+      if (!r.ok) throw new Error('pvgis http ' + r.status);
+      const j = await r.json();
+      if (!j || !Array.isArray(j.monthly) || j.monthly.length !== 12) throw new Error('pvgis shape');
+      const sf = 1 - a.shade / 100;
+      results.push({ idx: a.idx, name: a.name, kwp: a.kwp, monthly: j.monthly.map(m => m * sf), meta: j });
+    }
+  } catch(e) {
+    // Fallback: built-in UK irradiance model
+    source = 'model';
+    results.length = 0;
+    for (const a of active) {
+      const sf = 1 - a.shade / 100;
+      results.push({ idx: a.idx, name: a.name, kwp: a.kwp, monthly: modelMonthly(loc.lat, a.kwp, a.azimuth, a.pitch, loss).map(m => m * sf) });
+    }
+  }
+
+  results.forEach(r => r.annual = r.monthly.reduce((s,x)=>s+x,0));
+  const totalMonthly = MONTHS.map((_,m) => results.reduce((s,r)=>s+r.monthly[m],0));
+  lastResult = { arrays: results, totalMonthly, totalAnnual: totalMonthly.reduce((s,x)=>s+x,0),
+                 totalKwp: results.reduce((s,r)=>s+r.kwp,0), source, loss };
+
+  renderResults();
+  status.textContent = '';
+  document.getElementById('results').scrollIntoView({ behavior:'smooth', block:'start' });
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+/* Built-in fallback model (used only if PVGIS is unreachable).
+   Base specific yield for south-facing 35° by latitude, then an
+   orientation/tilt factor grid (MCS-style) with bilinear interpolation. */
+function modelMonthly(lat, kwp, azimuth, pitch, loss) {
+  const base = Math.max(760, Math.min(1010, 1000 - (lat - 50.8) * 22)); // kWh/kWp, S @35°
+  const offS = Math.min(180, Math.abs(((azimuth - 180) % 360 + 360) % 360 > 180 ? 360 - ((azimuth - 180) % 360 + 360) % 360 : ((azimuth - 180) % 360 + 360) % 360));
+  const tilts = [0, 30, 45, 60, 90];
+  const offs  = [0, 45, 90, 135, 180];
+  const F = [ // rows: tilt, cols: degrees off south
+    [0.87,0.87,0.87,0.87,0.87],
+    [1.00,0.96,0.86,0.75,0.68],
+    [0.99,0.94,0.82,0.68,0.58],
+    [0.95,0.90,0.77,0.60,0.48],
+    [0.78,0.73,0.60,0.43,0.32],
+  ];
+  const ti = Math.min(3, tilts.findIndex((t,i) => pitch <= tilts[Math.min(i+1, 4)]));
+  const oi = Math.min(3, offs.findIndex((o,i) => offS <= offs[Math.min(i+1, 4)]));
+  const tf = (pitch - tilts[ti]) / (tilts[ti+1] - tilts[ti]);
+  const of_ = (offS - offs[oi]) / (offs[oi+1] - offs[oi]);
+  const f = (F[ti][oi]*(1-tf) + F[ti+1][oi]*tf) * (1-of_) + (F[ti][oi+1]*(1-tf) + F[ti+1][oi+1]*tf) * of_;
+  const annual = base * f * kwp * (1 - (loss - 10) / 100 / 2); // mild loss adjustment around 10% baseline
+  const shape = [3.2,5.1,8.4,11.2,12.8,13.0,12.9,11.3,9.0,6.1,3.7,3.3]; // % of annual by month (UK)
+  return shape.map(p => annual * p / 100);
+}
+
+/* ═══════════════ RESULTS RENDERING ═══════════════ */
+function fmtInt(n) { return Math.round(n).toLocaleString('en-GB'); }
+
+function renderResults() {
+  const R = lastResult;
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('offlineNote').style.display = R.source === 'model' ? 'block' : 'none';
+
+  document.getElementById('resKwh').innerHTML = fmtInt(R.totalAnnual) + ' <small>kWh</small>';
+  document.getElementById('resKwhSub').textContent = R.totalKwp.toFixed(1) + ' kWp across ' + R.arrays.length + (R.arrays.length > 1 ? ' arrays' : ' array') + ' · ' + loc.label;
+  document.getElementById('resYield').innerHTML = fmtInt(R.totalAnnual / R.totalKwp) + ' <small>kWh/kWp</small>';
+
+  try { renderChart(); } catch(e) { /* chart lib unavailable — table below still shows everything */ }
+  renderContrib();
+  renderTable();
+  updateMoney();
+  renderMethod();
+}
+
+function renderChart() {
+  if (typeof Chart === 'undefined') return;
+  const R = lastResult;
+  const multi = R.arrays.length > 1;
+  const datasets = multi
+    ? R.arrays.map(a => ({
+        label: a.name, data: a.monthly.map(v => Math.round(v)),
+        backgroundColor: ACOLORS[a.idx], stack: 'gen',
+        borderColor: '#ffffff', borderWidth: 2, borderSkipped: false, borderRadius: 3, maxBarThickness: 46,
+      }))
+    : [{ label: R.arrays[0].name, data: R.arrays[0].monthly.map(v => Math.round(v)),
+         backgroundColor: ACOLORS[0], borderColor: '#ffffff', borderWidth: 2, borderSkipped: false, borderRadius: 4, maxBarThickness: 46 }];
+
+  if (chart) chart.destroy();
+  chart = new Chart(document.getElementById('monthlyChart'), {
+    type: 'bar',
+    data: { labels: MONTHS, datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: multi, position: 'top', align: 'end',
+          labels: { usePointStyle: true, pointStyle: 'rectRounded', boxWidth: 9, boxHeight: 9,
+                    color: '#1d1d1f', font: { size: 12, weight: '500' } } },
+        tooltip: {
+          backgroundColor: '#1d1d1f', titleFont: { weight: '600' }, padding: 10, cornerRadius: 8,
+          callbacks: {
+            label: ctx => ' ' + ctx.dataset.label + ': ' + fmtInt(ctx.parsed.y) + ' kWh',
+            footer: items => multi ? 'Total: ' + fmtInt(items.reduce((s,i)=>s+i.parsed.y,0)) + ' kWh' : '',
+          }
+        }
+      },
+      scales: {
+        x: { stacked: multi, grid: { display: false }, border: { color: '#d2d2d7' },
+             ticks: { color: '#6e6e73', font: { size: 11 } } },
+        y: { stacked: multi, grid: { color: '#ececf0' }, border: { display: false },
+             ticks: { color: '#6e6e73', font: { size: 11 }, callback: v => fmtInt(v) },
+             title: { display: true, text: 'kWh', color: '#6e6e73', font: { size: 11 } } }
+      }
+    }
+  });
+  const best = lastResult.totalMonthly.indexOf(Math.max(...lastResult.totalMonthly));
+  document.getElementById('chartSub').textContent =
+    'Estimated kWh per month — ' + MONTHS[best] + ' is your peak at ~' + fmtInt(lastResult.totalMonthly[best]) + ' kWh.';
+}
+
+function renderContrib() {
+  const R = lastResult;
+  const wrap = document.getElementById('contribWrap');
+  if (R.arrays.length < 2) { wrap.style.display = 'none'; return; }
+  wrap.style.display = 'block';
+  document.getElementById('contribCards').innerHTML = R.arrays.map(a => {
+    const pct = a.annual / R.totalAnnual * 100;
+    return `<div class="sg-contrib-card">
+      <div class="cc-name"><span class="cc-dot" style="background:${ACOLORS[a.idx]}"></span>${esc(a.name)}</div>
+      <div class="cc-kwh">${fmtInt(a.annual)} kWh</div>
+      <div class="cc-sub">${pct.toFixed(0)}% of total · ${fmtInt(a.annual / a.kwp)} kWh/kWp</div>
+      <div class="sg-contrib-bar"><span style="width:${pct.toFixed(1)}%;background:${ACOLORS[a.idx]};display:block;"></span></div>
+    </div>`;
+  }).join('');
+}
+
+function updateMoney() {
+  if (!lastResult) return;
+  const self = parseFloat(document.getElementById('selfUse').value) / 100;
+  const imp = parseFloat(document.getElementById('impRate').value);
+  const exp = parseFloat(document.getElementById('expRate').value);
+  document.getElementById('selfUseOut').textContent = Math.round(self * 100) + '%';
+  document.getElementById('impRateOut').textContent = imp + 'p';
+  document.getElementById('expRateOut').textContent = exp + 'p';
+
+  const g = lastResult.totalAnnual;
+  const selfKwh = g * self, expKwh = g * (1 - self);
+  const saveGBP = selfKwh * imp / 100, expGBP = expKwh * exp / 100;
+
+  document.getElementById('moneySelf').textContent = '£' + fmtInt(saveGBP);
+  document.getElementById('moneySelfSub').textContent = fmtInt(selfKwh) + ' kWh you don\'t buy at ' + imp + 'p';
+  document.getElementById('moneyExp').textContent = '£' + fmtInt(expGBP);
+  document.getElementById('moneyExpSub').textContent = fmtInt(expKwh) + ' kWh sold at ' + exp + 'p';
+  document.getElementById('moneyTotal').textContent = '£' + fmtInt(saveGBP + expGBP);
+  document.getElementById('resMoney').innerHTML = '£' + fmtInt(saveGBP + expGBP) + '<small>/yr</small>';
+}
+
+function renderTable() {
+  const R = lastResult;
+  const multi = R.arrays.length > 1;
+  let html = '<thead><tr><th>Month</th>';
+  if (multi) R.arrays.forEach(a => html += '<th>' + esc(a.name) + ' (kWh)</th>');
+  html += '<th>' + (multi ? 'Total (kWh)' : 'Generation (kWh)') + '</th></tr></thead><tbody>';
+  MONTHS.forEach((m, i) => {
+    html += '<tr><td>' + m + '</td>';
+    if (multi) R.arrays.forEach(a => html += '<td>' + fmtInt(a.monthly[i]) + '</td>');
+    html += '<td>' + fmtInt(R.totalMonthly[i]) + '</td></tr>';
+  });
+  html += '<tr class="total"><td>Year</td>';
+  if (multi) R.arrays.forEach(a => html += '<td>' + fmtInt(a.annual) + '</td>');
+  html += '<td>' + fmtInt(R.totalAnnual) + '</td></tr></tbody>';
+  document.getElementById('resultTable').innerHTML = html;
+}
+
+function downloadCsv() {
+  const R = lastResult;
+  if (!R) return;
+  let csv = 'Month,' + R.arrays.map(a => '"' + a.name.replace(/"/g,'""') + ' (kWh)"').join(',') + ',Total (kWh)\n';
+  MONTHS.forEach((m, i) => {
+    csv += m + ',' + R.arrays.map(a => a.monthly[i].toFixed(1)).join(',') + ',' + R.totalMonthly[i].toFixed(1) + '\n';
+  });
+  csv += 'Year,' + R.arrays.map(a => a.annual.toFixed(0)).join(',') + ',' + R.totalAnnual.toFixed(0) + '\n';
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], { type:'text/csv' }));
+  a.download = 'decarbonarma-solar-generation.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function renderMethod() {
+  const R = lastResult;
+  const src = R.source === 'pvgis'
+    ? 'the EU Joint Research Centre\'s <strong>PVGIS</strong> service (SARAH satellite irradiance record, hourly data spanning ~2005–2023), the same engine used by professional solar designers'
+    : 'our built-in UK irradiance model (PVGIS was unreachable)';
+  document.getElementById('methodNote').innerHTML =
+    '<strong>Methodology:</strong> Each array is modelled separately against ' + src +
+    ', using your exact latitude/longitude, the array\'s orientation and pitch, roof-mounted temperature behaviour, and <strong>' + R.loss +
+    '% system losses</strong> (inverter, cabling, dirt). Your shading percentage is then applied per array. ' +
+    'Results are a <strong>long-term annual average</strong> — a sunny year can be ~10% above it and a dull one ~10% below, and month-to-month swings are bigger. ' +
+    'Specific yield (kWh per kWp) is the fair way to compare arrays: in the UK, ~950–1,050 for a good south roof, ~800–900 for east/west, and ~550–700 for north — ' +
+    'north-facing panels still pay their way on modern low-cost panels with microinverters. Figures are estimates, not a guarantee.';
+}
+
+/* init */
+renderTabs();
+renderEditor();
+</script>
+</body>
+</html>
