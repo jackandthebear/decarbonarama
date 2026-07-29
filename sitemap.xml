@@ -127,7 +127,7 @@
   </url>
   <url>
     <loc>https://decarbonarma.com/articles/decarbonarama-optimiser_4.html</loc>
-    <lastmod>2026-07-10T08:40:26+00:00</lastmod>
+    <lastmod>2026-07-23T00:00:00+00:00</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
@@ -296,11 +296,6 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://decarbonarma.com/articles/decarbonarama-optimiser_4.html</loc>
-    <lastmod>2026-07-23T00:00:00+00:00</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
     <loc>https://decarbonarma.com/articles/heat-pump-grant-9000-golden-window.html</loc>
     <lastmod>2026-07-29T00:00:00+00:00</lastmod>
     <priority>0.80</priority>
@@ -314,5 +309,15 @@
     <loc>https://decarbonarma.com/news/daily-brief.html</loc>
     <lastmod>2026-07-10T08:40:26+00:00</lastmod>
     <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://decarbonarma.com/about.html</loc>
+    <lastmod>2026-07-29T00:00:00+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://decarbonarma.com/heat-pump-installation-cost.html</loc>
+    <lastmod>2026-07-29T00:00:00+00:00</lastmod>
+    <priority>0.80</priority>
   </url>
 </urlset>
