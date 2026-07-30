@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="max-image-preview:large">
+<title>Octopus's 6-Hour Charging Cap Meets the Zappi — and the Daytime-Slot Trap for Solar Exporters | Decarbonarma</title>
+<meta name="description" content="Intelligent Octopus Go now caps cheap smart charging at 6 hours (~42kWh) a day, and increasingly schedules slots in daylight. For solar exporters on 12p Outgoing, that daytime 'cheap' charge quietly costs more than charging overnight. We do the maths.">
+<link rel="canonical" href="https://decarbonarma.com/articles/octopus-6-hour-limit-zappi-solar.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Decarbonarma">
+<meta property="og:title" content="Octopus's 6-Hour Charging Cap Meets the Zappi — and the Daytime-Slot Trap for Solar Exporters | Decarbonarma">
+<meta property="og:description" content="Intelligent Octopus Go now caps cheap smart charging at 6 hours a day and increasingly schedules daytime slots. If you export solar at 12p, that 'cheap' daytime charge costs you real money. Full cost table inside.">
+<meta property="og:url" content="https://decarbonarma.com/articles/octopus-6-hour-limit-zappi-solar.html">
+<meta property="og:image" content="https://decarbonarma.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Octopus's 6-Hour Cap Meets the Zappi: The Daytime-Slot Trap for Solar Exporters">
+<meta name="twitter:description" content="6 hours max, ~42kWh a day — and daytime slots that eat your 12p export. We work out exactly what it costs.">
+<meta name="twitter:image" content="https://decarbonarma.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Octopus's 6-Hour Charging Cap Meets the Zappi — and the Daytime-Slot Trap for Solar Exporters",
+  "description": "Intelligent Octopus Go now caps cheap smart charging at 6 hours (~42kWh) a day, and increasingly schedules slots in daylight. For solar exporters on 12p Outgoing, that daytime charge quietly costs more than charging overnight.",
+  "url": "https://decarbonarma.com/articles/octopus-6-hour-limit-zappi-solar.html",
+  "image": "https://decarbonarma.com/og-image.png",
+  "author": {
+    "@type": "Person",
+    "name": "Gareth",
+    "url": "https://decarbonarma.com/about.html"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Decarbonarma",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://decarbonarma.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://decarbonarma.com/articles/octopus-6-hour-limit-zappi-solar.html"
+  },
+  "datePublished": "2026-07-30",
+  "dateModified": "2026-07-30"
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0d1510; --bg2:#111a13; --bg3:#162019; --bg4:#1a2820;
+    --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.13);
+    --green:#4ade80; --green-dim:#22c55e; --green-deep:#1a5c38;
+    --green-pale:rgba(74,222,128,0.08); --green-pale2:rgba(74,222,128,0.13);
+    --amber:#fbbf24; --amber-pale:rgba(251,191,36,0.08);
+    --blue:#5aa7d6; --violet:#a78bfa; --grey:#8a9a90;
+    --red:#f87171;
+    --text:#e4ede5; --text-mid:#94a894; --text-dim:#5a6c5a;
+    --mono:'JetBrains Mono','Courier New',monospace;
+    --serif:'Playfair Display',Georgia,serif;
+    --body:'Source Serif 4',Georgia,serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.75;font-weight:300;-webkit-font-smoothing:antialiased;}
+
+  .site-header{border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:rgba(13,21,16,.9);backdrop-filter:blur(8px);z-index:20;}
+  .site-logo{text-decoration:none;display:flex;align-items:center;}
+  .site-nav{display:flex;gap:1.5rem;}
+  .site-nav a{color:var(--text-dim);text-decoration:none;font-size:12px;letter-spacing:.07em;text-transform:uppercase;}
+  .site-nav a:hover{color:var(--green);}
+
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px;}
+  .hero{padding:64px 0 34px;border-bottom:1px solid var(--border);}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);}
+  h1{font-family:var(--serif);font-weight:700;font-size:2.5rem;line-height:1.12;margin:.4em 0 .3em;color:#fff;}
+  .standfirst{font-size:1.2rem;color:var(--text-mid);font-weight:300;}
+  .byline{font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-top:18px;}
+
+  main{padding:10px 0 40px;}
+  h2{font-family:var(--serif);font-weight:700;font-size:1.7rem;color:#fff;margin:2em 0 .4em;}
+  h3{font-family:var(--body);font-weight:600;font-size:1.18rem;color:var(--green);margin:1.7em 0 .3em;}
+  p{margin:.85em 0;}
+  strong{color:#fff;font-weight:600;}
+  em{color:var(--text-mid);}
+  a{color:var(--green);}
+  ul{margin:.85em 0 .85em 1.3em;}
+  li{margin:.45em 0;}
+
+  /* --- answer capsule (extractable direct answer for AI/SERP) --- */
+  .answer-capsule{border:1px solid rgba(255,255,255,0.07);border-left:4px solid #4ade80;background:rgba(74,222,128,0.07);padding:1.15rem 1.35rem;margin:26px 0 1.75rem;border-radius:0 3px 3px 0;}
+  .answer-capsule p{margin:0;color:#e4ede5;font-size:1.06rem;line-height:1.6;}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:30px 0;}
+  .stat{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+  .stat .n{font-family:var(--mono);font-size:1.6rem;font-weight:500;color:var(--green);line-height:1;}
+  .stat .l{font-size:13px;color:var(--text-mid);margin-top:8px;line-height:1.4;}
+
+  .card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px;margin:26px 0;}
+  .chart-box{position:relative;height:380px;width:100%;}
+  .chart-cap{font-size:13.5px;color:var(--text-mid);margin-top:14px;line-height:1.55;}
+
+  table{width:100%;border-collapse:collapse;font-size:15px;margin:6px 0;}
+  th,td{text-align:left;padding:10px 10px;border-bottom:1px solid var(--border);}
+  th{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim);font-weight:400;}
+  td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--text);}
+  tr.hl td{background:var(--amber-pale);}
+
+  .callout{border-left:3px solid var(--amber);background:var(--amber-pale);padding:18px 22px;border-radius:0 12px 12px 0;margin:28px 0;}
+  .callout h3{margin-top:0;color:var(--amber);}
+
+  footer{border-top:1px solid var(--border);padding:28px 0 60px;}
+  footer p{font-size:12.5px;color:var(--text-dim);line-height:1.65;}
+  footer a{color:var(--text-mid);}
+
+  @media(max-width:600px){ h1{font-size:1.85rem;} .chart-box{height:320px;} body{font-size:16px;} .hero{padding:40px 0 26px;} }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="site-logo"><img src="../logo-light.svg" alt="Decarbonarma" style="height:34px;width:auto;display:block;"></a>
+  <nav class="site-nav">
+    <a href="/">Home</a>
+    <a href="/#ev">EVs</a>
+    <a href="/#solar">Solar</a>
+    <a href="/#tariff">Tariffs</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">EV Tariffs · Solar · July 2026</div>
+    <h1>Octopus's 6-Hour Cap Meets the Zappi: The Daytime-Slot Trap for Solar Exporters</h1>
+    <!-- Article Start -->
+  <p class="standfirst">Intelligent Octopus Go now enforces a limit of six hours of cheap smart charging per day — roughly 42kWh through a 7kW charger — and increasingly schedules those slots in the middle of the day, when wholesale power is cheapest. Zappi owners are wrestling with the mechanics, and there's a quieter problem nobody's pricing up: if your roof is exporting solar at 12p when Octopus fires up the charger, that "cheap" daytime charge costs you more than charging at night. We've done the maths, using our own house as the test case.</p>
+    <div class="byline">Decarbonarma · July 2026 · ~8-min read</div>
+  </div>
+
+  <main>
+
+  <div class="answer-capsule">
+    <p>Intelligent Octopus Go now caps discounted smart charging at <strong>6 hours per day</strong> (measured midday to midday) — about <strong>42–43kWh</strong> through a 7–7.4kW charger. If Octopus schedules a daytime slot while your solar is exporting, every kWh of solar diverted into the car costs you a net <strong>5p</strong> (12p export foregone minus 7p import avoided). Exporting 5kW for a full 6-hour slot makes the charge about <strong>£1.50 dearer</strong> than the identical charge done overnight. Simplest fix: leave the car plugged in but keep the charger <em>paused</em> until export stops — a cloudy spell, or after ~7pm once the sun is down.</p>
+  </div>
+
+  <p>For years, Intelligent Octopus Go's headline trick was that it didn't really have a limit. The terms always mentioned six hours, but in practice the algorithm charged what your car needed at the off-peak rate and everyone got on with their lives. That era is over. Octopus announced enforcement of the cap from January 2026, with a "Charge Cap" feature rolling out through spring, and by early summer the forums — MoneySavingExpert, SpeakEV, PistonHeads, the MG and myenergi communities — were filling up with confused Zappi owners trying to work out where their cheap electricity had gone.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="n">6 hrs</div><div class="l">Max discounted smart charging per day, measured midday-to-midday</div></div>
+    <div class="stat"><div class="n">~42 kWh</div><div class="l">What 6 hours buys through a 7kW charger (~43kWh at a Zappi's 7.4kW)</div></div>
+    <div class="stat"><div class="n">7p</div><div class="l">Off-peak import rate (our tariff; officially "from 8p", varies by region)</div></div>
+    <div class="stat"><div class="n">12p</div><div class="l">Outgoing Octopus fixed export rate for every kWh your solar sends to the grid</div></div>
+  </div>
+
+  <h2>What actually changed</h2>
+
+  <p>The rules as they now stand: your car gets up to <strong>six hours of off-peak-priced smart charging per day</strong>, counted from midday to midday. Slots scheduled inside the standard <strong>23:30–05:30</strong> window are off-peak anyway — that window discounts your whole house, car included. Slots scheduled <em>outside</em> the window (Octopus does this whenever wholesale prices make it worthwhile, which in summer increasingly means the middle of a sunny day) are billed at the off-peak rate too — but only until your six hours are used. Beyond that, charging is billed at the day rate, even if you desperately need the miles. Octopus's justification is that around 80% of charging sessions were already under six hours, so most people will never notice. The other 20% — big batteries, low-power chargers, two-EV households — have noticed.</p>
+
+  <h3>Why Zappi owners are having a rough time</h3>
+
+  <p>The complaints cluster into four groups, and they're consistent across the forums:</p>
+
+  <ul>
+    <li><strong>The cap bites harder on slower chargers.</strong> Six hours through a 7kW charger is ~42kWh; through a granny lead at 2.3kW it's under 14kWh. The limit is hours, not energy — so the less powerful your connection, the less cheap charge you can ever get in a day.</li>
+    <li><strong>Fragmented slots.</strong> Users report small top-ups of 15–20kWh being split across late-evening and post-05:30 daytime slots rather than sitting neatly inside the off-peak window — chewing through the six-hour allowance in fragments and dragging charging into hours when solar households would rather the charger stayed off.</li>
+    <li><strong>Nobody knows how solar counts.</strong> If your Zappi is topping the car up partly from PV surplus and partly from grid during a smart slot, does the whole hour count against the six? Octopus hasn't published clear rules, and as of June the promised in-app six-hour visibility still hadn't fully arrived for Zappi users.</li>
+    <li><strong>Integration trade-offs.</strong> myenergi's own guidance: Zappi integration runs in <strong>Eco+</strong> (Octopus sends boost commands over your home Wi-Fi, with a 40–80 second delay, and solar divert still works between slots), while vehicle integration needs <strong>Fast mode</strong> — where solar divert doesn't work at all, because the car and Octopus have no idea your roof is generating. Owners of home batteries get a further warning: a daytime boost can happily drain your house battery into the car.</li>
+  </ul>
+
+  <h2>The daytime-slot trap: when "cheap" charging eats your export</h2>
+
+  <p>Here's the bit that matters if you have solar, and it's the reason we wrote this piece. Octopus <em>wants</em> to schedule daytime slots now. Midday wholesale prices are frequently the lowest of the day in summer — precisely because of all the solar on the grid. For a house with no PV, a daytime slot at 7p is a straight win. For a house that's exporting, it's the opposite.</p>
+
+  <p>Take our own setup at Rose Cottage. On a decent day the array is exporting <strong>5kW</strong> at lunchtime, earning 12p per kWh on Outgoing Octopus. Then Octopus decides it's a lovely time to charge the car and boosts the Zappi to full power, ~7.2kW. Instantly, all 5kW of export vanishes into the car and we start <em>importing</em> 2.2kW to make up the difference. The import is cheap — 7p. But every one of those solar kilowatt-hours was worth 12p on the grid and is now displacing electricity we could have bought for 7p. We're paying a <strong>5p-per-kWh penalty to use our own sunshine</strong>.</p>
+
+  <p>Over a full six-hour slot, here's what that does to the cost of the same ~43kWh charge, at different levels of export:</p>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Solar export during slot</th>
+          <th>Solar into car (6h)</th>
+          <th>Grid import (6h)</th>
+          <th>Import cost @7p</th>
+          <th>Lost export @12p</th>
+          <th>True cost of charge</th>
+          <th>vs overnight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>None (overnight)</td><td class="num">0 kWh</td><td class="num">43.2 kWh</td><td class="num">£3.02</td><td class="num">£0.00</td><td class="num">£3.02</td><td class="num">—</td></tr>
+        <tr><td>1 kW</td><td class="num">6 kWh</td><td class="num">37.2 kWh</td><td class="num">£2.60</td><td class="num">£0.72</td><td class="num">£3.32</td><td class="num">+£0.30</td></tr>
+        <tr><td>2 kW</td><td class="num">12 kWh</td><td class="num">31.2 kWh</td><td class="num">£2.18</td><td class="num">£1.44</td><td class="num">£3.62</td><td class="num">+£0.60</td></tr>
+        <tr><td>3 kW</td><td class="num">18 kWh</td><td class="num">25.2 kWh</td><td class="num">£1.76</td><td class="num">£2.16</td><td class="num">£3.92</td><td class="num">+£0.90</td></tr>
+        <tr><td>4 kW</td><td class="num">24 kWh</td><td class="num">19.2 kWh</td><td class="num">£1.34</td><td class="num">£2.88</td><td class="num">£4.22</td><td class="num">+£1.20</td></tr>
+        <tr class="hl"><td><strong>5 kW (Rose Cottage)</strong></td><td class="num">30 kWh</td><td class="num">13.2 kWh</td><td class="num">£0.92</td><td class="num">£3.60</td><td class="num">£4.52</td><td class="num">+£1.50</td></tr>
+        <tr><td>5.5 kW</td><td class="num">33 kWh</td><td class="num">10.2 kWh</td><td class="num">£0.71</td><td class="num">£3.96</td><td class="num">£4.67</td><td class="num">+£1.65</td></tr>
+      </tbody>
+    </table>
+    <p class="chart-cap"><strong>Table — the true cost of a full 6-hour, 7.2kW (43.2kWh) smart charge at 7p import, when your solar would otherwise export at 12p.</strong> "True cost" = grid import paid + export income foregone. The overnight row is the baseline: same energy, no solar sacrificed. Assumes steady export through the slot; real days vary, but the per-kWh penalty is constant at 5p.</p>
+  </div>
+
+  <div class="card">
+    <div class="chart-box"><canvas id="costChart"></canvas></div>
+    <p class="chart-cap"><strong>Figure — what you pay vs what you lose.</strong> As export rises, the import bill (green) shrinks but the foregone export (amber) grows faster — because export earns 12p and import only costs 7p. The dashed line is the £3.02 overnight baseline. The gap above it is pure, avoidable loss.</p>
+  </div>
+
+  <div class="callout">
+    <h3>The 5p rule</h3>
+    <p>On a 7p-import / 12p-export combination, <strong>every kWh of your own solar that goes into the car instead of the grid costs you a net 5p</strong>. Solar-charging the car feels virtuous, but financially it's backwards: you're spending 12p electricity to avoid buying 7p electricity. Fill the car from the cheap grid at night; sell the sunshine. If your export rate ever drops below your off-peak import rate, the logic flips back — so re-run this sum whenever either rate changes.</p>
+  </div>
+
+  <p>Scale it up and the numbers stop being trivial. A daily commuter pulling a full daytime slot against 4–5kW of summer export is losing <strong>£35–£45 a month</strong> versus doing exactly the same charging overnight. That's not Octopus overcharging anyone — every kWh was billed correctly — it's the opportunity cost of letting the algorithm optimise for <em>wholesale</em> prices while your household economics run on <em>retail</em> ones. Octopus's algorithm doesn't know what your export is worth. Only you do.</p>
+
+  <h2>What to actually do about it</h2>
+
+  <p><strong>If you have solar and a decent export rate, keep your charging out of daylight.</strong> The simplest lever is the plug itself: connect the car in the evening and set a ready-by time of early morning, so the algorithm has all night to find six off-peak hours inside the 23:30–05:30 window and no excuse to reach into tomorrow's sunshine. If daytime slots keep appearing, use the app's scheduling preferences (and the Charge Cap, as it rolls out) to cap sessions at what you actually need — a 42kWh daily ceiling is irrelevant if you only ever add 15kWh.</p>
+
+  <h3>What we actually do at Rose Cottage</h3>
+
+  <p>The principle is simple: the car stays plugged in, but the Zappi stays <strong>stopped</strong> whenever the export meter is earning. It's released in exactly two situations: when a cloudy afternoon has killed the export anyway, or <strong>after about 7pm</strong>, once the sun is off the panels. From that moment Octopus's algorithm can schedule whatever it likes, because every hour it can reach is solar-free by construction. An evening smart slot at 7p costs us nothing in lost export, the 23:30–05:30 window does the heavy lifting, and the six cheap hours get spent where they belong.</p>
+
+  <p>At Rose Cottage the whole thing runs hands-free through <strong>Homey</strong>, the smart-home hub that already watches our live solar data. The flow is one sentence long: <em>while the house is exporting, hold the Zappi off; once export dies — cloud or sunset — release it.</em> No app-fiddling, no remembering; the charger simply becomes invisible to Octopus during sunshine and available the moment the sunshine stops paying. If you don't run a hub, the manual version works too — it's ten seconds in the myenergi app when you get home. One honest caveat either way: Octopus's fair-use policy takes a dim view of third-party automation <em>fighting</em> its schedules — myenergi specifically warn that Home Assistant control of the Zappi can put you outside the policy. Keep any automation to a simple allow/pause gate like ours, rather than anything that overrides the slots Octopus sends. Our <a href="/#homeyguide">Homey setup guide</a> covers the building blocks.</p>
+
+  <p><strong>Zappi owners have one extra decision: which integration.</strong> Zappi (device) integration keeps Eco+ solar divert alive between smart slots — useful in winter, when surplus is small and export earnings are marginal. But in high summer, divert itself falls foul of the 5p rule: the Zappi is enthusiastically stuffing 12p electricity into a car you could fill for 7p at night. It's a strange inversion of everything solar owners have been taught, but on these rates the "greedy" choice — export everything, import cheap — is also the one the grid would thank you for: your midday export displaces someone else's generation, and your night-time import soaks up cheap surplus.</p>
+
+  <p><strong>If the six hours genuinely aren't enough</strong> — big battery, high mileage, granny lead — the cap is a real cost, and it's worth checking whether a different tariff now suits you better. And whichever side of the fence you're on, check your numbers, not ours: the whole argument pivots on the gap between your export rate and your off-peak import rate.</p>
+
+  <p>The bigger picture is worth naming. Smart tariffs were sold on a simple promise: plug in, forget, save. The 6-hour cap and daytime scheduling are the first serious cracks in "forget" — the algorithm's incentives and yours have started to diverge, and for the growing number of homes with both an EV and an export meter, blind trust now has a measurable price. About 5p a kilowatt-hour, to be precise.</p>
+  <!-- Article End -->
+
+  </main>
+</div>
+
+<!-- dca-email-capture -->
+<div class="dca-signup-outer">
+  <div class="dca-signup">
+    <div class="dca-signup-kicker">Decarbonarma Newsletter</div>
+    <h3 class="dca-signup-h">Get the next one in your inbox</h3>
+    <p class="dca-signup-sub">Clear, no-nonsense analysis of UK home decarbonisation &mdash; heat pumps, solar, EVs, batteries and the grid. Occasional emails, no spam, unsubscribe anytime.</p>
+    <form action="https://decarbonarma.us15.list-manage.com/subscribe/post?u=cffa5aec4001ad97d9357f807&amp;id=8d5f19dec4&amp;f_id=0096a2e1f0" method="post" target="_blank" novalidate class="dca-signup-form">
+      <label class="dca-visually-hidden" for="dca-email">Email address</label>
+      <input type="email" name="EMAIL" id="dca-email" required placeholder="you@example.com" class="dca-signup-input">
+      <div aria-hidden="true" style="position:absolute;left:-5000px;"><input type="text" name="b_cffa5aec4001ad97d9357f807_8d5f19dec4" tabindex="-1" value=""></div>
+      <button type="submit" name="subscribe" class="dca-signup-btn">Subscribe</button>
+    </form>
+    <div class="dca-signup-fine">We&rsquo;ll never share your email. Powered by Mailchimp.</div>
+  </div>
+</div>
+<style>
+  .dca-signup-outer{max-width:820px;margin:48px auto 10px;padding:0 24px;}
+  .dca-signup{background:var(--bg3,#162019);border:1px solid var(--green-pale2,rgba(74,222,128,0.13));border-radius:16px;padding:30px 28px;position:relative;overflow:hidden;}
+  .dca-signup::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green,#4ade80),var(--amber,#fbbf24));}
+  .dca-signup-kicker{font-family:var(--mono,'JetBrains Mono',monospace);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--green,#4ade80);margin-bottom:8px;}
+  .dca-signup-h{font-family:var(--serif,'Playfair Display',Georgia,serif);font-weight:700;font-size:1.5rem;color:#fff;margin:0 0 .3em;line-height:1.15;}
+  .dca-signup-sub{font-family:var(--body,'Source Serif 4',Georgia,serif);font-size:15px;color:var(--text-mid,#94a894);margin:0 0 18px;line-height:1.6;font-weight:300;}
+  .dca-signup-form{display:flex;gap:10px;flex-wrap:wrap;}
+  .dca-signup-input{flex:1 1 240px;min-width:0;background:var(--bg,#0d1510);border:1px solid var(--border2,rgba(255,255,255,0.13));border-radius:10px;padding:13px 15px;color:var(--text,#e4ede5);font-family:var(--body,'Source Serif 4',Georgia,serif);font-size:15px;}
+  .dca-signup-input:focus{outline:none;border-color:var(--green,#4ade80);box-shadow:0 0 0 3px var(--green-pale,rgba(74,222,128,0.08));}
+  .dca-signup-input::placeholder{color:var(--text-dim,#5a6c5a);}
+  .dca-signup-btn{flex:0 0 auto;background:var(--green,#4ade80);color:#062012;border:none;border-radius:10px;padding:13px 26px;font-family:var(--mono,'JetBrains Mono',monospace);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:background .15s;}
+  .dca-signup-btn:hover{background:var(--green-dim,#22c55e);}
+  .dca-signup-fine{font-family:var(--mono,'JetBrains Mono',monospace);font-size:11px;color:var(--text-dim,#5a6c5a);margin-top:12px;letter-spacing:.02em;}
+  .dca-visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  @media(max-width:520px){.dca-signup-btn{flex:1 1 100%;}}
+</style>
+<!-- /dca-email-capture -->
+
+<div data-toolref="1" style="max-width:760px;margin:2.5rem auto;padding:1.25rem 1.5rem;border:1px solid rgba(74,222,128,0.35);border-radius:12px;background:rgba(74,222,128,0.08);"><div style="font-weight:700;font-size:1.05rem;margin-bottom:0.85rem;">Free tools for this topic</div><div style="display:flex;flex-wrap:wrap;gap:0.6rem;"><a href="/ai-tariff-finder.html" target="_top" style="display:inline-block;background:#4ade80;color:#0d1510;font-weight:700;text-decoration:none;padding:0.6rem 1.1rem;border-radius:8px;font-size:0.95rem;line-height:1.2;">⚡ AI Tariff Finder &rarr;</a><a href="/solar-generation-calculator.html" target="_top" style="display:inline-block;background:#4ade80;color:#0d1510;font-weight:700;text-decoration:none;padding:0.6rem 1.1rem;border-radius:8px;font-size:0.95rem;line-height:1.2;">☀️ Solar Generation Calculator &rarr;</a><a href="/#homeyguide" target="_top" style="display:inline-block;background:#4ade80;color:#0d1510;font-weight:700;text-decoration:none;padding:0.6rem 1.1rem;border-radius:8px;font-size:0.95rem;line-height:1.2;">📱 Homey Setup Guide &rarr;</a></div><div style="font-size:0.85rem;color:#94a894;margin-top:0.6rem;">The whole argument pivots on your import/export gap — check which tariff combination actually wins for your setup, and how much your roof really exports.</div></div>
+<footer>
+  <div class="wrap">
+    <p><strong style="color:var(--text-mid);">Sources:</strong>
+      6-hour cap, midday-to-midday measurement, Charge Cap rollout &amp; "80% of sessions" figure: Octopus Energy blog, "Upcoming changes to Intelligent Octopus Go" (2026) · User issues &amp; enforcement from January 2026: MoneySavingExpert forum, "Intelligent Octopus Go limiting cheap charging" (2026) · Zappi-specific complaints (slot fragmentation, solar-counting ambiguity, missing app setting as of June 2026): MGEVs.com community threads (June 2026) · Zappi integration modes, Eco+/Fast behaviour, solar-divert limitations, 40–80s boost delay &amp; home-battery warning: myenergi Help Centre, "zappi &amp; Intelligent Octopus Go" · Rates: Intelligent Octopus Go off-peak officially "from 8p/kWh" (octopus.energy, July 2026; 7p used here is our metered rate — rates vary by region) · Outgoing Octopus fixed export 12p/kWh (Sunsave, "Octopus Energy export tariffs", 2026) · Cost table is Decarbonarma's own calculation for a 7.2kW Zappi over a 6-hour slot; export levels are from our live Rose Cottage data.
+      Published on Decarbonarma. Editorial commentary, not financial advice; check your own tariff rates before acting.</p>
+  </div>
+</footer>
+
+<script>
+const brand = { text:'#e4ede5', mid:'#94a894', grid:'rgba(255,255,255,0.06)', teal:'#4ade80', amber:'#fbbf24', grey:'#8a9a90' };
+Chart.defaults.font.family = "'Source Serif 4', Georgia, serif";
+Chart.defaults.color = brand.mid;
+
+new Chart(document.getElementById('costChart'), {
+  type:'bar',
+  data:{
+    labels:['0 kW (overnight)','1 kW','2 kW','3 kW','4 kW','5 kW','5.5 kW'],
+    datasets:[
+      { label:'Grid import paid @7p', data:[3.02,2.60,2.18,1.76,1.34,0.92,0.71], backgroundColor:brand.teal, stack:'cost', borderRadius:4, barPercentage:0.6 },
+      { label:'Export income lost @12p', data:[0,0.72,1.44,2.16,2.88,3.60,3.96], backgroundColor:brand.amber, stack:'cost', borderRadius:4, barPercentage:0.6 }
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{
+      legend:{position:'bottom', labels:{boxWidth:14, padding:16}},
+      tooltip:{callbacks:{
+        label:c=>` ${c.dataset.label}: £${c.parsed.y.toFixed(2)}`,
+        footer:items=>{const t=items.reduce((s,i)=>s+i.parsed.y,0);return `True cost: £${t.toFixed(2)}`;}
+      }},
+      annotation:undefined
+    },
+    scales:{
+      x:{ stacked:true, grid:{display:false}, title:{display:true,text:'Solar export during the 6-hour slot'} },
+      y:{ beginAtZero:true, suggestedMax:5, stacked:true, title:{display:true,text:'True cost of the 43.2kWh charge (£)'}, grid:{color:brand.grid}, ticks:{callback:v=>'£'+v.toFixed(2)} }
+    }
+  },
+  plugins:[{
+    id:'nightBaseline',
+    afterDraw(chart){
+      const {ctx, chartArea:{left,right}, scales:{y}} = chart;
+      const yPos = y.getPixelForValue(3.02);
+      ctx.save();
+      ctx.strokeStyle = 'rgba(228,237,229,0.55)';
+      ctx.setLineDash([6,5]);
+      ctx.beginPath(); ctx.moveTo(left,yPos); ctx.lineTo(right,yPos); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = 'rgba(228,237,229,0.75)';
+      ctx.font = "12px 'JetBrains Mono', monospace";
+      ctx.fillText('Overnight baseline £3.02', left+8, yPos-8);
+      ctx.restore();
+    }
+  }]
+});
+</script>
+<script defer src="/adviser-widget.js"></script>
+</body>
+</html>
