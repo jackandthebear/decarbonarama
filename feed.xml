@@ -5,8 +5,15 @@
 <link>https://decarbonarma.com/</link>
 <description>Clear, no-nonsense analysis of UK home decarbonisation - heat pumps, solar, EVs, batteries and the grid.</description>
 <language>en-gb</language>
-<lastBuildDate>Thu, 30 Jul 2026 04:06:06 -0000</lastBuildDate>
+<lastBuildDate>Fri, 31 Jul 2026 04:06:15 -0000</lastBuildDate>
 <atom:link href="https://decarbonarma.com/feed.xml" rel="self" type="application/rss+xml" />
+<item>
+<title>Octopus's 6-Hour Charging Cap Meets the Zappi — and the Daytime-Slot Trap for Solar Exporters</title>
+<link>https://decarbonarma.com/articles/octopus-6-hour-limit-zappi-solar.html</link>
+<guid isPermaLink="true">https://decarbonarma.com/articles/octopus-6-hour-limit-zappi-solar.html</guid>
+<pubDate>Thu, 30 Jul 2026 14:21:51 -0000</pubDate>
+<description>Intelligent Octopus Go now caps cheap smart charging at 6 hours (~42kWh) a day, and increasingly schedules slots in daylight. For solar exporters on 12p Outgoing, that daytime 'cheap' charge quietly costs more than charging overnight. We do the maths.</description>
+</item>
 <item>
 <title>The £9,000 Heat Pump Grant — and the Short Golden Window It Opens</title>
 <link>https://decarbonarma.com/articles/heat-pump-grant-9000-golden-window.html</link>
