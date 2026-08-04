@@ -5,8 +5,15 @@
 <link>https://decarbonarma.com/</link>
 <description>Clear, no-nonsense analysis of UK home decarbonisation - heat pumps, solar, EVs, batteries and the grid.</description>
 <language>en-gb</language>
-<lastBuildDate>Mon, 03 Aug 2026 04:08:08 -0000</lastBuildDate>
+<lastBuildDate>Tue, 04 Aug 2026 04:06:39 -0000</lastBuildDate>
 <atom:link href="https://decarbonarma.com/feed.xml" rel="self" type="application/rss+xml" />
+<item>
+<title>How We Automated Rose Cottage's Energy With Homey — and How to Copy It Without a Sonnen Battery</title>
+<link>https://decarbonarma.com/articles/homey-energy-automation-guide.html</link>
+<guid isPermaLink="true">https://decarbonarma.com/articles/homey-energy-automation-guide.html</guid>
+<pubDate>Mon, 03 Aug 2026 16:08:34 -0000</pubDate>
+<description>Eight real Homey Pro automations running at Rose Cottage today, screenshotted from the live Flow editor: Octopus via Kraken, myenergi Zappi and Eddi, solar forecasting, and a Sonnen battery. Only one of the eight flows is Sonnen-specific — here's exactly what to swap for your own inverter.</description>
+</item>
 <item>
 <title>Octopus's 6-Hour Charging Cap Meets the Zappi — and the Daytime-Slot Trap for Solar Exporters</title>
 <link>https://decarbonarma.com/articles/octopus-6-hour-limit-zappi-solar.html</link>
