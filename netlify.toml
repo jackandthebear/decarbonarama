@@ -25,3 +25,79 @@
 
 [build.processing.images]
   compress = false
+
+# --- Canonical URL enforcement -------------------------------------------------
+# Netlify serves extensionless twins (/articles/foo as well as /articles/foo.html).
+# Google treated the .html versions as duplicates of the extensionless ones, which
+# left several articles unindexed. These 301s collapse each page to one URL: the
+# .html form used in sitemap.xml and every <link rel="canonical">.
+# Note: rules without force=true only fire when no static file matches, so
+# /articles/foo.html still serves the file directly (no redirect loop).
+
+[[redirects]]
+  from = "/articles/:slug"
+  to = "/articles/:slug.html"
+  status = 301
+
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 301
+
+[[redirects]]
+  from = "/ai-tariff-finder"
+  to = "/ai-tariff-finder.html"
+  status = 301
+
+[[redirects]]
+  from = "/battery_sizing_tool"
+  to = "/battery_sizing_tool.html"
+  status = 301
+
+[[redirects]]
+  from = "/heat-loss-estimator"
+  to = "/heat-loss-estimator.html"
+  status = 301
+
+[[redirects]]
+  from = "/heat-pump-installation-cost"
+  to = "/heat-pump-installation-cost.html"
+  status = 301
+
+[[redirects]]
+  from = "/home-energy-adviser"
+  to = "/home-energy-adviser.html"
+  status = 301
+
+[[redirects]]
+  from = "/homey-setup-guide"
+  to = "/homey-setup-guide.html"
+  status = 301
+
+[[redirects]]
+  from = "/solar-generation-calculator"
+  to = "/solar-generation-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/uk-grants-guide"
+  to = "/uk-grants-guide.html"
+  status = 301
+
+[[redirects]]
+  from = "/uk-grid-live"
+  to = "/uk-grid-live.html"
+  status = 301
+
+# Root-level uk-nuclear-power-2026.html is a stale duplicate of the articles/ copy
+# (its own canonical already points there). Send both forms to the real page.
+[[redirects]]
+  from = "/uk-nuclear-power-2026"
+  to = "/articles/uk-nuclear-power-2026.html"
+  status = 301
+
+[[redirects]]
+  from = "/uk-nuclear-power-2026.html"
+  to = "/articles/uk-nuclear-power-2026.html"
+  status = 301
+  force = true
