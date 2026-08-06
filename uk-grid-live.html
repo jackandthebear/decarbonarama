@@ -116,8 +116,8 @@
   <div class="ng-wrap">
     <div class="ng-head">
       <div>
-        <h2 class="ng-title">UK National Grid <span class="ng-dot" title="live"></span></h2>
-        <p class="ng-sub">Live status of Great Britain&rsquo;s electricity generation &amp; carbon intensity</p>
+        <h1 class="ng-title">UK National Grid <span class="ng-dot" title="live"></span></h1>
+        <p class="ng-sub">Live generation mix and carbon intensity for Great Britain, refreshed every 60&nbsp;seconds &mdash; and what the numbers are worth acting on at home.</p>
       </div>
       <div class="ng-meta">
         <div id="ng-updated">Loading&hellip;</div>
@@ -187,6 +187,74 @@
       Page auto-refreshes every 60&nbsp;s.
     </div>
   </div>
+
+<style>
+  #page-grid .ng-explainer{max-width:760px;margin:34px auto 8px;padding:0 4px;
+    font-size:17px;line-height:1.65;color:var(--stone-800,#1d1d1f);}
+  #page-grid .ng-explainer h2{font-size:25px;line-height:1.2;letter-spacing:-.02em;
+    margin:34px 0 10px;color:var(--green-900,#0b3a1c);}
+  #page-grid .ng-explainer p{margin:0 0 14px;}
+  #page-grid .ng-explainer ul{margin:0 0 14px;padding-left:1.2em;}
+  #page-grid .ng-explainer li{margin:.35rem 0;}
+  #page-grid .ng-explainer a{color:var(--green-600,#1f8a4c);}
+  #page-grid .ng-capsule{border:1px solid var(--green-200,#aee3c1);border-left:4px solid var(--green-600,#1f8a4c);
+    background:var(--green-50,#f0faf3);padding:1.15rem 1.35rem;border-radius:0 3px 3px 0;margin:0 0 8px;}
+  #page-grid .ng-capsule .lbl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--green-600,#1f8a4c);margin-bottom:.5rem;font-weight:700;}
+  #page-grid .ng-capsule p{margin:0;font-size:1.02rem;}
+</style>
+
+<section class="ng-explainer">
+
+  <div class="ng-capsule">
+    <div class="lbl">The short answer</div>
+    <p>Carbon intensity is the grams of CO&#8322; produced per kilowatt-hour of electricity you use, and it swings widely through the day &mdash; mostly with the wind. The number is only worth acting on for things that can wait: EV charging, hot water, a heat battery, the dishwasher. The rest of your consumption is decided once, not hourly.</p>
+  </div>
+
+  <h2>What this page is showing you</h2>
+  <p>Three things: how much electricity Great Britain is generating right now, how clean that electricity is, and which sources it is coming from. Generation comes from Elexon&rsquo;s FUELINST feed and carbon intensity from NESO&rsquo;s Carbon Intensity API, refreshed every 60&nbsp;seconds.</p>
+  <p>One caveat worth carrying to any live grid dashboard, including this one. FUELINST counts <em>transmission-metered</em> generation, and most of Britain&rsquo;s solar is embedded in the distribution network where that feed never sees it. This page layers embedded solar and wind back in from NESO&rsquo;s Demand Data Update when that feed is reachable &mdash; and when it isn&rsquo;t, solar reads low. On a bright afternoon the real renewable share is usually higher than a transmission-only figure suggests.</p>
+
+  <h2>What the carbon intensity number actually means</h2>
+  <p>The badge next to the figure is the official index band &mdash; very low through very high &mdash; published alongside the number by the Carbon Intensity API, which NESO runs with Environmental Defense Fund Europe, the University of Oxford and WWF.</p>
+  <p>Those bands get recalibrated as the grid decarbonises. A figure that would have counted as &ldquo;low&rdquo; a few years ago sits in a higher band today, because the whole distribution has shifted down. That is why the band is more useful than a number you have memorised, and why any article quoting fixed thresholds goes stale quietly.</p>
+
+  <h2>Cheapest is usually cleanest &mdash; but not always</h2>
+  <p>On a tariff like Agile or Intelligent Octopus Go, cheap windows exist because demand is low or wind output is high. High wind is also low carbon, so most of the time cheap and clean land in the same hours and you can follow the price without thinking about it.</p>
+  <p>The exception is a still, cold night. Demand falls, prices soften, but gas is doing the work and intensity stays stubbornly high. If your goal is carbon rather than cost, the price signal and the intensity figure are two different things, and this page is the one that tells you which is which.</p>
+
+  <h2>What to actually do with it</h2>
+  <p>Honestly? For most households, not much, most of the time. The decisions that dominate your emissions are made once &mdash; insulation, heat pump flow temperature, tariff choice &mdash; not hour by hour. Chasing the live number with a kettle is not where the carbon is.</p>
+  <p>What genuinely responds to it is anything that can be delayed or stored:</p>
+  <ul>
+    <li><strong>EV charging</strong> &mdash; the single biggest shiftable load in most homes, and the easiest to schedule.</li>
+    <li><strong>Hot water</strong> &mdash; a cylinder or heat battery is a store, so it can be charged whenever the grid is cleanest or cheapest and drawn on later.</li>
+    <li><strong>Dishwasher and washing machine</strong> &mdash; small individually, but they already have delay timers.</li>
+    <li><strong>Home battery charge windows</strong>, if you have one.</li>
+  </ul>
+
+  <h2>How this gets used in a real house</h2>
+  <p>At Rose Cottage the rule is not carbon-led, it is arithmetic-led, and it is worth being upfront about that. On Intelligent Octopus Go, importing overnight costs roughly 7p per kWh while exporting earns roughly 12p. That means putting a kilowatt-hour of your own solar into the car costs about 5p <em>more</em> than exporting it and charging from the grid at night. So the Zappi stays paused while the house is exporting, and is released only once export stops on a cloudy afternoon or at around sunset. The full reasoning is in <a href="/articles/octopus-6-hour-limit-zappi-solar.html">the Octopus six-hour limit write-up</a>.</p>
+  <p>That rule is specific to that spread. If your export rate is lower than your overnight import rate &mdash; which it is for plenty of people &mdash; the arithmetic flips and self-consumption wins. Work out your own two numbers before copying anyone else&rsquo;s rule, including this one.</p>
+
+  <h2>Where the numbers come from</h2>
+  <ul>
+    <li><strong>Generation by fuel type</strong> &mdash; <a href="https://bmrs.elexon.co.uk/" target="_blank" rel="noopener">Elexon Insights (FUELINST)</a>, transmission-metered.</li>
+    <li><strong>Embedded solar and wind</strong> &mdash; <a href="https://www.neso.energy/data-portal/demand-data-update" target="_blank" rel="noopener">NESO Demand Data Update</a>.</li>
+    <li><strong>Carbon intensity and forecast</strong> &mdash; <a href="https://carbonintensity.org.uk/" target="_blank" rel="noopener">Carbon Intensity API</a>, covering Great Britain with regional forecasts across 14 DNO areas.</li>
+  </ul>
+  <p>All three are free and public. Nothing on this page is modelled or estimated by us &mdash; if a figure looks wrong, it is worth checking the source feed before believing the dashboard.</p>
+
+  <h2>Related reading</h2>
+  <ul>
+    <li><a href="/articles/uk-grid-security-of-supply-2026.html">Three grid margin notices in one summer</a> &mdash; what happens when wind is low and demand is high.</li>
+    <li><a href="/articles/uk-wind-status-h1-2026.html">UK wind in the first half of 2026</a> &mdash; the output data behind the swings you see here.</li>
+    <li><a href="/articles/uk-nuclear-power-2026.html">UK nuclear power in 2026</a> &mdash; the flat line under the mix.</li>
+    <li><a href="/rose-cottage/hot-water.html">Rose Cottage live solar and hot water report</a> &mdash; the same idea, applied to one house.</li>
+  </ul>
+
+</section>
+
 </div>
 
 <footer class="site-footer">Decarbonarma &mdash; UK home decarbonisation, explained with real data.</footer>
