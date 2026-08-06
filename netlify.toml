@@ -423,6 +423,12 @@
   status = 301
   force = true
 
+[[redirects]]
+  from = "/rose-cottage/hot-water"
+  to = "/rose-cottage/hot-water.html"
+  status = 301
+  force = true
+
 # Root uk-nuclear-power-2026.html is a stale duplicate of the articles/ copy
 # (its own canonical already points there). Send both forms to the real page.
 [[redirects]]

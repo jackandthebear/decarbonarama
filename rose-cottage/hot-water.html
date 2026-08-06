@@ -76,6 +76,40 @@ h2.section{font-family:"Playfair Display",serif;font-size:20px;color:var(--fores
 <script src="/dark-mode.js" defer></script>
 </head>
 <body>
+<!-- SITE_CHROME_START (added 2026-08-06 — this page receives the Sunamp case-study backlink;
+     it previously had no navigation and no internal links out. Hidden when the page is iframed
+     into index.html's Rose Cottage tab, so the tab does not show a nested header. Do not remove:
+     the scheduled tasks that regenerate this file must preserve this block.) -->
+<style>
+  .dca-sitenav{max-width:980px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;
+    justify-content:space-between;gap:16px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+  .dca-sitenav a{color:var(--forest);text-decoration:none;}
+  .dca-sitenav nav{display:flex;gap:18px;font-family:"JetBrains Mono",ui-monospace,monospace;
+    font-size:12px;letter-spacing:.06em;text-transform:uppercase;}
+  .dca-sitenav nav a:hover{text-decoration:underline;}
+  .dca-readnext{max-width:980px;margin:0 auto 56px;padding:0 24px;}
+  .dca-readnext h2{font-family:"Playfair Display",serif;font-size:20px;color:var(--forest);
+    margin:8px 0 4px;padding-top:16px;border-top:1px solid var(--border);}
+  .dca-readnext p.intro{color:var(--ink-2);margin:0 0 14px;}
+  .dca-readnext ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
+  .dca-readnext li{margin:0;}
+  .dca-readnext li a{color:var(--forest);text-decoration:none;font-weight:600;
+    display:block;padding:12px 14px;border:1px solid var(--border);border-radius:4px;background:var(--white);}
+  .dca-readnext li a:hover{border-color:var(--forest);}
+  .dca-readnext li span{display:block;font-weight:400;font-size:14px;color:var(--ink-3);margin-top:3px;}
+</style>
+<header class="dca-sitenav" data-frame-hide>
+  <a href="/" aria-label="Decarbonarma home"><img src="/logo-light.svg" alt="Decarbonarma" style="height:30px;width:auto;display:block;"></a>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/articles/heat-pump-worth-it-2026.html">Heat pumps</a>
+    <a href="/articles/solar-panels-worth-it-2026.html">Solar</a>
+    <a href="/heat-loss-estimator.html">Tools</a>
+  </nav>
+</header>
+<!-- SITE_CHROME_END -->
 <div class="wrap">
 
   <div class="head">
@@ -392,5 +426,30 @@ function buildInsights(rows) {
   buildInsights(rows);
 })();
 </script>
+<!-- READ_NEXT_START (see SITE_CHROME_START above) -->
+<section class="dca-readnext" data-frame-hide aria-label="Read next">
+  <h2>Where to go next</h2>
+  <p class="intro">This page is one house, measured. The rest of the site is the reasoning behind it — real costs, real performance data, and what we would do differently.</p>
+  <ul>
+    <li><a href="/articles/sunamp-300e-case-study.html">The heat battery that replaced our hot water tank<span>What the Sunamp actually cost, and what it displaced</span></a></li>
+    <li><a href="/articles/air-to-air-sunamp-case-study.html">Air-to-air heat pumps plus a Sunamp<span>The full Rose Cottage heating setup, and why it was chosen</span></a></li>
+    <li><a href="/articles/heatpumpmonitor-summary.html">Heat pump monitoring: what 639 real systems show<span>Why flow temperature, not brand, decides efficiency</span></a></li>
+    <li><a href="/articles/solar-panels-worth-it-2026.html">Are solar panels worth it in 2026?<span>Costs, output and payback, with the awkward numbers left in</span></a></li>
+    <li><a href="/articles/heat-pump-worth-it-2026.html">Is a heat pump worth it in 2026?<span>Before and after the £7,500 grant, with running costs</span></a></li>
+    <li><a href="/about.html">About Decarbonarma<span>Who built this, what it cost, and who pays for it</span></a></li>
+  </ul>
+</section>
+<script>
+  /* The Rose Cottage tab on the homepage embeds this page in an iframe. Show the site
+     navigation only to direct visitors (and crawlers), never nested inside that tab. */
+  (function () {
+    try {
+      if (window.self !== window.top) {
+        document.querySelectorAll('[data-frame-hide]').forEach(function (el) { el.remove(); });
+      }
+    } catch (e) { /* cross-origin: treat as embedded, leave chrome in place */ }
+  })();
+</script>
+<!-- READ_NEXT_END -->
 </body>
 </html>
