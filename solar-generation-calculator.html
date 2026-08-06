@@ -4,18 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="max-image-preview:large">
-<title>Solar Generation Calculator: How Much Will Your Panels Really Generate? | Decarbonarma</title>
-<meta name="description" content="Satellite-modelled annual solar generation for any UK postcode. Up to 4 arrays, any orientation and pitch, plus £ savings and export earnings. Free, no sign-up.">
+<title>UK Solar Forecast &amp; Output Calculator by Postcode | Decarbonarma</title>
+<meta name="description" content="What your solar panels will generate today and tomorrow, plus modelled annual output for any UK postcode and roof. Live forecast data, free, no sign-up.">
 <link rel="canonical" href="https://decarbonarma.com/solar-generation-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Decarbonarma">
-<meta property="og:title" content="Solar Generation Calculator: How Much Will Your Panels Really Generate? | Decarbonarma">
+<meta property="og:title" content="UK Solar Forecast &amp; Output Calculator by Postcode | Decarbonarma">
 <meta property="og:description" content="Satellite-modelled annual solar generation for any UK postcode. Up to 4 arrays, any orientation and pitch, plus £ savings and export earnings.">
 <meta property="og:url" content="https://decarbonarma.com/solar-generation-calculator.html">
 <meta property="og:image" content="https://decarbonarma.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Solar Generation Calculator | Decarbonarma">
-<meta name="twitter:description" content="Satellite-modelled annual solar generation for any UK postcode, with £ savings and SEG export earnings.">
+<meta name="twitter:title" content="UK Solar Forecast &amp; Output Calculator | Decarbonarma">
+<meta name="twitter:description" content="Today and tomorrow's solar forecast for your array, plus modelled annual output for any UK postcode.">
 <meta name="twitter:image" content="https://decarbonarma.com/og-image.png">
 <script type="application/ld+json">
 {
@@ -248,10 +248,11 @@
 
 <!-- HERO -->
 <section class="sg-hero">
-  <div class="page-tag">☀️ Solar Generation Calculator</div>
-  <h1>How much will your solar<br><em>really</em> generate?</h1>
-  <p>A satellite-modelled annual generation estimate for your exact roof — any UK postcode, any orientation, up to four arrays — plus what it's worth in pounds.</p>
+  <div class="page-tag">☀️ UK Solar Forecast &amp; Output Calculator</div>
+  <h1>How much will your solar<br><em>really</em> generate &mdash; today, tomorrow and all year?</h1>
+  <p>A live weather forecast of what your array will make <strong>today and tomorrow</strong>, alongside a satellite-modelled estimate for a typical year &mdash; any UK postcode, any orientation, up to four arrays, plus what it&rsquo;s worth in pounds.</p>
   <div class="sg-trust">
+    <span>⛅ Live today &amp; tomorrow forecast</span>
     <span>📡 EU PVGIS satellite irradiance data</span>
     <span>📍 Works from your postcode</span>
     <span>💷 Savings &amp; export earnings included</span>
@@ -465,6 +466,71 @@
   </div><!-- /results -->
 
 </div><!-- /sg-wrapper -->
+
+<style>
+  .sg-explainer{max-width:760px;margin:40px auto 8px;padding:0 20px;
+    font-size:17px;line-height:1.65;color:var(--stone-800,#1d1d1f);}
+  .sg-explainer h2{font-size:25px;line-height:1.2;letter-spacing:-.02em;margin:34px 0 10px;
+    color:var(--green-900,#0b3a1c);}
+  .sg-explainer p{margin:0 0 14px;}
+  .sg-explainer ul{margin:0 0 14px;padding-left:1.2em;}
+  .sg-explainer li{margin:.35rem 0;}
+  .sg-explainer a{color:var(--green-600,#1f8a4c);}
+  .sg-capsule{border:1px solid var(--green-200,#aee3c1);border-left:4px solid var(--green-600,#1f8a4c);
+    background:var(--green-50,#f0faf3);padding:1.15rem 1.35rem;border-radius:0 3px 3px 0;margin:0 0 8px;}
+  .sg-capsule .lbl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;
+    color:var(--green-600,#1f8a4c);margin-bottom:.5rem;}
+  .sg-capsule p{margin:0;font-size:1.02rem;}
+</style>
+
+<section class="sg-explainer">
+
+  <div class="sg-capsule">
+    <div class="lbl">The short answer</div>
+    <p>This page answers two different questions with two different data sources. <strong>Today and tomorrow</strong> comes from a live weather forecast for your array&rsquo;s exact geometry. The <strong>annual figure</strong> is satellite-modelled for a typical year at your coordinates. The first is for people who already have panels; the second is for people deciding whether to fit them.</p>
+  </div>
+
+  <h2>Two questions, two very different numbers</h2>
+  <p>Most solar calculators answer only the second question, because most of them exist to generate a quote. Both are useful, but they should be trusted differently, and it is worth knowing which one you are reading.</p>
+  <ul>
+    <li><strong>What will my panels make tomorrow?</strong> A weather forecast, refreshed through the day. Useful for deciding when to run the washing machine, whether to charge the car tonight or wait for the sun.</li>
+    <li><strong>What would panels make on this roof in a normal year?</strong> A modelled long-run average. Useful for sizing a system and sanity-checking an installer&rsquo;s quote.</li>
+  </ul>
+
+  <h2>Where the numbers come from</h2>
+  <p>The annual and monthly figures come from the EU&rsquo;s <strong>PVGIS</strong>, which uses satellite-derived irradiance for a typical meteorological year at your coordinates, adjusted for the tilt, orientation and system losses you enter. It answers &ldquo;what does a normal year look like on this roof&rdquo; &mdash; not &ldquo;what will this particular year do&rdquo;.</p>
+  <p>Today and tomorrow come from <strong>Forecast.Solar</strong>, which runs a weather model against your specific array geometry &mdash; the same service Homey and Home Assistant use for their solar forecasts.</p>
+
+  <h2>How much to trust a day-ahead solar forecast</h2>
+  <p>Solar forecasts are good at the <em>shape</em> of a day and less good at the exact total, because the total hinges on when cloud arrives. A clear day forecasts well. Broken cloud is where the error lives.</p>
+  <p>So use it for decisions that tolerate being roughly right &mdash; charge tonight or wait until tomorrow afternoon &mdash; rather than for precise energy budgeting. Tomorrow&rsquo;s number will move as new model runs come in. That is the forecast improving, not the tool contradicting itself.</p>
+
+  <h2>Why your real output won&rsquo;t match the annual model</h2>
+  <p>The modelled figure is a planning number, not a promise. Several things pull real installations below it, and none of them are visible to satellite data:</p>
+  <ul>
+    <li><strong>Shading.</strong> A chimney, a neighbour&rsquo;s tree, a dormer. Satellite irradiance has no idea they exist, and partial shading costs more than its share of the roof.</li>
+    <li><strong>Year-to-year weather.</strong> A typical meteorological year smooths good and bad years into one average you will rarely actually get.</li>
+    <li><strong>Soiling, snow and degradation.</strong> Small individually, real over two decades.</li>
+    <li><strong>Inverter clipping.</strong> If the array is large relative to the inverter, the peaks get shaved off. The mistake made at Rose Cottage was fitting a 3.6&nbsp;kW inverter where 5&nbsp;kW was needed &mdash; a decision that quietly costs generation on exactly the brightest days.</li>
+    <li><strong>Export limits.</strong> A DNO export cap truncates what you can send out, however much the panels produce.</li>
+  </ul>
+
+  <h2>kWh per kWp &mdash; the fair way to compare</h2>
+  <p>Dividing annual output by installed capacity gives kWh per kWp, which is the only honest way to compare a small south-facing array against a larger east&ndash;west one. A bigger system that generates more in total may still be the worse roof. This page shows that figure alongside the raw kWh for exactly that reason.</p>
+
+  <h2>What to do with the forecast</h2>
+  <p>Anything that can wait or store: the car, hot water, a heat battery, the dishwasher, a home battery&rsquo;s charge window.</p>
+  <p>One caveat worth doing the arithmetic on first. Self-consumption is only the right answer if your import rate is higher than your export rate. If you export at more than you pay to import overnight, using your own solar in the car actively costs you money &mdash; which is the situation at Rose Cottage, and the reasoning is set out in <a href="/articles/octopus-6-hour-limit-zappi-solar.html">the Octopus six-hour limit write-up</a>. Work out your own two numbers before following anyone&rsquo;s rule of thumb.</p>
+
+  <h2>Related reading</h2>
+  <ul>
+    <li><a href="/articles/solar-panels-worth-it-2026.html">Are solar panels worth it in 2026?</a> &mdash; costs, output and payback, with the awkward numbers left in.</li>
+    <li><a href="/articles/solar-quality-guide.html">How to tell a good solar quote from a bad one</a></li>
+    <li><a href="/rose-cottage/hot-water.html">Rose Cottage live solar report</a> &mdash; a real 16&nbsp;kWp array, measured rather than modelled.</li>
+    <li><a href="/uk-grid-live.html">UK grid live</a> &mdash; what the rest of the country is generating right now.</li>
+  </ul>
+
+</section>
 
 <footer>
   <div class="footer-grid">
