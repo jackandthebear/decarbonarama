@@ -47,11 +47,17 @@ def main():
         headers={"Content-Type": "application/json; charset=utf-8"},
         method="POST",
     )
+    body = ""
     try:
         with urllib.request.urlopen(req, timeout=30) as resp:
             code = resp.status
+            body = resp.read().decode("utf-8", "replace").strip()
     except urllib.error.HTTPError as e:
         code = e.code
+        try:
+            body = e.read().decode("utf-8", "replace").strip()
+        except Exception:
+            pass
     except Exception as e:
         print("request failed: %s" % e)
         return 1
@@ -61,9 +67,31 @@ def main():
         return 0
 
     print("IndexNow returned HTTP %d for %d URLs" % (code, len(urls)))
-    print("  403 = key file not reachable at %s" % KEY_LOCATION)
+    if body:
+        print("  response body: %s" % body)
+    print("  403 = key not valid / key file not reachable at %s" % KEY_LOCATION)
     print("  422 = URLs not on this host    429 = rate limited")
+    print()
+    check_key_file()
     return 1
+
+
+def check_key_file():
+    """Fetch the key file the way IndexNow would, so a 403 can be diagnosed."""
+    print("checking key file %s" % KEY_LOCATION)
+    req = urllib.request.Request(KEY_LOCATION, headers={"User-Agent": "curl/8"})
+    try:
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            raw = resp.read()
+            print("  HTTP %s  content-type=%s  %d bytes"
+                  % (resp.status, resp.headers.get("Content-Type"), len(raw)))
+            text = raw.decode("utf-8", "replace")
+            print("  matches key: %s" % (text.strip() == KEY))
+            if text.strip() != KEY:
+                print("  file contains: %r" % text[:120])
+    except Exception as e:
+        print("  FAILED: %s" % e)
+        print("  IndexNow cannot read the key file either -> that is the 403.")
 
 
 if __name__ == "__main__":
