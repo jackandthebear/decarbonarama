@@ -27,74 +27,409 @@
   compress = false
 
 # --- Canonical URL enforcement -------------------------------------------------
-# Netlify serves extensionless twins (/articles/foo as well as /articles/foo.html).
-# Google treated the .html versions as duplicates of the extensionless ones, which
-# left several articles unindexed. These 301s collapse each page to one URL: the
-# .html form used in sitemap.xml and every <link rel="canonical">.
-# Note: rules without force=true only fire when no static file matches, so
-# /articles/foo.html still serves the file directly (no redirect loop).
+# Netlify also serves an extensionless twin of every page (/articles/foo as well
+# as /articles/foo.html). Google picked the extensionless form as canonical and
+# then reported the .html URLs from sitemap.xml as duplicates, which left several
+# articles unindexed. These 301s collapse each page onto the single .html URL used
+# in sitemap.xml and in every <link rel="canonical">.
+#
+# force = true is required: without it Netlify serves the .html file for the
+# extensionless path before redirect rules are evaluated, so the rule never fires.
+# Every "from" below is an explicit extensionless path (never a :placeholder), so
+# no rule can match a .html request and no redirect loop is possible.
+# Regenerate from the file list when adding a page.
 
 [[redirects]]
-  from = "/articles/:slug"
-  to = "/articles/:slug.html"
+  from = "/articles/air-source-heat-pumps"
+  to = "/articles/air-source-heat-pumps.html"
   status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/air-to-air-heat-pumps-future"
+  to = "/articles/air-to-air-heat-pumps-future.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/air-to-air-heat-pumps-uk-cooling-2026"
+  to = "/articles/air-to-air-heat-pumps-uk-cooling-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/air-to-air-sunamp-case-study"
+  to = "/articles/air-to-air-sunamp-case-study.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/best-ev-chargers-2026"
+  to = "/articles/best-ev-chargers-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/best-gas-boiler-low-carbon"
+  to = "/articles/best-gas-boiler-low-carbon.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/can-uk-grid-handle-all-electric-vehicles"
+  to = "/articles/can-uk-grid-handle-all-electric-vehicles.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/can-uk-grid-handle-heating-electrification"
+  to = "/articles/can-uk-grid-handle-heating-electrification.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/can-uk-grid-survive-january-dunkelflaute"
+  to = "/articles/can-uk-grid-survive-january-dunkelflaute.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/cheapest-motoring-uk-frontera"
+  to = "/articles/cheapest-motoring-uk-frontera.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/crazy-ev-lease-deals-2026"
+  to = "/articles/crazy-ev-lease-deals-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/daikin-x-series-wait-or-buy"
+  to = "/articles/daikin-x-series-wait-or-buy.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/decarb-world-h1-2026"
+  to = "/articles/decarb-world-h1-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/decarbonarama-case-study-15"
+  to = "/articles/decarbonarama-case-study-15.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/decarbonarama-dutch-grid-crisis"
+  to = "/articles/decarbonarama-dutch-grid-crisis.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/decarbonarama-nature-carbon"
+  to = "/articles/decarbonarama-nature-carbon.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/decarbonarama-optimiser_4"
+  to = "/articles/decarbonarama-optimiser_4.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/decarbonarma-5-storage-solutions"
+  to = "/articles/decarbonarma-5-storage-solutions.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/does-brand-matter-heatpump"
+  to = "/articles/does-brand-matter-heatpump.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/eddi-sunamp-double-barrel"
+  to = "/articles/eddi-sunamp-double-barrel.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/ev-charger-decision-guide"
+  to = "/articles/ev-charger-decision-guide.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/ev-charger-solar-battery-ct-clamps"
+  to = "/articles/ev-charger-solar-battery-ct-clamps.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/ev-vs-diesel-case-study"
+  to = "/articles/ev-vs-diesel-case-study.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/frontera-pay-for-itself"
+  to = "/articles/frontera-pay-for-itself.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/future-homes-standard-solar-resale-value"
+  to = "/articles/future-homes-standard-solar-resale-value.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/green-stocks-vs-home-decarb"
+  to = "/articles/green-stocks-vs-home-decarb.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/heat-pump-grant-9000-golden-window"
+  to = "/articles/heat-pump-grant-9000-golden-window.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/heat-pump-worth-it-2026"
+  to = "/articles/heat-pump-worth-it-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/heatpump-news-scop"
+  to = "/articles/heatpump-news-scop.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/heatpumpmonitor-summary"
+  to = "/articles/heatpumpmonitor-summary.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/homey-energy-automation-guide"
+  to = "/articles/homey-energy-automation-guide.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/how-long-do-wind-turbines-last"
+  to = "/articles/how-long-do-wind-turbines-last.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/nibe-s1155-pvt-barry-sharp"
+  to = "/articles/nibe-s1155-pvt-barry-sharp.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/north-sea-fracking-case-study"
+  to = "/articles/north-sea-fracking-case-study.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/octopus-6-hour-limit-zappi-solar"
+  to = "/articles/octopus-6-hour-limit-zappi-solar.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/putin-vs-green-lobby"
+  to = "/articles/putin-vs-green-lobby.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/rose-cottage-h1-2026"
+  to = "/articles/rose-cottage-h1-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/samsung-ehs-quint-deep-dive"
+  to = "/articles/samsung-ehs-quint-deep-dive.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/sigenergy-ecosystem-2026"
+  to = "/articles/sigenergy-ecosystem-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/smr-case-study"
+  to = "/articles/smr-case-study.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/solar-panels-worth-it-2026"
+  to = "/articles/solar-panels-worth-it-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/solar-quality-guide"
+  to = "/articles/solar-quality-guide.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/sonnen-shell-decarbonarama"
+  to = "/articles/sonnen-shell-decarbonarama.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/sunamp-300e-case-study"
+  to = "/articles/sunamp-300e-case-study.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/superfoil-solar-roof-case-study"
+  to = "/articles/superfoil-solar-roof-case-study.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/toyota-bz4x-ev-lease-august-2026"
+  to = "/articles/toyota-bz4x-ev-lease-august-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/uk-grid-heat-pumps-evs"
+  to = "/articles/uk-grid-heat-pumps-evs.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/uk-grid-security-of-supply-2026"
+  to = "/articles/uk-grid-security-of-supply-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/uk-heatwave-deaths-heat-pump-cooling-2026"
+  to = "/articles/uk-heatwave-deaths-heat-pump-cooling-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/uk-nuclear-power-2026"
+  to = "/articles/uk-nuclear-power-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/uk-wasted-wind-grid"
+  to = "/articles/uk-wasted-wind-grid.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/uk-wind-status-h1-2026"
+  to = "/articles/uk-wind-status-h1-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/where-to-start-low-carbon-home"
+  to = "/articles/where-to-start-low-carbon-home.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/wind-at-home-doesnt-add-up"
+  to = "/articles/wind-at-home-doesnt-add-up.html"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/about"
   to = "/about.html"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/ai-tariff-finder"
   to = "/ai-tariff-finder.html"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/battery_sizing_tool"
   to = "/battery_sizing_tool.html"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/heat-loss-estimator"
   to = "/heat-loss-estimator.html"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/heat-pump-installation-cost"
   to = "/heat-pump-installation-cost.html"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/home-energy-adviser"
   to = "/home-energy-adviser.html"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/homey-setup-guide"
   to = "/homey-setup-guide.html"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/solar-generation-calculator"
   to = "/solar-generation-calculator.html"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/uk-grants-guide"
   to = "/uk-grants-guide.html"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/uk-grid-live"
   to = "/uk-grid-live.html"
   status = 301
+  force = true
 
-# Root-level uk-nuclear-power-2026.html is a stale duplicate of the articles/ copy
+# Root uk-nuclear-power-2026.html is a stale duplicate of the articles/ copy
 # (its own canonical already points there). Send both forms to the real page.
 [[redirects]]
   from = "/uk-nuclear-power-2026"
   to = "/articles/uk-nuclear-power-2026.html"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/uk-nuclear-power-2026.html"
