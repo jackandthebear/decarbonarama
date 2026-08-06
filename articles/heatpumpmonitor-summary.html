@@ -4,17 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="max-image-preview:large">
-<title>HeatpumpMonitor.org — What the Data Actually Says | Decarbonarma</title>
-<meta name="description" content="What 639 real UK heat pumps, tracked by HeatpumpMonitor.org, reveal about efficiency, flow temperatures and what good installation design actually looks like.">
+<title>Heat Pump Monitoring: What 639 Real Systems Show | Decarbonarma</title>
+<meta name="description" content="What 639 monitored UK heat pumps reveal about real efficiency — and how to monitor your own properly, with a MID heat meter rather than the manufacturer app.">
 <link rel="canonical" href="https://decarbonarma.com/articles/heatpumpmonitor-summary.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Decarbonarma">
-<meta property="og:title" content="HeatpumpMonitor.org — What the Data Actually Says | Decarbonarma">
+<meta property="og:title" content="Heat Pump Monitoring: What 639 Real Systems Show | Decarbonarma">
 <meta property="og:description" content="What 639 real UK heat pumps, tracked by HeatpumpMonitor.org, reveal about efficiency, flow temperatures and what good installation design actually looks like.">
 <meta property="og:url" content="https://decarbonarma.com/articles/heatpumpmonitor-summary.html">
 <meta property="og:image" content="https://decarbonarma.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="HeatpumpMonitor.org — What the Data Actually Says | Decarbonarma">
+<meta name="twitter:title" content="Heat Pump Monitoring: What 639 Real Systems Show | Decarbonarma">
 <meta name="twitter:description" content="What 639 real UK heat pumps, tracked by HeatpumpMonitor.org, reveal about efficiency, flow temperatures and what good installation design actually looks like.">
 <meta name="twitter:image" content="https://decarbonarma.com/og-image.png">
 <script type="application/ld+json">
@@ -381,7 +381,9 @@
     </div>
   </div>
 
-  <h2>What is HeatpumpMonitor.org?</h2>
+  
+<div class="answer-capsule" style="border:1px solid #c8c4bb;border-left:4px solid #2d6a4f;background:#d8f3dc;padding:1.15rem 1.35rem;margin:0 0 1.75rem;border-radius:0 3px 3px 0;"><div style="font-family:'DM Sans',system-ui,sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#2d6a4f;margin-bottom:.5rem;">The short answer</div><p style="margin:0;font-size:1.06rem;line-height:1.6;color:#1a1a18;font-weight:400;">Across 639 monitored UK heat pumps, the strongest predictor of efficiency is flow temperature, not brand. Systems averaging 30°C flow reach an SPF of about 4.4; at 40°C it falls to roughly 3.4. Measuring your own properly needs a MID heat meter on the flow plus a separate electricity meter — 448 systems in the dataset have both.</p></div>
+<h2>What is HeatpumpMonitor.org?</h2>
   <p>HeatpumpMonitor.org is an open-source community initiative run under the OpenEnergyMonitor umbrella. Heat pump owners — many of them among the UK's most technically rigorous installers and enthusiasts — connect monitoring hardware to their systems and upload live performance data. The result is a growing, publicly searchable dataset covering everything from seasonal performance factors to flow temperatures on the coldest recorded day.</p>
   <p>The dataset is genuinely useful for anyone buying, installing, or simply curious about heat pumps. It answers questions that manufacturer specifications simply can't: how does a particular model behave in mild weather? What does it actually output during a defrost cycle? Is this system's performance typical or outlying?</p>
 
@@ -433,6 +435,52 @@
   <h2>What this means for your installation</h2>
   <p>The dataset validates what the best installers already know: brand choice matters far less than system design. A well-designed, properly commissioned heat pump running at 35°C flow in a home with adequately sized radiators will comprehensively outperform a premium unit running at 50°C in a poorly designed system. The data shows SPF H4 values ranging from below 2 to above 5 — almost entirely explained by system design and commissioning, not hardware.</p>
   <p>For those buying now: insist on a proper heat loss calculation, ask what design flow temperature your installer is targeting, and make sure weather compensation will be set up and tuned at commissioning. These decisions matter far more than the brand badge on the outdoor unit.</p>
+  
+  <h2>How to monitor your own heat pump</h2>
+  <p>Everything above rests on one thing: the systems in this dataset are <strong>measured</strong>, not estimated. If you want to know how your own heat pump is really performing — rather than how the manufacturer's app believes it is performing — here is what that actually takes.</p>
+  <p>Efficiency is a ratio. COP is heat energy out divided by electrical energy in at a given moment; SPF is the same ratio averaged across a season. To get either honestly you have to measure both halves, and most home setups only ever measure one of them.</p>
+
+  <h3>The three levels of monitoring</h3>
+  <table class="temp-table">
+    <thead>
+      <tr><th>Level</th><th>Rough cost</th><th>What it actually tells you</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Manufacturer app</td>
+        <td>Included</td>
+        <td>Trends, run hours and fault codes. Heat output is usually derived from internal sensors rather than metered, so any efficiency figure it displays is an estimate. Useful as an indicator, not as evidence.</td>
+      </tr>
+      <tr>
+        <td>Electricity only — a CT clamp or a DIN-rail meter on the heat pump circuit</td>
+        <td>Typically under £100</td>
+        <td>Exactly what the system consumes, and when. Genuinely useful for cost and for shifting load onto a cheaper tariff — but it cannot tell you efficiency, because it never sees the heat delivered.</td>
+      </tr>
+      <tr class="good">
+        <td>Full metering — a MID-approved heat meter on the flow (class 2 is the usual domestic grade) plus a dedicated electricity meter</td>
+        <td>A few hundred pounds, and far cheaper fitted at installation</td>
+        <td>A real, comparable SPF. This is the standard that 448 of the 639 systems in this dataset meet, and it is why their numbers can be compared with each other at all.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>The heat meter is the part people skip</h3>
+  <p>A heat meter needs a flow sensor plumbed into the primary circuit and a matched pair of temperature probes on flow and return. That is a small job while the system is being installed and an awkward one afterwards, which is exactly why it is worth putting in the specification before anyone starts work. An installer confident in their design will not object to being measured.</p>
+
+  <h3>What to watch once it is running</h3>
+  <ul class="rec-list">
+    <li><strong>Weighted average flow temperature against outside temperature.</strong> The single strongest predictor of performance in the whole dataset (R&sup2; = 0.55). If that gap drifts upward over a season, your efficiency is drifting downward.</li>
+    <li><strong>Whether weather compensation is doing anything at all.</strong> A flow temperature that barely moves across a wide range of outdoor temperatures usually means the curve was never properly tuned at commissioning — one of the most common and most correctable faults in the data.</li>
+    <li><strong>Backup heater usage.</strong> SPF H4 is a whole-system figure: it includes circulation pumps and any immersion or supplementary electric heat. A backup heater quietly stepping in shows up as an efficiency loss with no obvious symptom in the house.</li>
+    <li><strong>Short, frequent compressor cycles in mild weather.</strong> Usually a sign the heat pump is oversized for the conditions or is fighting zoning controls, and it costs efficiency at exactly the times of year when a heat pump should be at its best.</li>
+  </ul>
+
+  <h3>Adding your own system to the dataset</h3>
+  <p>HeatpumpMonitor.org is open. Owners upload from OpenEnergyMonitor-compatible hardware, and that shared standard is precisely what makes several hundred systems comparable with one another rather than a pile of incompatible manufacturer exports. If you already have full metering, contributing costs you nothing and makes everyone else's picture sharper.</p>
+
+  <h3>One honest limitation</h3>
+  <p>All of this is an air-to-water picture. An air-to-air system has no water loop — the heat goes straight into the room — so there is nothing to fit a heat meter to, and the SPF figures on this page do not transfer to it. This house runs air-to-air, and the most that can be measured here is electricity in and comfort out. Worth saying plainly, because the number that cannot be measured is the one most likely to be quoted at you by someone selling something.</p>
+
   <!-- Article End -->
 
   <div class="source-box">
