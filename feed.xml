@@ -5,7 +5,7 @@
 <link>https://decarbonarma.com/</link>
 <description>Clear, no-nonsense analysis of UK home decarbonisation - heat pumps, solar, EVs, batteries and the grid.</description>
 <language>en-gb</language>
-<lastBuildDate>Thu, 06 Aug 2026 04:06:38 -0000</lastBuildDate>
+<lastBuildDate>Fri, 07 Aug 2026 04:05:51 -0000</lastBuildDate>
 <atom:link href="https://decarbonarma.com/feed.xml" rel="self" type="application/rss+xml" />
 <item>
 <title>How We Automated Rose Cottage's Energy With Homey — and How to Copy It Without a Sonnen Battery</title>
@@ -99,11 +99,11 @@
 <description>From March 2027 every new English home needs solar covering 40% of its footprint. Once it's law, not a luxury, does the resale premium survive?</description>
 </item>
 <item>
-<title>Britain's Grid Keeps Getting Margin Notices</title>
+<title>Three Grid Margin Notices in One Summer</title>
 <link>https://decarbonarma.com/articles/uk-grid-security-of-supply-2026.html</link>
 <guid isPermaLink="true">https://decarbonarma.com/articles/uk-grid-security-of-supply-2026.html</guid>
 <pubDate>Thu, 09 Jul 2026 19:39:20 -0000</pubDate>
-<description>Three heatwave-driven Electricity Margin Notices in one summer, low wind, and French interconnectors that couldn't help. Why supply security matters.</description>
+<description>Britain’s grid operator issued three Electricity Margin Notices in a single summer. Low wind, heatwave demand, and interconnectors that could not help.</description>
 </item>
 <item>
 <title>Has the British Summer Started Needing Air-Con?</title>
@@ -253,11 +253,11 @@
 <description>Vaillant vs Mitsubishi vs Samsung vs Daikin: what 639 real, metered heat pumps from HeatpumpMonitor.org actually say about whether brand affects performance.</description>
 </item>
 <item>
-<title>Eddi + Sunamp + Tepeo ZEB: The Triple Barrel</title>
+<title>Eddi + Sunamp + Tepeo ZEB: Storing Wasted Wind</title>
 <link>https://decarbonarma.com/articles/eddi-sunamp-double-barrel.html</link>
 <guid isPermaLink="true">https://decarbonarma.com/articles/eddi-sunamp-double-barrel.html</guid>
 <pubDate>Mon, 29 Jun 2026 18:15:36 -0000</pubDate>
-<description>Adding a Tepeo Zero Emission Boiler to an Eddi-and-Sunamp setup pushes Scotland's curtailed wind absorption even higher. Part 2 of the Wasted Wind series.</description>
+<description>A myenergi Eddi, a Sunamp heat battery and a Tepeo ZEB form a thermal cascade that soaks up Scottish wind that would otherwise be curtailed. Part 2 of Wasted Wind.</description>
 </item>
 <item>
 <title>The Real Cost of Going Electric: EV vs Diesel</title>
@@ -295,11 +295,11 @@
 <description>A six-year-old Austrian startup, Lambda Wärmepumpen, has posted a WPZ-certified SCOP of 6.06, breaking a barrier the industry wasn't expecting yet.</description>
 </item>
 <item>
-<title>HeatpumpMonitor.org — What the Data Actually Says</title>
+<title>Heat Pump Monitoring: What 639 Real Systems Show</title>
 <link>https://decarbonarma.com/articles/heatpumpmonitor-summary.html</link>
 <guid isPermaLink="true">https://decarbonarma.com/articles/heatpumpmonitor-summary.html</guid>
 <pubDate>Mon, 29 Jun 2026 18:15:36 -0000</pubDate>
-<description>What 639 real UK heat pumps, tracked by HeatpumpMonitor.org, reveal about efficiency, flow temperatures and what good installation design actually looks like.</description>
+<description>What 639 monitored UK heat pumps reveal about real efficiency — and how to monitor your own properly, with a MID heat meter rather than the manufacturer app.</description>
 </item>
 <item>
 <title>COP 4.8 in Scotland: Barry Sharp's NIBE S1155 PVT</title>
@@ -344,11 +344,11 @@
 <description>Budget panels vs premium panels, microinverters, and the battery brands everyone argues about: the real quality differences that matter in a solar system.</description>
 </item>
 <item>
-<title>Shell Bought Home Battery Storage, Then Shelved It</title>
+<title>Shell Paid €500m for Sonnen — Then Shelved It</title>
 <link>https://decarbonarma.com/articles/sonnen-shell-decarbonarama.html</link>
 <guid isPermaLink="true">https://decarbonarma.com/articles/sonnen-shell-decarbonarama.html</guid>
 <pubDate>Mon, 29 Jun 2026 18:15:36 -0000</pubDate>
-<description>Shell paid around €500 million for home battery startup Sonnen in 2019, then tried to sell it five years later. What went wrong with the Green Acquisition.</description>
+<description>Shell paid around €500 million for home battery maker Sonnen in 2019, then tried to sell it five years later. What went wrong, and why the pattern repeats.</description>
 </item>
 <item>
 <title>The Heat Battery That Replaced Our Hot Water Tank</title>
