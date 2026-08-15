@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Cartoon of a person slumped on a sofa in their underwear, sweating in a heatwave, while a small fan and the underfloor cooling pipes fail to help">
+<defs>
+  <radialGradient id="sunGlow" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.55"/>
+    <stop offset="60%" stop-color="#f87171" stop-opacity="0.14"/>
+    <stop offset="100%" stop-color="#f87171" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="floorG" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#162019"/>
+    <stop offset="100%" stop-color="#0f1712"/>
+  </linearGradient>
+  <linearGradient id="sofaG" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#2b4736"/>
+    <stop offset="100%" stop-color="#1d3125"/>
+  </linearGradient>
+</defs>
+
+<rect width="1200" height="630" fill="#0d1510"/>
+<rect x="0" y="424" width="1200" height="206" fill="url(#floorG)"/>
+<line x1="0" y1="424" x2="1200" y2="424" stroke="#4ade80" stroke-opacity="0.10" stroke-width="2"/>
+
+<!-- underfloor cooling loops, doing almost nothing -->
+<g stroke="#4ade80" stroke-opacity="0.15" stroke-width="5" fill="none" stroke-linecap="round">
+  <path d="M60 618 H1140 M60 618 a25 25 0 0 0 0-50 M1140 568 a25 25 0 0 0 0-50"/>
+  <path d="M60 568 H1140"/>
+  <path d="M60 518 H1140 M60 518 a23 23 0 0 0 0-46"/>
+  <path d="M83 472 H1120"/>
+</g>
+<text x="60" y="602" font-family="'JetBrains Mono',monospace" font-size="16" fill="#4ade80" fill-opacity="0.45">underfloor cooling: 400 W</text>
+
+<!-- window + blazing sun -->
+<circle cx="185" cy="180" r="205" fill="url(#sunGlow)"/>
+<rect x="70" y="60" width="230" height="250" rx="8" fill="#0d1510" stroke="#4a5c50" stroke-width="7"/>
+<rect x="82" y="72" width="206" height="226" rx="4" fill="#fbbf24" fill-opacity="0.16"/>
+<line x1="185" y1="66" x2="185" y2="304" stroke="#4a5c50" stroke-width="7"/>
+<line x1="76" y1="185" x2="294" y2="185" stroke="#4a5c50" stroke-width="7"/>
+<circle cx="185" cy="185" r="50" fill="#fbbf24" fill-opacity="0.9"/>
+<g stroke="#fbbf24" stroke-width="7" stroke-linecap="round" stroke-opacity="0.85">
+  <line x1="185" y1="110" x2="185" y2="92"/><line x1="185" y1="260" x2="185" y2="278"/>
+  <line x1="110" y1="185" x2="92" y2="185"/><line x1="260" y1="185" x2="278" y2="185"/>
+  <line x1="132" y1="132" x2="119" y2="119"/><line x1="238" y1="238" x2="251" y2="251"/>
+  <line x1="238" y1="132" x2="251" y2="119"/><line x1="132" y1="238" x2="119" y2="251"/>
+</g>
+
+<!-- heat shimmer -->
+<g stroke="#f87171" stroke-opacity="0.38" stroke-width="6" fill="none" stroke-linecap="round">
+  <path d="M330 302 q16 -26 0 -52 q-16 -26 0 -52"/>
+  <path d="M372 322 q16 -26 0 -52 q-16 -26 0 -52"/>
+</g>
+
+<!-- thermometer, pegged -->
+<g transform="translate(1062,104)">
+  <rect x="-15" y="0" width="30" height="150" rx="15" fill="#0d1510" stroke="#4a5c50" stroke-width="5"/>
+  <circle cx="0" cy="168" r="27" fill="#0d1510" stroke="#4a5c50" stroke-width="5"/>
+  <rect x="-7" y="14" width="14" height="150" rx="7" fill="#f87171"/>
+  <circle cx="0" cy="168" r="17" fill="#f87171"/>
+  <text x="-58" y="228" font-family="'JetBrains Mono',monospace" font-size="30" fill="#f87171" font-weight="500">36°C</text>
+</g>
+
+<!-- ===== SOFA (back + seat, all behind the figure) ===== -->
+<rect x="352" y="278" width="486" height="150" rx="26" fill="url(#sofaG)"/>
+<path d="M336 408 h518 a26 26 0 0 1 26 26 v30 a26 26 0 0 1 -26 26 h-518 a26 26 0 0 1 -26 -26 v-30 a26 26 0 0 1 26 -26z" fill="#33543f"/>
+<rect x="356" y="486" width="20" height="26" rx="6" fill="#1a2b20"/>
+<rect x="814" y="486" width="20" height="26" rx="6" fill="#1a2b20"/>
+
+<!-- ===== FIGURE ===== -->
+<g stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- far leg (shaded, behind) -->
+  <path d="M628 434 L734 484 L806 518" stroke="#c98d64" stroke-width="37" fill="none"/>
+  <ellipse cx="830" cy="524" rx="28" ry="15" fill="#b87d57" transform="rotate(12 830 524)"/>
+
+  <!-- near leg -->
+  <path d="M612 446 L700 534 L772 572" stroke="#e0a179" stroke-width="39" fill="none"/>
+  <ellipse cx="796" cy="580" rx="29" ry="16" fill="#d0906a" transform="rotate(14 796 580)"/>
+
+  <!-- left arm draped over the sofa back -->
+  <path d="M544 364 L476 398 L432 440" stroke="#e0a179" stroke-width="30" fill="none"/>
+  <circle cx="426" cy="450" r="17" fill="#e0a179"/>
+
+  <!-- right arm slung along the back, hand dangling -->
+  <path d="M572 352 L664 338 L716 398" stroke="#e0a179" stroke-width="30" fill="none"/>
+  <circle cx="718" cy="412" r="17" fill="#e0a179"/>
+
+  <!-- torso, slumped back into the sofa -->
+  <path d="M556 346 L610 424" stroke="#e0a179" stroke-width="82" fill="none"/>
+  <path d="M536 366 L566 402" stroke="#d0906a" stroke-width="4" stroke-opacity="0.5" fill="none"/>
+
+  <!-- boxer shorts -->
+  <path d="M590 404 L626 444" stroke="#5aa7d6" stroke-width="88" fill="none"/>
+  <path d="M624 434 L664 458" stroke="#5aa7d6" stroke-width="42" fill="none"/>
+  <path d="M614 448 L648 480" stroke="#5aa7d6" stroke-width="44" fill="none"/>
+  <g stroke="#3d7ea6" stroke-width="4" stroke-opacity="0.75">
+    <line x1="576" y1="414" x2="612" y2="396"/>
+    <line x1="590" y1="440" x2="626" y2="422"/>
+    <line x1="606" y1="464" x2="640" y2="448"/>
+  </g>
+
+  <!-- neck + head lolling back on the sofa top -->
+  <path d="M550 334 L526 314" stroke="#e0a179" stroke-width="27" fill="none"/>
+  <g transform="rotate(-34 500 296)">
+    <ellipse cx="500" cy="296" rx="42" ry="46" fill="#e0a179"/>
+    <path d="M460 286 q4 -46 42 -46 q40 0 40 42 q-15 -21 -42 -17 q-24 4 -40 21z" fill="#3a2c22"/>
+    <path d="M479 292 q10 9 20 0" stroke="#3a2c22" stroke-width="4.5" fill="none"/>
+    <path d="M513 290 q10 9 20 0" stroke="#3a2c22" stroke-width="4.5" fill="none"/>
+    <ellipse cx="506" cy="328" rx="14" ry="12" fill="#8c3b3b"/>
+    <ellipse cx="510" cy="339" rx="8" ry="9" fill="#c25f5f"/>
+  </g>
+
+  <!-- sweat -->
+  <g fill="#5aa7d6">
+    <path d="M450 244 q9 15 0 21 q-9 -6 0 -21z"/>
+    <path d="M546 238 q8 13 0 18 q-8 -5 0 -18z"/>
+    <path d="M596 276 q7 12 0 16 q-7 -4 0 -16z"/>
+    <path d="M424 292 q7 12 0 16 q-7 -4 0 -16z"/>
+  </g>
+  <g stroke="#5aa7d6" stroke-width="4" stroke-opacity="0.6" fill="none">
+    <path d="M560 374 q10 16 0 30"/>
+    <path d="M588 392 q10 16 0 30"/>
+  </g>
+</g>
+
+<!-- little desk fan, losing -->
+<g transform="translate(952,384)">
+  <rect x="-40" y="98" width="80" height="12" rx="6" fill="#3a4a40"/>
+  <rect x="-6" y="36" width="12" height="64" fill="#3a4a40"/>
+  <circle cx="0" cy="4" r="46" fill="#0d1510" stroke="#5c6f62" stroke-width="6"/>
+  <g stroke="#5c6f62" stroke-width="3" stroke-opacity="0.8" fill="none">
+    <circle cx="0" cy="4" r="33"/><circle cx="0" cy="4" r="20"/>
+  </g>
+  <g fill="#8a9a90" fill-opacity="0.85">
+    <path d="M0 4 q34 -12 26 16 q-24 4 -26 -16z"/>
+    <path d="M0 4 q-12 33 -30 12 q14 -20 30 -12z"/>
+    <path d="M0 4 q-22 -26 6 -30 q16 14 -6 30z"/>
+  </g>
+  <circle cx="0" cy="4" r="8" fill="#5c6f62"/>
+  <g stroke="#8a9a90" stroke-opacity="0.4" stroke-width="5" fill="none" stroke-linecap="round">
+    <path d="M-58 -14 q-26 6 -44 0"/>
+    <path d="M-58 6 q-30 8 -52 0"/>
+    <path d="M-58 26 q-26 6 -44 0"/>
+  </g>
+</g>
+
+<!-- thoroughly wilted houseplant -->
+<g transform="translate(252,466)">
+  <path d="M-30 0 h60 l-8 62 h-44z" fill="#8a5a3c"/>
+  <rect x="-34" y="-8" width="68" height="16" rx="5" fill="#a06a48"/>
+  <path d="M0 -8 q6 -34 -4 -48" stroke="#2f7d4f" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <g fill="#2f7d4f" fill-opacity="0.9">
+    <path d="M-4 -54 q-30 4 -32 34 q26 -6 32 -34z"/>
+    <path d="M-2 -46 q30 0 34 32 q-28 -2 -34 -32z"/>
+    <path d="M-3 -28 q-24 8 -22 32 q20 -6 22 -32z"/>
+  </g>
+</g>
+
+</svg>
