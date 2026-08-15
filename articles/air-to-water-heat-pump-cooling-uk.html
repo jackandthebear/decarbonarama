@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="max-image-preview:large">
+<title>Air-to-Water Heat Pump Cooling: Does It Actually Work? | Decarbonarma</title>
+<meta name="description" content="We asked UK heat pump owners whether A2W cooling works, then did the dew point and capacity maths. Fan coils behave like air-con. Underfloor is real but limited. Radiators are a trap.">
+<link rel="canonical" href="https://decarbonarma.com/articles/air-to-water-heat-pump-cooling-uk.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Decarbonarma">
+<meta property="og:title" content="Air-to-Water Heat Pump Cooling: Does It Actually Work in a UK Home? | Decarbonarma">
+<meta property="og:description" content="We asked UK heat pump owners whether air-to-water cooling works, then did the dew point and capacity maths ourselves. The answer is entirely about what the chilled water is connected to.">
+<meta property="og:url" content="https://decarbonarma.com/articles/air-to-water-heat-pump-cooling-uk.html">
+<meta property="og:image" content="https://decarbonarma.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Air-to-Water Heat Pump Cooling: Does It Actually Work in a UK Home? | Decarbonarma">
+<meta name="twitter:description" content="We asked UK heat pump owners whether air-to-water cooling works, then did the dew point and capacity maths ourselves. The answer is entirely about what the chilled water is connected to.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Air-to-Water Heat Pump Cooling: Does It Actually Work in a UK Home?",
+  "description": "We asked UK heat pump owners whether air-to-water cooling works, then did the dew point and capacity maths ourselves. The answer is entirely about what the chilled water is connected to.",
+  "url": "https://decarbonarma.com/articles/air-to-water-heat-pump-cooling-uk.html",
+  "image": "https://decarbonarma.com/og-image.png",
+  "author": {
+    "@type": "Person",
+    "name": "Gareth",
+    "url": "https://decarbonarma.com/about.html"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Decarbonarma",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://decarbonarma.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://decarbonarma.com/articles/air-to-water-heat-pump-cooling-uk.html"
+  },
+  "datePublished": "2026-08-15",
+  "dateModified": "2026-08-15"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can an air-to-water heat pump cool your house?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, if the unit is a reversible model with cooling enabled and the emitters suit chilled water. Fan coil units perform close to a conventional split air conditioner. Underfloor cooling delivers a genuine 3-5C reduction but only about 15-25 W per square metre. Standard radiators deliver almost nothing and risk condensation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does underfloor cooling cause condensation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Chilled water circulating below the dew point of the indoor air makes water vapour condense on cold surfaces. At 24C and 60% relative humidity the dew point is 15.8C, so a 16C flow temperature is already marginal. The manifold and uninsulated pipe tails run at flow temperature and sweat before the floor does."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is air-to-water cooling efficient?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It can be very efficient. Monitored UK systems report cooling COPs above 6 at higher chilled water temperatures, far better than a typical split air conditioner. Efficiency collapses as you push flow temperature down: one monitored system went from roughly COP 6.3 at 18C flow to COP 4.8 at 16C flow."
+      }
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0d1510; --bg2:#111a13; --bg3:#162019; --bg4:#1a2820;
+    --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.13);
+    --green:#4ade80; --green-dim:#22c55e; --green-deep:#1a5c38;
+    --green-pale:rgba(74,222,128,0.08); --green-pale2:rgba(74,222,128,0.13);
+    --amber:#fbbf24; --amber-pale:rgba(251,191,36,0.08);
+    --blue:#5aa7d6; --violet:#a78bfa; --grey:#8a9a90;
+    --red:#f87171;
+    --text:#e4ede5; --text-mid:#94a894; --text-dim:#5a6c5a;
+    --mono:'JetBrains Mono','Courier New',monospace;
+    --serif:'Playfair Display',Georgia,serif;
+    --body:'Source Serif 4',Georgia,serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.75;font-weight:300;-webkit-font-smoothing:antialiased;}
+
+  .site-header{border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:rgba(13,21,16,.9);backdrop-filter:blur(8px);z-index:20;}
+  .site-logo{text-decoration:none;display:flex;align-items:center;}
+  .site-nav{display:flex;gap:1.5rem;}
+  .site-nav a{color:var(--text-dim);text-decoration:none;font-size:12px;letter-spacing:.07em;text-transform:uppercase;}
+  .site-nav a:hover{color:var(--green);}
+
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px;}
+  .hero{padding:64px 0 34px;border-bottom:1px solid var(--border);}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);}
+  h1{font-family:var(--serif);font-weight:700;font-size:2.5rem;line-height:1.12;margin:.4em 0 .3em;color:#fff;}
+  .standfirst{font-size:1.2rem;color:var(--text-mid);font-weight:300;}
+  .byline{font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-top:18px;}
+
+  main{padding:10px 0 40px;}
+  h2{font-family:var(--serif);font-weight:700;font-size:1.7rem;color:#fff;margin:2em 0 .4em;}
+  h3{font-family:var(--body);font-weight:600;font-size:1.18rem;color:var(--green);margin:1.7em 0 .3em;}
+  p{margin:.85em 0;}
+  strong{color:#fff;font-weight:600;}
+  em{color:var(--text-mid);}
+  a{color:var(--green);}
+  ul,ol{margin:.85em 0 .85em 1.3em;}
+  li{margin:.4em 0;}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:30px 0;}
+  .stat{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+  .stat .n{font-family:var(--mono);font-size:1.6rem;font-weight:500;color:var(--green);line-height:1;}
+  .stat .l{font-size:13px;color:var(--text-mid);margin-top:8px;line-height:1.4;}
+
+  .card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px;margin:26px 0;}
+  .chart-box{position:relative;height:420px;width:100%;}
+  .chart-cap{font-size:13.5px;color:var(--text-mid);margin-top:14px;line-height:1.55;}
+
+  table{width:100%;border-collapse:collapse;font-size:15px;margin:6px 0;}
+  th,td{text-align:left;padding:10px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  th{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim);font-weight:400;}
+  td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--text);}
+  .pill{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;padding:2px 9px;border-radius:20px;}
+  .pill.on{background:var(--green-pale2);color:var(--green);border:1px solid var(--green-deep);}
+  .pill.hot{background:var(--amber-pale);color:var(--amber);border:1px solid rgba(251,191,36,.4);}
+  .pill.no{background:rgba(248,113,113,.1);color:var(--red);border:1px solid rgba(248,113,113,.35);}
+
+  .callout{border-left:3px solid var(--amber);background:var(--amber-pale);padding:18px 22px;border-radius:0 12px 12px 0;margin:28px 0;}
+  .callout h3{margin-top:0;color:var(--amber);}
+
+  blockquote{border-left:3px solid var(--green-deep);background:var(--green-pale);padding:14px 20px;border-radius:0 10px 10px 0;margin:22px 0;font-size:1.02rem;}
+  blockquote p{margin:.4em 0;}
+  blockquote cite{display:block;font-family:var(--mono);font-size:11.5px;font-style:normal;color:var(--text-dim);margin-top:10px;letter-spacing:.04em;text-transform:uppercase;}
+
+  footer{border-top:1px solid var(--border);padding:28px 0 60px;}
+  footer p{font-size:12.5px;color:var(--text-dim);line-height:1.65;}
+  footer a{color:var(--text-mid);}
+
+  @media(max-width:600px){ h1{font-size:1.85rem;} .chart-box{height:360px;} body{font-size:16px;} .hero{padding:40px 0 26px;} table{font-size:13.5px;} th,td{padding:8px 6px;} }
+
+  /* --- answer capsule (extractable direct answer for AI/SERP) --- */
+  .answer-capsule { border: 1px solid rgba(255,255,255,0.07); border-left: 4px solid #4ade80; background: rgba(74,222,128,0.07); padding: 1.15rem 1.35rem; margin: 0 0 1.75rem; border-radius: 0 3px 3px 0; }
+  .answer-capsule p { margin: 0; color: #e4ede5; font-size: 1.06rem; line-height: 1.6; }
+</style>
+<script>(function(){try{var p=localStorage.getItem('dm-pref');var d=p?p==='dark':(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);if(d){document.documentElement.classList.add('dm-dark');var s=document.createElement('style');s.id='dm-bootstrap';s.textContent='html.dm-dark{filter:invert(1) hue-rotate(180deg);background:#000!important}html.dm-dark img,html.dm-dark picture,html.dm-dark video,html.dm-dark iframe,html.dm-dark embed,html.dm-dark object,html.dm-dark canvas,html.dm-dark .dm-keep,html.dm-dark [data-dm-keep]{filter:invert(1) hue-rotate(180deg)}';document.head.appendChild(s);}}catch(e){}})();</script>
+<script src="/dark-mode.js" defer></script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="site-logo"><img src="../logo-light.svg" alt="Decarbonarma" style="height:34px;width:auto;display:block;"></a>
+  <nav class="site-nav">
+    <a href="/">Home</a>
+    <a href="/">Heating</a>
+    <a href="/">Solar</a>
+    <a href="/">Case Studies</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">Heating &amp; Cooling</div>
+    <h1>Air-to-Water Heat Pump Cooling: Does It Actually Work in a UK Home?</h1>
+    <!-- Article Start -->
+  <p class="standfirst">We asked UK heat pump owners who are actually running cooling from an air-to-water system. Then we did the dew point and capacity maths ourselves. The owners disagreed with each other — and the physics explains exactly why.</p>
+    <div class="byline">Decarbonarma &middot; 15 August 2026 &middot; ~11-min read</div>
+  </div>
+
+  <main>
+
+  <div class="answer-capsule">
+    <p>Yes — an air-to-water heat pump can cool your house, but the result depends almost entirely on <strong>what the chilled water is connected to</strong>. Fan coil units perform close to a conventional split air conditioner. Well-designed underfloor cooling delivers a real <strong>3&ndash;5&deg;C</strong> reduction but only about <strong>15&ndash;25&nbsp;W/m&sup2;</strong> — a quarter of what the same floor does in heating mode. Standard radiators deliver almost nothing and invite condensation. And the grant standard the whole UK market is built on explicitly says these systems <em>"shall be designed and optimised for heating."</em></p>
+  </div>
+
+  <p>Britain has just had a summer that ended the argument about whether cooling matters here. The May heatwave peaked at <strong>35.1&deg;C at Kew Gardens</strong> on 26 May — beating a record that had stood since 1922 by two full degrees. June went further, hitting <strong>37.7&deg;C at Lingwood in Norfolk</strong>, and triggering red heat-health warnings on three consecutive days. As we write in mid-August, the Met Office has the country on course for its <strong>warmest summer on record</strong>, for the second year running.</p>
+
+  <p>So the question in every UK heat pump group this summer has been the same: <em>I've already got an air-to-water heat pump outside — can I just make it run backwards?</em></p>
+
+  <p>Rather than guess, we asked. We put the question to a large UK heat pump owners' group: who has cooling actually set up and working on an air-to-water heat pump? The answers were more useful than a manufacturer brochure, and more honest — because they contradicted each other.</p>
+
+  <h2>What the owners said</h2>
+
+  <p>Five substantive replies, and they land in three distinct camps.</p>
+
+  <blockquote>
+    <p>"Designed and installed properly, cooling from A2W is as effective as a normal split AC unit. An A2W heat pump strapped to a standard heating system and asked to provide cooling is a recipe for problems... A system using chilled water to fancoils or cassettes will provide effective operation. A system dumping chilled water into rads and UFH will provide headaches. It's that straightforward."</p>
+    <cite>Respondent A &mdash; the design-purist camp</cite>
+  </blockquote>
+
+  <blockquote>
+    <p>"UFH (100mm centres, tiled) works pretty well &mdash; maintained 22&deg;C downstairs during the day. Temps started to creep up slowly in the afternoon when it was 36&deg;C, but overnight cooled it back down to 20.5&deg;C... You need to run it preemptively rather than turn it on when temperatures are already rising. Currently runs for 20&ndash;25 mins once an hour, tracking dewpoint with min flow temp of 15&deg;C. Don't use it through rads upstairs as didn't seem to do much even with a desk fan blowing across it."</p>
+    <cite>Respondent B &mdash; the it-works-if-you-design-it camp</cite>
+  </blockquote>
+
+  <blockquote>
+    <p>"Yes. I've had condensation. There's no humidity sensor. I've now got the flow temp set to 20 degrees. It helps a bit. Definitely better than nothing when outside temperature is in the high twenties."</p>
+    <cite>Respondent C &mdash; the bolted-on camp</cite>
+  </blockquote>
+
+  <p>A fourth owner, <strong>Respondent D</strong>, reported that cooling "works really well but it does have limitations" — good downstairs, but above 30&deg;C they switch to a separate air-to-air unit upstairs where the floors are carpeted. Their monitored <strong>average cooling COP is 6.7</strong>. And <strong>Respondent E</strong> made the point that frames everything else: chilled water can technically outperform direct-expansion air conditioning, but passive systems need humidity sensors, dehumidification and fans to get there.</p>
+
+  <p>Notice what happened. Respondent A says chilled water into underfloor is a headache. Respondent B says theirs works well. Both are right, and the difference between them is not luck — it is <strong>100mm pipe centres, a tiled floor, dew point tracking and preemptive operation</strong>. That is the whole article in one sentence. The rest is showing the working.</p>
+
+  <h2>The rule nobody mentions: MCS designs for heating</h2>
+
+  <p>Here is the structural reason so many UK installations end up in Respondent C's position rather than Respondent B's. The MCS heat pump design standard — <strong>MIS 3005-D</strong>, the document virtually every grant-funded UK heat pump is designed against — excludes cooling-only systems outright, and says this about reversible ones:</p>
+
+  <blockquote>
+    <p>"Reversible heat pump systems able to provide both heating and cooling are included but <strong>shall be designed and optimised for heating</strong>."</p>
+    <cite>MCS MIS 3005-D (2025), Heat Pump Design Standard</cite>
+  </blockquote>
+
+  <p>Read that carefully. It is not a ban on cooling. It is a statement that when the designer sizes your emitters, picks your pipe centres and sets your flow temperature, <em>cooling performance is explicitly not what is being optimised</em>. The same standard contains <strong>no requirement at all</strong> around condensation, dew point or moisture management in cooling mode.</p>
+
+  <p>So the default outcome of a standard UK &pound;7,500-grant heat pump install is a system that is physically capable of cooling and completely undesigned for it. Which is exactly what Respondent A described.</p>
+
+  <div class="callout">
+    <h3>Your heat pump may not even be allowed to cool</h3>
+    <p>Cooling is usually gated in hardware and software, not just switched on. On a Vaillant aroTHERM, for example, cooling requires a <strong>coding resistor</strong> physically fitted in the unit's wiring before the option even appears in the sensoCOMFORT controller menus. Daikin Altherma, LG Therma V, NIBE and selected Mitsubishi Ecodan models support cooling on some variants and not others. Owning a "cooling-capable" model is not the same as having cooling available on your installation — check the specific model number and whether your installer enabled it at commissioning.</p>
+  </div>
+
+  <h2>Problem one: the dew point ceiling</h2>
+
+  <p>Everything difficult about air-to-water cooling comes from one number. Chill any surface below the <strong>dew point</strong> of the air touching it and water condenses out. That is not a design flaw, it is thermodynamics, and it puts a hard floor under how cold your water is allowed to be.</p>
+
+  <p>We calculated the dew point across the range of conditions a British living room actually experiences in a heatwave, using the Magnus-Tetens formula. This is the chart that explains Respondent C's condensation.</p>
+
+  <div class="card">
+    <div class="chart-box"><canvas id="dewChart"></canvas></div>
+    <p class="chart-cap"><strong>Figure 1 &mdash; Indoor dew point vs relative humidity, at three room temperatures.</strong> The horizontal bands show typical chilled-water flow temperatures. Any point where a line rises above a band is a condition in which water at that temperature will sweat. At a fairly ordinary <strong>24&deg;C and 60% RH the dew point is 15.8&deg;C</strong> — so a 16&deg;C flow temperature is already on the edge. Calculated by Decarbonarma using the Magnus-Tetens approximation.</p>
+  </div>
+
+  <p>Flip it round and it is starker still. For 16&deg;C water to be safe, indoor relative humidity has to stay below <strong>69% at 22&deg;C, 61% at 24&deg;C, or 54% at 26&deg;C</strong>. British summer air after a thundery breakdown routinely blows straight past those. Published guidance puts typical UK summer dew points at <strong>14&ndash;18&deg;C</strong>, and recommends keeping surfaces 2&ndash;3&deg;C above the calculated dew point as a margin.</p>
+
+  <h3>Where the condensation actually starts</h3>
+
+  <p>Here is the detail most articles get wrong. Your floor <em>surface</em> is not at flow temperature — with 16&deg;C water and 20 W/m&sup2; coming off the slab, the surface typically sits around 19&ndash;21&deg;C. That is usually above the dew point. So why do people find water?</p>
+
+  <p>Because the <strong>manifold, the pipe tails and the flow pipework are at flow temperature</strong>, not floor temperature. They are the coldest surfaces in the building, they are frequently in a cupboard or utility room with poor air movement, and on a retrofit they are very often insulated for <em>heating</em> — meaning insulation chosen to stop heat escaping, with no vapour-sealed barrier to stop humid air reaching the cold pipe. That is where the drips begin. Any A2W cooling retrofit that does not include <strong>closed-cell, vapour-sealed insulation on every chilled pipe run and the manifold itself</strong> is an unfinished job.</p>
+
+  <p>A dew point sensor — a combined temperature and humidity sensor wired into the controller, placed in a representative cooled room — is what turns this from guesswork into control. It raises the minimum flow temperature as humidity climbs and pauses cooling entirely in extreme conditions, rather than applying one crude cut-off. For underfloor cooling it is effectively non-negotiable, and several manufacturers make it a condition of installation. Respondent B has one and holds 22&deg;C. Respondent C doesn't, and has retreated to a 20&deg;C flow temperature that "helps a bit."</p>
+
+  <h2>Problem two: there isn't much cooling in a floor</h2>
+
+  <p>Even with the condensation solved, underfloor cooling runs into a capacity wall. The same slab that happily delivers <strong>80&ndash;100 W/m&sup2;</strong> in heating mode manages only <strong>15&ndash;25 W/m&sup2;</strong> in cooling, rising to perhaps 40 W/m&sup2; in genuinely dry air with low flow temperatures. The reason is the dew point ceiling above: in heating you can push a 20&deg;C room to a 28&deg;C floor, a 8&deg;C driving difference. In cooling you can only pull it down to about 20&deg;C, a 4&deg;C difference — and the physics of natural convection is unhelpfully asymmetric, because cold air pools at the floor instead of rising off it.</p>
+
+  <p>So we modelled a real room against a real August afternoon.</p>
+
+  <div class="card">
+    <div class="chart-box"><canvas id="capChart"></canvas></div>
+    <p class="chart-cap"><strong>Figure 2 &mdash; Cooling supply vs demand, 20&nbsp;m&sup2; living room, hot afternoon.</strong> Green bars are what each emitter type can deliver into that room; the amber bar is a realistic heat gain on a 32&deg;C afternoon (unshaded 3&nbsp;m&sup2; south-west window 600&nbsp;W, two occupants 150&nbsp;W, electronics 120&nbsp;W, fabric and ventilation gain 250&nbsp;W). Underfloor cooling covers roughly a third to a half of it. A single fan coil covers all of it. Radiators are a rounding error. Supply figures from published underfloor cooling output ranges; gains modelled by Decarbonarma.</p>
+  </div>
+
+  <p>This is precisely Respondent B's experience, quantified. Their downstairs held 22&deg;C most of the day and only "started to creep up slowly in the afternoon when it was 36&deg;C" — the point at which gains overtook the slab's ~400&nbsp;W. And it recovered overnight, because once the sun is off the glass the gain collapses to a couple of hundred watts and the floor is comfortably ahead again.</p>
+
+  <p>It also explains why they run it <em>preemptively</em>. A floor slab is a huge thermal store with hours of lag. You cannot ask it for a rapid save at 3pm; you have to have been quietly chilling it since breakfast. Underfloor cooling is a <strong>thermal-mass strategy, not a thermostat</strong>. The same property that makes underfloor heating so forgiving in winter makes underfloor cooling useless as a panic button.</p>
+
+  <h2>Why radiators do nothing</h2>
+
+  <p>Both Respondent B and the group consensus are blunt on this, and the physics agrees. A radiator in heating mode works mostly by <strong>convection</strong>: warm surfaces heat air, the air rises, and a stack effect pulls more cold air in at the bottom. Run the same radiator cold and you kill the engine — cold air produced at the radiator sinks and puddles on the floor instead of circulating. Respondent B tried a desk fan across an upstairs radiator and it "didn't seem to do much."</p>
+
+  <p>You also lose the emitter area. A radiator sized for a 30&ndash;35&deg;C driving temperature difference in heating has, at best, a 5&ndash;6&deg;C difference in cooling. That is roughly a <strong>sixfold cut in output</strong> before you account for the dead convection. Add that a radiator has no condensate tray, no drain, and sits on a plastered wall or wooden floor, and it is the one configuration everyone we asked agreed to avoid.</p>
+
+  <h2>Fan coils: the version that actually behaves like air-con</h2>
+
+  <p>A fan coil unit is a chilled-water coil with a fan behind it and a condensate tray under it. That third component is the whole story. Because it collects and drains condensate by design, a fan coil is allowed to run water <em>below</em> the room dew point — which means it does what nothing else in this article does: it <strong>dehumidifies</strong>.</p>
+
+  <p>That matters more than the raw degrees. Underfloor and radiant cooling provide <em>sensible</em> cooling only — they lower air temperature and leave the moisture exactly where it was, so relative humidity actually <em>rises</em> as the room cools. A 22&deg;C room at 70% RH feels clammy in a way a 24&deg;C room at 50% RH does not. This is why Respondent E's comment about needing "humidity sensors, dehumidification system plus fans" is the sharpest observation in the thread: a passive system that only removes heat is solving half the comfort problem.</p>
+
+  <div class="card">
+  <table>
+    <thead><tr><th>Emitter</th><th class="num">Output</th><th>Dehumidifies?</th><th>Condensation risk</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Fan coils / cassettes</strong></td><td class="num">1&ndash;4 kW per unit</td><td>Yes &mdash; has a drain</td><td>Managed by design</td><td><span class="pill on">Works</span></td></tr>
+      <tr><td><strong>UFH, cooling-designed</strong><br><span style="font-size:13px;color:var(--text-mid)">&le;150mm centres, tile, dew point sensor</span></td><td class="num">15&ndash;25 W/m&sup2;</td><td>No</td><td>Controllable</td><td><span class="pill on">Works, limited</span></td></tr>
+      <tr><td><strong>UFH, heating-designed</strong><br><span style="font-size:13px;color:var(--text-mid)">225mm centres, carpet, no sensor</span></td><td class="num">&lt;10 W/m&sup2;</td><td>No</td><td>High &mdash; unmanaged</td><td><span class="pill hot">Marginal</span></td></tr>
+      <tr><td><strong>Radiators</strong></td><td class="num">Negligible</td><td>No</td><td>High, on walls/floors</td><td><span class="pill no">Don't</span></td></tr>
+      <tr><td><strong>Air-to-air (separate)</strong></td><td class="num">2&ndash;5 kW per head</td><td>Yes</td><td>Managed by design</td><td><span class="pill on">Works</span></td></tr>
+    </tbody>
+  </table>
+  <p class="chart-cap">Fan coil units typically cost <strong>&pound;500&ndash;&pound;1,000 each</strong> before installation, plus chilled pipework, insulation, power and a condensate drain to each unit. That is the honest price of "as effective as a normal split AC unit."</p>
+  </div>
+
+  <h2>The efficiency surprise: it can be brilliant</h2>
+
+  <p>Here is where air-to-water cooling gets genuinely interesting, and where it beats air conditioning on its own terms. Respondent D's monitored <strong>cooling COP of 6.7</strong> is not a typo and not a fluke — it is a direct consequence of the dew point ceiling. Because you are forced to make 16&ndash;20&deg;C water rather than the 5&ndash;7&deg;C a conventional chiller makes, the compressor is doing far less work. The constraint that limits your capacity is the same constraint that makes you efficient.</p>
+
+  <p>Monitoring data from a UK owner running a Grant R290 unit into three floors of underfloor makes the trade-off explicit. Dropping the chilled water target from 18&deg;C to 16&deg;C raised cooling output from 2.7&nbsp;kW to 3.8&nbsp;kW — but pushed electrical input from 430&nbsp;W to 800&nbsp;W. Do the arithmetic:</p>
+
+  <div class="stats">
+    <div class="stat"><div class="n">COP 6.3</div><div class="l">At 18&deg;C flow: 2.7&nbsp;kW cooling for 430&nbsp;W in</div></div>
+    <div class="stat"><div class="n">COP 4.8</div><div class="l">At 16&deg;C flow: 3.8&nbsp;kW cooling for 800&nbsp;W in</div></div>
+    <div class="stat"><div class="n">+41%</div><div class="l">More cooling for <strong>86% more electricity</strong></div></div>
+    <div class="stat"><div class="n">6.7</div><div class="l">Monitored average cooling COP reported by one of our respondents</div></div>
+  </div>
+
+  <p>That is the dial you are actually turning when you drop the flow temperature: you buy capacity with efficiency, and with condensation margin. For comparison, a typical domestic split air conditioner runs a seasonal efficiency in the region of 4&ndash;7 depending on class and conditions — so a well-tuned air-to-water system at high flow temperature is genuinely competitive, it just cannot deliver anything like the same peak kilowatts.</p>
+
+  <p>And in a solar house it is close to free. Cooling demand and peak generation land at the same hour of the same day. We make this point about air-to-air in our <a href="air-to-air-heat-pumps-uk-cooling-2026.html">British summer air-con analysis</a>, and it applies identically here: on a bright August afternoon the cooling is running on generation that would otherwise be clipped at the export limit and never produced at all.</p>
+
+  <div class="callout">
+    <h3>One thing your heat pump cannot do while cooling</h3>
+    <p>It cannot make hot water at the same time. A single-compressor air-to-water unit in cooling mode has to switch back to heating to charge the cylinder, which means the house warms slightly on every DHW cycle. In a heatwave that argues for shifting your cylinder reheat to the small hours and letting the machine cool uninterrupted through the day &mdash; or, if you have one, letting a separate store carry the hot water load entirely.</p>
+  </div>
+
+  <h2>Where air-to-air comes in — and why two of our five owners already have it</h2>
+
+  <p>The most telling pattern in the responses is that the <em>two owners with the best-working underfloor cooling both also run air-to-air upstairs</em>. Respondent B uses a portable air conditioner in the upstairs hallway and says they "would still consider a second air to air unit for upstairs" to cut the noise. Respondent D uses air-to-air upstairs above 30&deg;C, "where the floors are carpeted."</p>
+
+  <p>They arrived there independently, for the same two reasons. First, <strong>upstairs is where UK homes overheat</strong> — hot air stratifies, roofs gain heat all day, and bedrooms matter most because sleep is what heat actually costs you. Second, <strong>upstairs floors in British houses are carpeted and timber</strong>. Carpet above about 2.5 TOG blunts underfloor cooling to the point of being barely noticeable, and suspended timber floors have a fraction of the thermal contact of a screed. There is no underfloor cooling fix for a carpeted first floor.</p>
+
+  <p>Air-to-air units solve exactly that: they are fast, they dehumidify, they are zonal, and they cool the rooms underfloor cannot reach. That is the setup we run at Decarbonarma HQ — a Daikin multi-split covering the three main living spaces, which you can read about in our <a href="air-to-air-sunamp-case-study.html">A2A plus Sunamp case study</a>. It is also the honest reason we chose it: an air-to-water quote for our house came in at <strong>&pound;27,000 before grant</strong>, against roughly &pound;10,000 for air-to-air plus a heat battery — and the air-to-air cools as standard rather than as a retrofit project.</p>
+
+  <p>The grant picture is shifting here too. The Boiler Upgrade Scheme regulations that came into force on <strong>28 April 2026</strong> introduced a <strong>&pound;2,500 grant for air-to-air heat pumps</strong> alongside the &pound;7,500 for air-to-water (and &pound;9,000 for homes coming off oil or LPG from 21 July 2026), and extended the scheme to 2030. One important caveat: <strong>air-to-air is not claimable yet</strong>. MCS published the updated standards in December 2025 but installers cannot certify air-to-air installations until certification bodies complete UKAS accreditation. If you are weighing an air-to-air purchase, that timing is worth watching. See our <a href="../uk-grants-guide.html">UK grants guide</a> for the current state of play.</p>
+
+  <h2>If you want A2W cooling that works: the checklist</h2>
+
+  <p>Distilling everything above, and everything our respondents learned the hard way:</p>
+
+  <ol>
+    <li><strong>Check the unit is cooling-capable and enabled.</strong> Model-specific. May need a coding resistor and a commissioning menu change by an approved installer.</li>
+    <li><strong>Fit fan coils where you need real capacity.</strong> They are the only option in this article that dehumidifies, and the only one that responds in minutes. Budget &pound;500&ndash;&pound;1,000 per unit plus pipework, power and a condensate drain.</li>
+    <li><strong>For underfloor, design it as cooling from the start.</strong> 150mm centres or tighter (one respondent runs 100mm), pipes 40&ndash;50mm below the surface, hard floor coverings, and carpet kept below 1.5&ndash;2.5 TOG.</li>
+    <li><strong>Fit a dew point sensor and configure it.</strong> A sensor that is wired in but never given limits protects nothing — this is one of the most common oversights in UK cooling commissioning.</li>
+    <li><strong>Insulate chilled pipework and the manifold with closed-cell, vapour-sealed insulation.</strong> Not heating-grade lagging. This is where condensation appears first.</li>
+    <li><strong>Run it preemptively and continuously.</strong> Respondent B's 20&ndash;25 minutes per hour from morning beats a full-power panic at 3pm, and cycles the compressor less.</li>
+    <li><strong>Leave the radiators out of it.</strong> Fit isolating valves so the cooling circuit serves only the underfloor and fan coils.</li>
+    <li><strong>Watch your floor finish.</strong> One monitored owner found anything below 16&deg;C flow started making Amtico shrink. Check what your manufacturer permits.</li>
+    <li><strong>Deal with humidity separately.</strong> MVHR helps significantly — one system running 14.5&deg;C flow reports no condensation issues at all and credits its MVHR. A standalone dehumidifier works but adds heat back into the room.</li>
+    <li><strong>Plan for upstairs.</strong> If your first floor is carpeted, budget for air-to-air or accept that the bedrooms stay hot.</li>
+  </ol>
+
+  <h2>The bottom line</h2>
+
+  <p>Respondent A was right and Respondent B was right, which is the most useful thing this exercise produced. "As effective as a normal split AC unit" and "a recipe for problems" are both true statements about air-to-water cooling — they just describe two different jobs of work.</p>
+
+  <p>If you are <strong>designing a new system now</strong> and you want cooling, specify it now: fan coils where you need punch, tight-centre underfloor over a hard floor for background, a dew point sensor, and vapour-sealed pipework. Done that way it is efficient, near-silent, and cheaper to run than air conditioning — a COP above 6 is not available from any split unit on the market.</p>
+
+  <p>If you have an <strong>existing MCS-designed heat pump</strong> and you are wondering whether to switch cooling on, be realistic about what you are getting. Your system was, by the letter of the standard it was designed to, optimised for heating. Cooling into a heating-designed floor at a safe 20&deg;C flow will take the edge off — Respondent C's "definitely better than nothing" is an accurate review. It will not rescue a bedroom at 2am in a heatwave. For that, the answer in almost every UK house is still a separate air-to-air unit, and this summer's temperature records suggest that is a conversation more of us are going to be having.</p>
+  <!-- Article End -->
+
+  </main>
+</div>
+
+<!-- dca-email-capture -->
+<div class="dca-signup-outer">
+  <div class="dca-signup">
+    <div class="dca-signup-kicker">Decarbonarma Newsletter</div>
+    <h3 class="dca-signup-h">Get the next one in your inbox</h3>
+    <p class="dca-signup-sub">Clear, no-nonsense analysis of UK home decarbonisation &mdash; heat pumps, solar, EVs, batteries and the grid. Occasional emails, no spam, unsubscribe anytime.</p>
+    <form action="https://decarbonarma.us15.list-manage.com/subscribe/post?u=cffa5aec4001ad97d9357f807&amp;id=8d5f19dec4&amp;f_id=0096a2e1f0" method="post" target="_blank" novalidate class="dca-signup-form">
+      <label class="dca-visually-hidden" for="dca-email">Email address</label>
+      <input type="email" name="EMAIL" id="dca-email" required placeholder="you@example.com" class="dca-signup-input">
+      <!-- Mailchimp bot-prevention honeypot: real users leave this empty -->
+      <div aria-hidden="true" style="position:absolute;left:-5000px;"><input type="text" name="b_cffa5aec4001ad97d9357f807_8d5f19dec4" tabindex="-1" value=""></div>
+      <button type="submit" name="subscribe" class="dca-signup-btn">Subscribe</button>
+    </form>
+    <div class="dca-signup-fine">We&rsquo;ll never share your email. Powered by Mailchimp.</div>
+  </div>
+</div>
+<style>
+  .dca-signup-outer{max-width:820px;margin:48px auto 10px;padding:0 24px;}
+  .dca-signup{background:var(--bg3,#162019);border:1px solid var(--green-pale2,rgba(74,222,128,0.13));border-radius:16px;padding:30px 28px;position:relative;overflow:hidden;}
+  .dca-signup::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green,#4ade80),var(--amber,#fbbf24));}
+  .dca-signup-kicker{font-family:var(--mono,'JetBrains Mono',monospace);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--green,#4ade80);margin-bottom:8px;}
+  .dca-signup-h{font-family:var(--serif,'Playfair Display',Georgia,serif);font-weight:700;font-size:1.5rem;color:#fff;margin:0 0 .3em;line-height:1.15;}
+  .dca-signup-sub{font-family:var(--body,'Source Serif 4',Georgia,serif);font-size:15px;color:var(--text-mid,#94a894);margin:0 0 18px;line-height:1.6;font-weight:300;}
+  .dca-signup-form{display:flex;gap:10px;flex-wrap:wrap;}
+  .dca-signup-input{flex:1 1 240px;min-width:0;background:var(--bg,#0d1510);border:1px solid var(--border2,rgba(255,255,255,0.13));border-radius:10px;padding:13px 15px;color:var(--text,#e4ede5);font-family:var(--body,'Source Serif 4',Georgia,serif);font-size:15px;}
+  .dca-signup-input:focus{outline:none;border-color:var(--green,#4ade80);box-shadow:0 0 0 3px var(--green-pale,rgba(74,222,128,0.08));}
+  .dca-signup-input::placeholder{color:var(--text-dim,#5a6c5a);}
+  .dca-signup-btn{flex:0 0 auto;background:var(--green,#4ade80);color:#062012;border:none;border-radius:10px;padding:13px 26px;font-family:var(--mono,'JetBrains Mono',monospace);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:background .15s;}
+  .dca-signup-btn:hover{background:var(--green-dim,#22c55e);}
+  .dca-signup-fine{font-family:var(--mono,'JetBrains Mono',monospace);font-size:11px;color:var(--text-dim,#5a6c5a);margin-top:12px;letter-spacing:.02em;}
+  .dca-visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  @media(max-width:520px){.dca-signup-btn{flex:1 1 100%;}}
+</style>
+<!-- /dca-email-capture -->
+
+<div data-toolref="1" style="max-width:760px;margin:2.5rem auto;padding:1.25rem 1.5rem;border:1px solid rgba(74,222,128,0.35);border-radius:12px;background:rgba(74,222,128,0.08);"><div style="font-weight:700;font-size:1.05rem;margin-bottom:0.85rem;">Free tools for this topic</div><div style="display:flex;flex-wrap:wrap;gap:0.6rem;"><a href="/#heatloss" target="_top" style="display:inline-block;background:#4ade80;color:#0d1510;font-weight:700;text-decoration:none;padding:0.6rem 1.1rem;border-radius:8px;font-size:0.95rem;line-height:1.2;">🏠 Heat Loss Estimator &rarr;</a><a href="/home-energy-adviser.html" target="_top" style="display:inline-block;background:#4ade80;color:#0d1510;font-weight:700;text-decoration:none;padding:0.6rem 1.1rem;border-radius:8px;font-size:0.95rem;line-height:1.2;">🤖 Home Energy Adviser &rarr;</a></div></div>
+<div data-relatedreading="1">
+<div style="max-width:760px;margin:2.5rem auto;padding:1.25rem 1.5rem;border:1px solid rgba(74,222,128,0.35);border-radius:12px;background:rgba(74,222,128,0.08);"><div style="font-weight:700;font-size:1.05rem;margin-bottom:0.85rem;">Related heat pump reading</div><ul style="margin:0;padding-left:1.15rem;display:flex;flex-direction:column;gap:0.5rem;font-family:var(--body,'Source Serif 4',Georgia,serif);font-size:0.98rem;"><li><a href="air-to-air-heat-pumps-uk-cooling-2026.html" style="color:#4ade80;font-weight:600;text-decoration:none;" target="_top">Has the British Summer Started Needing Air-Con? &rarr;</a></li><li><a href="air-to-air-sunamp-case-study.html" style="color:#4ade80;font-weight:600;text-decoration:none;" target="_top">My A2A Heat Pump + Sunamp Setup, Not a Gas Boiler &rarr;</a></li><li><a href="uk-heatwave-deaths-heat-pump-cooling-2026.html" style="color:#4ade80;font-weight:600;text-decoration:none;" target="_top">2,700 Heat Deaths — Why Cooling Heat Pumps Matter &rarr;</a></li><li><a href="air-source-heat-pumps.html" style="color:#4ade80;font-weight:600;text-decoration:none;" target="_top">The Beginner's Guide to Air Source Heat Pumps &rarr;</a></li><li><a href="does-brand-matter-heatpump.html" style="color:#4ade80;font-weight:600;text-decoration:none;" target="_top">Does Brand Matter? What 600+ Heat Pumps Tell Us &rarr;</a></li><li><a href="heatpumpmonitor-summary.html" style="color:#4ade80;font-weight:600;text-decoration:none;" target="_top">HeatpumpMonitor.org — What the Data Actually Says &rarr;</a></li><li><a href="samsung-ehs-quint-deep-dive.html" style="color:#4ade80;font-weight:600;text-decoration:none;" target="_top">Samsung EHS Quint Deep Dive: One Box, Five Modes &rarr;</a></li><li><a href="daikin-x-series-wait-or-buy.html" style="color:#4ade80;font-weight:600;text-decoration:none;" target="_top">Daikin X Series vs Samsung EHS Quint: Worth It? &rarr;</a></li><li><a href="heat-pump-worth-it-2026.html" style="color:#4ade80;font-weight:600;text-decoration:none;" target="_top">Is a Heat Pump Worth It in the UK? 2026 Answer &rarr;</a></li></ul></div>
+</div>
+
+<style>.related-reading{max-width:min(760px,100%);margin:2.5rem auto 1rem;padding:1.25rem 1.25rem 0;border-top:1px solid rgba(127,127,127,.35);box-sizing:border-box}.related-reading h2{font-size:.78rem!important;letter-spacing:.12em;text-transform:uppercase;opacity:.7;margin:0 0 .7rem!important;border:0!important;padding:0!important}.related-reading ul{margin:0;padding:0 0 0 1.1rem;list-style:disc}.related-reading li{margin:.4rem 0;line-height:1.5}.related-reading a{color:inherit;text-decoration:underline;text-underline-offset:2px}</style>
+<nav class="related-reading" aria-label="Related reading"><ul><li><a href="air-to-air-heat-pumps-uk-cooling-2026.html">Has the British summer started needing air-con?</a></li><li><a href="heatpump-news-scop.html">SCOP 6 has already been broken</a></li></ul></nav>
+<footer>
+  <div class="wrap">
+    <p><strong style="color:var(--text-mid);">Sources:</strong>
+      Owner responses gathered by Decarbonarma from a UK heat pump owners' group poll, August 2026 (respondents anonymised; quotes lightly trimmed for length).
+      MCS <em>MIS 3005-D (2025) Heat Pump: Design Standard</em>, scope and reversible-system clause (mcscertified.com).
+      MCS, <em>Boiler Upgrade Scheme</em> consumer guidance and <em>Update on the implementation of air-to-air heat pumps into MCS</em>, April 2026 (mcscertified.com).
+      Underfloor cooling output ranges, flow temperature bands, pipe centres and floor-covering TOG guidance &mdash; underfloorheating.info, <em>Heat Pump and Underfloor Cooling in the UK</em>.
+      Dew point sensor requirements and control behaviour &mdash; ukheatpumphelp.co.uk.
+      Monitored cooling data (Grant R290 / underfloor, 18&deg;C vs 16&deg;C flow; 14.5&deg;C flow with MVHR; Amtico flow-temperature limit) &mdash; OpenEnergyMonitor community forum, <em>Examples of air-to-water cooling on HeatpumpMonitor.org</em>.
+      Fan coil unit cost range &mdash; boxergy.co.uk. Vaillant cooling coding resistor and sensoCOMFORT enablement &mdash; third-party installer guidance.
+      2026 UK temperature records and heat-health alerts &mdash; Met Office and contemporaneous reporting.
+      Dew point figures, COP arithmetic from the monitored 18&deg;C/16&deg;C data, and the 20&nbsp;m&sup2; room heat-gain model calculated by Decarbonarma (Magnus-Tetens approximation).
+      Analytical commentary, not investment, planning or product advice. Always take system-specific design advice from a qualified installer.</p>
+  </div>
+</footer>
+
+<script>
+const brand = {
+  text:'#e4ede5', mid:'#94a894', grid:'rgba(255,255,255,0.06)',
+  grey:'#8a9a90', blue:'#5aa7d6', teal:'#4ade80', violet:'#a78bfa', amber:'#fbbf24', red:'#f87171'
+};
+Chart.defaults.font.family = "'Source Serif 4', Georgia, serif";
+Chart.defaults.color = brand.mid;
+
+/* Figure 1 — Dew point vs RH at three room temperatures (Magnus-Tetens) */
+const rhLabels = [45,50,55,60,65,70,75];
+const dp22 = [9.5, 11.1, 12.5, 13.9, 15.1, 16.3, 17.4];
+const dp24 = [11.3, 12.9, 14.4, 15.8, 17.0, 18.2, 19.3];
+const dp26 = [13.1, 14.8, 16.3, 17.6, 18.9, 20.1, 21.2];
+
+const flowBands = {
+  id: 'flowBands',
+  beforeDatasetsDraw(chart){
+    const {ctx, chartArea:{left,right}, scales:{y}} = chart;
+    const bands = [
+      {v:16, c:'rgba(248,113,113,.13)', l:'16°C flow'},
+      {v:18, c:'rgba(251,191,36,.11)',  l:'18°C flow'},
+      {v:20, c:'rgba(74,222,128,.10)',  l:'20°C flow'}
+    ];
+    ctx.save();
+    bands.forEach(b=>{
+      const yy = y.getPixelForValue(b.v);
+      ctx.strokeStyle = b.c.replace(/[\d.]+\)$/,'.75)');
+      ctx.setLineDash([5,4]); ctx.lineWidth = 1.4;
+      ctx.beginPath(); ctx.moveTo(left,yy); ctx.lineTo(right,yy); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = b.c.replace(/[\d.]+\)$/,'.9)');
+      ctx.font = "500 11px 'JetBrains Mono', monospace";
+      ctx.textAlign = 'left';
+      ctx.fillText(b.l, left + 6, yy - 5);
+    });
+    ctx.restore();
+  }
+};
+
+new Chart(document.getElementById('dewChart'), {
+  type:'line',
+  plugins:[flowBands],
+  data:{ labels: rhLabels.map(r=>r+'%'), datasets:[
+    {label:'Room at 22°C', data:dp22, borderColor:brand.teal,   backgroundColor:brand.teal,   tension:.25, borderWidth:2.5, pointRadius:3},
+    {label:'Room at 24°C', data:dp24, borderColor:brand.amber,  backgroundColor:brand.amber,  tension:.25, borderWidth:2.5, pointRadius:3},
+    {label:'Room at 26°C', data:dp26, borderColor:brand.red,    backgroundColor:brand.red,    tension:.25, borderWidth:2.5, pointRadius:3}
+  ]},
+  options:{ responsive:true, maintainAspectRatio:false, interaction:{mode:'index', intersect:false},
+    plugins:{
+      legend:{position:'bottom', labels:{boxWidth:12, padding:14, font:{size:12}, color:brand.mid}},
+      tooltip:{callbacks:{label:c=>` ${c.dataset.label}: dew point ${c.parsed.y.toFixed(1)}°C`}}
+    },
+    scales:{
+      y:{ title:{display:true,text:'Dew point (°C)'}, grid:{color:brand.grid}, suggestedMin:8, suggestedMax:22 },
+      x:{ title:{display:true,text:'Indoor relative humidity'}, grid:{display:false} }
+    }
+  }
+});
+
+/* Figure 2 — Cooling supply vs demand, 20 m² room */
+new Chart(document.getElementById('capChart'), {
+  type:'bar',
+  data:{
+    labels:['Radiators\n(cooling)','UFH, heating-\ndesigned','UFH, cooling-\ndesigned','UFH, best case\n(dry air)','One fan coil\nunit','Room heat gain,\n32°C afternoon'],
+    datasets:[{
+      label:'Watts',
+      data:[60, 200, 400, 800, 2500, 1120],
+      backgroundColor:['rgba(248,113,113,.55)','rgba(251,191,36,.55)','rgba(74,222,128,.55)','rgba(74,222,128,.55)','rgba(74,222,128,.55)','rgba(251,191,36,.85)'],
+      borderColor:[brand.red,brand.amber,brand.teal,brand.teal,brand.teal,brand.amber],
+      borderWidth:1.5, borderRadius:4
+    }]
+  },
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{callbacks:{label:c=>` ${c.parsed.y} W`}} },
+    scales:{
+      y:{ beginAtZero:true, title:{display:true,text:'Watts into / out of a 20 m² room'}, grid:{color:brand.grid} },
+      x:{ grid:{display:false}, ticks:{ font:{size:11}, callback:function(v){ return this.getLabelForValue(v).split('\n'); } } }
+    }
+  }
+});
+</script>
+<script defer src="/adviser-widget.js"></script>
+</body>
+</html>
