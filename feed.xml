@@ -5,14 +5,14 @@
 <link>https://decarbonarma.com/</link>
 <description>Clear, no-nonsense analysis of UK home decarbonisation - heat pumps, solar, EVs, batteries and the grid.</description>
 <language>en-gb</language>
-<lastBuildDate>Sat, 15 Aug 2026 09:00:00 -0000</lastBuildDate>
+<lastBuildDate>Sun, 16 Aug 2026 04:05:30 -0000</lastBuildDate>
 <atom:link href="https://decarbonarma.com/feed.xml" rel="self" type="application/rss+xml" />
 <item>
-<title>Air-to-Water Heat Pump Cooling: Does It Actually Work in a UK Home?</title>
+<title>Air-to-Water Heat Pump Cooling: Does It Actually Work?</title>
 <link>https://decarbonarma.com/articles/air-to-water-heat-pump-cooling-uk.html</link>
 <guid isPermaLink="true">https://decarbonarma.com/articles/air-to-water-heat-pump-cooling-uk.html</guid>
-<pubDate>Sat, 15 Aug 2026 09:00:00 -0000</pubDate>
-<description>We asked UK owners running cooling from an air-to-water heat pump and they contradicted each other, so we did the dew point and capacity maths. Fan coils behave like air-con, well-designed underfloor gives a real 3-5C, radiators are a trap - and MCS requires these systems to be "designed and optimised for heating".</description>
+<pubDate>Sat, 15 Aug 2026 08:27:27 -0000</pubDate>
+<description>We asked UK heat pump owners whether A2W cooling works, then did the dew point and capacity maths. Fan coils behave like air-con. Underfloor is real but limited. Radiators are a trap.</description>
 </item>
 <item>
 <title>How We Automated Rose Cottage's Energy With Homey — and How to Copy It Without a Sonnen Battery</title>
