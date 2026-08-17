@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="max-image-preview:large">
+    <meta name="description" content="Honest Electricity Cost Calculator: compare gas, wind, solar, Hinkley Point C, SMR and a hybrid grid on £/MWh including the hidden backup, balancing and grid costs — and see what each would mean on your annual bill.">
+    <title>The Honest Electricity Cost Calculator: True Cost of UK Electricity | Decarbonarma</title>
+    <link rel="canonical" href="https://decarbonarma.com/honest-electricity-cost-calculator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Decarbonarma">
+    <meta property="og:title" content="The Honest Electricity Cost Calculator: True Cost of UK Electricity | Decarbonarma">
+    <meta property="og:description" content="Compare gas, wind, solar, Hinkley, SMR and a hybrid grid on £/MWh — including the hidden backup and balancing costs most cost comparisons leave out.">
+    <meta property="og:url" content="https://decarbonarma.com/honest-electricity-cost-calculator.html">
+    <meta property="og:image" content="https://decarbonarma.com/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Honest Electricity Cost Calculator | Decarbonarma">
+    <meta name="twitter:description" content="Compare gas, wind, solar, Hinkley, SMR and a hybrid grid on £/MWh — including the hidden backup and balancing costs most cost comparisons leave out.">
+    <meta name="twitter:image" content="https://decarbonarma.com/og-image.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "The Honest Electricity Cost Calculator",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any (web browser)",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"},
+      "description": "Compare gas, wind, solar, Hinkley Point C, SMR and a hybrid grid on a system cost basis in £/MWh, including backup, balancing, transmission and capacity market costs, and convert the result into an annual household bill.",
+      "url": "https://decarbonarma.com/honest-electricity-cost-calculator.html",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Decarbonarma",
+        "logo": {"@type": "ImageObject", "url": "https://decarbonarma.com/logo.png"}
+      }
+    }
+    </script>
+    <script>(function(){try{var p=localStorage.getItem('dm-pref');var d=p?p==='dark':(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);if(d){document.documentElement.classList.add('dm-dark');var s=document.createElement('style');s.id='dm-bootstrap';s.textContent='html.dm-dark{filter:invert(1) hue-rotate(180deg);background:#000!important}html.dm-dark img,html.dm-dark picture,html.dm-dark video,html.dm-dark iframe,html.dm-dark embed,html.dm-dark object,html.dm-dark canvas,html.dm-dark .dm-keep,html.dm-dark [data-dm-keep]{filter:invert(1) hue-rotate(180deg)}';document.head.appendChild(s);}}catch(e){}})();</script>
+    <script src="/dark-mode.js" defer></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f9fafb;
+            color: #1f2937;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        
+        .header {
+            margin-bottom: 32px;
+            text-align: center;
+            border-bottom: 3px solid #ef4444;
+            padding-bottom: 24px;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            font-size: 16px;
+            color: #6b7280;
+        }
+        
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+        
+        .scenario-btn {
+            padding: 12px 16px;
+            border: 3px solid #e5e7eb;
+            border-radius: 8px;
+            background-color: #fff;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            color: #6b7280;
+            transition: all 0.2s;
+        }
+        
+        .scenario-btn:hover {
+            border-color: #d1d5db;
+        }
+        
+        .scenario-btn.active {
+            border-color: currentColor;
+            font-weight: 600;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .gas { color: #ef4444; }
+        .wind { color: #3b82f6; }
+        .solar { color: #fbbf24; }
+        .hinkley { color: #06b6d4; }
+        .smr { color: #10b981; }
+        .hybrid { color: #8b5cf6; }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .card h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
+        .cost-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .cost-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        .cost-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #f3f4f6;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .cost-bar-fill {
+            height: 100%;
+            transition: width 0.3s;
+        }
+        
+        .metric-box {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .metric {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 12px;
+        }
+        
+        .metric:last-child {
+            border-bottom: none;
+        }
+        
+        .metric-label {
+            font-size: 12px;
+            color: #6b7280;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        .metric-value {
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+        
+        .bill-card {
+            background-color: #fef2f2;
+            border: 2px solid #fee2e2;
+        }
+        
+        .bill-card h2 {
+            color: #991b1b;
+        }
+        
+        .bill-input-group {
+            margin-bottom: 16px;
+        }
+        
+        .bill-input-group label {
+            font-size: 12px;
+            color: #6b7280;
+            font-weight: 600;
+        }
+        
+        .bill-input-group input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 8px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .bill-breakdown {
+            background-color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .bill-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+        
+        .bill-total {
+            border-top: 2px solid #e5e7eb;
+            padding-top: 8px;
+            margin-top: 8px;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+        }
+        
+        .bill-note {
+            font-size: 12px;
+            color: #6b7280;
+            background-color: #fff;
+            padding: 8px;
+            border-radius: 6px;
+        }
+        
+        .description {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 32px;
+            border-left: 4px solid currentColor;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .description p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #374151;
+            margin: 0;
+        }
+        
+        .chart-container {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 32px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .chart-container h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .chart-bars {
+            display: flex;
+            gap: 20px;
+            align-items: stretch;
+            height: 280px;
+            margin-bottom: 20px;
+        }
+
+        .chart-bar-group {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+        }
+
+        .chart-bar-area {
+            flex: 1 1 auto;
+            width: 100%;
+            display: flex;
+            align-items: flex-end;
+            min-height: 0;
+        }
+
+        .chart-bar {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            border-radius: 4px 4px 0 0;
+            overflow: hidden;
+            min-height: 40px;
+        }
+        
+        .chart-bar-segment {
+            width: 100%;
+            transition: all 0.3s;
+        }
+        
+        .chart-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            color: #374151;
+        }
+        
+        .chart-legend {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            font-size: 13px;
+        }
+        
+        .chart-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .chart-legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 2px;
+        }
+        
+        .smoking-gun {
+            background-color: #fef3c7;
+            border: 2px solid #fcd34d;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .smoking-gun h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 12px;
+        }
+        
+        .smoking-gun p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #78350f;
+            margin-bottom: 12px;
+        }
+        
+        .smoking-gun-box {
+            background-color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .smoking-gun-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+        
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #6b7280;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 20px;
+        }
+        
+        .footer p {
+            margin: 0 0 8px 0;
+        }
+        
+        /* --- site chrome --- */
+        .site-header { padding:14px 32px; border-bottom:1px solid #e5e7eb; display:flex; align-items:center; justify-content:space-between; background:#fff; }
+        .site-header img { height:28px; display:block; }
+        .site-header .back-link { font-size:13px; color:#6b7280; text-decoration:none; font-weight:500; }
+        .site-header .back-link:hover { color:#1f8a4c; }
+        .site-footer { padding:32px; border-top:1px solid #ececf0; text-align:center; font-size:12px; color:#6b7280; background:#fff; }
+        .site-footer a { color:#1f8a4c; }
+
+        /* --- methodology --- */
+        .method {
+            background-color:#fff; border:1px solid #e5e7eb; border-radius:12px;
+            padding:24px; margin-bottom:32px; box-shadow:0 1px 3px rgba(0,0,0,0.1);
+        }
+        .method h2 { font-size:18px; font-weight:600; margin-bottom:12px; }
+        .method h3 { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:#6b7280; margin:18px 0 8px; }
+        .method p, .method li { font-size:14px; line-height:1.65; color:#374151; }
+        .method ul { padding-left:20px; margin-bottom:8px; }
+        .method li { margin-bottom:6px; }
+        .method .caveat { background:#f9fafb; border-left:3px solid #fbbf24; padding:12px 14px; border-radius:0 8px 8px 0; margin-top:16px; }
+
+        /* --- related tools --- */
+        .toolref { background:#f0faf3; border:1px solid #aee3c1; border-radius:12px; padding:20px; margin-bottom:32px; }
+        .toolref h2 { font-size:16px; font-weight:600; margin-bottom:12px; color:#14622f; }
+        .toolref-links { display:flex; flex-wrap:wrap; gap:10px; }
+        .toolref-links a {
+            display:inline-block; padding:9px 14px; border-radius:8px; background:#fff;
+            border:1px solid #aee3c1; color:#14622f; text-decoration:none; font-size:14px; font-weight:500;
+        }
+        .toolref-links a:hover { background:#dcf1e3; }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px;
+            }
+            .site-header { padding:12px 16px; }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .scenarios-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart-bars {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/"><img src="logo.svg" alt="Decarbonarma"></a>
+  <a href="/" class="back-link">&larr; Back to Decarbonarma</a>
+</header>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>The Honest Electricity Cost Calculator</h1>
+            <p>What you actually pay for Gas, Wind, Solar, Hinkley, SMR — including hidden backup and system costs</p>
+        </div>
+        
+        <!-- Scenario buttons -->
+        <div class="scenarios-grid" id="scenarioButtons"></div>
+        
+        <!-- Content grid -->
+        <div class="content-grid">
+            <!-- Cost breakdown card -->
+            <div class="card">
+                <h2>Cost Breakdown (£/MWh)</h2>
+                <div id="costBreakdown"></div>
+            </div>
+            
+            <!-- Key metrics card -->
+            <div class="card">
+                <h2>Key Metrics</h2>
+                <div class="metric-box" id="metrics"></div>
+            </div>
+            
+            <!-- Bill card -->
+            <div class="card bill-card">
+                <h2>Your Annual Bill</h2>
+                <div class="bill-input-group">
+                    <label>Household consumption (kWh/year):</label>
+                    <input type="number" id="kwh-input" min="1000" max="5000" value="2800">
+                    <div style="font-size: 12px; color: #6b7280; margin-top: 4px;">(UK average: 2,800 kWh)</div>
+                </div>
+                <div class="bill-breakdown" id="billBreakdown"></div>
+                <div class="bill-note">💡 UK average bill (2024): £911/year</div>
+            </div>
+        </div>
+        
+        <!-- Description -->
+        <div class="description" id="description"></div>
+        
+        <!-- Chart -->
+        <div class="chart-container">
+            <h2>All Technologies Compared</h2>
+            <div class="chart-bars" id="chartBars"></div>
+            <div class="chart-legend" id="chartLegend"></div>
+        </div>
+        
+        <!-- Smoking gun section -->
+        <div class="smoking-gun">
+            <h2>🔥 The Smoking Gun</h2>
+            <p>Current UK bill (2024): £911/year</p>
+            <div class="smoking-gun-box">
+                <div class="smoking-gun-row">
+                    <span>What generation actually costs (renewable mix):</span>
+                    <span style="font-weight: 600;">~£420</span>
+                </div>
+                <div class="smoking-gun-row">
+                    <span>What backup/grid/balancing costs (hidden):</span>
+                    <span style="font-weight: 600;">~£340</span>
+                </div>
+                <div class="smoking-gun-row">
+                    <span>Honest cost of the system:</span>
+                    <span style="font-weight: 600;">~£760</span>
+                </div>
+                <div class="smoking-gun-row" style="border-top: 1px solid #e5e7eb; padding-top: 8px; margin-top: 8px;">
+                    <span style="font-weight: 600;">Your actual bill:</span>
+                    <span style="font-weight: 700; color: #991b1b;">£911</span>
+                </div>
+            </div>
+            <p>Why? Taxes (£261) + supplier margins + grid inefficiencies. The system hides the true cost.</p>
+        </div>
+        
+        <!-- Methodology -->
+        <div class="method">
+            <h2>How these numbers are built</h2>
+            <p>Most "cheapest energy" headlines quote <strong>levelised cost of electricity (LCOE)</strong> — what it costs to build and run one power station, divided by the units it produces. That number tells you nothing about what it costs to keep the lights on when the wind drops. This calculator adds the rest of the system back in.</p>
+
+            <h3>What each cost line means</h3>
+            <ul>
+                <li><strong>Generation</strong> — levelised cost of the plant itself: build, finance, fuel, operate, decommission. This is the number you normally see quoted.</li>
+                <li><strong>Transmission</strong> — grid reinforcement and connection costs. Higher for wind and solar, which are built far from demand and need new lines.</li>
+                <li><strong>Balancing</strong> — what the system operator spends second-by-second keeping supply and demand matched, including constraint payments to turn generators off.</li>
+                <li><strong>Capacity market</strong> — payments to keep firm capacity available for the hours the source isn't producing.</li>
+                <li><strong>Backup / flexibility</strong> — the cost of the batteries, interconnectors and standby gas that fill the gaps. Zero for firm generators that run around the clock; the dominant hidden cost for solar and wind.</li>
+            </ul>
+
+            <h3>Assumptions</h3>
+            <ul>
+                <li>Figures are per megawatt-hour delivered, in 2025 money, for a Great Britain system.</li>
+                <li>Each scenario is a deliberate thought experiment: <em>what if the grid leaned heavily on this one source?</em> Backup costs are attributed to the intermittent source that creates the need for them, rather than socialised across the whole system as they are on your actual bill.</li>
+                <li>The bill panel multiplies system cost by your consumption. It is the cost of <em>supplying</em> your electricity — it excludes VAT, policy levies, standing charges and supplier margin, which is why it comes out below a real bill.</li>
+                <li>Household baseline: 2,800 kWh/year, the Ofgem typical domestic consumption value for a medium electricity-only household. Average annual bill of £911 is the 2024 figure.</li>
+                <li>Hinkley Point C is shown at its strike-price-inflated real-world cost; the SMR line uses Rolls-Royce's target unit cost, which is a projection, not a delivered price.</li>
+            </ul>
+
+            <div class="caveat">
+                <p><strong>Read this before quoting the numbers.</strong> Whole-system costing is contested territory — reasonable analysts land on very different backup figures depending on how much storage, interconnection and demand flexibility they assume. These are Decarbonarma's working assumptions, built from the sources below, not an official government or regulator figure. The point of the tool isn't the third decimal place: it's that the hidden share of the cost is large, and comparisons that ignore it are comparing the wrong thing.</p>
+            </div>
+
+            <h3>Sources</h3>
+            <p>Lazard <em>Levelized Cost of Energy+</em> (2025) · DESNZ electricity generation cost estimates and Contracts for Difference strike prices · NESO Balancing Costs and Capacity Market reports (2024–25) · Ofgem price cap and typical domestic consumption values · Grantham Institute, Imperial College London, on whole-system costs of intermittency.</p>
+        </div>
+
+        <!-- Related tools -->
+        <div class="toolref" data-toolref="1">
+            <h2>Turn this into something you can act on</h2>
+            <div class="toolref-links">
+                <a href="/ai-tariff-finder.html">⚡ Find my best tariff</a>
+                <a href="/uk-grid-live.html">📡 UK Grid Live</a>
+                <a href="/solar-generation-calculator.html">☀️ Solar generation calculator</a>
+                <a href="/battery_sizing_tool.html">🔋 Battery sizer</a>
+                <a href="/home-energy-adviser.html">🌿 Home Energy Adviser</a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>Data sources:</strong> Lazard 2025 LCOE, DESNZ 2025, NESO 2024–25, Ofgem, Grantham Institute</p>
+            <p>Built for <strong>Decarbonarma</strong> — independent, data-driven analysis of home decarbonisation</p>
+        </div>
+    </div>
+
+    <script>
+        const scenarios = {
+            gas: {
+                name: 'Gas CCGT',
+                className: 'gas',
+                color: '#ef4444',
+                generation: 67,
+                transmission: 2,
+                balancing: 4,
+                capacity: 7,
+                backup: 20,
+                total: 100,
+                cf: '45%',
+                emissions: 425,
+                description: 'Spinning reserve for reliability. Cost includes low capacity factor when acting as backup.'
+            },
+            wind: {
+                name: 'Onshore Wind',
+                className: 'wind',
+                color: '#3b82f6',
+                generation: 52,
+                transmission: 14,
+                balancing: 6,
+                capacity: 25,
+                backup: 37,
+                total: 134,
+                cf: '40%',
+                emissions: 12,
+                description: 'Needs backup for calm hours. Hidden costs dominate. Requires battery or gas standby.'
+            },
+            solar: {
+                name: 'Solar PV',
+                className: 'solar',
+                color: '#fbbf24',
+                generation: 60,
+                transmission: 14,
+                balancing: 6,
+                capacity: 30,
+                backup: 45,
+                total: 155,
+                cf: '15%',
+                emissions: 30,
+                description: 'Highest backup needs (evening peak). Capacity factor lowest. Storage required.'
+            },
+            hinkley: {
+                name: 'Hinkley Point C',
+                className: 'hinkley',
+                color: '#06b6d4',
+                generation: 180,
+                transmission: 3,
+                balancing: 1,
+                capacity: 0,
+                backup: 0,
+                total: 184,
+                cf: '90%+',
+                emissions: 5,
+                description: 'Large reactor (1,600 MW). Proven technology. BUT: 10-12 year build delays destroy value. Cost: £20-26bn per unit.'
+            },
+            smr: {
+                name: 'SMR (Rolls-Royce)',
+                className: 'smr',
+                color: '#10b981',
+                generation: 125,
+                transmission: 2,
+                balancing: 1,
+                capacity: 0,
+                backup: 0,
+                total: 128,
+                cf: '90%',
+                emissions: 3,
+                description: 'Modular (470 MW). Factory-built. 15-year build vs Hinkley delays. £2.5bn per unit. Parallel deployment possible.'
+            },
+            hybrid: {
+                name: 'Hybrid (15GW SMR + Wind/Solar + Battery)',
+                className: 'hybrid',
+                color: '#8b5cf6',
+                generation: 73,
+                transmission: 10,
+                balancing: 5,
+                capacity: 8,
+                backup: 15,
+                total: 111,
+                cf: '65% avg',
+                emissions: 8,
+                description: 'Optimized mix: SMR baseload + renewables peak shaving + battery bridging. Best balance.'
+            }
+        };
+        
+        let activeScenario = 'gas';
+        
+        function updateDisplay() {
+            const current = scenarios[activeScenario];
+            const kwh = parseInt(document.getElementById('kwh-input').value);
+            const annualCost = (current.total * kwh) / 1000;
+            const visibleCost = (current.generation * kwh) / 1000;
+            const hiddenCost = annualCost - visibleCost;
+            
+            // Update buttons
+            Object.keys(scenarios).forEach(key => {
+                const btn = document.getElementById(`btn-${key}`);
+                if (btn) {
+                    btn.classList.toggle('active', key === activeScenario);
+                }
+            });
+            
+            // Update cost breakdown
+            const costBreakdown = document.getElementById('costBreakdown');
+            const components = [
+                { name: 'Generation', value: current.generation, color: '#1f2937' },
+                { name: 'Transmission', value: current.transmission, color: '#6366f1' },
+                { name: 'Balancing', value: current.balancing, color: '#f59e0b' },
+                { name: 'Capacity Market', value: current.capacity, color: '#ec4899' },
+                { name: 'Backup/Flexibility', value: current.backup, color: '#ef4444' }
+            ];
+            
+            costBreakdown.innerHTML = components.map(item => 
+                item.value > 0 ? `
+                    <div class="cost-item">
+                        <div class="cost-row">
+                            <span>${item.name}</span>
+                            <span>£${item.value}/MWh</span>
+                        </div>
+                        <div class="cost-bar">
+                            <div class="cost-bar-fill" style="width: ${(item.value / current.total * 100)}%; background-color: ${item.color};"></div>
+                        </div>
+                    </div>
+                ` : ''
+            ).join('');
+            
+            costBreakdown.innerHTML += `
+                <div style="border-top: 2px solid #e5e7eb; padding-top: 12px; margin-top: 12px;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 600;">Total Cost</span>
+                        <span style="font-size: 16px; font-weight: 700; color: ${current.color};">£${current.total}/MWh</span>
+                    </div>
+                </div>
+            `;
+            
+            // Update metrics
+            const hiddenPercent = Math.round((current.total - current.generation) / current.total * 100);
+            document.getElementById('metrics').innerHTML = `
+                <div class="metric">
+                    <p class="metric-label">Capacity Factor</p>
+                    <p class="metric-value">${current.cf}</p>
+                </div>
+                <div class="metric">
+                    <p class="metric-label">CO₂ Emissions</p>
+                    <p class="metric-value">${current.emissions} g/kWh</p>
+                </div>
+                <div class="metric">
+                    <p class="metric-label">Hidden % of Cost</p>
+                    <p class="metric-value" style="color: #ef4444;">${hiddenPercent}%</p>
+                </div>
+            `;
+            
+            // Update bill
+            document.getElementById('billBreakdown').innerHTML = `
+                <div class="bill-row">
+                    <span>Visible (generation):</span>
+                    <span style="font-weight: 600;">£${visibleCost.toFixed(0)}</span>
+                </div>
+                <div class="bill-row">
+                    <span style="color: #ef4444;">Hidden (backup, transmission, etc):</span>
+                    <span style="font-weight: 600; color: #ef4444;">£${hiddenCost.toFixed(0)}</span>
+                </div>
+                <div class="bill-total">
+                    <span>Total Cost:</span>
+                    <span style="color: ${current.color}; font-size: 16px;">£${annualCost.toFixed(0)}</span>
+                </div>
+            `;
+            
+            // Update description
+            document.getElementById('description').style.borderColor = current.color;
+            document.getElementById('description').innerHTML = `<p>${current.description}</p>`;
+        }
+        
+        // Initialize scenario buttons
+        const scenarioButtons = document.getElementById('scenarioButtons');
+        Object.entries(scenarios).forEach(([key, scenario]) => {
+            const btn = document.createElement('button');
+            btn.id = `btn-${key}`;
+            btn.className = `scenario-btn ${scenario.className}`;
+            btn.textContent = scenario.name;
+            btn.onclick = () => {
+                activeScenario = key;
+                updateDisplay();
+            };
+            scenarioButtons.appendChild(btn);
+        });
+        
+        // Handle input change
+        document.getElementById('kwh-input').addEventListener('change', updateDisplay);
+        document.getElementById('kwh-input').addEventListener('input', updateDisplay);
+        
+        // Create comparison chart
+        function createChart() {
+            const chartBars = document.getElementById('chartBars');
+            const chartLegend = document.getElementById('chartLegend');
+            
+            let legendHTML = '';
+            const colors = [
+                { name: 'Visible (Generation)', color: '#1f2937' },
+                { name: 'Hidden (Backup, Grid, etc)', color: '#ef4444' }
+            ];
+            
+            colors.forEach(item => {
+                legendHTML += `
+                    <div class="chart-legend-item">
+                        <div class="chart-legend-color" style="background-color: ${item.color};"></div>
+                        <span>${item.name}</span>
+                    </div>
+                `;
+            });
+            
+            chartLegend.innerHTML = legendHTML;
+            
+            chartBars.innerHTML = Object.entries(scenarios).map(([key, scenario]) => {
+                const visiblePercent = (scenario.generation / scenario.total) * 100;
+                const hiddenPercent = ((scenario.total - scenario.generation) / scenario.total) * 100;
+                const maxHeight = (scenario.total / 184) * 100;
+                
+                return `
+                    <div class="chart-bar-group">
+                        <div class="chart-bar-area">
+                            <div class="chart-bar" style="height: ${maxHeight}%;" title="${scenario.name}: £${scenario.total}/MWh">
+                                <div class="chart-bar-segment" style="height: ${visiblePercent}%; background-color: #1f2937;"></div>
+                                <div class="chart-bar-segment" style="height: ${hiddenPercent}%; background-color: #ef4444;"></div>
+                            </div>
+                        </div>
+                        <div class="chart-label">${scenario.name}<br><strong>£${scenario.total}/MWh</strong></div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Initial display
+        updateDisplay();
+        createChart();
+    </script>
+
+<footer class="site-footer">
+  <p>&copy; Decarbonarma — independent UK home decarbonisation analysis. <a href="/">Home</a> · <a href="/about.html">About</a></p>
+</footer>
+
+<script defer src="/adviser-widget.js"></script>
+</body>
+</html>
