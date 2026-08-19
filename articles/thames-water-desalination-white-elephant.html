@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="max-image-preview:large">
+<title>The £250m White Elephant and the £7.5bn Mirage | Decarbonarma</title>
+<meta name="description" content="Thames Water's Beckton desalination plant has run five times in fifteen years and has still not been switched on in this drought. It wants £7.5bn for a reservoir that delivers its first litre in 2040. The numbers don't work.">
+<link rel="canonical" href="https://decarbonarma.com/articles/thames-water-desalination-white-elephant.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Decarbonarma">
+<meta property="og:title" content="The £250m White Elephant and the £7.5bn Mirage: Why Thames Water's Infrastructure Strategy Is Broken | Decarbonarma">
+<meta property="og:description" content="A desalination plant that has produced about a week of London's water in fifteen years has gone unused through a third drought — while Thames Water asks customers for £7.5bn for a reservoir that delivers nothing until 2040.">
+<meta property="og:url" content="https://decarbonarma.com/articles/thames-water-desalination-white-elephant.html">
+<meta property="og:image" content="https://decarbonarma.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The £250m White Elephant and the £7.5bn Mirage | Decarbonarma">
+<meta name="twitter:description" content="Thames Water's desalination plant has run five times since 2010 and has not been switched on in this drought either. Meanwhile the company wants £7.5bn for a reservoir that delivers its first litre in 2040.">
+<meta name="twitter:image" content="https://decarbonarma.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The £250m White Elephant and the £7.5bn Mirage | Decarbonarma",
+  "description": "Thames Water's Beckton desalination plant has run five times in fifteen years and has still not been switched on in this drought. It wants £7.5bn for a reservoir that delivers its first litre in 2040. The case for fixing what you already own.",
+  "url": "https://decarbonarma.com/articles/thames-water-desalination-white-elephant.html",
+  "image": "https://decarbonarma.com/og-image.png",
+  "author": {
+    "@type": "Person",
+    "name": "Gareth",
+    "url": "https://decarbonarma.com/about.html"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Decarbonarma",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://decarbonarma.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://decarbonarma.com/articles/thames-water-desalination-white-elephant.html"
+  },
+  "datePublished": "2026-08-19",
+  "dateModified": "2026-08-19"
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0d1510; --bg2:#111a13; --bg3:#162019; --bg4:#1a2820;
+    --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.13);
+    --green:#4ade80; --green-dim:#22c55e; --green-deep:#1a5c38;
+    --green-pale:rgba(74,222,128,0.08); --green-pale2:rgba(74,222,128,0.13);
+    --amber:#fbbf24; --amber-pale:rgba(251,191,36,0.08);
+    --blue:#5aa7d6; --violet:#a78bfa; --grey:#8a9a90;
+    --red:#f87171; --red-pale:rgba(248,113,113,0.08);
+    --text:#e4ede5; --text-mid:#94a894; --text-dim:#5a6c5a;
+    --mono:'JetBrains Mono','Courier New',monospace;
+    --serif:'Playfair Display',Georgia,serif;
+    --body:'Source Serif 4',Georgia,serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.75;font-weight:300;-webkit-font-smoothing:antialiased;}
+
+  .site-header{border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:rgba(13,21,16,.9);backdrop-filter:blur(8px);z-index:20;}
+  .site-logo{text-decoration:none;display:flex;align-items:center;}
+  .site-nav{display:flex;gap:1.5rem;}
+  .site-nav a{color:var(--text-dim);text-decoration:none;font-size:12px;letter-spacing:.07em;text-transform:uppercase;}
+  .site-nav a:hover{color:var(--green);}
+
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px;}
+  .hero{padding:64px 0 34px;border-bottom:1px solid var(--border);}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);}
+  h1{font-family:var(--serif);font-weight:700;font-size:2.5rem;line-height:1.12;margin:.4em 0 .3em;color:#fff;}
+  .standfirst{font-size:1.2rem;color:var(--text-mid);font-weight:300;}
+  .byline{font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-top:18px;}
+
+  main{padding:10px 0 40px;}
+  h2{font-family:var(--serif);font-weight:700;font-size:1.7rem;color:#fff;margin:2em 0 .4em;}
+  h3{font-family:var(--body);font-weight:600;font-size:1.18rem;color:var(--green);margin:1.7em 0 .3em;}
+  p{margin:.85em 0;}
+  strong{color:#fff;font-weight:600;}
+  em{color:var(--text-mid);}
+  a{color:var(--green);}
+  ul,ol{margin:.85em 0 .85em 1.3em;}
+  li{margin:.4em 0;}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:30px 0;}
+  .stat{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+  .stat .n{font-family:var(--mono);font-size:1.6rem;font-weight:500;color:var(--green);line-height:1;}
+  .stat .l{font-size:13px;color:var(--text-mid);margin-top:8px;line-height:1.4;}
+
+  .card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px;margin:26px 0;}
+  .chart-box{position:relative;height:400px;width:100%;}
+  .chart-cap{font-size:13.5px;color:var(--text-mid);margin-top:14px;line-height:1.55;}
+
+  table{width:100%;border-collapse:collapse;font-size:15px;margin:6px 0;}
+  th,td{text-align:left;padding:10px 10px;border-bottom:1px solid var(--border);}
+  th{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim);font-weight:400;}
+  td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--text);}
+  .pill{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:500;padding:2px 9px;border-radius:20px;}
+  .pill.on{background:var(--green-pale2);color:var(--green);border:1px solid var(--green-deep);}
+  .pill.warn{background:var(--amber-pale);color:var(--amber);border:1px solid rgba(251,191,36,0.35);}
+  .pill.off{background:var(--red-pale);color:var(--red);border:1px solid rgba(248,113,113,0.35);}
+
+  .callout{border-left:3px solid var(--amber);background:var(--amber-pale);padding:18px 22px;border-radius:0 12px 12px 0;margin:28px 0;}
+  .callout h3{margin-top:0;color:var(--amber);}
+  .callout.fair{border-left-color:var(--blue);background:rgba(90,167,214,0.08);}
+  .callout.fair h3{color:var(--blue);}
+
+  footer{border-top:1px solid var(--border);padding:28px 0 60px;}
+  footer p{font-size:12.5px;color:var(--text-dim);line-height:1.65;}
+  footer a{color:var(--text-mid);}
+
+  @media(max-width:600px){ h1{font-size:1.85rem;} .chart-box{height:340px;} body{font-size:16px;} .hero{padding:40px 0 26px;} }
+</style>
+<script>(function(){try{var p=localStorage.getItem('dm-pref');var d=p?p==='dark':(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);if(d){document.documentElement.classList.add('dm-dark');var s=document.createElement('style');s.id='dm-bootstrap';s.textContent='html.dm-dark{filter:invert(1) hue-rotate(180deg);background:#000!important}html.dm-dark img,html.dm-dark picture,html.dm-dark video,html.dm-dark iframe,html.dm-dark embed,html.dm-dark object,html.dm-dark canvas,html.dm-dark .dm-keep,html.dm-dark [data-dm-keep]{filter:invert(1) hue-rotate(180deg)}';document.head.appendChild(s);}}catch(e){}})();</script>
+<script src="/dark-mode.js" defer></script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="site-logo"><img src="../logo-light.svg" alt="Decarbonarma" style="height:34px;width:auto;display:block;"></a>
+  <nav class="site-nav">
+    <a href="/">Home</a>
+    <a href="#">Policy</a>
+    <a href="#">Grid</a>
+    <a href="#">Infrastructure</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">Policy &amp; Infrastructure</div>
+    <h1>The £250m White Elephant and the £7.5bn Mirage: Why Thames Water's Infrastructure Strategy Is Broken</h1>
+    <p class="standfirst">A desalination plant that has produced about a week of London's water in fifteen years has gone unused through a third drought in five years. Thames Water says it is available; it also says it will be brought back online by the end of the year. Meanwhile customers are being asked to fund a £7.5bn reservoir that delivers its first litre in 2040. The cheapest water in Britain is the water we have already paid for.</p>
+    <div class="byline">Decarbonarma · 19 August 2026 · ~12-min read</div>
+  </div>
+
+  <main>
+
+  <div class="stats">
+    <div class="stat"><div class="n">5</div><div class="l">Times the Beckton desalination plant has been switched on since 2010</div></div>
+    <div class="stat"><div class="n">7.2bn L</div><div class="l">Total drinking water produced in 15 years — about a week of London's supply</div></div>
+    <div class="stat"><div class="n">570 Ml/d</div><div class="l">Water Thames Water loses to leakage every day: more than a fifth of everything it supplies</div></div>
+    <div class="stat"><div class="n">2040</div><div class="l">Year the £5.5–7.5bn Abingdon reservoir delivers its first litre</div></div>
+  </div>
+
+  <div class="answer-capsule" style="border:1px solid rgba(255,255,255,0.07);border-left:4px solid #4ade80;background:rgba(74,222,128,0.08);padding:1.15rem 1.35rem;margin:0 0 1.75rem;border-radius:0 3px 3px 0;"><div style="font-family:'JetBrains Mono','Courier New',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#4ade80;margin-bottom:.5rem;">The short answer</div><p style="margin:0;font-size:1.06rem;line-height:1.6;color:#e4ede5;font-weight:400;">Thames Water built a desalination plant at Beckton in 2010 for around £270m. It has been switched on five times, has never run during a drought, and has not been switched on in this one either. Thames Water says the plant is available if needed; it also says it will be brought back online by the end of 2026, and its chief executive told MPs the membranes had reached the end of their service life and the company has no facility to test replacements. At the same time it is seeking consent for a £5.5–7.5bn reservoir near Abingdon that produces nothing until 2040. Restarting Beckton would cost a rounding error by comparison. The regulatory model rewards the reservoir.</p></div>
+
+  <h2>1. The absurdity in plain numbers</h2>
+
+  <p>Thames Water owns a desalination plant that does not work. Officially it is the Thames Gateway Water Treatment Works; everyone calls it the Beckton desalination plant. It was opened in June 2010 by the Duke of Edinburgh at a build cost of around £270m — the Telegraph's long-running shorthand of "£250m" is close enough that both figures circulate, and once you add financing and fifteen years of keeping an idle asset alive the whole-life number is closer to £500m.</p>
+
+  <p>It has never been deployed during an actual drought. It was unavailable in 2022, when hosepipe bans went up across the South East, and unavailable again in 2025. This summer — with <strong>71% of England by land area officially in drought</strong> and Thames Water's own hosepipe ban in force across London, the Thames Valley and the Home Counties since 23 July — the company says Beckton <em>is</em> available and could be activated if required. It has not been. There is no official trigger for switching it on, and starting it would reportedly take weeks of preparation.</p>
+
+  <p>At the same time, Thames Water is asking its customers to bankroll the <strong>South East Strategic Reservoir Option near Abingdon — rebranded the White Horse Reservoir in January 2026</strong> — at a cost of £5.5bn to £7.5bn, plus another £1.9bn to operate over 65 years. Construction is pencilled in for 2029. First water: 2040.</p>
+
+  <p>That is not infrastructure planning. That is institutional theatre with a fourteen-year delivery date.</p>
+
+  <h2>2. What actually happened at Beckton</h2>
+
+  <p>The plant was supposed to relieve London's water stress. The Environment Agency classifies Thames Water's supply area, London included, as <em>seriously water stressed</em> — a determination accepted by the Secretary of State in 2021 and still current. Beckton was designed to produce up to <strong>150 million litres a day</strong> from brackish Thames estuary water, enough for roughly 400,000 homes.</p>
+
+  <h3>The technical collapse</h3>
+
+  <p>Reverse osmosis works by forcing water through polymer membranes at pressure. Those membranes are consumables — they foul, they degrade, and eventually they get changed. Beckton's reached the end of their service life. Chief executive Chris Weston told Parliament in 2025 that the company <strong>does not have a facility to test replacement membranes</strong>, which is why they have not been changed. His own verdict on the plant was blunt: it is "a big problem for us… it is not a good story, it was not a good investment."</p>
+
+  <p>Read that again. A water utility serving sixteen million people owns a £270m membrane plant and cannot validate a replacement membrane. Not "cannot afford" — cannot test.</p>
+
+  <h3>The track record</h3>
+
+  <p>Since 2010 the plant has been switched on <strong>five times</strong>. As of September 2025 — fifteen years in — it had delivered <strong>7.2 billion litres</strong> of drinking water. The investigation that surfaced that figure called it "just seven days' water"; the Telegraph, working from a higher demand assumption, makes it roughly four days. Either way, the plant's entire lifetime output is somewhere between half a week and a week of London's supply. Averaged across those fifteen years, Beckton has produced about <strong>1.3 million litres a day</strong>. Its design figure was 150 million.</p>
+
+  <p>Thames Water has also walked the capacity backwards. In early 2022, before that summer's drought, the usable figure was cut by a third to 100 Ml/d — a revision the company explained at the time as made "on the basis of experience" and to avoid "creating unrealistic expectations about the output over a sustained period." By August 2026 the number being briefed was <strong>75 Ml/d — half the original promise</strong>, serving perhaps 200,000 homes rather than 400,000.</p>
+
+  <h3>What the regulator says happened in 2022</h3>
+
+  <p>The Environment Agency accused Thames Water of "hiding problems at its emergency back-up plant." In its January 2022 drought planning the company had assured regulators that Beckton was ready to go online. On <strong>19 July 2022</strong> the UK recorded 40.3°C at Coningsby, the hottest temperature in its history. On <strong>20 July 2022</strong> — the day after — Thames Water told the Environment Agency the plant was not operational. Ofwat was reported to be looking into the company's management of it.</p>
+
+  <h3>Where it stands today</h3>
+
+  <p>As of this week, Thames Water says it is preparing to bring the plant back online <strong>by the end of 2026</strong>, dependent on weather, demand and reservoir levels. In other words: after the drought, over the winter, to help refill reservoirs. That sits awkwardly next to the company's statement three days earlier that the plant is available right now. Either way there is no trigger, no committed date, and no consequence attached to missing it.</p>
+
+  <div class="callout">
+    <h3>The pattern, stated plainly</h3>
+    <p>An asset bought for drought resilience was unavailable in two droughts and has gone unused in a third. Each time the explanation is maintenance. Each time the fix arrives after the emergency has passed. At some point "we're working on it" stops being an operational update and starts being the operating model.</p>
+  </div>
+
+  <h2>3. The £7.5bn reservoir</h2>
+
+  <p>Rather than fix the asset it already owns, Thames Water is pursuing a Nationally Significant Infrastructure Project. Here is what customers are being asked to fund:</p>
+
+  <table>
+    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Project</td><td class="num">White Horse Reservoir (formerly SESRO), near Abingdon, Oxfordshire</td></tr>
+      <tr><td>Build cost</td><td class="num">£5.5bn – £7.5bn (was £2.2bn as recently as early 2025)</td></tr>
+      <tr><td>Operating cost</td><td class="num">£1.9bn over 65 years</td></tr>
+      <tr><td>Consent application</td><td class="num">Development Consent Order, expected November 2026</td></tr>
+      <tr><td>Construction starts</td><td class="num">2029</td></tr>
+      <tr><td>First water</td><td class="num">2040</td></tr>
+      <tr><td>Effect on bills</td><td class="num">≈ £5 per month by 2040</td></tr>
+      <tr><td>Drought output</td><td class="num">271 Ml/d in drought — Thames Water's "three million baths a day"</td></tr>
+      <tr><td>Footprint</td><td class="num">Site area comparable to Gatwick Airport</td></tr>
+    </tbody>
+  </table>
+
+  <p>The reservoir is not a stupid idea in isolation. The South East genuinely is short of raw water storage, and a large reservoir is a genuinely durable, low-energy way to hold it. The problem is what sits either side of it on the balance sheet.</p>
+
+  <p>Thames Water's network loses <strong>570 million litres every single day</strong> to leakage — the 2023-24 audited figure, more than a fifth of everything it puts into supply, and the worst performance in England and Wales by volume. The 2025-26 results report leakage 15.1% below the 2019/20 baseline, so the number is coming down; it is not coming down fast enough to change the arithmetic. Campaigners at the Group Against Reservoir Development quote "over 600 million litres." Either way, the daily leak is more than twice what the new reservoir would deliver at full drought output.</p>
+
+  <p>Olly Glover, the Liberal Democrat MP for Didcot and Wantage, put it about as well as it can be put: without a credible plan to cut leakage first, building a mega-reservoir is <em>"just like filling the bath when the plughole's open."</em> Derek Stork, chairman of GARD, has been making the same arithmetic point for years — that the network "leaks over 600 million litres of water per day, more than twice the maximum supply of this reservoir," and that the scheme is the least drought-resilient and longest-delivery option on the table.</p>
+
+  <div class="card">
+    <div class="chart-box"><canvas id="mldChart"></canvas></div>
+    <p class="chart-cap"><strong>Figure 1 — Megalitres a day, at the same scale.</strong> Thames Water's daily leakage dwarfs the reservoir it wants £7.5bn to build. Beckton's design capacity is more than half the reservoir's drought output — and its actual average output, spread over fifteen years, is 1.3 Ml/d: the sliver on the right. Leakage figure 570.4 Ml/d (2023-24 audited); reservoir drought output 271 Ml/d, Thames Water's own published figure.</p>
+  </div>
+
+  <h2>4. The missing third option: fix the thing you already own</h2>
+
+  <p>There is a route between "leave a £270m asset rusting" and "spend £7.5bn." It is unglamorous, it generates no press release, and it could largely be done inside a year.</p>
+
+  <h3>1. Buy and fit new membranes</h3>
+  <p>Reverse osmosis elements are a commodity product with a global supply chain and a well-understood replacement cycle. Every large RO plant on earth changes them. At Beckton's design scale the job is not trivial — working from typical brackish-water flux rates, a plant of 150,000 m³/day needs somewhere in the region of 8,000–9,000 standard 8-inch elements, which at commodity prices puts a full re-membrane at design scale in the region of <strong>£3m–£5m including installation</strong>. Re-equipping only to the revised 75 Ml/d output would be roughly half that. <em>(That is Decarbonarma's estimate from published flux and element pricing, not a Thames Water figure — but it is the right order of magnitude, and the order of magnitude is the point.)</em></p>
+
+  <h3>2. Get a membrane testing capability</h3>
+  <p>This is the bit that should embarrass the sector. Membrane test skids are standard water-industry kit; every major membrane manufacturer runs validation programmes; specialist consultancies do this as a service. A utility of Thames Water's size can build one, rent one, or contract the testing out. Cost: high five to low six figures. Timeline: months, not years. "We don't have a facility to test membranes" is a procurement decision, not a law of physics.</p>
+
+  <h3>3. Run it off-peak</h3>
+  <p>Beckton's design energy intensity is about <strong>2.3 kWh per cubic metre</strong> — 17.6 MW peak load, 14 MW average, at 150,000 m³/day. That is entirely normal for brackish-water RO, which typically sits at 1.5–2.5 kWh/m³ (seawater RO is 3–4.5). At the revised 75 Ml/d output that is roughly <strong>170 MWh a day</strong>.</p>
+  <p>Desalination is a textbook deferrable load: you are making a storable product, and nobody downstream can tell what time of night it was made. Run it overnight, store the treated water, and you buy that energy in the cheapest and usually the cleanest hours of the day — exactly the logic every household on a time-of-use tariff already applies to its EV and its hot water. Thames Water's public complaint about Beckton has always been energy cost. It has never explained why it is buying that energy at the worst possible time of day.</p>
+
+  <h3>4. Contract renewable power directly</h3>
+  <p>Thames Water is not short of renewable ambition on paper — it self-generated 475 GWh in 2024-25, about a quarter of its energy need, from biogas, sludge, wind and solar, and it owns turbines at Crossness and Beckton sewage works. What its parent company Kemble did, in July 2024, was put the group's renewables venture Trinzic Operations into liquidation after a £500m investment pledge was pulled and floating solar came in at under a quarter of forecast output. A fixed-price corporate PPA for a genuinely interruptible night-time load is one of the easier things to buy in the UK energy market right now. Doing that turns desalination from an emergency purchase at spot prices into a planned, budgeted resilience service.</p>
+
+  <h3>5. Operate it seasonally, not hysterically</h3>
+  <p>Run the plant October to May, filling reservoirs through the wet months when raw water and cheap wind are both abundant. Take June to September for planned maintenance and membrane changes. That is how industrial plant is actually run — scheduled downtime around a duty cycle, rather than a mothballed asset that someone tries to cold-start in the middle of a heatwave and discovers is broken.</p>
+
+  <div class="card">
+    <div class="chart-box"><canvas id="costChart"></canvas></div>
+    <p class="chart-cap"><strong>Figure 2 — Capital cost per megalitre per day of drought supply (log scale).</strong> Restarting Beckton at 75 Ml/d for an estimated £10m works out at roughly £0.13m per Ml/d. The White Horse Reservoir, at £7.5bn for 271 Ml/d, is around £27.7m per Ml/d — more than two hundred times more per unit of drought water. The reservoir is a 65-year asset and the comparison is not perfectly like-for-like, but no reasonable adjustment closes a gap that size. Restart cost is a Decarbonarma estimate; all other figures as sourced below.</p>
+  </div>
+
+  <h3>What the fix costs, roughly</h3>
+  <ul>
+    <li><strong>Full re-membrane at 75 Ml/d:</strong> £1.5m–£2.5m including installation</li>
+    <li><strong>Membrane testing capability:</strong> £0.5m–£1.5m, or contracted out for less</li>
+    <li><strong>Recommissioning, controls, staffing up:</strong> a few million</li>
+    <li><strong>Electricity to run it flat out for a whole year:</strong> ~62,000 MWh, or roughly £7.5m at £120/MWh — and materially less on an off-peak, contracted-renewable basis</li>
+  </ul>
+  <p>Call it <strong>£10m of capital, contingency included, to have a working 75 Ml/d drought asset next winter</strong>, and something like £5–9m a year to run it hard when it is needed, depending on how many months it operates and what it pays for power. Set against a £5.5–7.5bn build budget, the plant's entire annual running cost is somewhere between a six-hundredth and a fifteen-hundredth of it. You could run Beckton flat out, every single day, for the best part of a millennium, for what the reservoir costs to construct.</p>
+
+  <div class="callout fair">
+    <h3>The fair counter-argument</h3>
+    <p>Thames Water would say — and it would not be entirely wrong — that a reservoir and a desalination plant are not substitutes. A reservoir is 65 years of near-zero-energy storage that also supports river flows and regional transfers; Beckton is an energy-hungry emergency tap on a tidal estuary that only ever addressed London, and it has a genuinely poor operating history. The South East does need more raw water storage, and building it takes a decade whether anyone likes it or not. The honest version of the argument in this piece is therefore <em>not</em> "reservoir bad." It is that a company which cannot keep a £270m asset in working order, and which loses a quarter of its water through the pipes, has not yet earned the right to ask its customers for £7.5bn — and that the cheapest, fastest drought resilience available to London between now and 2040 is sitting in Beckton with worn-out membranes in it.</p>
+  </div>
+
+  <h2>5. Why this matters beyond water</h2>
+
+  <p>This is a water story, but the failure mode is the one that shows up everywhere in UK decarbonisation.</p>
+
+  <h3>The greenwashing gap</h3>
+  <p>Thames Water talks about renewable-powered treatment and floating solar on the new reservoir. It cannot currently operate the treatment asset it already has, and it liquidated its solar venture when the numbers stopped working. Environmental rhetoric aimed at a project fourteen years out is not a substitute for operating today's plant competently.</p>
+
+  <h3>The capital discipline problem</h3>
+  <p>Multi-billion new-build gets approved and funded. Operational fixes to existing assets get deferred indefinitely. This is the single biggest reason UK infrastructure is expensive: we build new things instead of maintaining and optimising the things we have. It is the same instinct that leads a household to price a new boiler before it has looked at the loft insulation.</p>
+
+  <h3>The customer pays twice</h3>
+  <p>Londoners funded Beckton through their bills. They are being asked to fund the reservoir through their bills — about £5 a month by 2040, on top of the 35% real-terms increase Ofwat allowed Thames Water for 2025–2030. And they are under a hosepipe ban while the asset they already bought sits idle.</p>
+
+  <h3>The resilience illusion</h3>
+  <p>"We are building major new green infrastructure" is a far easier sentence to announce than "we fixed our leaks and ran our existing plant properly." One is a press release. The other is resilience. They are not the same thing, and the regulatory system currently cannot tell them apart.</p>
+
+  <h2>6. What should actually happen</h2>
+
+  <ol>
+    <li><strong>Put a date on Beckton.</strong> The Environment Agency should require the plant to be demonstrably operational and drought-deployable by the start of the 2027 dry season, with the membrane testing capability in place, and should publish the milestones.</li>
+    <li><strong>Make failed assets visible.</strong> Water companies should be required to publish an annual availability statement for every drought-resilience asset they own — designed output, actual output, days available. A £270m plant going dark should be a reportable event, not something journalists discover during a heatwave.</li>
+    <li><strong>Leakage before new supply.</strong> Tie consent for major new supply schemes to a hard, audited leakage trajectory. Losing 570 Ml/d while asking for 271 Ml/d of new capacity is not a supply problem, it is a maintenance problem wearing a supply problem's clothes.</li>
+    <li><strong>Fix the incentive, not just the company.</strong> Ofwat has known about capital expenditure bias for over a decade — the whole point of moving to a "totex" framework at the 2014 price review was to stop rewarding companies for building rather than maintaining. Beckton is fairly strong evidence that it has not worked well enough. If a company can earn a regulated return on a £7.5bn reservoir while a £270m asset it already owns sits broken, the incentive is still pointing the wrong way.</li>
+  </ol>
+
+  <h2>7. The uncomfortable truth</h2>
+
+  <p>Thames Water is not uniquely incompetent, although it is doing an excellent impression. It is carrying £18.5bn of net debt at 86% gearing, its shareholders wrote their equity down to zero and walked away in 2024, its senior creditors are in the process of taking control — and it is close enough to special administration that ministers have reportedly been preparing for it. A company in that condition does not have the management bandwidth or the balance sheet to sweat the details of a membrane replacement programme.</p>
+
+  <p>But the deeper problem is structural. Under the regulated asset model, new capital spending grows the asset base and earns a return for decades. Fixing broken equipment is just doing your job. Building a £7.5bn reservoir is, in the most literal financial sense, worth more to a water company than making a £270m asset work.</p>
+
+  <p>That is a regulatory design failure, not merely a management one — and it is the same design failure that makes UK grid connections, road schemes and hospital rebuilds cost what they cost.</p>
+
+  <h2>The bottom line</h2>
+
+  <p>London is in drought. Ten million people are under a hosepipe ban. A desalination plant capable of 75 million litres a day is sitting in Beckton with worn-out membranes and no test rig. Thames Water says it is available. It also says it will be brought back online by the end of the year — after the rain returns. The reservoir that is supposed to fix all this delivers its first litre in 2040, by which point the current chief executive, the current regulator, the current government and quite possibly the current company will all be gone.</p>
+
+  <p>The cheapest water in Britain is the water we already paid for. Nobody has an incentive to go and get it.</p>
+
+  </main>
+</div>
+
+<!-- dca-email-capture -->
+<div class="dca-signup-outer">
+  <div class="dca-signup">
+    <div class="dca-signup-kicker">Decarbonarma Newsletter</div>
+    <h3 class="dca-signup-h">Get the next one in your inbox</h3>
+    <p class="dca-signup-sub">Clear, no-nonsense analysis of UK home decarbonisation &mdash; heat pumps, solar, EVs, batteries and the grid. Occasional emails, no spam, unsubscribe anytime.</p>
+    <form action="https://decarbonarma.us15.list-manage.com/subscribe/post?u=cffa5aec4001ad97d9357f807&amp;id=8d5f19dec4&amp;f_id=0096a2e1f0" method="post" target="_blank" novalidate class="dca-signup-form">
+      <label class="dca-visually-hidden" for="dca-email">Email address</label>
+      <input type="email" name="EMAIL" id="dca-email" required placeholder="you@example.com" class="dca-signup-input">
+      <!-- Mailchimp bot-prevention honeypot: real users leave this empty -->
+      <div aria-hidden="true" style="position:absolute;left:-5000px;"><input type="text" name="b_cffa5aec4001ad97d9357f807_8d5f19dec4" tabindex="-1" value=""></div>
+      <button type="submit" name="subscribe" class="dca-signup-btn">Subscribe</button>
+    </form>
+    <div class="dca-signup-fine">We&rsquo;ll never share your email. Powered by Mailchimp.</div>
+  </div>
+</div>
+<style>
+  .dca-signup-outer{max-width:820px;margin:48px auto 10px;padding:0 24px;}
+  .dca-signup{background:var(--bg3,#162019);border:1px solid var(--green-pale2,rgba(74,222,128,0.13));border-radius:16px;padding:30px 28px;position:relative;overflow:hidden;}
+  .dca-signup::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green,#4ade80),var(--amber,#fbbf24));}
+  .dca-signup-kicker{font-family:var(--mono,'JetBrains Mono',monospace);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--green,#4ade80);margin-bottom:8px;}
+  .dca-signup-h{font-family:var(--serif,'Playfair Display',Georgia,serif);font-weight:700;font-size:1.5rem;color:#fff;margin:0 0 .3em;line-height:1.15;}
+  .dca-signup-sub{font-family:var(--body,'Source Serif 4',Georgia,serif);font-size:15px;color:var(--text-mid,#94a894);margin:0 0 18px;line-height:1.6;font-weight:300;}
+  .dca-signup-form{display:flex;gap:10px;flex-wrap:wrap;}
+  .dca-signup-input{flex:1 1 240px;min-width:0;background:var(--bg,#0d1510);border:1px solid var(--border2,rgba(255,255,255,0.13));border-radius:10px;padding:13px 15px;color:var(--text,#e4ede5);font-family:var(--body,'Source Serif 4',Georgia,serif);font-size:15px;}
+  .dca-signup-input:focus{outline:none;border-color:var(--green,#4ade80);box-shadow:0 0 0 3px var(--green-pale,rgba(74,222,128,0.08));}
+  .dca-signup-input::placeholder{color:var(--text-dim,#5a6c5a);}
+  .dca-signup-btn{flex:0 0 auto;background:var(--green,#4ade80);color:#062012;border:none;border-radius:10px;padding:13px 26px;font-family:var(--mono,'JetBrains Mono',monospace);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:background .15s;}
+  .dca-signup-btn:hover{background:var(--green-dim,#22c55e);}
+  .dca-signup-fine{font-family:var(--mono,'JetBrains Mono',monospace);font-size:11px;color:var(--text-dim,#5a6c5a);margin-top:12px;letter-spacing:.02em;}
+  .dca-visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  @media(max-width:520px){.dca-signup-btn{flex:1 1 100%;}}
+</style>
+<!-- /dca-email-capture -->
+
+<div data-toolref="1" style="max-width:760px;margin:2.5rem auto;padding:1.25rem 1.5rem;border:1px solid rgba(74,222,128,0.35);border-radius:12px;background:rgba(74,222,128,0.08);"><div style="font-weight:700;font-size:1.05rem;margin-bottom:0.85rem;">Free tools for this topic</div><div style="font-size:0.95rem;line-height:1.6;margin-bottom:0.9rem;opacity:.85;">Off-peak, deferrable load is the same idea at household scale — shift the work to the cheap, clean hours.</div><div style="display:flex;flex-wrap:wrap;gap:0.6rem;"><a href="/#grid" target="_top" style="display:inline-block;background:#4ade80;color:#0d1510;font-weight:700;text-decoration:none;padding:0.6rem 1.1rem;border-radius:8px;font-size:0.95rem;line-height:1.2;">📡 UK Grid Live &rarr;</a><a href="/#optimiser" target="_top" style="display:inline-block;background:#4ade80;color:#0d1510;font-weight:700;text-decoration:none;padding:0.6rem 1.1rem;border-radius:8px;font-size:0.95rem;line-height:1.2;">🧮 Home Energy Optimiser &rarr;</a></div></div>
+
+<nav class="related-reading" aria-label="Related reading" style="max-width:min(760px,100%);margin:2.5rem auto 1rem;padding:1.25rem 1.25rem 0;box-sizing:border-box;border-top:1px solid rgba(255,255,255,0.07);"><h2 style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;opacity:.75;margin:0 0 .7rem;border:0;padding:0;color:#e4ede5;">Related reading</h2><ul style="margin:0;padding:0 0 0 1.1rem;list-style:disc;color:#e4ede5;"><li style="margin:.4rem 0;line-height:1.5;"><a href="uk-wasted-wind-grid.html" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">The wind Britain pays to throw away</a></li><li style="margin:.4rem 0;line-height:1.5;"><a href="uk-grid-security-of-supply-2026.html" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Three grid margin notices in one summer</a></li><li style="margin:.4rem 0;line-height:1.5;"><a href="../uk-grid-live.html" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">UK grid live: real-time generation mix and carbon intensity</a></li></ul></nav>
+
+<footer>
+  <div class="wrap">
+    <p><strong style="color:var(--text-mid);">Sources:</strong>
+      Telegraph, "Thames dusts off £250m desalination plant" (14 Aug 2026) — never used in a drought, unavailable in 2022 and 2025, capacity revised to 75 Ml/d ·
+      Guardian, "Thames Water plans to restart desalination plant" (17 Aug 2026) — Chris Weston's evidence to MPs on membranes and the absence of a testing facility; restart "by the end of 2026" ·
+      Guardian / Watershed Investigations (26 Sep 2025) — five activations, 7.2 billion litres, whole-life cost ·
+      BBC News (2 Jun 2010) — plant opening, design capacity, ~400,000 households ·
+      Telegraph (4–5 Aug 2022) — Environment Agency notified 20 July 2022; January 2022 drought-readiness assurance; Ofwat investigation ·
+      Met Office, July 2022 heat review — 40.3°C at Coningsby, 19 July 2022 ·
+      Environment Agency / GOV.UK, "Dry weather and drought in England, 7 to 13 August 2026" — 71% of England in drought, reservoir storage, temporary use bans ·
+      Thames Water, temporary use ban announcement (21 Jul 2026) and Annual Results 2025-26 — ban in force 23 July 2026; 2.6 billion litres/day supplied; net debt and gearing ·
+      BBC News (19 Sep 2025) and Thames Water SRO project pages — SESRO / White Horse Reservoir cost, timeline, bill impact and "three million baths daily" ·
+      New Civil Engineer (14 May 2026) — DCO expected November 2026 ·
+      BBC News, "Call for public inquiry into Thames Water reservoir plans" — Olly Glover MP and Derek Stork (GARD) quotes ·
+      Company annual reports as compiled by City AM — leakage 570.4 Ml/d, 2023-24 ·
+      "An Overview of the 150,000 m³/day Beckton Desalination Plant in London", IDA World Congress 2009 — 17.6 MW peak / 14 MW average load, ≈2.27 kWh/m³ ·
+      Defra/EA, "Updating the determination of water stressed areas in England" (2021) — seriously water stressed classification ·
+      Thames Water, "Managing our carbon emissions" — 475 GWh renewable self-generation 2024-25 ·
+      Guardian (Jul 2024) — liquidation of Trinzic Operations.
+      <br><br>
+      Membrane replacement costs, recommissioning cost and the cost-per-Ml/d comparison in Figure 2 are Decarbonarma estimates derived from published flux rates and commodity element pricing, and are clearly labelled as such in the text. ITV News (21 Jul 2026) — 10.1 million customers covered by the temporary use ban · Thames Water tender notice (Jan 2026) — 271 Ml/d drought output for the White Horse Reservoir. Thames Water was not approached for comment before publication; the company's published statements, parliamentary evidence and press responses are quoted throughout, including its position that Beckton is currently available. Corrections and right of reply welcome — <a href="/about.html">get in touch</a>.
+      Published on Decarbonarma. Analytical commentary, not investment or policy advice.</p>
+  </div>
+</footer>
+
+<script>
+Chart.defaults.font.family = "'Source Serif 4', Georgia, serif";
+Chart.defaults.color = '#94a894';
+
+/* Figure 1 — Megalitres per day, same scale */
+new Chart(document.getElementById('mldChart'), {
+  type:'bar',
+  data:{
+    labels:[
+      'Thames Water leakage\n(570 Ml/d, 2023-24)',
+      'White Horse Reservoir\n(from 2040)',
+      'Beckton, as designed\n(2010)',
+      'Beckton, revised\n(2026 figure)',
+      'Beckton, actual average\n2010–2025'
+    ],
+    datasets:[{
+      label:'Megalitres per day',
+      data:[570, 271, 150, 75, 1.3],
+      backgroundColor:['#f87171','#5aa7d6','#4ade80','#fbbf24','#8a9a90'],
+      borderRadius:6,
+      borderSkipped:false
+    }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{
+      legend:{display:false},
+      tooltip:{callbacks:{label:function(c){return c.parsed.y + ' Ml/d';}}}
+    },
+    scales:{
+      y:{ beginAtZero:true, title:{display:true, text:'Megalitres per day', color:'#94a894'},
+          grid:{color:'rgba(255,255,255,0.08)'}, ticks:{color:'#94a894'} },
+      x:{ grid:{display:false}, ticks:{color:'#e4ede5', font:{size:11}} }
+    }
+  }
+});
+
+/* Figure 2 — Capital cost per Ml/d of drought supply (log scale) */
+new Chart(document.getElementById('costChart'), {
+  type:'bar',
+  data:{
+    labels:[
+      'Restart Beckton\n(est. £10m ÷ 75 Ml/d)',
+      'Beckton as built\n(£270m ÷ 150 Ml/d)',
+      'Beckton whole-life\n(~£500m ÷ 150 Ml/d)',
+      'White Horse Reservoir\n(£7.5bn ÷ 271 Ml/d)'
+    ],
+    datasets:[{
+      label:'£m of capital per Ml/d of drought supply',
+      data:[0.13, 1.8, 3.3, 27.7],
+      backgroundColor:['#4ade80','#fbbf24','#f0a04b','#f87171'],
+      borderRadius:6,
+      borderSkipped:false
+    }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{
+      legend:{display:false},
+      tooltip:{callbacks:{label:function(c){return '£' + c.parsed.y + 'm per Ml/d';}}}
+    },
+    scales:{
+      y:{ type:'logarithmic', title:{display:true, text:'£m capital per Ml/d (log scale)', color:'#94a894'},
+          grid:{color:'rgba(255,255,255,0.08)'},
+          ticks:{color:'#94a894', callback:function(v){ return [0.1,1,10,100].indexOf(v)>-1 ? '£'+v+'m' : ''; }} },
+      x:{ grid:{display:false}, ticks:{color:'#e4ede5', font:{size:11}} }
+    }
+  }
+});
+</script>
+<script defer src="/adviser-widget.js"></script>
+</body>
+</html>
