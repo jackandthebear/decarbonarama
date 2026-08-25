@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Birds, One Neutron: Rolls-Royce's Dual Nuclear Desalination Play | Decarbonarama</title>
+    <meta name="description" content="The overlooked dual pathway: why Rolls-Royce's SMR and AMR portfolio could position the UK as a desalination tech leader.">
+    <meta name="author" content="Decarbonarama">
+    <meta name="publish_date" content="2026-08-25">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0f4c3a;
+            --accent: #e67e22;
+            --light-bg: #f8f6f1;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --border: #e0d5c7;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background-color: #ffffff;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        header nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        /* Article Container */
+        article {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Article Meta */
+        .article-meta {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .article-category {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 3px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .article-subheader {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .article-details {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            flex-wrap: wrap;
+        }
+
+        .article-details span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Content Styling */
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        em {
+            color: var(--text-light);
+        }
+
+        /* Callout boxes */
+        .callout {
+            background-color: var(--light-bg);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 3px;
+        }
+
+        .callout-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .callout p {
+            margin-bottom: 0;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* Comparison Section */
+        .comparison {
+            background-color: var(--light-bg);
+            padding: 2rem;
+            border-radius: 6px;
+            margin: 2.5rem 0;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .comparison-box {
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 3px;
+            border-top: 3px solid var(--primary);
+        }
+
+        .comparison-box h4 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .comparison-box ul {
+            margin-left: 1.5rem;
+        }
+
+        /* Pull quote */
+        blockquote {
+            border-left: 4px solid var(--accent);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Links */
+        a {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .article-subheader {
+                font-size: 1.1rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            article {
+                padding: 2rem 1rem;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .article-details {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">decarbo<span>narama</span></div>
+            <span style="font-size: 0.9rem; opacity: 0.9;">UK Home Decarbonisation</span>
+        </nav>
+    </header>
+
+    <article>
+        <div class="article-meta">
+            <div class="article-category">Industrial Strategy</div>
+            <h1>Two Birds, One Neutron: Why Rolls-Royce's Dual Nuclear Desalination Play Could Position the UK as a Tech Leader</h1>
+            <p class="article-subheader">The overlooked dual pathway: SMRs for near-term proof, AMRs for global export. If the government has the vision to back it.</p>
+            <div class="article-details">
+                <span>📅 August 2026</span>
+                <span>📍 UK Industrial Strategy</span>
+                <span>⏱️ 8 min read</span>
+            </div>
+        </div>
+
+        <section>
+            <p>When Rolls-Royce signed trilateral agreements with the UK National Nuclear Laboratory and Japan's Atomic Energy Agency in June 2026, the headlines landed predictably: <em>Mini nuclear reactors</em>, <em>advanced modular reactors</em>, <em>decarbonising industry</em>.</p>
+
+            <p>Nobody mentioned fresh water. That's the story.</p>
+
+            <p>Buried in the technical detail is an overlooked commercial opportunity: Rolls-Royce is pursuing <strong>two parallel nuclear desalination pathways</strong>—one near-term and proven, one medium-term and export-ready. Together, they could position the UK as the global leader in coupling clean power and water security.</p>
+
+            <p>But only if the government has the vision to back it.</p>
+        </section>
+
+        <section>
+            <h2>The Dual Pathway Nobody Saw</h2>
+
+            <p>Rolls-Royce has two nuclear horses in the desalination race, and they're at different stages of maturity:</p>
+
+            <div class="comparison">
+                <h3 style="margin-top: 0;">SMRs vs. AMRs: Two Routes to Desalination</h3>
+                <div class="comparison-grid">
+                    <div class="comparison-box">
+                        <h4>🌊 SMRs + Reverse Osmosis (2035–2038)</h4>
+                        <p><strong>Timeline:</strong> Near-term, proven technology</p>
+                        <p><strong>How it works:</strong> Rolls-Royce Small Modular Reactors produce 470 MW of electricity. Reverse osmosis desalination plants (already proven tech) bolt onto the grid, powered directly by reactor output.</p>
+                        <p><strong>Scale:</strong> A 340 MW SMR plant can provide 800,000+ m³ of fresh water per day while powering a city.</p>
+                        <p><strong>Risk profile:</strong> Low—both tech proven separately. Just engineering integration.</p>
+                    </div>
+
+                    <div class="comparison-box">
+                        <h4>🔥 AMRs + Integrated Desalination (2037+)</h4>
+                        <p><strong>Timeline:</strong> Medium-term, optimised design</p>
+                        <p><strong>How it works:</strong> High-temperature reactors (700°C+) integrate desalination into the thermodynamic design. Waste heat cascades through multiple processes: electricity + industrial heat + water production.</p>
+                        <p><strong>Scale:</strong> Smaller units (15–35 MW), suited to coastal industrial sites or remote operations.</p>
+                        <p><strong>Risk profile:</strong> Higher—novel integrated design. But higher efficiency and export appeal.</p>
+                    </div>
+                </div>
+            </div>
+
+            <p>This is actually smarter industrial strategy than the headlines suggested. <strong>The SMR path gets you to market and proof-of-concept sooner.</strong> The AMR path is the optimised, export-ready design for global markets.</p>
+        </section>
+
+        <section>
+            <h2>Why SMR Desalination Is the Near-Term Win</h2>
+
+            <p>Let's start with the easy one: SMRs + reverse osmosis is <strong>happening now</strong>, in multiple countries, with real timelines.</p>
+
+            <p>NuScale Power (a competing US SMR company) has already announced research on precisely this: coupling a 77 MW module to reverse osmosis systems. They project 150 million gallons of clean water per day—without carbon emissions.</p>
+
+            <p>Why reverse osmosis works with SMRs: It's simple. RO plants need electricity for high-pressure pumps. SMRs produce electricity. Bolt one next to the other. Proven, boring, reliable.</p>
+
+            <div class="callout">
+                <div class="callout-title">The near-term opportunity</div>
+                <p>Rolls-Royce SMRs targeting Anglesey (Wales) in the mid-2030s could be coupled with reverse osmosis desalination within 2–3 years of grid connection. That's <strong>2035–2038 for working SMR + desalination in the UK</strong>. This is achievable, not theoretical.</p>
+            </div>
+
+            <p>What does this solve?</p>
+            <ul>
+                <li><strong>Coastal industrial sites</strong> get both clean power and fresh water from one capital expenditure</li>
+                <li><strong>Water-stressed regions</strong> (UK Southeast, coastal cities) get proof that nuclear desalination works at scale</li>
+                <li><strong>Rolls-Royce</strong> gets near-term revenue from desalination engineering + system integration</li>
+                <li><strong>UK government</strong> demonstrates climate technology working, not just promised</li>
+            </ul>
+
+            <p>This is the unglamorous win. No headlines. Just infrastructure that works.</p>
+        </section>
+
+        <section>
+            <h2>Then Comes the AMR Export Play</h2>
+
+            <p>While SMRs are proving desalination works in practice, AMRs are being optimised for export.</p>
+
+            <p>Japan's Atomic Energy Agency designed a complete dual-use system called the GTHTR300C: a 600 MWt high-temperature reactor configured to simultaneously generate electricity, produce hydrogen via thermochemical water-splitting, and desalt seawater—all using waste heat with no efficiency penalty.</p>
+
+            <p>Rolls-Royce is now commercialising this design via the Japan partnership. The AMR version will be smaller (15–35 MW) but follow the same thermodynamic logic: <strong>cascade multiple products from one heat source.</strong></p>
+
+            <div class="callout">
+                <div class="callout-title">Why AMRs change the game</div>
+                <p>An AMR sitting on a coastal industrial site can simultaneously power steelmaking (700°C heat), generate electricity (for grid or local use), and produce fresh water (from waste heat). One reactor. One carbon footprint. Three revenue streams. That's an export model worth hundreds of billions globally.</p>
+            </div>
+
+            <p>The global markets for this are enormous:</p>
+
+            <ul>
+                <li><strong>Middle East & North Africa:</strong> Water-scarce, energy-intensive industry, desperate for decarbonised options</li>
+                <li><strong>Coastal mining (Chile, Peru, Australia):</strong> Remote sites beyond grid reach, facing water stress and electricity deficits</li>
+                <li><strong>India & Southeast Asia:</strong> Rapid industrialisation + water scarcity = perfect AMR markets</li>
+                <li><strong>UK coastal zones:</strong> Proving ground for domestic deployment</li>
+            </ul>
+
+            <p>If Rolls-Royce can demonstrate an integrated HTGR + desalination system working in the UK by 2036–2038, it becomes a proven export product. That's not a science project—that's a commercial offering countries will bid on.</p>
+        </section>
+
+        <section>
+            <h2>Why Nobody's Talking About This</h2>
+
+            <p>Three reasons the June press releases buried the desalination angle:</p>
+
+            <ol>
+                <li><strong>The deal is pre-commercial R&D.</strong> Site selection and spec work hasn't happened yet. You don't announce water plans until you have sites locked down.</li>
+                <li><strong>Desalination is politically charged.</strong> Water nationalism is real. Middle Eastern countries see this as strategic infrastructure; they're not going to let a UK company dictate terms. Rolls-Royce needs to move quietly first, announce wins later.</li>
+                <li><strong>The UK doesn't feel acute coastal desalination pressure yet.</strong> The Southeast is stressed, but not like the Middle East or Australia. So it's not politically sexy in Whitehall—until it becomes a drought crisis, which could be 2–3 years away.</li>
+            </ol>
+
+            <p>But the opportunity is real. And the timeline is now.</p>
+        </section>
+
+        <section>
+            <h2>What It Takes to Actually Win</h2>
+
+            <p>For this to work—both SMR and AMR pathways—three things have to happen:</p>
+
+            <h3>1. Rolls-Royce Executes</h3>
+            <p>Delivers working demonstrators on time and within budget. Given their SMR delays (2029 target → mid-2030s actual), trust but verify. The AMR is harder tech than the SMR, so expect slips. Realistic timeline: 2035–2037 for first integrated system, not mid-2030s.</p>
+
+            <h3>2. Regulators Cooperate</h3>
+            <p>The UK's nuclear oversight bodies have to move at industrial pace, not academic pace. That means streamlined approvals for proven Japanese HTGR technology; paralysis by analysis kills this. Early signals are mixed—the Generic Design Assessment is rigorous but slow.</p>
+
+            <h3>3. Government Has Vision</h3>
+            <p>Whitehall needs to explicitly position desalination-coupled reactors as UK climate-tech export strategy. That means:</p>
+            <ul>
+                <li>Funding site selection and supply-chain investment</li>
+                <li>Supporting TRISO fuel manufacturing capacity in the UK</li>
+                <li>Diplomatic outreach to target markets (Middle East, India, Africa)</li>
+                <li>Treating this as an industrial policy priority, not a nice-to-have</li>
+            </ul>
+
+            <p>Currently? Mixed signals. The government talks about "golden age of nuclear" but nuclear timelines keep slipping and budgets keep tightening. Execution risk is real.</p>
+        </section>
+
+        <section>
+            <h2>What This Means for Your Home and Industry</h2>
+
+            <p>You might be wondering: <em>I'm not running a steel mill or a water utility. Why should I care?</em></p>
+
+            <p>Fair question. Here's why it matters indirectly:</p>
+
+            <p><strong>For homeowners:</strong> If the UK successfully decarbonises industrial heat via nuclear, it reduces pressure to electrify residential heating via heat pumps (which are expensive and don't work in all properties). Cleaner grid electricity as industrial demand shifts from fossil fuels to nuclear means your grid carbon intensity improves over time.</p>
+
+            <p><strong>For installers and specifiers:</strong> This is upstream strategy that shapes your market. A genuine investment in next-generation nuclear technology—proven, tested, deployed—signals that the government actually believes in net-zero. That affects investor confidence in the retrofit supply chain, talent pipeline, and long-term profitability of the decarbonisation economy you're building a business around.</p>
+
+            <p><strong>For climate watchers:</strong> The Rolls-Royce–Japan partnership is a rare example of realistic, unglamorous decarbonisation infrastructure: boring engineering, proven tech, multi-decade timelines, dual-use economics. If it works, it's a template for how climate strategy should actually work—not headlines, not promises, just solid engineering and honest timelines.</p>
+        </section>
+
+        <section>
+            <h2>The Bottom Line</h2>
+
+            <blockquote>
+                Genuine decarbonisation infrastructure is unglamorous. It's engineering, not politics. It's multi-year, not multi-week. It's Japanese reactors and British engineering and UK sites proving that the energy-water nexus doesn't have to be a zero-sum trade-off.
+            </blockquote>
+
+            <p>The Rolls-Royce–Japan nuclear agreement is boring. That's precisely why it might matter.</p>
+
+            <p><strong>The near-term play (SMRs + desalination, 2035–2038):</strong> Proof of concept. Revenue. UK credibility.</p>
+
+            <p><strong>The export play (AMRs + integrated design, 2037+):</strong> Billion-pound market. Technology leadership. Climate infrastructure that actually works at scale.</p>
+
+            <p>If Rolls-Royce builds it, if regulators let it happen, if the government has the vision to fund it properly—the UK could own a technology the water-stressed world will desperately need.</p>
+
+            <p>That's worth watching. And worth demanding the government actually back properly, not just with press releases.</p>
+        </section>
+    </article>
+
+    <footer>
+        <p><strong>Decarbonarama</strong> | Independent UK home and industrial decarbonisation research</p>
+        <p>Data-led. Anti-greenwashing. For homeowners, installers, and specifiers.</p>
+        <p style="margin-top: 1rem; font-size: 0.85rem;"><a href="#">Visit decarbonarama.com</a></p>
+    </footer>
+</body>
+</html>
