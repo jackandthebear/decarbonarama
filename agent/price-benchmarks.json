@@ -1,10 +1,10 @@
 {
   "_meta": {
     "purpose": "Public UK price benchmarks the Decarbonarma agent reasons over when sanity-checking a user's quote. Ranges are 'ballpark', not valuations. NEVER present as a guarantee that a quote is good/bad — frame as 'typical range' + 'what to question'.",
-    "compiled": "2026-07-27",
-    "refresh_due": "2026-10-27",
+    "compiled": "2026-09-01",
+    "refresh_due": "2026-12-01",
     "currency": "GBP",
-    "vat_note": "All figures are with 0% VAT on domestic solar/battery/heat-pump installs, in force until 31 March 2027. After that VAT reverts to 20% — add ~20% to hardware+install. EV chargers are standard-rated.",
+    "vat_note": "All figures are with 0% VAT on domestic solar/battery/heat-pump installs, in force until 31 March 2027. From 1 April 2027 the rate reverts to the REDUCED rate of 5% (not 20%) — add ~5% to hardware+install. EV chargers are standard-rated.",
     "sources": [
       "solarroicalculator.co.uk/insights/solar-panel-costs-uk-2026.html",
       "greatbritishenergy.com/solar-panel-costs/",
@@ -55,6 +55,17 @@
     "total_before_grant": { "low": 8000, "typical": 12500, "high": 14000 },
     "ofgem_bus_average": { "value": 12500, "basis": "avg 8kW unit, Ofgem BUS stats Jan 2026" },
     "bus_grant": 7500,
+    "bus_grant_offgas_uplift": {
+      "value": 9000,
+      "window": "2026-07-21 to 2027-03-31",
+      "eligibility": "Properties in England & Wales currently heated by oil or LPG with no mains gas connection (homes and small businesses). ASHP or GSHP via MCS-certified installer; installer applies through Ofgem and deducts at source.",
+      "note": "£1,500 uplift on the standard £7,500. If the user is on oil or LPG heating, quote £9,000, not £7,500."
+    },
+    "bus_scheme_notes": {
+      "air_to_air_grant": { "value": 2500, "from": "2026-04", "note": "Air-to-air heat pumps now BUS-eligible at £2,500 per domestic install (vs £7,500 for air-to-water/GSHP)." },
+      "epc_requirement": "Removed from April 2026 — no valid EPC needed to qualify.",
+      "scheme_horizon": "Extended to 2030; 2026-27 budget £400m."
+    },
     "net_after_grant_by_scope": [
       { "scope": "4-6kW, 1 cylinder, modest rad upgrades", "net_low": 500, "net_high": 3000 },
       { "scope": "6-10kW, 200-250L cylinder, 4-6 rad changes", "net_low": 2000, "net_high": 6000 },
@@ -62,7 +73,7 @@
     ],
     "component_split": "Unit £3,000-£7,000; install labour £2,000-£4,000 (2-4 days).",
     "quote_check_flags": {
-      "notes": "ALWAYS check the quote is a proper MCS install with a room-by-room heat-loss survey (MCS requires one) — a heat pump sized off a rule-of-thumb is the biggest red flag and the main cause of poor performance. Confirm the £7,500 BUS grant is deducted at source by the installer, not something the homeowner claims back. Watch for undersized cylinders and skipped radiator upgrades that hide behind a low headline price."
+      "notes": "ALWAYS check the quote is a proper MCS install with a room-by-room heat-loss survey (MCS requires one) — a heat pump sized off a rule-of-thumb is the biggest red flag and the main cause of poor performance. Confirm the BUS grant (£7,500, or £9,000 for oil/LPG off-gas-grid homes from 21 Jul 2026) is deducted at source by the installer, not something the homeowner claims back. Watch for undersized cylinders and skipped radiator upgrades that hide behind a low headline price."
     }
   },
 
