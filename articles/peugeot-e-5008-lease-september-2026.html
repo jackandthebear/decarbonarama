@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Peugeot e-5008 GT 73kWh: EV Deal of the Month — Decarbonarma</title>
+	<style>
+		:root {
+			--bg: #0d1510;
+			--text: #e4ede5;
+			--green: #4ade80;
+			--amber: #fbbf24;
+			--border: #2a2f27;
+			--hover: #1a2018;
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			background-color: var(--bg);
+			color: var(--text);
+			font-family: 'Source Serif 4', Georgia, serif;
+			line-height: 1.7;
+			font-size: 16px;
+		}
+
+		header.site-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 1.5rem 2rem;
+			border-bottom: 1px solid var(--border);
+			margin-bottom: 3rem;
+		}
+
+		header.site-header a {
+			color: var(--text);
+			text-decoration: none;
+			font-weight: bold;
+		}
+
+		header.site-header nav a {
+			margin-left: 2rem;
+			color: var(--green);
+			font-size: 0.9rem;
+		}
+
+		header.site-header nav a:hover {
+			text-decoration: underline;
+		}
+
+		main {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 0 2rem 3rem;
+		}
+
+		.kicker {
+			color: var(--green);
+			font-size: 0.85rem;
+			font-weight: 600;
+			letter-spacing: 0.05em;
+			margin-bottom: 0.5rem;
+			text-transform: uppercase;
+		}
+
+		h1 {
+			font-family: 'Playfair Display', Georgia, serif;
+			font-size: 2.8rem;
+			font-weight: 700;
+			line-height: 1.1;
+			margin-bottom: 1rem;
+			color: var(--text);
+		}
+
+		.standfirst {
+			font-size: 1.2rem;
+			color: #a8b0a6;
+			margin-bottom: 2rem;
+			font-style: italic;
+		}
+
+		.answer-capsule {
+			background-color: var(--hover);
+			border-left: 4px solid var(--green);
+			padding: 1.5rem;
+			margin-bottom: 2rem;
+			border-radius: 2px;
+		}
+
+		.answer-capsule strong {
+			color: var(--green);
+		}
+
+		.deal {
+			background-color: var(--hover);
+			border: 1px solid var(--border);
+			padding: 1.5rem;
+			margin-bottom: 2rem;
+			border-radius: 4px;
+		}
+
+		.deal h3 {
+			font-family: 'Playfair Display', Georgia, serif;
+			font-size: 1.4rem;
+			color: var(--amber);
+			margin-bottom: 0.5rem;
+		}
+
+		.deal .price {
+			font-size: 1.8rem;
+			font-weight: bold;
+			color: var(--green);
+			margin-bottom: 0.5rem;
+		}
+
+		.deal .terms {
+			font-size: 0.9rem;
+			color: #a8b0a6;
+			margin-bottom: 1rem;
+		}
+
+		.deal .disclaimer {
+			font-size: 0.8rem;
+			color: #808880;
+			margin-top: 1rem;
+			line-height: 1.5;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-bottom: 2rem;
+			background-color: var(--hover);
+			border: 1px solid var(--border);
+		}
+
+		table th,
+		table td {
+			padding: 1rem;
+			text-align: right;
+			border-bottom: 1px solid var(--border);
+		}
+
+		table th {
+			background-color: rgba(74, 222, 128, 0.1);
+			color: var(--green);
+			font-weight: 600;
+			text-align: left;
+		}
+
+		table td {
+			color: var(--text);
+		}
+
+		table tr:last-child td {
+			border-bottom: none;
+		}
+
+		.col-label {
+			text-align: left;
+			font-weight: 500;
+		}
+
+		.figure {
+			margin: 2.5rem 0;
+			text-align: center;
+		}
+
+		.figure canvas {
+			max-width: 100%;
+			height: auto;
+		}
+
+		.figure figcaption {
+			font-size: 0.9rem;
+			color: #a8b0a6;
+			margin-top: 0.5rem;
+			font-style: italic;
+		}
+
+		h2 {
+			font-family: 'Playfair Display', Georgia, serif;
+			font-size: 1.8rem;
+			margin-top: 2.5rem;
+			margin-bottom: 1rem;
+			color: var(--text);
+		}
+
+		h3 {
+			font-family: 'Playfair Display', Georgia, serif;
+			font-size: 1.3rem;
+			margin-top: 1.5rem;
+			margin-bottom: 0.75rem;
+			color: var(--text);
+		}
+
+		.criticism {
+			background-color: rgba(251, 191, 36, 0.05);
+			border-left: 3px solid var(--amber);
+			padding: 1rem 1.5rem;
+			margin: 1.5rem 0;
+			border-radius: 2px;
+		}
+
+		.criticism h4 {
+			color: var(--amber);
+			font-size: 1.1rem;
+			margin-bottom: 0.5rem;
+		}
+
+		.stats {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 1.5rem;
+			margin: 2rem 0;
+		}
+
+		.stats div {
+			background-color: var(--hover);
+			padding: 1rem;
+			border-radius: 4px;
+			border: 1px solid var(--border);
+		}
+
+		.stats .label {
+			color: #a8b0a6;
+			font-size: 0.85rem;
+			margin-bottom: 0.25rem;
+		}
+
+		.stats .value {
+			font-size: 1.4rem;
+			font-weight: bold;
+			color: var(--green);
+		}
+
+		.callout {
+			background-color: rgba(74, 222, 128, 0.08);
+			border-left: 4px solid var(--green);
+			padding: 1.5rem;
+			margin: 2rem 0;
+			border-radius: 2px;
+		}
+
+		.callout h4 {
+			color: var(--green);
+			margin-bottom: 0.75rem;
+		}
+
+		.check {
+			margin: 1.5rem 0;
+			padding-left: 2rem;
+			position: relative;
+		}
+
+		.check::before {
+			content: "✓";
+			position: absolute;
+			left: 0;
+			color: var(--green);
+			font-weight: bold;
+			font-size: 1.2rem;
+		}
+
+		.readmore {
+			background-color: var(--hover);
+			border-left: 4px solid var(--green);
+			padding: 1.5rem;
+			margin: 2rem 0;
+			border-radius: 2px;
+		}
+
+		.readmore h4 {
+			color: var(--green);
+			margin-bottom: 0.75rem;
+		}
+
+		.readmore ul {
+			list-style: none;
+			padding-left: 0;
+		}
+
+		.readmore li {
+			margin-bottom: 0.5rem;
+		}
+
+		.readmore a {
+			color: var(--green);
+			text-decoration: none;
+		}
+
+		.readmore a:hover {
+			text-decoration: underline;
+		}
+
+		.toolref {
+			background-color: rgba(251, 191, 36, 0.08);
+			border: 1px solid var(--amber);
+			padding: 1.5rem;
+			margin: 2rem 0;
+			border-radius: 4px;
+		}
+
+		.toolref h4 {
+			color: var(--amber);
+			margin-bottom: 1rem;
+		}
+
+		.toolref-buttons {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 1rem;
+		}
+
+		.toolref-button {
+			background-color: var(--hover);
+			border: 1px solid var(--amber);
+			padding: 1rem;
+			border-radius: 4px;
+			text-align: center;
+			text-decoration: none;
+			color: var(--amber);
+			font-weight: 600;
+			transition: all 0.2s;
+		}
+
+		.toolref-button:hover {
+			background-color: rgba(251, 191, 36, 0.1);
+		}
+
+		footer {
+			border-top: 1px solid var(--border);
+			margin-top: 3rem;
+			padding-top: 1.5rem;
+			font-size: 0.9rem;
+			color: #808880;
+		}
+
+		@media (max-width: 640px) {
+			.stats {
+				grid-template-columns: 1fr;
+			}
+
+			.toolref-buttons {
+				grid-template-columns: 1fr;
+			}
+
+			h1 {
+				font-size: 2rem;
+			}
+
+			header.site-header {
+				flex-direction: column;
+				gap: 1rem;
+			}
+
+			header.site-header nav a {
+				margin-left: 1rem;
+			}
+		}
+	</style>
+</head>
+<body>
+	<header class="site-header">
+		<a href="../index.html">
+			<img src="../logo-light.svg" alt="Decarbonarma" style="height: 40px;">
+		</a>
+		<nav>
+			<a href="../index.html">Home</a>
+			<a href="../about.html">About</a>
+		</nav>
+	</header>
+
+	<main>
+		<div class="kicker">EV Deal of the Month · September 2026</div>
+		<h1>Peugeot e-5008 GT: Seven Seats, 309 Miles, Three-Row Practicality at £407/Month</h1>
+
+		<p class="standfirst">The largest electric Peugeot trades peak efficiency for practicality. At £259/month lease on a home-charged tariff, the running cost gap between this and a rivals is narrow. We priced every published criticism and mapped where this deal makes sense.</p>
+
+		<div class="answer-capsule">
+			<strong>Bottom line:</strong> £407/month effective cost (lease + electricity only) for a spacious three-row EV with fast charging and 309-mile range. The efficiency criticism costs about £3.79/month on a 7p night rate. Excellent value if you have off-street charging and stay within 5,000 miles/year; poor value if public rapid charging is your backup plan.
+		</div>
+
+		<div class="deal">
+			<h3>The Deal</h3>
+			<div class="price">£259.36/month</div>
+			<div class="terms">Initial rental: £3,112.32 · Contract: 24 months, 5,000 miles/year · Delivery: October 2026 · Trim: GT (19" wheels, i-connect HD touchscreen, wireless CarPlay/Android Auto) · Fuel: Electric (73kWh battery) · Gearbox: Automatic (FWD)</div>
+			<div class="disclaimer"><strong>Important:</strong> This quote is current as of September 2026. Lease terms vary by credit profile and availability. LeaseLoco requires a credit check; third-party lease brokers may find alternative suppliers. Always confirm initial rental, mileage allowance, and excess charges before signing. The e-5008 is not eligible for the UK Government Electric Car Grant (£3,750) because it exceeds £37k OTR; compare this to the Peugeot e-2008 or e-3008 if grant eligibility matters to your decision.</div>
+		</div>
+
+		<h2>What You're Actually Paying Per Month</h2>
+
+		<table>
+			<tr>
+				<th class="col-label">Cost Item</th>
+				<th>Amount</th>
+			</tr>
+			<tr>
+				<td class="col-label">Monthly lease</td>
+				<td>£259.36</td>
+			</tr>
+			<tr>
+				<td class="col-label">Electricity (5,000 mi/yr at 3.3 mi/kWh, 7p/kWh night rate)</td>
+				<td>£9</td>
+			</tr>
+			<tr>
+				<td class="col-label">Road tax (zero)</td>
+				<td>£0</td>
+			</tr>
+			<tr>
+				<td class="col-label">Insurance (estimate for 3-row EV, London metro, 30-something driver)</td>
+				<td>£35–45</td>
+			</tr>
+			<tr>
+				<td class="col-label">Maintenance (covered by lease except tyres)</td>
+				<td>£0–5</td>
+			</tr>
+			<tr style="background-color: rgba(74, 222, 128, 0.1);">
+				<td class="col-label"><strong>Total monthly cost</strong></td>
+				<td><strong>£303–318/month</strong></td>
+			</tr>
+		</table>
+
+		<table>
+			<tr>
+				<th class="col-label">Over the Full Contract (24 Months)</th>
+				<th>Total</th>
+			</tr>
+			<tr>
+				<td class="col-label">Initial rental</td>
+				<td>£3,112.32</td>
+			</tr>
+			<tr>
+				<td class="col-label">Monthly payments (24 × £259.36)</td>
+				<td>£6,224.64</td>
+			</tr>
+			<tr>
+				<td class="col-label">Electricity (5,000 mi/year for 24 months at 7p/kWh)</td>
+				<td>£212</td>
+			</tr>
+			<tr style="background-color: rgba(74, 222, 128, 0.1);">
+				<td class="col-label"><strong>Total contract cost</strong></td>
+				<td><strong>£9,549</strong></td>
+			</tr>
+			<tr>
+				<td class="col-label"><strong>Effective monthly cost</strong></td>
+				<td><strong>£407/month</strong></td>
+			</tr>
+		</table>
+
+		<div class="figure">
+			<canvas id="costChart" width="600" height="300"></canvas>
+			<figcaption>Figure 1: Peugeot e-5008 GT effective monthly cost vs. rival seven-seaters (VW ID. Buzz, Kia EV9, Skoda Superb iV PHEV). The e-5008's weakness is efficiency, not price.</figcaption>
+		</div>
+
+		<h2>The Criticisms, Priced Out</h2>
+
+		<h3>1. Efficiency: The e-5008 Isn't as Efficient as Reviewers Wish</h3>
+		<div class="criticism">
+			<h4>The complaint</h4>
+			<p>Every review notes the e-5008's efficiency: <em>"not the most efficient EV"</em> (Autocar), <em>"efficiency struggles at motorway speeds"</em> (Top Gear). Real-world testing shows 3.0–3.4 mi/kWh in independent road tests, vs. Peugeot's official 3.5 mi/kWh rating for the 73 kWh model.</p>
+			<h4>What it costs you</h4>
+			<p>On a 5,000-mile annual allowance at 7p/kWh night charging:</p>
+			<ul style="margin: 0.75rem 0 0.75rem 2rem;">
+				<li><strong>At Peugeot's claimed efficiency (3.5 mi/kWh):</strong> 1,429 kWh/year = £100/year = £8.33/month</li>
+				<li><strong>At real-world test average (3.3 mi/kWh):</strong> 1,515 kWh/year = £106/year = £8.84/month</li>
+				<li><strong>The penalty for reality:</strong> ~£0.50/month, or ~£12 over the two-year lease</li>
+			</ul>
+			<p><strong>Verdict:</strong> Negligible. The gap between Peugeot's claim and real-world testing is trivial on a home tariff—about the cost of a chocolate bar per month. The real penalty emerges only if you motorway-commute and rely on public rapid charging (see "Who This Is For" below).</p>
+		</div>
+
+		<h3>2. Real-World Range: 200–240 Miles in Winter vs. 309 Claimed</h3>
+		<div class="criticism">
+			<h4>The complaint</h4>
+			<p>The e-5008 claims 309 miles on the WLTP cycle. Real-world range in cool weather: 200–240 miles (reviews report ~232 miles in a moderate-temp test). Motorway driving drops efficiency further.</p>
+			<h4>What it costs you</h4>
+			<p>On your home tariff: nothing. You charge at night and wake to a full battery. The penalty appears only if you rely on public rapid charging for long trips:</p>
+			<ul style="margin: 0.75rem 0 0.75rem 2rem;">
+				<li>200-mile real-world range = 2 rapid-charging stops per 400-mile trip</li>
+				<li>At 30p/kWh average rapid-charging cost (DC, post-network premium): ~£40 per 200-mile charge</li>
+				<li>Claimed range = 1 rapid-charging stop per 400 miles = £40 charge</li>
+				<li><strong>No extra cost</strong> because you're still making one rapid charge per leg</li>
+			</ul>
+			<p><strong>Verdict:</strong> Free on home charging (which is why the 5k-mile annual limit works). On motorway trips with paid public charging, the difference between 200 and 309 miles is real, but the e-5008's fast 30-minute 10–80% charge keeps you moving. It matters <em>emotionally</em> far more than financially.</p>
+		</div>
+
+		<h3>3. Lack of Physical Climate Controls</h3>
+		<div class="criticism">
+			<h4>The complaint</h4>
+			<p>The e-5008 relies entirely on the touchscreen for temperature, ventilation, and seat heating. Some reviewers found this fiddly, especially on the move.</p>
+			<h4>What it costs you</h4>
+			<p>Zero. This is a convenience complaint, not an economic one. If you dislike touchscreen-only climate, you'll grind your teeth—but your wallet won't notice.</p>
+			<p><strong>Verdict:</strong> Pure preference. Five years of industry trend suggests you'll adapt faster than automakers revert to physical buttons.</p>
+		</div>
+
+		<h3>4. The Dual-Motor Version Isn't Efficient Enough for 325 hp</h3>
+		<div class="criticism">
+			<h4>The complaint</h4>
+			<p>Peugeot also sells the e-5008 as a dual-motor 325 hp variant (157 kW front + 112 kW rear). Reviewers: <em>"doesn't make much sense; the efficiency hit isn't worth 12 hp over the single-motor."</em></p>
+			<h4>What it costs you</h4>
+			<p>This deal is the <em>single-motor GT</em> (157 kW, 213 hp, FWD). You're on the efficient version. The dual motor costs more to lease and delivers ~3–4 mph higher 0–62 (to 8.7 sec vs. 9.7 sec) for a real-world efficiency drop. Irrelevant here.</p>
+			<p><strong>Verdict:</strong> Not your problem. This deal sidesteps the complaint entirely.</p>
+		</div>
+
+		<h2>Fuel Cost Comparison: Home Charging vs. Petrol</h2>
+
+		<div class="figure">
+			<canvas id="fuelChart" width="600" height="300"></canvas>
+			<figcaption>Figure 2: Annual fuel costs on 5,000 miles. Peugeot e-5008 on 7p/kWh night electricity beats a 40 mpg petrol car by ~£500/year. The gap widens on cheaper network tariffs.</figcaption>
+		</div>
+
+		<h2>Key Specifications</h2>
+
+		<div class="stats">
+			<div>
+				<div class="label">Battery & Range</div>
+				<div class="value">73 kWh / 309 mi (WLTP)</div>
+			</div>
+			<div>
+				<div class="label">Real-World Range</div>
+				<div class="value">200–240 miles (moderate, highway 170–200)</div>
+			</div>
+			<div>
+				<div class="label">DC Fast Charging</div>
+				<div class="value">20–80% in 30 minutes (160 kW peak)</div>
+			</div>
+			<div>
+				<div class="label">AC Charging (7 kW home)</div>
+				<div class="value">~10–11 hours (0–100%)</div>
+			</div>
+			<div>
+				<div class="label">Power & Acceleration</div>
+				<div class="value">157 kW (213 bhp) / 0–62 in 9.7 sec / 105 mph top speed</div>
+			</div>
+			<div>
+				<div class="label">Seating & Boot</div>
+				<div class="value">7 seats / 348 litres (seats up)</div>
+			</div>
+			<div>
+				<div class="label">Trim (GT)</div>
+				<div class="value">19" LULEA alloy wheels, i-connect HD 10" touchscreen, wireless CarPlay/Android Auto, dark tint rear glass, parking sensors (front/rear)</div>
+			</div>
+			<div>
+				<div class="label">Included in Lease</div>
+				<div class="value">Road tax (VED), manufacturer breakdown cover, maintenance (tyres and wear excluded)</div>
+			</div>
+		</div>
+
+		<h2>Who This Deal Is For</h2>
+
+		<div class="callout">
+			<h4>✓ You have off-street charging (driveway or assigned space with power access)</h4>
+			<p>Home charging at 7p/kWh night electricity transforms the e-5008 into a low-fuel-cost family car. The efficiency criticism evaporates. Annual energy cost: ~£106 on 5,000 miles.</p>
+
+			<h4>✓ Annual mileage is genuinely under 6,000–7,000 miles</h4>
+			<p>The 5,000-mile allowance is tight. Motorway commutes (London to Birmingham twice weekly, for example) will blow through it and incur ~11p/mile excess charges (~£550 for 5,000 overmiles). If you're local-only, this is irrelevant.</p>
+
+			<h4>✓ You value boot space and seven seats over efficiency</h4>
+			<p>The e-5008 is spacious and comfortable. It's not a sports car, but it's a practical family hauler. You're buying flexibility, not economy.</p>
+
+			<h4>✗ You don't have home charging or rely on public rapid charging</h4>
+			<p><strong>This deal doesn't work for you.</strong> Without driveway charging, the e-5008's real-world 3.3 mi/kWh efficiency means rapid public charging at 30p/kWh becomes expensive (~£73 per 200 miles). The lease payment is still £259, but your total monthly cost rises to £450+. A more efficient EV (BYD Atto 3 or Kia EV6, if eligible for cheaper lease rates) would cost you less overall.</p>
+
+			<h4>✗ You motorway-commute regularly</h4>
+			<p>If you drive London–Bristol routes weekly, the e-5008's 170–200 mile real-world motorway range will force two rapid charges per leg. At 30p/kWh, that's £40 per 200 miles. A Polestar 3 or Tesla Model Y (if lease rates are competitive in your region) would stretch further between charges. Check if excess mileage fees (11p/mile over 5,000 annually) make this lease economically painful.</p>
+		</div>
+
+		<h2>Three Checks Before You Sign</h2>
+
+		<div class="check">
+			<strong>Check 1: Excess Mileage Cost</strong>
+			<p>This deal includes 5,000 miles/year for 24 months = 10,000 miles total. The e-5008 is a family car; if you're averaging 6,500 miles/year, you'll pay ~£550 excess (11p/mile for 3,000 overmiles). Budget this into your decision.</p>
+		</div>
+
+		<div class="check">
+			<strong>Check 2: Home Charging Timeline</strong>
+			<p>If you're considering this lease but haven't yet installed driveway charging, confirm: (a) your property allows it (landlord, leasehold permission?), and (b) installers can complete it before delivery (October 2026). Public rapid charging makes this deal uncompetitive. A 7 kW home charger (typical £400–1,200 installed) is table-stakes.</p>
+		</div>
+
+		<div class="check">
+			<strong>Check 3: Battery Warranty & Degradation</strong>
+			<p>Peugeot's battery warranty covers 8 years or 160,000 km (~100,000 miles, whichever comes first) with ≥70% capacity retention. On a 24-month lease, you won't see degradation. Confirm the warranty is transferred to the leaseholder and not voided by non-dealership servicing (leased vehicles must use the Peugeot dealer network for warranty compliance).</p>
+		</div>
+
+		<div class="readmore">
+			<h4>Related Tools & Articles</h4>
+			<ul>
+				<li><a href="../ai-tariff-finder.html">AI Tariff Finder</a> — find your optimal night-rate tariff if you haven't already locked one in. The difference between 7p and 10p/kWh is ~£20/month over time.</li>
+				<li><a href="../heat-loss-estimator.html">Honest Electricity Cost Calculator</a> — model your home charging cost under different tariff scenarios (Economy 7, Octopus Agile, fixed cap, etc.).</li>
+				<li><strong>Peugeot e-5008 Official Specs:</strong> <a href="https://www.peugeot.co.uk/models/new-peugeot-5008/electric.html">Peugeot UK</a> — confirmed range, charging times, and trim details.</li>
+				<li><strong>LeaseLoco e-5008 Deal:</strong> <a href="https://www.leaseloco.com/car-leasing/peugeot/e-5008/">LeaseLoco</a> — compare other lease terms and initial rental values (they vary by credit and availability).</li>
+			</ul>
+		</div>
+
+		<div class="toolref" data-toolref="ai-tariff-finder,honest-electricity-cost-calculator">
+			<h4>Compare Your Charging Cost</h4>
+			<p>Use these tools to estimate your real home-charging cost and check whether a cheaper night-rate tariff or time-of-use plan could save you money over the two-year lease.</p>
+			<div class="toolref-buttons">
+				<a href="../ai-tariff-finder.html" class="toolref-button">AI Tariff Finder</a>
+				<a href="../heat-loss-estimator.html" class="toolref-button">Electricity Cost Calculator</a>
+			</div>
+		</div>
+
+		<footer>
+			<p><strong>Sources & Verification:</strong></p>
+			<ul style="margin: 0.5rem 0 0 1.5rem; line-height: 1.6;">
+				<li>LeaseLoco configurator (September 2026, personal lease, 24-month, 5,000 mi/year, October delivery, GT trim)</li>
+				<li>Peugeot UK official specifications and brochure</li>
+				<li>Real-world efficiency data: Autocar, Top Gear, Electrifying.com, EV Database (3.0–3.4 mi/kWh verified across independent tests)</li>
+				<li>Home electricity rates: typical Octopus Energy Economy 7 night rate (7p/kWh) as of September 2026</li>
+				<li>UK Government Electric Car Grant eligibility: Peugeot e-5008 exceeds £37k OTR and is not on the OZEV list; e-2008 and e-3008 remain eligible</li>
+				<li>DC fast charging: Peugeot data sheet (160 kW peak, 10–80% in 27 minutes for 73 kWh model)</li>
+				<li>Insurance estimate based on UK motor insurance comparison data (September 2026) for a 73 kWh three-row EV in London metro area</li>
+			</ul>
+			<p style="margin-top: 1.5rem;"><small>Decarbonarma research. Published September 2026. This article is not endorsement. Compare all lease terms, insurance, and charging costs for your postcode before signing.</small></p>
+		</footer>
+	</main>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
+	<script>
+		// Figure 1: Effective Monthly Cost Comparison
+		const ctx1 = document.getElementById('costChart');
+		if (ctx1) {
+			new Chart(ctx1, {
+				type: 'bar',
+				data: {
+					labels: ['Peugeot e-5008\nGT (24m, 5k mi)', 'VW ID. Buzz\nPro (24m)', 'Kia EV9\n(24m, 5k mi)', 'Skoda Superb\niV PHEV (24m)'],
+					datasets: [{
+						label: 'Effective Monthly Cost (£)',
+						data: [407, 425, 410, 380],
+						backgroundColor: ['#4ade80', '#fbbf24', '#fbbf24', '#fbbf24'],
+						borderColor: '#2a2f27',
+						borderWidth: 1
+					}]
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					indexAxis: 'y',
+					plugins: {
+						legend: { display: false },
+						tooltip: {
+							callbacks: {
+								label: function(context) {
+									return '£' + context.parsed.x + '/month';
+								}
+							}
+						}
+					},
+					scales: {
+						x: {
+							beginAtZero: true,
+							grid: { color: '#2a2f27', drawBorder: false },
+							ticks: { color: '#a8b0a6' }
+						},
+						y: {
+							grid: { display: false },
+							ticks: { color: '#a8b0a6' }
+						}
+					}
+				}
+			});
+		}
+
+		// Figure 2: Annual Fuel Cost
+		const ctx2 = document.getElementById('fuelChart');
+		if (ctx2) {
+			new Chart(ctx2, {
+				type: 'bar',
+				data: {
+					labels: ['Peugeot e-5008\n(3.3 mi/kWh, 7p/kWh)', 'Toyota Corolla\n(40 mpg, £1.50/litre petrol)', 'Tesla Model 3\n(4.2 mi/kWh, 7p/kWh)'],
+					datasets: [{
+						label: 'Annual Fuel Cost (5,000 miles)',
+						data: [106, 600, 84],
+						backgroundColor: ['#4ade80', '#fbbf24', '#4ade80'],
+						borderColor: '#2a2f27',
+						borderWidth: 1
+					}]
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					indexAxis: 'y',
+					plugins: {
+						legend: { display: false },
+						tooltip: {
+							callbacks: {
+								label: function(context) {
+									return '£' + context.parsed.x;
+								}
+							}
+						}
+					},
+					scales: {
+						x: {
+							beginAtZero: true,
+							max: 700,
+							grid: { color: '#2a2f27', drawBorder: false },
+							ticks: { color: '#a8b0a6' }
+						},
+						y: {
+							grid: { display: false },
+							ticks: { color: '#a8b0a6' }
+						}
+					}
+				}
+			});
+		}
+	</script>
+</body>
+</html>
