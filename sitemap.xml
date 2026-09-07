@@ -242,6 +242,11 @@
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://decarbonarma.com/articles/solar-battery-act-now.html</loc>
+    <lastmod>2026-09-07T00:00:00+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://decarbonarma.com/articles/sonnen-shell-decarbonarama.html</loc>
     <lastmod>2026-07-10T08:40:26+00:00</lastmod>
     <priority>0.80</priority>
@@ -337,6 +342,11 @@
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://decarbonarma.com/articles/nuclear-desalination-smr-amr.html</loc>
+    <lastmod>2026-09-02T00:00:00+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://decarbonarma.com/news/daily-brief.html</loc>
     <lastmod>2026-07-10T08:40:26+00:00</lastmod>
     <priority>0.60</priority>
@@ -354,6 +364,21 @@
   <url>
     <loc>https://decarbonarma.com/articles/octopus-6-hour-limit-zappi-solar.html</loc>
     <lastmod>2026-07-31T00:00:00+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://decarbonarma.com/articles/rose-cottage-2026-08.html</loc>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://decarbonarma.com/articles/heatpump-news-scop.html</loc>
+    <lastmod>2026-09-05T00:00:00+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://decarbonarma.com/articles/heatpumpmonitor-summary.html</loc>
+    <lastmod>2026-09-05T00:00:00+00:00</lastmod>
     <priority>0.80</priority>
   </url>
 </urlset>
