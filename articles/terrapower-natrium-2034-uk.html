@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UK's Nuclear Timeline: TerraPower's 2034 Natrium Reactor and Home Decarbonisation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d1510;
+            --text: #e4ede5;
+            --green: #4ade80;
+            --amber: #fbbf24;
+            --border: #1a2818;
+            --accent-dark: #0f1813;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Source Serif 4', serif;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            border-bottom: 1px solid var(--border);
+            background: var(--accent-dark);
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+        }
+
+        .nav a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: var(--green);
+        }
+
+        article {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .article-meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--amber);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            color: var(--text);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--green);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--amber);
+        }
+
+        .lede {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--green);
+            border-left: 3px solid var(--amber);
+            padding-left: 1.5rem;
+        }
+
+        .sidebar-box {
+            background: var(--accent-dark);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--green);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-size: 0.95rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .sidebar-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.95rem;
+        }
+
+        table th {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 2px solid var(--green);
+            font-weight: 600;
+            color: var(--green);
+        }
+
+        table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        table tr:hover {
+            background: var(--accent-dark);
+        }
+
+        .callout {
+            background: var(--accent-dark);
+            border-left: 4px solid var(--amber);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .callout p {
+            margin-bottom: 0;
+        }
+
+        footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        .sources {
+            margin-top: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        .sources strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--amber);
+        }
+
+        .sources a {
+            display: block;
+            color: var(--green);
+            text-decoration: none;
+            word-break: break-word;
+            margin-bottom: 0.5rem;
+        }
+
+        .sources a:hover {
+            color: var(--amber);
+        }
+
+        .ai-tool-cta {
+            background: linear-gradient(135deg, var(--green) 0%, var(--accent-dark) 100%);
+            border: 1px solid var(--green);
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .ai-tool-cta h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+        }
+
+        .ai-tool-cta p {
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .ai-tool-cta a {
+            display: inline-block;
+            background: var(--green);
+            color: var(--bg);
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 3px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .ai-tool-cta a:hover {
+            background: var(--amber);
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <img src="../logo-light.svg" alt="Decarbonarma" class="logo">
+        <nav class="nav">
+            <a href="../index.html">Home</a>
+            <a href="../index.html#articles">Articles</a>
+            <a href="../about.html">About</a>
+        </nav>
+    </header>
+
+    <article>
+        <div class="article-meta">Policy & Grid • 7 September 2026</div>
+
+        <h1>UK's Nuclear Timeline: TerraPower's 2034 Natrium Reactor and What It Means for Home Decarbonisation</h1>
+
+        <p class="lede">Bill Gates-backed TerraPower announced this week that its advanced Natrium reactor could be generating electricity in Britain by 2034. For homeowners weighing heat pump, solar, and EV investments today, this timeline matters more than you might think.</p>
+
+        <h2>The 2034 Milestone</h2>
+
+        <p>On 7 September 2026, TerraPower's CEO Chris Levesque told Reuters that the company expects its first UK Natrium reactor to be operational by 2034, making the UK the company's first international market outside the United States. The announcement came as TerraPower begins the formal Generic Design Assessment (GDA) process with the UK nuclear regulator.</p>
+
+        <p>This is not idle speculation. TerraPower's first US Natrium plant in Kemmerer, Wyoming is under construction and due to be completed in 2031. That proof-of-concept will validate the design before UK deployment. The company has also secured partnerships with tech giants like Meta, which has committed to buying power from up to eight TerraPower reactors in the US — a signal of serious commercial intent.</p>
+
+        <p>But here's what makes this announcement significant: <strong>it's part of a staggered nuclear renaissance that reshapes the UK's decarbonisation timeline.</strong> And that timeline is what your home's energy future depends on.</p>
+
+        <h2>Natrium vs. Traditional Nuclear</h2>
+
+        <p>The Natrium reactor is a sodium-cooled fast reactor, a technology distinct from the light-water reactors that have powered the UK for decades. Each unit generates 345 megawatts of constant baseload electricity, but here's the twist: it includes thermal storage capable of boosting output to 500 megawatts for more than five hours.</p>
+
+        <p>That storage advantage matters. Solar and wind are intermittent; nuclear has always been baseload. But Natrium can flex up during peak demand (evening heating, EV charging), then settle back down—<strong>a hybrid that acts like both baseload and peaker without needing batteries.</strong></p>
+
+        <div class="sidebar-box">
+            <strong>Key Specs:</strong>
+            345 MW baseload capacity<br>
+            500 MW for 5+ hours with integrated storage<br>
+            Cooled by molten sodium (faster heat transfer than water)<br>
+            Runs on HALEU fuel (high-assay, low-enriched uranium)<br>
+            Cost target: under £100 per megawatt hour (levelised)
+        </div>
+
+        <p>That cost target is crucial. <strong>Under £100/MWh puts Natrium cost-competitive with solar-and-battery projects</strong> — the combination most home and grid planners assume will dominate 2030s decarbonisation. If Natrium hits that number, it's not a niche technology; it's a mainstream option that changes the math for grid investment.</p>
+
+        <h2>The Rolls-Royce SMR Parallel</h2>
+
+        <p>TerraPower is not alone. Rolls-Royce is developing its own small modular reactor (SMR), a pressurised water reactor (PWR) design at around 470 megawatts per unit. The UK government has already selected Rolls-Royce as the preferred SMR technology, committed government backing to de-risk the investment, and mandated three units at Gwyndod Power Station on Anglesey (the former Wylfa nuclear site).</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Rolls-Royce SMR</th>
+                    <th>TerraPower Natrium</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Capacity</strong></td>
+                    <td>~470 MW per unit</td>
+                    <td>345 MW (+ 155 MW storage boost)</td>
+                </tr>
+                <tr>
+                    <td><strong>Technology</strong></td>
+                    <td>Pressurised water reactor</td>
+                    <td>Sodium-cooled fast reactor</td>
+                </tr>
+                <tr>
+                    <td><strong>UK Timeline</strong></td>
+                    <td>Early 2030s (GDA Step 3)</td>
+                    <td>2034 (GDA Step 1, just starting)</td>
+                </tr>
+                <tr>
+                    <td><strong>Govt Status</strong></td>
+                    <td>Preferred tech, selected site</td>
+                    <td>Commercial entrant, early assessment</td>
+                </tr>
+                <tr>
+                    <td><strong>Fuel</strong></td>
+                    <td>Standard enriched uranium</td>
+                    <td>HALEU (new, post-Russia sanctions)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>The key insight: <strong>Rolls-Royce gets there first, but TerraPower arrives just as the first units are proving economics.</strong> If Rolls-Royce hits early 2030s, Natrium comes in at 2034 with:
+        <ul style="margin-left: 2rem; margin-bottom: 1.5rem; list-style-type: disc;">
+            <li>Proven operational record (from the US, 3 years earlier)</li>
+            <li>Lower cost (<£100/MWh vs TBD for RR)</li>
+            <li>Built-in storage (no external battery needed)</li>
+            <li>Private sector momentum (Meta and other tech partnerships)</li>
+        </ul>
+        </p>
+
+        <p>This is the opposite of a bottleneck. It's portfolio risk reduction. If one technology hits delays (common in nuclear), the other can step in. The UK grid gets a credible, multi-source decarbonisation pathway through the 2030s and 2040s.</p>
+
+        <h2>What This Means for Your Home</h2>
+
+        <p>Most homeowner payback calculations for heat pumps, solar panels, and EVs assume grid electricity will cost between £0.20 and £0.30 per kilowatt-hour through the 2030s, with modest decarbonisation. Those assumptions are now too pessimistic.</p>
+
+        <div class="callout">
+            <p><strong>If Natrium hits £100/MWh and Rolls-Royce SMRs are online by early 2030s, grid electricity decarbonisation will accelerate faster than consensus forecasts predict.</strong> That means:</p>
+            <ul style="margin-left: 1rem; margin-top: 1rem; list-style-type: disc;">
+                <li>Heat pump ROI improves (cleaner grid electricity per joule)</li>
+                <li>EV charging costs fall (lower grid wholesale prices)</li>
+                <li>Solar payback may extend slightly (lower peak-period prices compress arbitrage)</li>
+                <li>Storage (home batteries, vehicle-to-grid) becomes less critical for grid stability</li>
+            </ul>
+        </div>
+
+        <p>The current assumption in UK energy policy is that gas generation will phase out by 2035, replaced mostly by wind and solar. <strong>Natrium + Rolls-Royce SMR changes that calculus.</strong> Instead of a 70% wind-solar, 20% interconnect-import, 10% uncertain-flexibility grid, you get 50% renewable, 30% advanced nuclear, 15% interconnect, 5% flexible gas or storage. That's a more stable, less weather-dependent, lower-cost system.</p>
+
+        <h2>The Timeline: When Should You Decide?</h2>
+
+        <p>If you're considering a heat pump or solar install today, here's the question: <strong>does the 2034 Natrium timeline change your decision?</strong></p>
+
+        <p>For most homes, no. Heat pumps have payback periods of 8–12 years; if you install in 2026, you're done by 2034–2038. By then, the grid is cleaner, and your investment has already been justified. Solar follows the same logic.</p>
+
+        <p>But if you're <em>undecided</em> between, say, a heat pump and a boiler replacement, or between solar and waiting for grid power, this timeline is worth factoring in: <strong>the grid is decarbonising faster and cheaper than it was 12 months ago.</strong> That weakens the case for on-site generation and strengthens the case for heat pumps and electrification.</p>
+
+        <h2>The Regulatory Wild Card</h2>
+
+        <p>None of this is guaranteed. Natrium is undergoing GDA Step 1, a rigorous assessment process that typically takes 2–3 years per step. Step 3 completion could slip. Site selection (TerraPower hasn't chosen yet, but mentions Liverpool as a likely HQ) could hit local opposition. Supply chains for HALEU fuel could tighten.</p>
+
+        <p>But—and this is the point—<strong>the regulatory bar is lower than it was for traditional large reactors.</strong> The Advanced Nuclear Framework, announced in 2024, explicitly aims to accelerate SMR and advanced reactor deployment. Rolls-Royce already has a signed contract. TerraPower is now in the official assessment queue. The political will is there.</p>
+
+        <p>For the first time in a generation, UK nuclear policy is pushing <em>forward,</em> not just managing decline.</p>
+
+        <h2>Bottom Line</h2>
+
+        <p>TerraPower's 2034 target isn't just a headline. It's evidence that UK grid decarbonisation is moving from "hoped-for" to "structurally inevitable." Rolls-Royce in the early 2030s, TerraPower by mid-decade, and a portfolio of wind, solar, and interconnects means the grid your home will run on in 2035 will be <strong>cheap, clean, and increasingly reliable.</strong></p>
+
+        <p>That shifts the economics of heating and transport. If you're making decisions about your home's energy future, the question isn't "will the grid decarbonise?" anymore. It's "do I invest now (heat pump, solar, EV) to capture savings and emissions reductions today, or wait for the grid to catch up?"</p>
+
+        <p>For most homes, the answer is still: invest now. But the gap between grid and on-site generation is narrowing faster than anyone predicted a year ago.</p>
+
+        <div class="ai-tool-cta">
+            <h3>How Will This Affect Your Home's Energy Costs?</h3>
+            <p>Use our Solar Generation Calculator or Energy Adviser to model how grid decarbonisation and falling electricity costs will affect your heat pump, EV, and solar payback timelines.</p>
+            <a href="../solar-generation-calculator.html">Open Solar Calculator</a>
+        </div>
+
+        <footer>
+            <div class="sources">
+                <strong>Sources:</strong>
+                <a href="https://www.reuters.com/business/energy/gates-backed-terrapower-targets-british-nuclear-power-plant-start-by-2034-2026-09-07/">Reuters: TerraPower targets 2034 British nuclear plant (7 Sep 2026)</a>
+                <a href="https://www.rolls-royce-smr.com/our-progress">Rolls-Royce SMR: Our Progress</a>
+                <a href="https://neutronbytes.com/2025/11/16/uk-govt-taps-rolls-royce-for-three-480-mw-pwrs-at-wylfa/">Neutron Bytes: UK Government Taps Rolls-Royce for Three SMRs at Wylfa (Nov 2025)</a>
+                <a href="https://interestingengineering.com/energy/terrapower-natrium-nuclear-reactor-uk">Interesting Engineering: TerraPower to challenge Rolls-Royce in UK's nuclear energy race</a>
+                <a href="https://www.gov.uk/government/publications/advanced-nuclear-framework">UK Government: Advanced Nuclear Framework</a>
+            </div>
+            <p style="margin-top: 2rem; font-size: 0.85rem;">Article by Gareth Pitts, Decarbonarma. Published 7 September 2026. Data accurate to publication date.</p>
+        </footer>
+    </article>
+</body>
+</html>
