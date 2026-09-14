@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sodium Batteries 2026: The Real Deal or Hype? | Decarbonarma</title>
+    <meta name="description" content="Sodium batteries are shipping now, but not for your UK home yet. Here's where they actually win, when they'll save you money, and why lithium still reigns.">
+
+    <style>
+        :root {
+            --bg: #0d1510;
+            --text: #e4ede5;
+            --green: #4ade80;
+            --amber: #fbbf24;
+            --grey-dark: #1a2420;
+            --grey-mid: #2d3a33;
+            --border: #3a4a42;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Source Serif 4', serif;
+            font-size: 16px;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        header.site-header {
+            padding: 2rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .site-logo {
+            height: 40px;
+            width: auto;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        nav a {
+            color: var(--green);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        nav a:hover {
+            border-bottom-color: var(--green);
+        }
+
+        article {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            color: var(--text);
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            color: var(--green);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+            border-left: 3px solid var(--amber);
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--green);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .highlight {
+            background-color: var(--grey-mid);
+            border-left: 3px solid var(--green);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 2px;
+        }
+
+        .highlight.warning {
+            border-left-color: var(--amber);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background-color: var(--grey-dark);
+        }
+
+        th, td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: var(--grey-mid);
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: var(--grey-mid);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .comp-card {
+            background-color: var(--grey-dark);
+            padding: 1.2rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+
+        .comp-card h4 {
+            color: var(--green);
+            margin-bottom: 0.8rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .comp-card .stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.4rem 0;
+            font-size: 0.95rem;
+        }
+
+        .stat-label {
+            color: var(--text);
+        }
+
+        .stat-value {
+            color: var(--green);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        .bottom-line {
+            background: linear-gradient(135deg, var(--grey-mid) 0%, var(--grey-dark) 100%);
+            border: 2px solid var(--amber);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+
+        .bottom-line h3 {
+            color: var(--amber);
+            border: none;
+            padding: 0;
+            margin-bottom: 1rem;
+        }
+
+        .action-item {
+            background-color: var(--grey-dark);
+            padding: 0.8rem 0.8rem 0.8rem 1.2rem;
+            margin: 0.6rem 0;
+            border-left: 3px solid var(--green);
+            border-radius: 2px;
+        }
+
+        .action-item.caution {
+            border-left-color: var(--amber);
+        }
+
+        .ai-tool-button {
+            display: inline-block;
+            background-color: var(--green);
+            color: var(--bg);
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-family: 'Source Serif 4', serif;
+            margin-top: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .ai-tool-button:hover {
+            background-color: var(--amber);
+            color: var(--bg);
+        }
+
+        .chart-container {
+            background-color: var(--grey-dark);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+        }
+
+        canvas {
+            max-width: 100%;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem 1.5rem;
+            margin-top: 3rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .sources {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .sources h4 {
+            color: var(--green);
+            margin-bottom: 0.8rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .sources ul {
+            list-style: none;
+            font-size: 0.85rem;
+        }
+
+        .sources li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .sources a {
+            color: var(--amber);
+            text-decoration: none;
+        }
+
+        .sources a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .article-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <a href="../"><img src="../logo-light.svg" alt="Decarbonarma" class="site-logo"></a>
+        <nav>
+            <a href="../">Home</a>
+            <a href="../about.html">About</a>
+        </nav>
+    </header>
+
+    <article>
+        <h1>Sodium Batteries 2026: The Real Deal—But Not for Your Home Yet</h1>
+
+        <div class="article-meta">
+            <span>📅 September 2026</span>
+            <span>⏱ 8 min read</span>
+            <span>📊 Data-led | UK focus</span>
+        </div>
+
+        <p><strong>The headlines say sodium batteries are coming. They're right. But they're also wrong about what that means for you.</strong></p>
+
+        <p>This week, CATL—the world's largest battery maker—started shipping sodium-ion storage systems to customers. BYD announced 10,000-cycle sodium batteries. UK-based Faradion is ramping production. The hype is real, the technology is real, and the price drop is real. But here's the thing: none of it is for typical UK homeowners buying a battery right now.</p>
+
+        <p>Sodium batteries are winning in one place—the grid. They're niche in another—cold climates. And they're a wait in a third—your home. This article cuts through the noise and tells you what's actually happening, when it matters, and why you should (or shouldn't) care in 2026.</p>
+
+        <h2>What Changed: September 2026 Matters</h2>
+
+        <p>For years, sodium batteries lived in labs and pilot projects. Now they're shipping. Here's what's real:</p>
+
+        <div class="highlight">
+            <strong>CATL's first customer deliveries:</strong> Starting September 2026, CATL is shipping gigawatt-hour quantities of sodium-ion battery storage systems. They've signed a three-year deal for 60 GWh with HyperStrong, a major grid energy storage integrator. That's not a trial. That's deployment.
+        </div>
+
+        <p><strong>BYD's third-generation product</strong> has achieved 10,000-cycle life—matching or beating some lithium iron phosphate (LFP) systems. The company has solved major engineering challenges around sodium precipitation and high-temperature performance. Production timing remains flexible ("based on market demand"), but the tech works.</p>
+
+        <p><strong>Faradion, a UK company owned by Reliance, is launching production</strong> with targets of $100 million annual output. It's the first UK-based sodium battery manufacturer at scale. But—and this is important—they're not selling to homeowners yet.</p>
+
+        <p><strong>Hard-carbon anodes are collapsing in cost:</strong> The critical component that made sodium batteries expensive is dropping in price by roughly 50% between 2024 and 2026—from $8,300–9,700 per tonne down to $4,850–5,550 per tonne. This is the engine driving the cost parity story.</p>
+
+        <h2>Sodium vs Lithium: The Honest Specs</h2>
+
+        <p>Marketing tends to hide trade-offs. Here's what you're actually comparing:</p>
+
+        <div class="comparison-grid">
+            <div class="comp-card">
+                <h4>Sodium-Ion (CATL Naxtra)</h4>
+                <div class="stat">
+                    <span class="stat-label">Energy density</span>
+                    <span class="stat-value">175 Wh/kg</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Cycle life</span>
+                    <span class="stat-value">~3,000 cycles</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Round-trip efficiency</span>
+                    <span class="stat-value">~92%</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Cold performance (−20°C)</span>
+                    <span class="stat-value">90% capacity</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Thermal runaway risk</span>
+                    <span class="stat-value">Very low</span>
+                </div>
+            </div>
+
+            <div class="comp-card">
+                <h4>LFP (Lithium Iron Phosphate)</h4>
+                <div class="stat">
+                    <span class="stat-label">Energy density</span>
+                    <span class="stat-value">205 Wh/kg</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Cycle life</span>
+                    <span class="stat-value">2,000–3,000 cycles</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Round-trip efficiency</span>
+                    <span class="stat-value">~96%</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Cold performance (−20°C)</span>
+                    <span class="stat-value">50–60% capacity</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Thermal runaway risk</span>
+                    <span class="stat-value">Lower than NMC</span>
+                </div>
+            </div>
+        </div>
+
+        <p><strong>What this means for you:</strong></p>
+
+        <p>Sodium batteries are actually *better* at longer cycle life and handle extreme cold. But that 4% efficiency gap—the difference between 92% and 96% round-trip—costs a UK homeowner about £30–40 a year in wasted energy. And the lower energy density matters mostly for EVs, not stationary storage.</p>
+
+        <p>The cold performance sounds impressive until you remember: if your battery is indoors (almost all UK installations), you don't get the benefit. If it's outside in an unheated garage, LFP already handles that fine. You'd need to be in a genuinely arctic climate for sodium's advantage to move the needle.</p>
+
+        <p><strong>The real sodium advantage isn't the chemistry—it's the absence of thermal runaway risk</strong> and the vastly simpler supply chain (no cobalt, no nickel constraints). But for UK homes today, that's insurance you don't need yet.</p>
+
+        <h2>Cost Parity: When (Not If) Sodium Beats Lithium</h2>
+
+        <p>Here's where the hype intersects with reality.</p>
+
+        <div class="chart-container">
+            <canvas id="costChart"></canvas>
+        </div>
+
+        <p><strong>Current state (September 2026):</strong> Sodium batteries are being sold in the UK—Eleven Energy's Volta at ~£1,350 for a 4.5 kWh module—but they're priced *identically* to LFP. There's no cost advantage yet, despite the chemistry being cheaper to make. The price gap will close, but it hasn't.</p>
+
+        <p><strong>CATL's CTO Lin Jiubiao has stated publicly:</strong> "By the end of 2026, the cost of our sodium-ion battery cells will match that of LFP batteries." This is specific and repeated across multiple sources. Cell-level parity is expected by December 2026.</p>
+
+        <p><strong>System-level parity (batteries installed in your home) is forecast for 2027,</strong> when integration costs and installer margins factor in. Full cost advantage—sodium *cheaper* than LFP—realistically lands in 2028.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Timeline</th>
+                    <th>Cost vs LFP</th>
+                    <th>Why It Matters</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Now (Sept 2026)</strong></td>
+                    <td>Parity</td>
+                    <td>No reason to choose sodium over LFP today</td>
+                </tr>
+                <tr>
+                    <td><strong>Dec 2026</strong></td>
+                    <td>Cells 5–10% cheaper</td>
+                    <td>Prices start to move, but retail lags</td>
+                </tr>
+                <tr>
+                    <td><strong>2027</strong></td>
+                    <td>Systems 5–10% cheaper</td>
+                    <td>First meaningful savings appear at install time</td>
+                </tr>
+                <tr>
+                    <td><strong>2028+</strong></td>
+                    <td>15–25% cheaper</td>
+                    <td>Real competitive advantage for sodium</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="highlight warning">
+            <strong>⚠️ The waiting trap:</strong> If you wait 18–24 months for sodium cost parity, you forgo £800–950 in annual bill savings *now* (from an LFP battery installed today). Even if sodium is 20% cheaper in 2028, you've lost £1,600–1,900 of savings waiting for it. Unless you're buying in late 2027 or later, LFP is the math winner.
+        </div>
+
+        <h2>Who's Winning and Where: The Geographic Story</h2>
+
+        <p>Sodium batteries aren't arriving equally everywhere. Here's the reality:</p>
+
+        <h3>China Leads—By a Lot</h3>
+        <p>CATL and BYD are both Chinese. Faradion (UK) is owned by Reliance (India). Nearly 95% of announced sodium battery capacity through 2030 is in China. This is *not* a diversification story—it's a geographical concentration story that mirrors lithium-ion supply risks.</p>
+
+        <h3>Grid Storage: China and Australia</h3>
+        <p>The first commercial sodium battery installation happened in China in 2019. Grid-scale deployments are live and accelerating. Australia is exploring large-scale sodium installations. The US and Europe are watching and funding research but aren't shipping yet.</p>
+
+        <h3>EVs: Niche in Cold Climates</h3>
+        <p>CATL's second-gen Naxtra targets 600 km range for passenger vehicles, but realistic numbers are more like 350–400 km. This works for cold-climate markets (Scandinavia, Canada, northern US) and commercial fleets where logistics favour proven tech. Mass adoption requires another generation.</p>
+
+        <h3>UK Residential: 18–24 Months Away</h3>
+        <p>Faradion is making sodium batteries in the UK, but there's no retail product for homeowners yet. Specialist companies (Eleven Energy, Beyond Batteries) are selling to hobbyists and off-grid users. Mainstream adoption by MCS-certified installers won't happen until cost parity is real *and* installers carry stock and certification. That's 2027–2029.</p>
+
+        <h2>Grid vs Home: Where Sodium Actually Wins</h2>
+
+        <p>This is the critical split that most coverage misses.</p>
+
+        <h3>🟢 Grid Storage: Sodium Is Winning</h3>
+        <p><strong>Why:</strong> Grids need long-duration, high-cycle-count, cost-per-MWh optimised storage. Sodium batteries excel here. They're cheaper, they don't thermal-runaway, and they can cycle 10,000+ times. CATL's deal with HyperStrong (60 GWh over three years) proves the economics work at scale.</p>
+
+        <p><strong>Timeline:</strong> Already live. Grid operators are buying sodium batteries *now*.</p>
+
+        <p><strong>Impact on you:</strong> Grid-level battery costs feed into wholesale electricity prices, which eventually affect your tariff. Cheaper grid storage = lower peak prices = potential for cheaper smart tariffs. Not tomorrow, but in 2–3 years.</p>
+
+        <h3>🔴 Home Storage: LFP Still Wins</h3>
+        <p><strong>Why:</strong> Your battery needs to fit in a cabinet, last 10+ years, work indoors, integrate with your solar and EV charger, and be certified by MCS. Sodium batteries don't meet most of those requirements *yet*. The 4% efficiency loss costs you real money annually. The cold performance isn't relevant.</p>
+
+        <p><strong>Timeline:</strong> 18–24 months (realistic: 2027–2029) for mainstream availability.</p>
+
+        <p><strong>What to do now:</strong> If you're buying in 2026, LFP is still your move. The cost advantage of waiting doesn't pay for the lost savings.</p>
+
+        <h2>The Bottom Line: What Sodium Means for You</h2>
+
+        <div class="bottom-line">
+            <h3>Your Decision Matrix</h3>
+
+            <div class="action-item">
+                <strong>You want a home battery in 2026:</strong> Buy LFP. It's proven, certified, priced competitively, and ready today. Sodium offers no advantage right now.
+            </div>
+
+            <div class="action-item">
+                <strong>You're buying in 2027:</strong> Watch the market. If sodium prices have dropped to 10%+ below LFP by mid-2027, it starts to make sense. But ask your installer about MCS certification status first—without it, you lose EPC benefits.
+            </div>
+
+            <div class="action-item">
+                <strong>You're in a cold climate or off-grid:</strong> Sodium may make sense *now*. The 90% capacity retention at −20°C is real and valuable. But you're an exception, not the rule.
+            </div>
+
+            <div class="action-item caution">
+                <strong>You're tempted to wait for sodium to save money:</strong> Don't. Waiting 18–24 months costs you £1,600–1,900 in foregone bill savings. Even if sodium is 20% cheaper then, you're underwater. The maths only work if you're buying in late 2027 or later.
+            </div>
+
+            <div class="action-item">
+                <strong>You care about grid decarbonisation:</strong> Sodium batteries *are* a big deal here. They're enabling cheap grid storage at scale, which makes room for more renewables. This happens whether you buy one or not.
+            </div>
+        </div>
+
+        <h2>The Longer View: What 2027–2029 Looks Like</h2>
+
+        <p>By 2027–2028, sodium batteries will be cost-competitive with LFP. By 2029, they could be cheaper. Installers will carry them. MCS will certify them. Marketing will shift from "emerging technology" to "proven alternative."</p>
+
+        <p>When that happens, your choice will be real: Do I want a battery with slightly lower efficiency but longer cycle life and lower cost? For most UK homes, the answer will be yes—if you're buying then.</p>
+
+        <p>But if you're buying today, that's a decision for your future self to make. Your present self should buy LFP.</p>
+
+        <h2>What Next?</h2>
+
+        <p>If you're considering a battery, the real question isn't "should I wait for sodium?" It's "does my home actually need a battery, and if so, what size?" That depends on your solar output, consumption patterns, and tariff structure.</p>
+
+        <a href="../battery-sizing-estimator.html" class="ai-tool-button">→ Calculate Your Battery Need</a>
+
+        <p>Once you know what you need, LFP is your answer for 2026. Sodium is your option for 2028.</p>
+
+    </article>
+
+    <footer>
+        <div class="sources">
+            <h4>Sources</h4>
+            <ul>
+                <li><a href="https://carnewschina.com/2026/06/05/catl-to-deliver-first-sodium-ion-storage-systems-in-september-as-material-costs-halve/">CATL to deliver first sodium-ion storage systems in September as material costs halve</a> — CnEVNews</li>
+                <li><a href="https://cnevpost.com/2026/02/09/byd-has-developed-sodium-batteries-cycle-life-10000/">BYD says it has developed sodium batteries with cycle life up to 10,000</a> — CnEVPost</li>
+                <li><a href="https://carnewschina.com/2026/06/09/sodium-ion-batteries-to-reach-cost-parity-with-lithium-by-late-2026-report-says/">Sodium-ion batteries to reach cost parity with lithium by late 2026</a> — CnEVNews</li>
+                <li><a href="https://www.iea.org/commentaries/sodium-ion-battery-momentum-grows-but-challenges-remain">Sodium-ion battery momentum grows, but challenges remain</a> — International Energy Agency</li>
+                <li><a href="https://haboenergy.co.uk/sodium-ion-home-battery-uk">Sodium-Ion Home Batteries UK 2026: Should You Wait?</a> — Habo Energy</li>
+                <li><a href="http://www.pv-magazine.com/2025/12/29/catl-confirms-significant-upgrade-to-sodium-ion-battery-product-range-and-scale-into-2026/">CATL confirms significant upgrade to sodium-ion battery product range and scale into 2026</a> — pv magazine</li>
+                <li><a href="https://sodiumbatteryhub.com/2026/08/25/sodium-battery-technology-in-2026/">Sodium Battery Technology in 2026</a> — Sodium Battery Hub</li>
+                <li><a href="https://www.patsnap.com/resources/blog/articles/sodium-ion-battery-technology-landscape-2026/">Sodium-ion battery technology landscape 2026</a> — PatSnap</li>
+            </ul>
+        </div>
+        <p style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem;">
+            <strong>About Decarbonarma:</strong> We cover home decarbonisation with data-led, anti-greenwashing rigour. This article reflects publicly available facts, independent research, and real-world UK conditions. No affiliate links, no sponsored content.
+        </p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script>
+        // Cost trajectory chart
+        const ctx = document.getElementById('costChart').getContext('2d');
+        const costChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Sept 2026', 'Dec 2026', 'Mid 2027', '2028'],
+                datasets: [
+                    {
+                        label: 'Sodium-Ion Cost Index',
+                        data: [100, 93, 88, 75],
+                        borderColor: '#4ade80',
+                        backgroundColor: 'rgba(74, 222, 128, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#4ade80',
+                        pointBorderColor: '#e4ede5',
+                        pointBorderWidth: 2,
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    },
+                    {
+                        label: 'LFP Cost Index (baseline)',
+                        data: [100, 99, 98, 97],
+                        borderColor: '#fbbf24',
+                        backgroundColor: 'rgba(251, 191, 36, 0.05)',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#fbbf24',
+                        pointBorderColor: '#e4ede5',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#e4ede5',
+                            font: { size: 12, family: "'Source Serif 4', serif" },
+                            padding: 15
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(13, 21, 16, 0.9)',
+                        borderColor: '#4ade80',
+                        borderWidth: 1,
+                        titleColor: '#4ade80',
+                        bodyColor: '#e4ede5',
+                        padding: 12,
+                        titleFont: { size: 13, weight: 'bold' },
+                        bodyFont: { size: 12 }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 70,
+                        max: 105,
+                        grid: {
+                            color: '#2d3a33',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#4ade80',
+                            font: { size: 11, family: "'JetBrains Mono', monospace" },
+                            callback: function(value) {
+                                return value + '';
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Relative Cost (100 = Sept 2026)',
+                            color: '#e4ede5',
+                            font: { size: 12 }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: '#2d3a33',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#e4ede5',
+                            font: { size: 11 }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Timeline',
+                            color: '#e4ede5',
+                            font: { size: 12 }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
