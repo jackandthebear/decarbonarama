@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rose Cottage — August 2026 Solar &amp; Battery Report</title>
+<style>
+  :root {
+    --green-dark: #1a5c3a;
+    --green-mid: #2e7d52;
+    --green-light: #4caf7d;
+    --green-pale: #e8f5ee;
+    --green-bright: #66bb8a;
+    --amber: #e8a33d;
+    --slate: #37474f;
+    --grey: #6b7a76;
+    --red-soft: #c0604d;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f4f8f6; color: var(--slate); line-height: 1.55; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 24px 20px 60px; }
+
+  .hero { background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 70%, var(--green-light) 100%); color: #fff; border-radius: 16px; padding: 40px 36px; margin-bottom: 24px; }
+  .hero h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.5px; }
+  .hero .sub { opacity: .85; margin-top: 6px; font-size: .95rem; }
+  .hero .headline { margin-top: 22px; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .hero .headline .big { font-size: 3.2rem; font-weight: 800; letter-spacing: -1px; }
+  .hero .headline .unit { font-size: 1.3rem; opacity: .9; }
+  .hero .systems { margin-top: 18px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero .chip { background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.25); border-radius: 999px; padding: 6px 14px; font-size: .82rem; }
+
+  .highlights { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .hl { background: var(--green-dark); color: #fff; border-radius: 12px; padding: 16px 18px; }
+  .hl .v { font-size: 1.5rem; font-weight: 700; }
+  .hl .l { font-size: .78rem; opacity: .8; text-transform: uppercase; letter-spacing: .05em; margin-top: 2px; }
+  .hl.alt { background: var(--green-mid); }
+
+  h2 { color: var(--green-dark); font-size: 1.25rem; margin: 34px 0 14px; padding-bottom: 6px; border-bottom: 2px solid var(--green-pale); }
+
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .card { background: #fff; border: 1px solid #dfe9e4; border-radius: 12px; padding: 16px; }
+  .card .v { font-size: 1.45rem; font-weight: 700; color: var(--green-dark); }
+  .card .l { font-size: .8rem; color: var(--grey); margin-top: 2px; }
+  .card .n { font-size: .72rem; color: var(--grey); margin-top: 6px; font-style: italic; }
+
+  .specs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .spec { background: #fff; border-left: 4px solid var(--green-mid); border-radius: 10px; padding: 16px 18px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+  .spec h3 { color: var(--green-dark); font-size: 1rem; margin-bottom: 6px; }
+  .spec p { font-size: .86rem; color: var(--grey); }
+
+  .chart { background: #fff; border: 1px solid #dfe9e4; border-radius: 12px; padding: 20px; }
+  .chart .title { font-size: .9rem; font-weight: 600; color: var(--green-dark); margin-bottom: 14px; }
+  .bars { display: flex; align-items: flex-end; gap: 3px; height: 160px; }
+  .bar { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
+  .bar .fill { width: 100%; background: linear-gradient(180deg, var(--green-bright), var(--green-mid)); border-radius: 3px 3px 0 0; min-height: 2px; }
+  .bar.peak .fill { background: linear-gradient(180deg, var(--amber), #c98a2e); }
+  .bar .d { font-size: .58rem; color: var(--grey); margin-top: 4px; }
+  .legend { font-size: .75rem; color: var(--grey); margin-top: 10px; }
+
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .hbar-row { display: flex; align-items: center; gap: 10px; margin: 10px 0; font-size: .85rem; }
+  .hbar-row .lbl { width: 160px; color: var(--grey); flex-shrink: 0; }
+  .hbar-track { flex: 1; background: var(--green-pale); border-radius: 6px; height: 22px; overflow: hidden; }
+  .hbar-fill { height: 100%; border-radius: 6px; background: var(--green-mid); display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; color: #fff; font-size: .75rem; font-weight: 600; min-width: 60px; }
+  .hbar-fill.amber { background: var(--amber); }
+  .hbar-fill.dark { background: var(--green-dark); }
+  .hbar-fill.soft { background: var(--red-soft); }
+
+  .note { background: #fdf6ea; border-left: 4px solid var(--amber); border-radius: 8px; padding: 12px 16px; font-size: .84rem; color: #7a5c1e; margin-top: 12px; }
+
+  .analysis p { margin-bottom: 12px; font-size: .93rem; }
+  .analysis strong { color: var(--green-dark); }
+
+  table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; font-size: .85rem; }
+  th { background: var(--green-dark); color: #fff; text-align: left; padding: 10px 14px; font-weight: 600; }
+  td { padding: 10px 14px; border-bottom: 1px solid #eef4f1; }
+  tr:last-child td { border-bottom: none; }
+  .footer { margin-top: 30px; font-size: .75rem; color: var(--grey); text-align: center; }
+  @media (max-width: 760px) { .highlights, .cards { grid-template-columns: repeat(2,1fr); } .specs, .duo { grid-template-columns: 1fr; } .bar .d { display:none; } }
+</style>
+<script>(function(){try{var p=localStorage.getItem('dm-pref');var d=p?p==='dark':(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);if(d){document.documentElement.classList.add('dm-dark');var s=document.createElement('style');s.id='dm-bootstrap';s.textContent='html.dm-dark{filter:invert(1) hue-rotate(180deg);background:#000!important}html.dm-dark img,html.dm-dark picture,html.dm-dark video,html.dm-dark iframe,html.dm-dark embed,html.dm-dark object,html.dm-dark canvas,html.dm-dark .dm-keep,html.dm-dark [data-dm-keep]{filter:invert(1) hue-rotate(180deg)}';document.head.appendChild(s);}}catch(e){}})();</script>
+<script src="/dark-mode.js" defer></script>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <h1>🌿 Rose Cottage — August 2026</h1>
+    <div class="sub">Monthly Solar &amp; Battery Generation Report · 1–31 August 2026</div>
+    <div class="headline">
+      <span class="big">1,784</span><span class="unit">kWh combined generation</span>
+    </div>
+    <div class="systems">
+      <span class="chip">☀️ Enphase: 22× 510W Aiko · IQ8HC micros · 11.2 kWp</span>
+      <span class="chip">☀️ Sonnen-connected original array</span>
+      <span class="chip">🔋 Sonnen hybrid battery</span>
+    </div>
+  </div>
+
+  <div class="highlights">
+    <div class="hl"><div class="v">1,784 kWh</div><div class="l">Combined generation</div></div>
+    <div class="hl alt"><div class="v">944.5 kWh</div><div class="l">Exported (Sonnen)*</div></div>
+    <div class="hl alt"><div class="v">614.6 kWh</div><div class="l">Imported (Enphase)*</div></div>
+    <div class="hl"><div class="v">+329.9 kWh</div><div class="l">Net exporter</div></div>
+  </div>
+  <div class="note">* Octopus smart-meter data (normal source of truth) stopped updating on 26 Aug ~13:00 BST, so full-month export uses the Sonnen grid meter and import uses the Enphase CT clamp. Octopus partial figures to 26 Aug: 850.8 kWh exported / 447.5 kWh imported.</div>
+
+  <h2>Month at a glance</h2>
+  <div class="cards">
+    <div class="card"><div class="v">1,208.4 kWh</div><div class="l">Enphase generation</div><div class="n">Enlighten, 39.0 kWh/day avg</div></div>
+    <div class="card"><div class="v">575.9 kWh</div><div class="l">Sonnen solar</div><div class="n">47.7% of Enphase — in expected 45–50% band</div></div>
+    <div class="card"><div class="v">1,784.3 kWh</div><div class="l">Combined total</div><div class="n">57.5 kWh/day average</div></div>
+    <div class="card"><div class="v">£181.40</div><div class="l">Estimated savings</div><div class="n">Enphase currency equivalent of production</div></div>
+    <div class="card"><div class="v">125.9 kWh</div><div class="l">Battery charged</div><div class="n">Homey · Sonnen meter</div></div>
+    <div class="card"><div class="v">162.9 kWh</div><div class="l">Battery discharged</div><div class="n">Homey · Sonnen meter</div></div>
+    <div class="card"><div class="v">614.6 kWh</div><div class="l">Grid imported</div><div class="n">Enphase CT (Octopus partial: 447.5)</div></div>
+    <div class="card"><div class="v">944.5 kWh</div><div class="l">Grid exported</div><div class="n">Sonnen meter (Octopus partial: 850.8)</div></div>
+  </div>
+
+  <h2>System specifications</h2>
+  <div class="specs">
+    <div class="spec">
+      <h3>Enphase array — 11.22 kWp</h3>
+      <p>22× 510W Aiko panels with IQ8HC microinverters (Enlighten Site ID 5848331).<br>
+      North main roof: 9 panels (Az 25°, Tilt 34°) · South main roof: 9 panels (Az 205°, Tilt 34°) · Garage: 4 panels (Az 180°, Tilt 30°).</p>
+    </div>
+    <div class="spec">
+      <h3>Sonnen system — original array + storage</h3>
+      <p>Original solar array connected through the Sonnen hybrid inverter, typically producing 45–50% of Enphase output (47.7% this month), with integrated Sonnen battery storage handling charge/discharge and grid metering.</p>
+    </div>
+  </div>
+
+  <h2>Daily combined generation</h2>
+  <div class="chart">
+    <div class="title">Combined generation per day (Enphase + Sonnen, kWh)</div>
+    <div class="bars">
+      <div class="bar"><div class="fill" style="height:85%"></div><div class="d">1</div></div>
+      <div class="bar peak"><div class="fill" style="height:100%"></div><div class="d">2</div></div>
+      <div class="bar"><div class="fill" style="height:84%"></div><div class="d">3</div></div>
+      <div class="bar"><div class="fill" style="height:76%"></div><div class="d">4</div></div>
+      <div class="bar"><div class="fill" style="height:81%"></div><div class="d">5</div></div>
+      <div class="bar"><div class="fill" style="height:75%"></div><div class="d">6</div></div>
+      <div class="bar"><div class="fill" style="height:90%"></div><div class="d">7</div></div>
+      <div class="bar"><div class="fill" style="height:85%"></div><div class="d">8</div></div>
+      <div class="bar"><div class="fill" style="height:94%"></div><div class="d">9</div></div>
+      <div class="bar"><div class="fill" style="height:83%"></div><div class="d">10</div></div>
+      <div class="bar"><div class="fill" style="height:93%"></div><div class="d">11</div></div>
+      <div class="bar"><div class="fill" style="height:95%"></div><div class="d">12</div></div>
+      <div class="bar"><div class="fill" style="height:90%"></div><div class="d">13</div></div>
+      <div class="bar"><div class="fill" style="height:90%"></div><div class="d">14</div></div>
+      <div class="bar"><div class="fill" style="height:79%"></div><div class="d">15</div></div>
+      <div class="bar"><div class="fill" style="height:56%"></div><div class="d">16</div></div>
+      <div class="bar"><div class="fill" style="height:64%"></div><div class="d">17</div></div>
+      <div class="bar"><div class="fill" style="height:40%"></div><div class="d">18</div></div>
+      <div class="bar"><div class="fill" style="height:72%"></div><div class="d">19</div></div>
+      <div class="bar"><div class="fill" style="height:66%"></div><div class="d">20</div></div>
+      <div class="bar"><div class="fill" style="height:51%"></div><div class="d">21</div></div>
+      <div class="bar"><div class="fill" style="height:82%"></div><div class="d">22</div></div>
+      <div class="bar"><div class="fill" style="height:75%"></div><div class="d">23</div></div>
+      <div class="bar"><div class="fill" style="height:83%"></div><div class="d">24</div></div>
+      <div class="bar"><div class="fill" style="height:74%"></div><div class="d">25</div></div>
+      <div class="bar"><div class="fill" style="height:56%"></div><div class="d">26</div></div>
+      <div class="bar"><div class="fill" style="height:39%"></div><div class="d">27</div></div>
+      <div class="bar"><div class="fill" style="height:66%"></div><div class="d">28</div></div>
+      <div class="bar"><div class="fill" style="height:33%"></div><div class="d">29</div></div>
+      <div class="bar"><div class="fill" style="height:56%"></div><div class="d">30</div></div>
+      <div class="bar"><div class="fill" style="height:47%"></div><div class="d">31</div></div>
+    </div>
+    <div class="legend">🏆 Peak day: <strong>Sat 2 Aug — 79.1 kWh</strong> (Enphase 55.6 + Sonnen 23.5). Quietest: 29 Aug — 25.9 kWh. Weekly totals: 466.6 / 497.2 / 337.7 / 375.2 / 107.3 (3 days) kWh.</div>
+  </div>
+
+  <h2>Battery performance</h2>
+  <div class="chart">
+    <div class="hbar-row"><div class="lbl">Charged into battery</div><div class="hbar-track"><div class="hbar-fill" style="width:77%">125.9 kWh</div></div></div>
+    <div class="hbar-row"><div class="lbl">Discharged to house</div><div class="hbar-track"><div class="hbar-fill dark" style="width:100%">162.9 kWh</div></div></div>
+    <div class="legend">Busiest discharge day: <strong>14 Aug — 8.8 kWh</strong> delivered from storage. Average discharge ≈ 5.3 kWh/day, covering evening and overnight loads.</div>
+    <div class="note">The meters recorded more energy leaving the battery than entering it this month, which is not physically possible over a full cycle — the Homey 6-hourly averaging of the Sonnen cumulative counters (which showed occasional small dips) is the likely cause. Treat the split as indicative; a round-trip efficiency figure isn't quoted for August for this reason.</div>
+  </div>
+
+  <h2>Grid interaction</h2>
+  <div class="chart">
+    <div class="hbar-row"><div class="lbl">Exported (Sonnen, full month)</div><div class="hbar-track"><div class="hbar-fill" style="width:100%">944.5 kWh</div></div></div>
+    <div class="hbar-row"><div class="lbl">Exported (Octopus, to 26 Aug)</div><div class="hbar-track"><div class="hbar-fill amber" style="width:90%">850.8 kWh</div></div></div>
+    <div class="hbar-row"><div class="lbl">Imported (Enphase, full month)</div><div class="hbar-track"><div class="hbar-fill soft" style="width:65%">614.6 kWh</div></div></div>
+    <div class="hbar-row"><div class="lbl">Imported (Octopus, to 26 Aug)</div><div class="hbar-track"><div class="hbar-fill amber" style="width:47%">447.5 kWh</div></div></div>
+    <div class="legend">Rose Cottage was a <strong>net exporter of ~330 kWh</strong> in August (Enphase's own net-export figure: 324.0 kWh). The house consumed 885.3 kWh, of which solar covered roughly 70% directly or via the battery. Grid consumption routed through the Sonnen meter was 300.8 kWh (reference).</div>
+  </div>
+
+  <h2>Analysis</h2>
+  <div class="analysis">
+    <p><strong>A month of two halves.</strong> The first fortnight was excellent — 1,026 kWh combined (68 kWh/day) with a run of 70+ kWh days peaking at 79.1 kWh on 2 August. From mid-month, conditions turned noticeably duller: the second half produced 758 kWh, with the weakest spells around 16–18, 27 and 29 August (25.9 kWh on the 29th), consistent with unsettled late-summer weather and shortening days.</p>
+    <p><strong>Versus July.</strong> Enphase generation fell 24.9% (1,609.6 → 1,208.4 kWh) — the usual seasonal step-down from peak summer. Export dropped 28% (1,311.5 → 938.0 kWh on the Enphase meter) while imports rose ~15% (527.5 → 605.6 kWh) and home consumption crept up 6% (825.5 → 876.8 kWh), so the net-export margin narrowed but remained comfortably positive.</p>
+    <p><strong>Array balance.</strong> The Sonnen-connected array produced 47.7% of Enphase output, right in the middle of its expected 45–50% band — both arrays are performing to spec. Solar offset for the month was 137% of household consumption (Enphase), with a CO₂ reduction equivalent of 876.5 kg.</p>
+    <p><strong>Watch item.</strong> The Octopus meter feed in Homey went stale at 26 August ~13:00 BST (import frozen at 85,973.2 kWh, export at 9,496.9 kWh). Worth checking the Octopus integration in Homey so September's report can use metered figures for the full month.</p>
+  </div>
+
+  <h2>Data sources</h2>
+  <table>
+    <tr><th>Metric</th><th>Source</th><th>Notes</th></tr>
+    <tr><td>Grid import / export</td><td>Octopus smart meter (Homey)</td><td>Source of truth, but stale after 26 Aug — full-month figures fall back to Enphase CT (import) and Sonnen grid meter (export)</td></tr>
+    <tr><td>Enphase generation, consumption, savings</td><td>Enphase Enlighten (Site 5848331)</td><td>Month view + daily energy API; savings = currency equivalent of production</td></tr>
+    <tr><td>Sonnen solar generation</td><td>Homey Insights (Sonnen production)</td><td>6-hourly average power integrated over the month; final evening slot of 31 Aug estimated (~0.1 kWh)</td></tr>
+    <tr><td>Battery charge / discharge</td><td>Homey Insights (Sonnen totals)</td><td>Monthly delta of cumulative counters, midnight-to-midnight</td></tr>
+  </table>
+
+  <div class="footer">Generated automatically on 1 September 2026 · Rose Cottage monthly report · Reporting period 2026-08-01 00:00 → 2026-09-01 00:00</div>
+</div>
+</body>
+</html>
