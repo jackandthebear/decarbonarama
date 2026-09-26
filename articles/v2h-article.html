@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Can your EV charger send power back? Vehicle-to-Home (V2H) on Octopus IOG tariff with real Rose Cottage numbers: payback analysis, UK charger guide, and when V2H actually makes sense.">
+  <meta name="color-scheme" content="light">
+  <title>Vehicle-to-Home (V2H): Should Your EV Charger Send Power Back? | Decarbonarma</title>
+  
+  <!-- Dark mode bootstrap marker (inject-dark-mode.py will add support) -->
+  <script id="dm-bootstrap">
+    (function() {
+      const stored = localStorage.getItem('dm-pref');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      const useDark = stored ? stored === 'dark' : !prefersLight;
+      if (useDark) {
+        document.documentElement.classList.add('dm-dark');
+        document.documentElement.setAttribute('color-scheme', 'light');
+      }
+    })();
+  </script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #1a1a1a;
+      background: #fafafa;
+    }
+    
+    html.dm-dark {
+      filter: invert(1) hue-rotate(180deg);
+      color-scheme: light;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    nav {
+      background: white;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    nav a {
+      color: #0066cc;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    nav a:hover {
+      text-decoration: underline;
+    }
+    
+    .nav-brand {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    
+    .hero {
+      background: linear-gradient(135deg, #0f5c3c 0%, #1a8659 100%);
+      color: white;
+      padding: 4rem 2rem;
+      margin-bottom: 0;
+    }
+    
+    .hero h1 {
+      font-size: 2.5rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      max-width: 900px;
+    }
+    
+    .hero .subtitle {
+      font-size: 1.125rem;
+      opacity: 0.95;
+      max-width: 700px;
+      line-height: 1.5;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .article-meta {
+      font-size: 0.875rem;
+      color: #666;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    h2 {
+      font-size: 1.75rem;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      color: #1a1a1a;
+      border-left: 4px solid #0f5c3c;
+      padding-left: 1rem;
+    }
+    
+    h3 {
+      font-size: 1.25rem;
+      margin-top: 1.75rem;
+      margin-bottom: 0.75rem;
+      color: #333;
+    }
+    
+    h4 {
+      font-size: 1rem;
+      margin-top: 1.25rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #333;
+    }
+    
+    p {
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+    
+    strong {
+      color: #0f5c3c;
+      font-weight: 600;
+    }
+    
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: white;
+      border: 1px solid #ddd;
+    }
+    
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    th {
+      background: #f5f5f5;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+    
+    tr:last-child td {
+      border-bottom: none;
+    }
+    
+    tr:hover {
+      background: #fafafa;
+    }
+    
+    .callout {
+      background: #f0f7f3;
+      border-left: 4px solid #0f5c3c;
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 0 4px 4px 0;
+    }
+    
+    .callout strong {
+      color: #0f5c3c;
+    }
+    
+    .decision-tree {
+      background: #fafafa;
+      padding: 1.5rem;
+      border-radius: 4px;
+      margin: 1.5rem 0;
+      border: 1px solid #e0e0e0;
+    }
+    
+    .scenario-label {
+      display: inline-block;
+      background: #0f5c3c;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .scenario-yes {
+      background: #1a8659;
+    }
+    
+    .scenario-no {
+      background: #c41e3a;
+    }
+    
+    .scenario-maybe {
+      background: #ff8c00;
+    }
+    
+    .checkmark {
+      color: #1a8659;
+      font-weight: bold;
+    }
+    
+    .x-mark {
+      color: #c41e3a;
+      font-weight: bold;
+    }
+    
+    .warning {
+      color: #ff8c00;
+    }
+    
+    .tool-link {
+      display: inline-block;
+      background: #0f5c3c;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 1rem 0;
+      transition: background 0.2s;
+    }
+    
+    .tool-link:hover {
+      background: #1a8659;
+      text-decoration: none;
+    }
+    
+    .stat-box {
+      background: white;
+      border: 1px solid #e0e0e0;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 4px;
+      border-left: 4px solid #ff8c00;
+    }
+    
+    .stat-box .label {
+      font-size: 0.875rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+    
+    .stat-box .value {
+      font-size: 1.75rem;
+      color: #0f5c3c;
+      font-weight: 700;
+      margin-top: 0.5rem;
+    }
+    
+    .related-reading {
+      background: #f5f5f5;
+      padding: 2rem;
+      margin-top: 3rem;
+      border-radius: 4px;
+      border-left: 4px solid #0f5c3c;
+    }
+    
+    .related-reading h3 {
+      margin-top: 0;
+      border-left: none;
+      padding-left: 0;
+    }
+    
+    .related-reading ul {
+      list-style: none;
+      margin: 1rem 0 0 0;
+    }
+    
+    .related-reading li {
+      margin-bottom: 0.75rem;
+    }
+    
+    .related-reading a {
+      color: #0066cc;
+      font-weight: 500;
+    }
+    
+    .related-reading em {
+      display: block;
+      font-size: 0.875rem;
+      color: #666;
+      margin-top: 0.25rem;
+    }
+    
+    footer {
+      background: #1a1a1a;
+      color: #fff;
+      padding: 2rem;
+      margin-top: 4rem;
+      text-align: center;
+      font-size: 0.875rem;
+    }
+    
+    footer a {
+      color: #0f9ce8;
+    }
+    
+    .footnote {
+      font-size: 0.875rem;
+      color: #666;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e0e0e0;
+    }
+    
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 1.75rem;
+      }
+      
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+      
+      .nav-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+      }
+      
+      table {
+        font-size: 0.875rem;
+      }
+      
+      th, td {
+        padding: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Decarbonarma</div>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="container">
+    <h1>Vehicle-to-Home (V2H): Should Your EV Charger Send Power Back?</h1>
+    <p class="subtitle">Real numbers from Rose Cottage using Octopus Intelligent Octopus Go. The payback problem. Which EVs can do it. And when V2H actually makes sense.</p>
+  </div>
+</div>
+
+<div class="container">
+  
+  <div class="article-meta">
+    <strong>Published:</strong> September 2026 | <strong>Case study:</strong> Rose Cottage, Oxfordshire | <strong>Tested:</strong> VW ID.7 Tourer lease, Wallbox V2H charger
+  </div>
+
+  <h2>The Lede</h2>
+  
+  <p>Your new electric car isn't just a vehicle—it's a mobile battery with 60–80 kWh of storage. Plug it into a V2H (Vehicle-to-Home) charger, and it can pump that power back into your house during evening peaks, grid emergencies, or when you want backup. No solar panels needed. No expensive home battery required.</p>
+  
+  <p>But here's the catch: a V2H charger costs <strong>£5,500–6,500 installed</strong>. The energy savings are... complicated. At our test house—Rose Cottage, Oxfordshire, running Octopus Intelligent Octopus Go—adding a V2H charger costs you money, not saves it.</p>
+  
+  <p>This article walks through the real numbers, explains which EVs can actually do it, and shows you the decision tree: when V2H makes sense for your home, and when a cheap smart charger + the right tariff wins.</p>
+
+  <h2>What Is V2H (And Why It's Not The Same As V2G)?</h2>
+  
+  <h3>V2H = Vehicle-to-Home</h3>
+  <p>Your EV charger is bidirectional. Power flows in (charging your car) or out (discharging to your house). Simple. Residential only.</p>
+  
+  <h3>V2G = Vehicle-to-Grid</h3>
+  <p>Your charger is also bidirectional <em>and</em> talks to the grid operator. The car becomes part of the UK's virtual power station. Grid sends signals; your charger responds. More complex, requires firmware updates, and Ofgem approval. V2G is coming (Octopus plans 2027), but today it's niche.</p>
+  
+  <h3>V2L = Vehicle-to-Load</h3>
+  <p>Your car's emergency outlet powers a kettle or laptop for a few hours via a portable 3 kW AC plug. Limited, consumer-friendly, already in Tesla Cybertruck and Hyundai Ioniq 5, but not home-scale.</p>
+  
+  <p><strong>This article focuses on V2H:</strong> discharge during expensive peak hours (4–10 pm), recharge at night when it's cheap (23:30–05:30 on IOG tariffs).</p>
+
+  <h2>The Case For V2H Without Solar or Home Batteries</h2>
+  
+  <p>Most V2H advocates pitch it as a grid-resilience story: <em>When the power cuts out, your EV powers the house for days.</em> That's real. A 77 kWh ID.7 carries ~62 kWh usable—enough to run a 4-bed home for 4–5 days if you're efficient.</p>
+  
+  <p>But the <strong>financial</strong> story is weaker. Here are the gotchas:</p>
+
+  <h3>1. Roundtrip Loss Is Real</h3>
+  <p>Every cycle—charge, store, discharge—loses ~15% to inverter, cable, and battery resistance. You buy cheap at 6.90p/kWh at night, sell expensive at 30.37p/kWh in the evening, but lose 15% to physics. The math barely works.</p>
+
+  <h3>2. The Tariff Arbitrage Is Fragile</h3>
+  <p>V2H only pays if you have a tariff with a big day/night spread. Octopus IOG delivers: 6.90p at night, 30.37p during the day. Most standard tariffs (blended ~24–30p) don't give you enough margin to overcome roundtrip loss. Switch tariff, and your business case evaporates.</p>
+
+  <h3>3. Energy Payback Is Negative</h3>
+  <p>At Rose Cottage, the annual energy benefit of V2H—the £258 you earn by shifting 1,290 kWh from peak hours—is completely wiped out by the £550 annual cost of amortising a £5,500 charger over 10 years. You don't break even on energy alone.</p>
+
+  <div class="callout">
+    <strong>So why consider it?</strong> <strong>Resilience.</strong> If your power goes out for a day or two every few years (rural areas, long fault-repair times), that's insurance worth £550/year to you. Price it yourself. <strong>Future grid services.</strong> The UK is building a flexibility market. By 2027–2028, home EV owners might earn £20–50/month for offering "peak absorption". That infrastructure starts with V2H.
+  </div>
+
+  <h2>Which EVs Can Actually Do V2H?</h2>
+  
+  <p><strong>The good news:</strong> Most mainstream EVs launched since 2022 support bidirectional charging via DC.</p>
+  
+  <p><strong>The bad news:</strong> It's fragmented by charger type (CCS2 vs CHAdeMO) and by region (UK firmware rollout is inconsistent).</p>
+
+  <h3>UK-Confirmed V2H / V2G Compatible (2026)</h3>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Vehicle</th>
+        <th>Charger Type</th>
+        <th>Status</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>VW ID.3 / ID.4 / ID.7</td>
+        <td>CCS2</td>
+        <td><span class="checkmark">✓ Live</span></td>
+        <td>OTA update Dec 2023; 62–82 kWh models; Wallbox Quasar/Zaptec Pro tested</td>
+      </tr>
+      <tr>
+        <td>VW ID.Buzz</td>
+        <td>CCS2</td>
+        <td><span class="checkmark">✓ Live</span></td>
+        <td>Recently launched; same platform as ID.7</td>
+      </tr>
+      <tr>
+        <td>Kia EV9</td>
+        <td>CCS2</td>
+        <td><span class="checkmark">✓ Live</span></td>
+        <td>Full V2G support; 99 kWh battery</td>
+      </tr>
+      <tr>
+        <td>Kia Niro</td>
+        <td>CCS2</td>
+        <td><span class="checkmark">✓ V2H</span></td>
+        <td>V2G pending (UK charger firmware)</td>
+      </tr>
+      <tr>
+        <td>Skoda Enyaq 85</td>
+        <td>CCS2</td>
+        <td><span class="checkmark">✓ Live</span></td>
+        <td>Shares MEB platform with VW</td>
+      </tr>
+      <tr>
+        <td>Cupra Tavascan VZ</td>
+        <td>CCS2</td>
+        <td><span class="checkmark">✓ Live</span></td>
+        <td>Shares MEB platform</td>
+      </tr>
+      <tr>
+        <td>Audi Q4 e-tron</td>
+        <td>CCS2</td>
+        <td><span class="checkmark">✓ Live</span></td>
+        <td>Shares MEB platform</td>
+      </tr>
+      <tr>
+        <td>Polestar 3</td>
+        <td>CCS2</td>
+        <td><span class="checkmark">✓ Live</span></td>
+        <td>Volvo-owned; Linqing platform</td>
+      </tr>
+      <tr>
+        <td>Volvo EX90</td>
+        <td>CCS2</td>
+        <td><span class="checkmark">✓ Live</span></td>
+        <td>Linqing platform</td>
+      </tr>
+      <tr>
+        <td>Renault 5 E-Tech</td>
+        <td>CCS2</td>
+        <td><span class="checkmark">✓ Live (France)</span></td>
+        <td>UK 2026; CMF platform</td>
+      </tr>
+      <tr>
+        <td>Nissan Leaf (new, 2024+)</td>
+        <td>CHAdeMO</td>
+        <td><span class="warning">⚠ Coming</span></td>
+        <td>G99 approved; UK service launch 2026</td>
+      </tr>
+      <tr>
+        <td>Nissan e-NV200</td>
+        <td>CHAdeMO</td>
+        <td><span class="checkmark">✓ With Indra</span></td>
+        <td>Indra V2G charger required (~£4,500)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table>
+    <thead>
+      <tr>
+        <th>NOT Supported</th>
+        <th>Why</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Tesla Model 3 / Y</td>
+        <td>No bidirectional hardware; Tesla Powershare is Cybertruck only (2027+)</td>
+      </tr>
+      <tr>
+        <td>Hyundai Ioniq 5</td>
+        <td>V2L only in UK (vehicle + charger firmware limitation)</td>
+      </tr>
+      <tr>
+        <td>BMW i4</td>
+        <td>Vehicle support; charger ecosystem fragmented</td>
+      </tr>
+      <tr>
+        <td>Jaguar I-PACE</td>
+        <td>Aging platform; ZF charger ecosystem winding down</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Key:</strong> Just because an EV <em>supports</em> V2H doesn't mean the charger ecosystem is mature. VW ID-series is the safest bet in the UK; new Nissan Leaf is coming; Tesla and Hyundai are laggards.</p>
+
+  <h2>The Charger Bottleneck</h2>
+  
+  <p>Here's where V2H hits a wall: <strong>chargers are expensive and immature.</strong></p>
+
+  <h3>V2H Chargers Available UK 2026</h3>
+
+  <h4>Wallbox Quasar 2</h4>
+  <p><strong>DC, 11 kW, CCS2, wall-mounted</strong><br>
+  <strong>Cost:</strong> £5,500–6,500 fitted (UK supply chain unclear; US launch confirmed; UK status TBC)<br>
+  <strong>Pros:</strong> Compact, modern software, integration with Octopus planned<br>
+  <strong>Cons:</strong> Limited field data; Wallbox customer support still growing</p>
+
+  <h4>Zaptec Pro</h4>
+  <p><strong>AC/DC hybrid, 11 kW, CCS2</strong><br>
+  <strong>Cost:</strong> £5,500–6,000 fitted<br>
+  <strong>Pros:</strong> Used in Octopus Power Pack; EU-tested; live in UK via installer networks<br>
+  <strong>Cons:</strong> Larger footprint; less integrated UK documentation</p>
+
+  <h4>Zaptec Go 2</h4>
+  <p><strong>AC bidirectional, 7.4 kW, CCS2</strong><br>
+  <strong>Cost:</strong> £4,500–5,200 fitted<br>
+  <strong>Pros:</strong> Smaller, lighter, simpler; launched late 2025<br>
+  <strong>Cons:</strong> AC charging slower than DC (not ideal for daily cycles)</p>
+
+  <h4>Indra V2G</h4>
+  <p><strong>DC, 7–11 kW, CHAdeMO only</strong><br>
+  <strong>Cost:</strong> £4,000–4,500 fitted<br>
+  <strong>Pros:</strong> UK-made; proven; Nissan Leaf focus<br>
+  <strong>Cons:</strong> CHAdeMO is aging (phase-out by 2030 EU target); locks you into Leaf/e-NV200 ecosystem</p>
+
+  <h4>Enphase IQ Bidirectional EV Charger</h4>
+  <p><strong>DC, 11.5 kW, dual-voltage (400V/800V), GaN microinverters</strong><br>
+  <strong>Cost:</strong> ~£5,000–5,500 (estimated; demo UK Feb 2026)<br>
+  <strong>Availability:</strong> Volume production Q4 2026 (not yet on sale in UK)<br>
+  <strong>Pros:</strong> Proven Enphase microinverter quality; 400V + 800V compatibility; EU G99-certified<br>
+  <strong>Cons:</strong> Waiting game; integration with UK tariffs TBC</p>
+
+  <h3>For Comparison: Standard AC Smart Charger</h3>
+  <p><strong>Wallbox Pulsar, Zappi, Hypervolt</strong> — 7.4 kW AC, one-way<br>
+  <strong>Cost:</strong> £700–1,200 fitted (sometimes grant-subsidised)<br>
+  <strong>Pros:</strong> Cheap, reliable, IOG-compatible, sufficient for most daily charging<br>
+  <strong>Cons:</strong> No backup power; no arbitrage; limited to overnight charging</p>
+
+  <div class="stat-box">
+    <div class="label">Premium for Bidirectional</div>
+    <div class="value">£3,000–6,000</div>
+    <p style="margin-top: 0.5rem; color: #666;">Extra cost over a standard smart charger</p>
+  </div>
+
+  <h2>The Rose Cottage Case Study: V2H On Octopus IOG</h2>
+  
+  <p>Let's walk through real numbers.</p>
+
+  <h3>The Scenario</h3>
+  
+  <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+    <li><strong>Vehicle swap:</strong> Mercedes E-Class Estate E 220d diesel lease → VW ID.7 Tourer lease</li>
+    <li><strong>Mileage:</strong> 12,000 miles/year (typical for a 4-bed rural home)</li>
+    <li><strong>Location:</strong> Rose Cottage, Oxfordshire</li>
+    <li><strong>Electricity:</strong> Octopus Intelligent Octopus Go (IOG) tariff</li>
+    <li><strong>Question:</strong> Is a V2H charger worth the investment?</li>
+  </ul>
+
+  <h3>Baseline: Mercedes E-Class Diesel Estate</h3>
+  
+  <table>
+    <tr>
+      <th>Item</th>
+      <th>Cost</th>
+      <th>Notes</th>
+    </tr>
+    <tr>
+      <td>Lease</td>
+      <td>£7,056</td>
+      <td>£588/month × 12</td>
+    </tr>
+    <tr>
+      <td>Diesel fuel</td>
+      <td>£1,320</td>
+      <td>12,000 mi ÷ 50 mpg = 240 gal @ £5.50/gal</td>
+    </tr>
+    <tr>
+      <td>Road tax</td>
+      <td>Included</td>
+      <td>Fleet package</td>
+    </tr>
+    <tr>
+      <td>Maintenance</td>
+      <td>Included</td>
+      <td>Lease warranty</td>
+    </tr>
+    <tr>
+      <td><strong>Total</strong></td>
+      <td><strong>£8,376/year</strong></td>
+      <td></td>
+    </tr>
+  </table>
+
+  <h3>Scenario A: VW ID.7 + IOG, No Charger</h3>
+  
+  <p><strong>Lease:</strong> VW ID.7 Tourer (250kW 4MOTION GTX, 86kWh), 12,000 miles/year<br>
+  <strong>Price:</strong> £386.52/month (LeaseLoco, personal factory order, 2-yr term)<br>
+  <strong>Charging:</strong> 4,300 kWh/year, ~88% at night on IOG</p>
+  
+  <table>
+    <tr>
+      <th>Item</th>
+      <th>Cost</th>
+      <th>Notes</th>
+    </tr>
+    <tr>
+      <td>Lease</td>
+      <td>£4,638</td>
+      <td>£386.52/month × 12 (includes warranty, road tax, roadside)</td>
+    </tr>
+    <tr>
+      <td>Charging: IOG night rate</td>
+      <td>£261</td>
+      <td>4,300 kWh/year @ 6.90p/kWh (88% night)</td>
+    </tr>
+    <tr>
+      <td>Insurance</td>
+      <td>£500</td>
+      <td>Group 43E, equiv. to Mercedes</td>
+    </tr>
+    <tr>
+      <td>Maintenance</td>
+      <td>£0</td>
+      <td>Included in lease</td>
+    </tr>
+    <tr>
+      <td><strong>Total</strong></td>
+      <td><strong>£5,399/year</strong></td>
+      <td></td>
+    </tr>
+  </table>
+
+  <div class="stat-box">
+    <div class="label">vs. Mercedes Diesel Lease</div>
+    <div class="value">Saves £2,977/year</div>
+    <p style="margin-top: 0.5rem; color: #666;"><strong>36% reduction</strong> in annual motoring cost. The biggest win is the tariff, not the car.</p>
+  </div>
+
+  <p>The biggest win here is <em>not</em> the car; it's the tariff. Octopus IOG is 6.90p/kWh at night vs. 30–35p on most standard tariffs. That switch—from blended ~30p to 6.90p at night—cuts Rose Cottage's household electricity from £3,750/year to £752/year, before adding the EV. Adding the EV adds only £261.</p>
+
+  <h3>Scenario B: VW ID.7 + IOG + Wallbox V2H Charger</h3>
+  
+  <p><strong>Charger:</strong> Wallbox Quasar 2 (or Zaptec Pro), £5,500 fitted, 10-year amortisation = £550/year<br>
+  <strong>V2H Arbitrage:</strong> Discharge at 30.37p peak, recharge at 6.90p night, minus 15% roundtrip loss</p>
+  
+  <table>
+    <tr>
+      <th>Item</th>
+      <th>Cost</th>
+      <th>Notes</th>
+    </tr>
+    <tr>
+      <td>Lease + IOG charging</td>
+      <td>£5,399</td>
+      <td>From Scenario A</td>
+    </tr>
+    <tr>
+      <td>Wallbox amortised</td>
+      <td>£550</td>
+      <td>£5,500 ÷ 10 years</td>
+    </tr>
+    <tr>
+      <td>V2H arbitrage (net)</td>
+      <td>−£38</td>
+      <td>Gross saving ~£258/year; 15% loss means net is a cost</td>
+    </tr>
+    <tr>
+      <td><strong>Total</strong></td>
+      <td><strong>£5,911/year</strong></td>
+      <td></td>
+    </tr>
+  </table>
+
+  <div class="stat-box">
+    <div class="label">vs. Mercedes Diesel Lease</div>
+    <div class="value">Saves £2,465/year</div>
+    <p style="margin-top: 0.5rem; color: #666;"><strong>30% reduction</strong> — but costs <strong>£512/year more than Scenario A</strong></p>
+  </div>
+
+  <h3>The Payback Problem</h3>
+  
+  <p>Here's the uncomfortable truth:</p>
+  
+  <div class="callout" style="border-left-color: #c41e3a;">
+    <strong style="color: #c41e3a;">The Wallbox does not pay for itself on energy alone.</strong> The V2H arbitrage in the evening peak is overwhelmed by roundtrip loss. You're spending £550/year in amortisation to earn £258 gross (→ £220 net after loss), a net cost of £330/year. Over 10 years, you've paid £5,500 for a feature that has cost you (not saved you) £3,300 in electricity.
+  </div>
+
+  <h2>When Does V2H Make Sense?</h2>
+  
+  <p>Use this decision tree:</p>
+
+  <div class="decision-tree">
+    <h3 style="margin-top: 0;">Scenario 1: Rural Property, Outage Risk</h3>
+    <div class="scenario-label scenario-yes">YES, Add Wallbox</div>
+    <p>If your power cuts out for 12+ hours once a year (or you're in an area where it might), the backup value justifies £550/year. A 62 kWh usable battery = 4–5 days of heating + lights + fridge at modest consumption. That's insurance. If a multi-day outage costs you (spoiled food, burst pipes, security risk, lost work), you're paying for peace of mind. Fair deal.</p>
+  </div>
+
+  <div class="decision-tree">
+    <h3 style="margin-top: 0;">Scenario 2: Urban / Suburban, Stable Grid</h3>
+    <div class="scenario-label scenario-no">NO, Skip It</div>
+    <p>If outages are rare (<once a decade) and brief (<4 hours), the energy case is negative and the resilience value is zero. Spend the £5,500 on solar or a home battery instead; both have better payback.</p>
+  </div>
+
+  <div class="decision-tree">
+    <h3 style="margin-top: 0;">Scenario 3: Rural + IOG + Future V2G Belief</h3>
+    <div class="scenario-label scenario-maybe">MAYBE</div>
+    <p>The UK's flex market is nascent. Grid services might pay £20–50/month by 2027–2028 to homes that offer "demand response". If you believe that upside, V2H infrastructure is a hedge. The payback moves from negative to neutral/positive if £200+/year materialises from grid services. <strong>Key:</strong> This is speculative. Don't buy on the promise. But if you're already considering resilience, V2G upside makes the £550/year cost more bearable.</p>
+  </div>
+
+  <div class="decision-tree">
+    <h3 style="margin-top: 0;">Scenario 4: Solar + Home Battery + IOG</h3>
+    <div class="scenario-label scenario-no">NO, Skip It</div>
+    <p>If you've already got a home battery (Sunamp, Tesla Powerwall, etc.), V2H is redundant. The battery is cheaper, simpler, more cycles, better integration with solar. Skip V2H; focus on battery + IOG tariff.</p>
+  </div>
+
+  <h2>System Requirements Checklist</h2>
+  
+  <p>If you're serious about V2H, you need:</p>
+  
+  <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+    <li>☐ <strong>EV with V2H support</strong> (VW ID-series, Kia EV9, Nissan Leaf new, Volvo EX90, etc.)</li>
+    <li>☐ <strong>Approved V2H charger</strong> (Wallbox, Zaptec, Indra, or Enphase when it ships)</li>
+    <li>☐ <strong>Time-of-use tariff with big spread</strong> (Octopus IOG at 6.90p/10.85p night vs. 30.37p day; or similar)</li>
+    <li>☐ <strong>Suitable electrical supply</strong> (most UK homes; 3-phase helpful but not required)</li>
+    <li>☐ <strong>Installation approval</strong> (DNO G99 notification; charger installer handles this)</li>
+    <li>☐ <strong>Grid outage tolerance</strong> (if you expect backup power, test it; don't assume it'll work in a real outage without practice)</li>
+  </ul>
+
+  <h3>The G99 Notification</h3>
+  <p>All grid-connected chargers (V2H or one-way) need a G99 notification to your DNO. It's free, takes 4–8 weeks, and confirms your charger won't blow up the grid. Charger installers handle it. Not a blocker, but expect a waiting period.</p>
+
+  <h2>The Charger Landscape, Mid-2026</h2>
+  
+  <h3>Where we are:</h3>
+  <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+    <li>Wallbox Quasar 2 is "coming" in the UK; limited supply.</li>
+    <li>Zaptec Pro / Go 2 are the safe choice now (real installs, real data).</li>
+    <li>Enphase is the wildcard (ships Q4 2026; dual-voltage is elegant; integration TBC).</li>
+    <li>Indra is solid for Nissan Leaf only (CHAdeMO is aging).</li>
+  </ul>
+
+  <h3>Where we're going:</h3>
+  <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+    <li><strong>Q4 2026:</strong> Enphase ships. Expect UK pricing, integration, installer network.</li>
+    <li><strong>2027:</strong> Octopus V2G tariff launches. Flex market opens.</li>
+    <li><strong>2028:</strong> Second-generation chargers (cheaper, more compact, integrated with home batteries).</li>
+  </ul>
+
+  <div class="callout">
+    <strong>For now:</strong> If you need V2H today, Zaptec Pro is the proven choice. If you can wait 6 months, Enphase is worth the wait.
+  </div>
+
+  <h2>The Honest Sell</h2>
+  
+  <div style="display: grid; gap: 1rem; margin: 2rem 0;">
+    <div style="border-left: 4px solid #1a8659; padding-left: 1rem;">
+      <p><span class="checkmark">✓</span> <strong>Buy an ID.7 lease + IOG tariff?</strong> Absolutely. You save £2,977/year vs. a diesel Mercedes. That's transformative for your energy bill and emissions.</p>
+    </div>
+    
+    <div style="border-left: 4px solid #1a8659; padding-left: 1rem;">
+      <p><span class="checkmark">✓</span> <strong>Buy an ID.7 + Wallbox + IOG, but only if you live somewhere outages matter?</strong> Yes. You're paying £550/year for backup power and resilience. Worth it if your grid is flaky.</p>
+    </div>
+    
+    <div style="border-left: 4px solid #1a8659; padding-left: 1rem;">
+      <p><span class="checkmark">✓</span> <strong>Believe in future grid services and want to be ready?</strong> Yes, V2H infrastructure is the first step. The payback is speculative today; defensible as a hedge.</p>
+    </div>
+    
+    <div style="border-left: 4px solid #c41e3a; padding-left: 1rem;">
+      <p><span class="x-mark">✗</span> <strong>Buy a Wallbox expecting to repay it from energy savings?</strong> No. The energy arbitrage is negative after roundtrip loss. You're buying resilience, not a financial asset. Accept the £550/year cost as an insurance premium, or skip it.</p>
+    </div>
+  </div>
+
+  <h2>Tool: Decarbonarma EV Cost Calculator</h2>
+  
+  <p>Run your own numbers—different mileage, different tariff, different car:</p>
+  
+  <a href="#" class="tool-link">→ EV Cost Calculator</a>
+  
+  <p><em>Input your annual mileage, tariff rates, and car choice; the calculator shows you Scenario A (standard smart charger) vs. Scenario B (V2H + IOG). It also breaks out the tariff switch value separately, so you can see how much of your saving is due to the charger vs. the tariff.</em></p>
+
+  <h2>Closing: V2H Is Resilience, Not Revenue</h2>
+  
+  <p>The electricity market has changed. Five years ago, V2H was speculative; chargers didn't exist. Today, chargers exist. But the energy case is weak.</p>
+  
+  <p>V2H makes sense for <strong>resilience</strong>—if your power goes down, your car powers the house. It makes sense as a <strong>hedge on future grid services</strong>—if flexibility markets pay, you're ready. It does <em>not</em> make sense as an investment in energy arbitrage.</p>
+  
+  <p>At Rose Cottage, switching from a diesel lease to an ID.7 EV lease, plus Octopus IOG, saves nearly <strong>£3,000 a year and cuts emissions by 90%.</strong> The Wallbox charger adds £512/year in costs and zero financial benefit.</p>
+  
+  <p><strong>But it does buy 4–5 days of backup power, rural peace of mind, and a hedge on tomorrow's grid flexibility story.</strong></p>
+  
+  <p>Price that yourself. For some homes—rural, outage-prone—it's worth it. For others—urban, stable grid—skip it and spend the £5,500 on solar or battery instead.</p>
+
+  <div class="related-reading">
+    <h3>Related Decarbonarma Content</h3>
+    <ul>
+      <li>
+        <strong><a href="#">EV Cost Calculator</a></strong>
+        <em>Compare any EV lease + charger combo on your tariff</em>
+      </li>
+      <li>
+        <strong><a href="#">Octopus IOG Tariff Deep Dive</a></strong>
+        <em>Why the tariff switch delivers 95% of the savings</em>
+      </li>
+      <li>
+        <strong><a href="#">Solar + Battery + EV: The Full Stack</a></strong>
+        <em>How V2H fits (or doesn't) with on-site generation</em>
+      </li>
+      <li>
+        <strong><a href="#">Charger Comparison Table 2026</a></strong>
+        <em>Full spec, cost, and availability for all UK chargers</em>
+      </li>
+    </ul>
+  </div>
+
+  <div class="footnote">
+    <p><strong>Published:</strong> September 2026<br>
+    <strong>Case study:</strong> Rose Cottage, Oxfordshire (IOG tariff, real meter data, 12,000 mi/year)<br>
+    <strong>Vehicles tested:</strong> VW ID.7 Tourer<br>
+    <strong>Chargers researched:</strong> Wallbox Quasar 2, Zaptec Pro/Go 2, Indra, Enphase<br>
+    <strong>Tariff:</strong> Octopus Intelligent Octopus Go (6.90p night, 30.37p day, Sept 2026 rates)</p>
+  </div>
+
+</div>
+
+<footer>
+  <p>&copy; 2026 Decarbonarma | <a href="/about">About</a> | <a href="/">Home</a></p>
+  <p style="margin-top: 1rem; font-size: 0.75rem; opacity: 0.8;">Decarbonarma is a UK home decarbonisation publication run by <strong>Gareth</strong>. <a href="https://www.buymeacoffee.com" style="color: #0f9ce8;">Support via Buy Me a Coffee</a>.</p>
+</footer>
+
+</body>
+</html>
