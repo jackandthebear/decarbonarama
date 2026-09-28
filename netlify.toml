@@ -428,6 +428,83 @@
   to = "/rose-cottage/hot-water.html"
   status = 301
   force = true
+[[redirects]]
+  from = "/articles/air-to-water-heat-pump-cooling-uk"
+  to = "/articles/air-to-water-heat-pump-cooling-uk.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/battery-install-6-month-plan"
+  to = "/articles/battery-install-6-month-plan.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/nuclear-desalination-smr-amr"
+  to = "/articles/nuclear-desalination-smr-amr.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/peugeot-e-5008-lease-september-2026"
+  to = "/articles/peugeot-e-5008-lease-september-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/rose-cottage-2026-08"
+  to = "/articles/rose-cottage-2026-08.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/sodium-batteries-2026"
+  to = "/articles/sodium-batteries-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/solar-battery-act-now"
+  to = "/articles/solar-battery-act-now.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/solar-storage-live-2026"
+  to = "/articles/solar-storage-live-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/terrapower-natrium-2034-uk"
+  to = "/articles/terrapower-natrium-2034-uk.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/thames-water-desalination-white-elephant"
+  to = "/articles/thames-water-desalination-white-elephant.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/toyota-urban-cruiser-ev-lease-august-2026"
+  to = "/articles/toyota-urban-cruiser-ev-lease-august-2026.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/v2h-article"
+  to = "/articles/v2h-article.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/honest-electricity-cost-calculator"
+  to = "/honest-electricity-cost-calculator.html"
+  status = 301
+  force = true
 
 # Root uk-nuclear-power-2026.html is a stale duplicate of the articles/ copy
 # (its own canonical already points there). Send both forms to the real page.
