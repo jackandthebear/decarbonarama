@@ -519,3 +519,9 @@
   to = "/articles/uk-nuclear-power-2026.html"
   status = 301
   force = true
+
+[[redirects]]
+  from = "/articles/intelligent-go-loyalty-article"
+  to = "/articles/intelligent-go-loyalty-article.html"
+  status = 301
+  force = true
