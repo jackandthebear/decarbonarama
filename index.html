@@ -425,6 +425,8 @@
   </section>
   <script>
   const latestSlides = [
+{icon:'🚙', grad:'linear-gradient(135deg,#1e3a5f,#0D6E7B)', meta:'Deal watch · October 2026', title:"BMW iX1 at £10,140 off: is £30,365 a good deal?", teaser:"A 25% discount takes the 65 kWh iX1 eDrive20 to £30,365 on the road. Home charging at 7p costs roughly £200–£235 a year, but the Electric Car Grant question is unanswered — get it in writing before you sign.", src:'./articles/bmw-ix1-deal-of-the-month-october-2026.html', full:"BMW iX1 eDrive20 Tech+: £10,140 Off, £30,365 on the Road"},
+{icon:'🔒', grad:'linear-gradient(135deg,#B45309,#1A3D2B)', meta:'Case study · October 2026', title:"I locked my EV tariff at 6.6p. Here's why that matters.", teaser:"Switching to Intelligent Octopus Go Loyalty saves just 0.4p/kWh — about £30 a year — on today's numbers. But with the price cap forecast to jump 12–14% in January 2027, the real value is the lock. Rose Cottage data.", src:'./articles/intelligent-go-loyalty-article.html', full:"I Locked My EV Tariff at 6.6p. Here's Why That Matters."},
 {icon:'🚗', grad:'linear-gradient(135deg,#1A3D2B,#1e3a5f)', meta:'Case study · September 2026', title:'Vehicle-to-Home (V2H): Should your EV charger send power back?', teaser:'A V2H charger costs £5,500–6,500 installed — and at Rose Cottage on Intelligent Octopus Go it loses money rather than saving it. The real payback maths, which EVs can actually do it, and when V2H makes sense.', src:'./articles/v2h-article.html', full:'Vehicle-to-Home (V2H): Should Your EV Charger Send Power Back?'},
 {icon:'📊', grad:'linear-gradient(135deg,#0D6E7B,#c97a0b)', meta:'Show Guide · September 2026', title:'Solar & Storage Live UK 2026: How to read the market', teaser:'The UK\'s largest renewable energy show runs Sep 22–24 at NEC Birmingham. AC-coupled batteries are standard, Virtual Power Plants are the frontier, battery-only installs are growing faster than solar+storage. Here\'s what actually matters on the floor.', src:'./articles/solar-storage-live-2026.html', full:'Solar & Storage Live UK 2026: How to Read the Market'},
 {icon:'🔋', grad:'linear-gradient(135deg,#0f6837,#c97a0b)', meta:'Product Watch · September 2026', title:'Sodium Batteries 2026: The Real Deal or Hype?', teaser:'Sodium batteries are shipping now, but not for your UK home yet. Here\'s where they actually win and when they\'ll save you money over lithium.', src:'./articles/sodium-batteries-2026.html', full:'Sodium Batteries 2026: The Real Deal or Hype?'},
@@ -1376,6 +1378,35 @@ window.addEventListener('DOMContentLoaded', function(){
       </div>
 
       <div id="art-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+
+        <!-- BMW iX1 deal of the month Oct 2026 -->
+        <a class="art-card" data-tag="ev" href="./articles/bmw-ix1-deal-of-the-month-october-2026.html" onclick="artOpen('./articles/bmw-ix1-deal-of-the-month-october-2026.html','BMW iX1 eDrive20 Tech+: £10,140 Off, £30,365 on the Road'); return false;" style="text-decoration:none;color:inherit;display:block;background:#fff;border:1px solid var(--stone-200);border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow='0 1px 4px rgba(0,0,0,0.05)'">
+          <div style="height:140px;background:linear-gradient(135deg,#1e3a5f,#0D6E7B);display:flex;align-items:center;justify-content:center;font-size:48px;">🚙</div>
+          <div style="padding:20px;">
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;">
+              <span style="background:#dbeafe;color:#1e40af;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;">Deal watch</span>
+              <span style="font-size:11px;color:var(--stone-600);">October 2026</span>
+            </div>
+            <h3 style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--green-900);line-height:1.3;margin-bottom:8px;">BMW iX1 at £10,140 off: is £30,365 a good deal?</h3>
+            <p style="font-size:13px;color:var(--stone-600);line-height:1.6;">A 25% discount takes the 65 kWh iX1 eDrive20 to £30,365 on the road. Home charging at 7p costs roughly £200–£235 a year, but the Electric Car Grant question is unanswered — get it in writing before you sign.</p>
+            <div style="margin-top:16px;font-size:13px;font-weight:600;color:var(--green-600);">Read article →</div>
+          </div>
+        </a>
+
+        <!-- Intelligent Go Loyalty 6.6p lock -->
+        <a class="art-card" data-tag="finance" href="./articles/intelligent-go-loyalty-article.html" onclick="artOpen('./articles/intelligent-go-loyalty-article.html','I Locked My EV Tariff at 6.6p. Here&#39;s Why That Matters.'); return false;" style="text-decoration:none;color:inherit;display:block;background:#fff;border:1px solid var(--stone-200);border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow='0 1px 4px rgba(0,0,0,0.05)'">
+          <div style="height:140px;background:linear-gradient(135deg,#B45309,#1A3D2B);display:flex;align-items:center;justify-content:center;font-size:48px;">🔒</div>
+          <div style="padding:20px;">
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;">
+              <span style="background:#dcfce7;color:#166534;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;">Case study</span>
+              <span style="font-size:11px;color:var(--stone-600);">October 2026</span>
+            </div>
+            <h3 style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--green-900);line-height:1.3;margin-bottom:8px;">I locked my EV tariff at 6.6p. Here&#39;s why that matters.</h3>
+            <p style="font-size:13px;color:var(--stone-600);line-height:1.6;">Switching to Intelligent Octopus Go Loyalty saves just 0.4p/kWh — about £30 a year — on today&#39;s numbers. But with the price cap forecast to jump 12–14% in January 2027, the real value is the lock. Rose Cottage data.</p>
+            <div style="margin-top:16px;font-size:13px;font-weight:600;color:var(--green-600);">Read article →</div>
+          </div>
+        </a>
+
 
         <!-- V2H article -->
         <a class="art-card" data-tag="ev" href="./articles/v2h-article.html" onclick="artOpen('./articles/v2h-article.html','Vehicle-to-Home (V2H): Should Your EV Charger Send Power Back?'); return false;" style="text-decoration:none;color:inherit;display:block;background:#fff;border:1px solid var(--stone-200);border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow='0 1px 4px rgba(0,0,0,0.05)'">
